@@ -1,0 +1,188 @@
+
+/* QNamedLineEdit */
+
+QWidget[QNamedLineEdit=true] QLineEdit {
+	height: 36px;
+	border: none;
+	border-bottom: 2px solid transparent;
+	background-color: #262626;
+	font-size: 12px;
+	font-weight: bold;
+	padding-top: 16px;
+	padding-left: 16px;
+	padding-right: 12px;
+}
+
+QWidget[QNamedLineEdit=true] QLineEdit:hover {
+	background-color: #333333;
+}
+
+QWidget[QNamedLineEdit=true] QLineEdit:focus {
+	border-bottom: 2px solid #8AAEDB;
+	background-color: #333333;
+}
+
+QWidget[QNamedLineEdit=true] QLabel {
+	color: #909090;
+	height: 50px;
+	border: none;
+	font-size: 12px;
+	padding-bottom: 24px;
+	padding-left: 16px;
+}
+
+QWidget[QNamedLineEdit=true] QLabel[hover=true] {
+	color: #909090;
+}
+
+QWidget[QNamedLineEdit=true] QLabel[focus=true] {
+	color: #3C6FB2;
+}
+
+QWidget[QNamedLineEdit=true][dark=true] QLineEdit {
+	background-color: #1A1A1A;
+}
+
+
+
+/* QNamedLineEdit - Wide */
+
+QWidget[wide=true] QWidget[QNamedLineEdit=true] QLineEdit, QWidget[QNamedLineEdit=true][wide=true] QLineEdit {
+	min-width: 6em;
+}
+
+QWidget[wider=true] QWidget[QNamedLineEdit=true] QLineEdit, QWidget[QNamedLineEdit=true][wider=true] QLineEdit {
+	min-width: 12em;
+}
+
+
+
+/* QNamedLineEdit - Blue */
+
+QWidget[color='blue'] QWidget[QNamedLineEdit=true][color='main'] QLineEdit:focus, QWidget[QNamedLineEdit=true][color='blue'] QLineEdit:focus {
+	border-bottom-color: #1B80FC;
+}
+
+QWidget[color='blue'] QWidget[QNamedLineEdit=true][color='main'] QLabel[focus=true], QWidget[QNamedLineEdit=true][color='blue'] QLabel[focus=true] {
+	color: #1B80FC;
+}
+
+
+
+/* QNamedLineEdit - Red */
+
+QWidget[color='red'] QWidget[QNamedLineEdit=true][color='main'] QLineEdit:focus, QWidget[QNamedLineEdit=true][color='red'] QLineEdit:focus {
+	border-bottom-color: #FC271B;
+}
+
+QWidget[color='red'] QWidget[QNamedLineEdit=true][color='main'] QLabel[focus=true], QWidget[QNamedLineEdit=true][color='red'] QLabel[focus=true] {
+	color: #FC271B;
+}
+
+
+
+/* QNamedLineEdit - Green */
+
+QWidget[color='green'] QWidget[QNamedLineEdit=true][color='main'] QLineEdit:focus, QWidget[QNamedLineEdit=true][color='green'] QLineEdit:focus {
+	border-bottom-color: #07E813;
+}
+
+QWidget[color='green'] QWidget[QNamedLineEdit=true][color='main'] QLabel[focus=true], QWidget[QNamedLineEdit=true][color='green'] QLabel[focus=true] {
+	color: #07E813;
+}
+
+
+
+/* QNamedLineEdit - Yellow */
+
+QWidget[color='yellow'] QWidget[QNamedLineEdit=true][color='main'] QLineEdit:focus, QWidget[QNamedLineEdit=true][color='yellow'] QLineEdit:focus {
+	border-bottom-color: #E8BC07;
+}
+
+QWidget[color='yellow'] QWidget[QNamedLineEdit=true][color='main'] QLabel[focus=true], QWidget[QNamedLineEdit=true][color='yellow'] QLabel[focus=true] {
+	color: #E8BC07;
+}
+
+
+
+/* QNamedLineEdit - Magenta */
+
+QWidget[color='magenta'] QWidget[QNamedLineEdit=true][color='main'] QLineEdit:focus, QWidget[QNamedLineEdit=true][color='magenta'] QLineEdit:focus {
+	border-bottom-color: #FC1BF1;
+}
+
+QWidget[color='magenta'] QWidget[QNamedLineEdit=true][color='main'] QLabel[focus=true], QWidget[QNamedLineEdit=true][color='magenta'] QLabel[focus=true] {
+	color: #FC1BF1;
+}
+
+
+
+/* QNamedLineEdit - Cyan */
+
+QWidget[color='cyan'] QWidget[QNamedLineEdit=true][color='main'] QLineEdit:focus, QWidget[QNamedLineEdit=true][color='cyan'] QLineEdit:focus {
+	border-bottom-color: #00C8D4;
+}
+
+QWidget[color='cyan'] QWidget[QNamedLineEdit=true][color='main'] QLabel[focus=true], QWidget[QNamedLineEdit=true][color='cyan'] QLabel[focus=true] {
+	color: #00C8D4;
+}
+
+
+
+/* QNamedLineEdit - Orange */
+
+QWidget[color='orange'] QWidget[QNamedLineEdit=true][color='main'] QLineEdit:focus, QWidget[QNamedLineEdit=true][color='orange'] QLineEdit:focus {
+	border-bottom-color: #E88307;
+}
+
+QWidget[color='orange'] QWidget[QNamedLineEdit=true][color='main'] QLabel[focus=true], QWidget[QNamedLineEdit=true][color='orange'] QLabel[focus=true] {
+	color: #E88307;
+}
+
+
+
+/* QNamedLineEdit - Pink */
+
+QWidget[color='pink'] QWidget[QNamedLineEdit=true][color='main'] QLineEdit:focus, QWidget[QNamedLineEdit=true][color='pink'] QLineEdit:focus {
+	border-bottom-color: #E8076C;
+}
+
+QWidget[color='pink'] QWidget[QNamedLineEdit=true][color='main'] QLabel[focus=true], QWidget[QNamedLineEdit=true][color='pink'] QLabel[focus=true] {
+	color: #E8076C;
+}
+
+
+
+/* QNamedLineEdit - Lime */
+
+QWidget[color='lime'] QWidget[QNamedLineEdit=true][color='main'] QLineEdit:focus, QWidget[QNamedLineEdit=true][color='lime'] QLineEdit:focus {
+	border-bottom-color: #6CE807;
+}
+
+QWidget[color='lime'] QWidget[QNamedLineEdit=true][color='main'] QLabel[focus=true], QWidget[QNamedLineEdit=true][color='lime'] QLabel[focus=true] {
+	color: #6CE807;
+}
+
+
+
+/* QNamedLineEdit - Turquoise */
+
+QWidget[color='turquoise'] QWidget[QNamedLineEdit=true][color='main'] QLineEdit:focus, QWidget[QNamedLineEdit=true][color='turquoise'] QLineEdit:focus {
+	border-bottom-color: #07E8BC;
+}
+
+QWidget[color='turquoise'] QWidget[QNamedLineEdit=true][color='main'] QLabel[focus=true], QWidget[QNamedLineEdit=true][color='turquoise'] QLabel[focus=true] {
+	color: #07E8BC;
+}
+
+
+
+/* QNamedLineEdit - White */
+
+QWidget[color='white'] QWidget[QNamedLineEdit=true][color='main'] QLineEdit:focus, QWidget[QNamedLineEdit=true][color='white'] QLineEdit:focus {
+	border-bottom-color: #EFEFEF;
+}
+
+QWidget[color='white'] QWidget[QNamedLineEdit=true][color='main'] QLabel[focus=true], QWidget[QNamedLineEdit=true][color='white'] QLabel[focus=true] {
+	color: #EFEFEF;
+}

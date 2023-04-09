@@ -1,0 +1,30 @@
+
+/* QFrame - Border */
+
+QWidget[background='dark'], QWidget[background='dark']:hover, QWidget[background='dark']:focus, QWidget[background='dark']:disabled {
+	background-color: #1A1A1A;
+}
+
+QWidget[background='light'], QWidget[background='light']:hover, QWidget[background='light']:focus, QWidget[background='light']:disabled {
+	background-color: #262626;
+}
+
+QWidget[border-top=true], QWidget[border-top=true]:hover, QWidget[border-top=true]:focus, QWidget[border-top=true]:disabled {
+	border-top: 1px solid #313131;
+	border-radius: 0px;
+}
+
+QWidget[border-bottom=true], QWidget[border-bottom=true]:hover, QWidget[border-bottom=true]:focus, QWidget[border-bottom=true]:disabled {
+	border-bottom: 1px solid #313131;
+	border-radius: 0px;
+}
+
+QWidget[border-left=true], QWidget[border-left=true]:hover, QWidget[border-left=true]:focus, QWidget[border-left=true]:disabled {
+	border-left: 1px solid #313131;
+	border-radius: 0px;
+}
+
+QWidget[border-right=true], QWidget[border-right=true]:hover, QWidget[border-right=true]:focus, QWidget[border-right=true]:disabled {
+	border-right: 1px solid #313131;
+	border-radius: 0px;
+}

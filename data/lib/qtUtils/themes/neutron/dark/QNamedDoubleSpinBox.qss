@@ -1,0 +1,188 @@
+
+/* QNamedDoubleSpinBox */
+
+QWidget[QNamedDoubleSpinBox=true] QDoubleSpinBox {
+	height: 33px;
+	border: none;
+	border-bottom: 2px solid transparent;
+	background-color: #262626;
+	font-size: 14px;
+	font-weight: bold;
+	padding-top: 16px;
+	padding-left: 16px;
+	padding-right: 12px;
+}
+
+QWidget[QNamedDoubleSpinBox=true] QDoubleSpinBox:hover {
+	background-color: #333333;
+}
+
+QWidget[QNamedDoubleSpinBox=true] QDoubleSpinBox:focus {
+	border-bottom: 2px solid #8AAEDB;
+	background-color: #333333;
+}
+
+QWidget[QNamedDoubleSpinBox=true] QLabel {
+	color: #909090;
+	height: 50px;
+	border: none;
+	font-size: 12px;
+	padding-bottom: 24px;
+	padding-left: 16px;
+}
+
+QWidget[QNamedDoubleSpinBox=true] QLabel[hover=true] {
+	color: #909090;
+}
+
+QWidget[QNamedDoubleSpinBox=true] QLabel[focus=true] {
+	color: #3C6FB2;
+}
+
+QWidget[QNamedDoubleSpinBox=true][dark=true] QDoubleSpinBox {
+	background-color: #1A1A1A;
+}
+
+
+
+/* QNamedDoubleSpinBox - Wide */
+
+QWidget[wide=true] QWidget[QNamedDoubleSpinBox=true] QDoubleSpinBox, QWidget[QNamedDoubleSpinBox=true][wide=true] QDoubleSpinBox {
+	min-width: 6em;
+}
+
+QWidget[wider=true] QWidget[QNamedDoubleSpinBox=true] QDoubleSpinBox, QWidget[QNamedDoubleSpinBox=true][wider=true] QDoubleSpinBox {
+	min-width: 12em;
+}
+
+
+
+/* QNamedDoubleSpinBox - Blue */
+
+QWidget[color='blue'] QWidget[QNamedDoubleSpinBox=true][color='main'] QDoubleSpinBox:focus, QWidget[QNamedDoubleSpinBox=true][color='blue'] QDoubleSpinBox:focus {
+	border-bottom-color: #1B80FC;
+}
+
+QWidget[color='blue'] QWidget[QNamedDoubleSpinBox=true][color='main'] QLabel[focus=true], QWidget[QNamedDoubleSpinBox=true][color='blue'] QLabel[focus=true] {
+	color: #1B80FC;
+}
+
+
+
+/* QNamedDoubleSpinBox - Red */
+
+QWidget[color='red'] QWidget[QNamedDoubleSpinBox=true][color='main'] QDoubleSpinBox:focus, QWidget[QNamedDoubleSpinBox=true][color='red'] QDoubleSpinBox:focus {
+	border-bottom-color: #FC271B;
+}
+
+QWidget[color='red'] QWidget[QNamedDoubleSpinBox=true][color='main'] QLabel[focus=true], QWidget[QNamedDoubleSpinBox=true][color='red'] QLabel[focus=true] {
+	color: #FC271B;
+}
+
+
+
+/* QNamedDoubleSpinBox - Green */
+
+QWidget[color='green'] QWidget[QNamedDoubleSpinBox=true][color='main'] QDoubleSpinBox:focus, QWidget[QNamedDoubleSpinBox=true][color='green'] QDoubleSpinBox:focus {
+	border-bottom-color: #07E813;
+}
+
+QWidget[color='green'] QWidget[QNamedDoubleSpinBox=true][color='main'] QLabel[focus=true], QWidget[QNamedDoubleSpinBox=true][color='green'] QLabel[focus=true] {
+	color: #07E813;
+}
+
+
+
+/* QNamedDoubleSpinBox - Yellow */
+
+QWidget[color='yellow'] QWidget[QNamedDoubleSpinBox=true][color='main'] QDoubleSpinBox:focus, QWidget[QNamedDoubleSpinBox=true][color='yellow'] QDoubleSpinBox:focus {
+	border-bottom-color: #E8BC07;
+}
+
+QWidget[color='yellow'] QWidget[QNamedDoubleSpinBox=true][color='main'] QLabel[focus=true], QWidget[QNamedDoubleSpinBox=true][color='yellow'] QLabel[focus=true] {
+	color: #E8BC07;
+}
+
+
+
+/* QNamedDoubleSpinBox - Magenta */
+
+QWidget[color='magenta'] QWidget[QNamedDoubleSpinBox=true][color='main'] QDoubleSpinBox:focus, QWidget[QNamedDoubleSpinBox=true][color='magenta'] QDoubleSpinBox:focus {
+	border-bottom-color: #FC1BF1;
+}
+
+QWidget[color='magenta'] QWidget[QNamedDoubleSpinBox=true][color='main'] QLabel[focus=true], QWidget[QNamedDoubleSpinBox=true][color='magenta'] QLabel[focus=true] {
+	color: #FC1BF1;
+}
+
+
+
+/* QNamedDoubleSpinBox - Cyan */
+
+QWidget[color='cyan'] QWidget[QNamedDoubleSpinBox=true][color='main'] QDoubleSpinBox:focus, QWidget[QNamedDoubleSpinBox=true][color='cyan'] QDoubleSpinBox:focus {
+	border-bottom-color: #00C8D4;
+}
+
+QWidget[color='cyan'] QWidget[QNamedDoubleSpinBox=true][color='main'] QLabel[focus=true], QWidget[QNamedDoubleSpinBox=true][color='cyan'] QLabel[focus=true] {
+	color: #00C8D4;
+}
+
+
+
+/* QNamedDoubleSpinBox - Orange */
+
+QWidget[color='orange'] QWidget[QNamedDoubleSpinBox=true][color='main'] QDoubleSpinBox:focus, QWidget[QNamedDoubleSpinBox=true][color='orange'] QDoubleSpinBox:focus {
+	border-bottom-color: #E88307;
+}
+
+QWidget[color='orange'] QWidget[QNamedDoubleSpinBox=true][color='main'] QLabel[focus=true], QWidget[QNamedDoubleSpinBox=true][color='orange'] QLabel[focus=true] {
+	color: #E88307;
+}
+
+
+
+/* QNamedDoubleSpinBox - Pink */
+
+QWidget[color='pink'] QWidget[QNamedDoubleSpinBox=true][color='main'] QDoubleSpinBox:focus, QWidget[QNamedDoubleSpinBox=true][color='pink'] QDoubleSpinBox:focus {
+	border-bottom-color: #E8076C;
+}
+
+QWidget[color='pink'] QWidget[QNamedDoubleSpinBox=true][color='main'] QLabel[focus=true], QWidget[QNamedDoubleSpinBox=true][color='pink'] QLabel[focus=true] {
+	color: #E8076C;
+}
+
+
+
+/* QNamedDoubleSpinBox - Lime */
+
+QWidget[color='lime'] QWidget[QNamedDoubleSpinBox=true][color='main'] QDoubleSpinBox:focus, QWidget[QNamedDoubleSpinBox=true][color='lime'] QDoubleSpinBox:focus {
+	border-bottom-color: #6CE807;
+}
+
+QWidget[color='lime'] QWidget[QNamedDoubleSpinBox=true][color='main'] QLabel[focus=true], QWidget[QNamedDoubleSpinBox=true][color='lime'] QLabel[focus=true] {
+	color: #6CE807;
+}
+
+
+
+/* QNamedDoubleSpinBox - Turquoise */
+
+QWidget[color='turquoise'] QWidget[QNamedDoubleSpinBox=true][color='main'] QDoubleSpinBox:focus, QWidget[QNamedDoubleSpinBox=true][color='turquoise'] QDoubleSpinBox:focus {
+	border-bottom-color: #07E8BC;
+}
+
+QWidget[color='turquoise'] QWidget[QNamedDoubleSpinBox=true][color='main'] QLabel[focus=true], QWidget[QNamedDoubleSpinBox=true][color='turquoise'] QLabel[focus=true] {
+	color: #07E8BC;
+}
+
+
+
+/* QNamedDoubleSpinBox - White */
+
+QWidget[color='white'] QWidget[QNamedDoubleSpinBox=true][color='main'] QDoubleSpinBox:focus, QWidget[QNamedDoubleSpinBox=true][color='white'] QDoubleSpinBox:focus {
+	border-bottom-color: #EFEFEF;
+}
+
+QWidget[color='white'] QWidget[QNamedDoubleSpinBox=true][color='main'] QLabel[focus=true], QWidget[QNamedDoubleSpinBox=true][color='white'] QLabel[focus=true] {
+	color: #EFEFEF;
+}

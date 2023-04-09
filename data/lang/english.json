@@ -1,0 +1,250 @@
+{
+    "info": {
+        "name": "English",
+        "version": "07e7554a",
+        "description": "English language for OGE Next."
+    },
+    "data": {
+        "QMainWindow": {
+            "title": "OGE Next",
+            "mainPage": {
+                "QSidePanel": {
+                    "emptyPanel": {
+                        "QLoginWidget": {
+                            "QNamedLineEdit": {
+                                "username": "Username",
+                                "password": "Password"
+                            },
+                            "QNamedToggleButton": {
+                                "remember": "Remember me"
+                            }
+                        },
+                        "QPushButton": {
+                            "login": "Login"
+                        }
+                    },
+                    "dataPanel": {
+                        "QPushButton": {
+                            "refresh": "Refresh"
+                        }
+                    }
+                }
+            },
+            "QSideBar": {
+                "semester": "Semester %s"
+            },
+            "showMessage": {
+                "emptyUsername": "You must enter a username.",
+                "emptyPassword": "You must enter a password.",
+                "loginFailed": "Login failed.",
+                "loginSuccess": "Login successful.",
+                "createPanels": "Creating panels..."
+            }
+        },
+        "QSettingsDialog": {
+            "title": "OGE Next > Settings",
+            "QSidePanel": {
+                "appearance": {
+                    "title": "Appearance",
+                    "QLabel": {
+                        "language": {
+                            "title": "Language",
+                            "description": "Select a display language for OGE Next."
+                        },
+                        "theme": {
+                            "title": "Theme",
+                            "description": "Select a display theme for OGE Next."
+                        }
+                    },
+                    "QNamedComboBox": {
+                        "language": "Language",
+                        "theme": "Theme",
+                        "themeVariant": "Theme Variant"
+                    }
+                },
+                "updates": {
+                    "title": "Updates",
+                    "QLabel": {
+                        "checkForUpdates": {
+                            "title": "Check for Updates",
+                            "description": "Determines how often OGE Next checks for updates."
+                        },
+                        "checkForAppsUpdates": {
+                            "title": "Check for Apps Updates",
+                            "description": "Determines how often OGE Next checks for apps updates."
+                        },
+                        "newAppsCheckForUpdates": {
+                            "title": "Check for Updates Frequency Setting for New Apps",
+                            "description": "Determines the check for updates frequency setting for new apps."
+                        },
+                        "newAppsAutoUpdate": {
+                            "title": "Auto Update Setting for New Apps",
+                            "description": "Determines the auto update setting for new apps."
+                        }
+                    },
+                    "QNamedComboBox": {
+                        "checkForUpdates": {
+                            "title": "Check for Updates",
+                            "values": {
+                                "never": "Never",
+                                "daily": "Daily",
+                                "weekly": "Weekly",
+                                "monthly": "Monthly",
+                                "atLaunch": "At Launch"
+                            }
+                        },
+                        "checkForAppsUpdates": {
+                            "title": "Check for Apps Updates",
+                            "values": {
+                                "never": "Never",
+                                "daily": "Daily",
+                                "weekly": "Weekly",
+                                "monthly": "Monthly",
+                                "atLaunch": "At Launch"
+                            }
+                        },
+                        "newAppsCheckForUpdates": {
+                            "title": "Check for Updates",
+                            "values": {
+                                "never": "Never",
+                                "daily": "Daily",
+                                "weekly": "Weekly",
+                                "monthly": "Monthly",
+                                "atLaunch": "At Launch"
+                            }
+                        }
+                    },
+                    "QToggleButton": {
+                        "newAppsAutoUpdate": "Auto Update"
+                    }
+                },
+                "data": {
+                    "title": "Data",
+                    "QLabel": {
+                        "clearData": {
+                            "title": "Clear Data",
+                            "description": "Clears all data stored by OGE Next and restarts the app."
+                        },
+                        "importData": {
+                            "title": "Import Data",
+                            "description": "Imports data from a file and restarts the app. This will overwrite all data."
+                        },
+                        "exportData": {
+                            "title": "Export Data",
+                            "description": "Exports data to a file."
+                        }
+                    },
+                    "QPushButton": {
+                        "clearData": "Clear Data",
+                        "importData": "Import Data",
+                        "exportData": "Export Data"
+                    },
+                    "QFileDialog": {
+                        "importData": "OGE Next > Settings > Data > Import Data",
+                        "exportData": "OGE Next > Settings > Data > Export Data"
+                    }
+                }
+            },
+            "QPushButton": {
+                "cancel": "Cancel",
+                "apply": "Apply"
+            }
+        },
+        "QMessageBox": {
+            "critical": {
+                "notImplemented": {
+                    "title": "OGE Next > Not Implemented Feature",
+                    "text": "This functionality doesn't exist yet and will be\navailable in a later version of the software.",
+                    "details": "Details"
+                }
+            },
+            "warning": {},
+            "information": {
+                "settingsReload": {
+                    "title": "OGE Next > Settings",
+                    "text": "A restart of the software is necessary in order\nto correctly apply all the settings."
+                }
+            }
+        },
+        "QAbout": {
+            "OGENext": {
+                "title": "About OGE Next",
+                "texts": [
+                    "OGE Next is an open-source software that allows you to access your school's online gradebook and average from OGE.",
+                    "OGE Next was programmed by %s, is written in Python, uses PySide 6 for the interface and is available for Windows, MacOS and Linux.",
+                    "Logo idea and design by %s, realization by %s.",
+                    "Thanks to %s for the help with BeautifulSoup and regex.",
+                    "Go to the %s for more information."
+                ]
+            }
+        },
+        "QMenu": {
+            "about": {
+                "PySide": "About PySide...",
+                "OGENext": "About OGE Next..."
+            },
+            "donate": {
+                "title": "Donate"
+            }
+        },
+        "QStatusBar": {
+            "QPushButton": {
+                "update": "Update"
+            }
+        },
+        "QUpdater": {
+            "title": "OGE Next Updater",
+            "QLabel": {
+                "downloading": "Downloading... (%s)",
+                "installing": "Installing... (%s)",
+                "calculatingRemainingTime": "Calculating remaining time...",
+                "remainingTime": "Remaining time: %s",
+                "waiting": "Waiting...",
+                "done": "Done",
+                "bytes": "%s/s",
+                "items": "%s packages/s",
+                "eta": "ETA: %s",
+                "days": "%s days",
+                "hours": "%s hours",
+                "minutes": "%s minutes",
+                "seconds": "%s seconds",
+                "day": "%s day",
+                "hour": "%s hour",
+                "minute": "%s minute",
+                "second": "%s second",
+                "undefined": "Undefined"
+            },
+            "QSlidingStackedWidget": {
+                "texts": [
+                    "OGE Next is being updated to the latest version.",
+                    "OGE Next allows you to ???.",
+                    "???.",
+                    "???.",
+                    "You can choose how often OGE Next checks for updates in the settings."
+                ]
+            },
+            "QMessageBox": {
+                "critical": {
+                    "downloadFailed": {
+                        "title": "Download Failed",
+                        "text": "An error occurred while downloading the update."
+                    },
+                    "installFailed": {
+                        "title": "Install Failed",
+                        "text": "An error occurred while installing the update."
+                    },
+                    "openAppFailed": {
+                        "title": "Open App Failed",
+                        "text": "An error occurred while opening the app."
+                    },
+                    "appNotFound": {
+                        "title": "App Not Found",
+                        "text": "The app was not found."
+                    }
+                },
+                "warning": {},
+                "information": {}
+            }
+        }
+    }
+}

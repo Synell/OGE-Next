@@ -1,0 +1,61 @@
+
+/* QTimeEdit */
+
+QTimeEdit {
+	background-color: transparent;
+	color: #FFFFFF;
+	border-radius: 5px;
+	padding: 0px 4px;
+	border: 1px solid #313131;
+	height: 32px;
+}
+
+QTimeEdit:hover {
+	border: 1px solid #3C3C3C;
+	background-color: #262626;
+}
+
+QTimeEdit:focus {
+	border: 1px solid #515151;
+	background-color: #262626;
+}
+
+QTimeEdit::up-button {
+    subcontrol-origin: border;
+    subcontrol-position: top right; /* position at the top right corner */
+    border-width: 1px;
+}
+
+QTimeEdit::up-arrow {
+    image: url({path}spinbox/upArrow.png);
+    width: 16px;
+    height: 16px;
+	padding-right: 4px;
+}
+
+QTimeEdit::up-arrow:pressed {
+    image: url({path}spinbox/upArrowPressed.png);
+    width: 16px;
+    height: 16px;
+	padding-right: 4px;
+}
+
+QTimeEdit::down-button {
+    subcontrol-origin: border;
+    subcontrol-position: bottom right; /* position at the bottom right corner */
+    border-width: 1px;
+}
+
+QTimeEdit::down-arrow {
+    image: url({path}spinbox/downArrow.png);
+    width: 16px;
+    height: 16px;
+	padding-right: 4px;
+}
+
+QTimeEdit::down-arrow:pressed {
+    image: url({path}spinbox/downArrowPressed.png);
+    width: 16px;
+    height: 16px;
+	padding-right: 4px;
+}

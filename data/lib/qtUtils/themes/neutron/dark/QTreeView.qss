@@ -1,0 +1,27 @@
+
+/* QTreeView */
+
+QTreeView {
+	background-color: transparent;
+	color: #f5f5f5;
+	border-radius: 5px;
+	padding: 6px 6px;
+	border: 1px solid #313131;
+}
+
+QTreeView::item {
+	background-color: transparent;
+	color: #FFFFFF;
+	border: 2px solid transparent;
+	/* border-radius: 5px; */
+	/* spacing: 6px; */
+}
+
+QTreeView::item:hover {
+	background-color: #404040;
+}
+
+QTreeView::item:selected {
+	background-color: #404040;
+	/* border: 2px solid #8AAEDB; */
+}

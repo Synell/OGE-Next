@@ -1,0 +1,202 @@
+
+/* QNamedComboBox */
+
+QWidget[QNamedComboBox=true] QComboBox {
+	height: 36px;
+	min-width: 12em;
+	padding-top: 12px;
+	padding-left: 19px;
+	background-color: #262626;
+}
+
+QWidget[QNamedComboBox=true] QComboBox::down-arrow {
+	width: 36px;
+	height: 36px;
+	margin-top: 36px;
+	margin-right: 16px;
+}
+
+QWidget[QNamedComboBox=true] QLabel {
+	color: #909090;
+	height: 50px;
+	border: none;
+	font-size: 12px;
+	padding-bottom: 24px;
+	padding-left: 16px;
+}
+
+QWidget[QNamedComboBox=true] QLabel[hover=true] {
+	color: #909090;
+}
+
+QWidget[QNamedComboBox=true] QLabel[focus=true] {
+	color: #3C6FB2;
+}
+
+QWidget[QNamedComboBox=true][dark=true] QComboBox {
+	background-color: #1A1A1A;
+}
+
+QWidget[QNamedComboBox=true][dark=true] QComboBox QListView {
+	background-color: #1A1A1A;
+}
+
+QWidget[QNamedComboBox=true][dark=true] QComboBox QListView::item {
+	background-color: #1A1A1A;
+}
+
+QWidget[QNamedComboBox=true][dark=true] QComboBox[bigitem=true] QListView::item {
+	background-color: #1A1A1A;
+}
+
+QWidget[QNamedComboBox=true][dark=true] QComboBox QListView::item:hover {
+	background-color: #262626;
+}
+
+QWidget[QNamedComboBox=true][dark=true] QComboBox QListView::item:selected {
+	background-color: #262626;
+}
+
+
+
+/* QNamedComboBox - Wide */
+
+QWidget[wide=true] QWidget[QNamedComboBox=true] QComboBox, QWidget[QNamedComboBox=true][wide=true] QComboBox {
+	min-width: 6em;
+}
+
+QWidget[wider=true] QWidget[QNamedComboBox=true] QComboBox, QWidget[QNamedComboBox=true][wider=true] QComboBox {
+	min-width: 12em;
+}
+
+
+
+/* QNamedComboBox - Blue */
+
+QWidget[color='blue'] QWidget[QNamedComboBox=true][color='main'] QComboBox:focus, QWidget[QNamedComboBox=true][color='blue'] QComboBox:focus {
+	border-bottom-color: #1B80FC;
+}
+
+QWidget[color='blue'] QWidget[QNamedComboBox=true][color='main'] QLabel[focus=true], QWidget[QNamedComboBox=true][color='blue'] QLabel[focus=true] {
+	color: #1B80FC;
+}
+
+
+
+/* QNamedComboBox - Red */
+
+QWidget[color='red'] QWidget[QNamedComboBox=true][color='main'] QComboBox:focus, QWidget[QNamedComboBox=true][color='red'] QComboBox:focus {
+	border-bottom-color: #FC271B;
+}
+
+QWidget[color='red'] QWidget[QNamedComboBox=true][color='main'] QLabel[focus=true], QWidget[QNamedComboBox=true][color='red'] QLabel[focus=true] {
+	color: #FC271B;
+}
+
+
+
+/* QNamedComboBox - Green */
+
+QWidget[color='green'] QWidget[QNamedComboBox=true][color='main'] QComboBox:focus, QWidget[QNamedComboBox=true][color='green'] QComboBox:focus {
+	border-bottom-color: #07E813;
+}
+
+QWidget[color='green'] QWidget[QNamedComboBox=true][color='main'] QLabel[focus=true], QWidget[QNamedComboBox=true][color='green'] QLabel[focus=true] {
+	color: #07E813;
+}
+
+
+
+/* QNamedComboBox - Yellow */
+
+QWidget[color='yellow'] QWidget[QNamedComboBox=true][color='main'] QComboBox:focus, QWidget[QNamedComboBox=true][color='yellow'] QComboBox:focus {
+	border-bottom-color: #E8BC07;
+}
+
+QWidget[color='yellow'] QWidget[QNamedComboBox=true][color='main'] QLabel[focus=true], QWidget[QNamedComboBox=true][color='yellow'] QLabel[focus=true] {
+	color: #E8BC07;
+}
+
+
+
+/* QNamedComboBox - Magenta */
+
+QWidget[color='magenta'] QWidget[QNamedComboBox=true][color='main'] QComboBox:focus, QWidget[QNamedComboBox=true][color='magenta'] QComboBox:focus {
+	border-bottom-color: #FC1BF1;
+}
+
+QWidget[color='magenta'] QWidget[QNamedComboBox=true][color='main'] QLabel[focus=true], QWidget[QNamedComboBox=true][color='magenta'] QLabel[focus=true] {
+	color: #FC1BF1;
+}
+
+
+
+/* QNamedComboBox - Cyan */
+
+QWidget[color='cyan'] QWidget[QNamedComboBox=true][color='main'] QComboBox:focus, QWidget[QNamedComboBox=true][color='cyan'] QComboBox:focus {
+	border-bottom-color: #00C8D4;
+}
+
+QWidget[color='cyan'] QWidget[QNamedComboBox=true][color='main'] QLabel[focus=true], QWidget[QNamedComboBox=true][color='cyan'] QLabel[focus=true] {
+	color: #00C8D4;
+}
+
+
+
+/* QNamedComboBox - Orange */
+
+QWidget[color='orange'] QWidget[QNamedComboBox=true][color='main'] QComboBox:focus, QWidget[QNamedComboBox=true][color='orange'] QComboBox:focus {
+	border-bottom-color: #E88307;
+}
+
+QWidget[color='orange'] QWidget[QNamedComboBox=true][color='main'] QLabel[focus=true], QWidget[QNamedComboBox=true][color='orange'] QLabel[focus=true] {
+	color: #E88307;
+}
+
+
+
+/* QNamedComboBox - Pink */
+
+QWidget[color='pink'] QWidget[QNamedComboBox=true][color='main'] QComboBox:focus, QWidget[QNamedComboBox=true][color='pink'] QComboBox:focus {
+	border-bottom-color: #E8076C;
+}
+
+QWidget[color='pink'] QWidget[QNamedComboBox=true][color='main'] QLabel[focus=true], QWidget[QNamedComboBox=true][color='pink'] QLabel[focus=true] {
+	color: #E8076C;
+}
+
+
+
+/* QNamedComboBox - Lime */
+
+QWidget[color='lime'] QWidget[QNamedComboBox=true][color='main'] QComboBox:focus, QWidget[QNamedComboBox=true][color='lime'] QComboBox:focus {
+	border-bottom-color: #6CE807;
+}
+
+QWidget[color='lime'] QWidget[QNamedComboBox=true][color='main'] QLabel[focus=true], QWidget[QNamedComboBox=true][color='lime'] QLabel[focus=true] {
+	color: #6CE807;
+}
+
+
+
+/* QNamedComboBox - Turquoise */
+
+QWidget[color='turquoise'] QWidget[QNamedComboBox=true][color='main'] QComboBox:focus, QWidget[QNamedComboBox=true][color='turquoise'] QComboBox:focus {
+	border-bottom-color: #07E8BC;
+}
+
+QWidget[color='turquoise'] QWidget[QNamedComboBox=true][color='main'] QLabel[focus=true], QWidget[QNamedComboBox=true][color='turquoise'] QLabel[focus=true] {
+	color: #07E8BC;
+}
+
+
+
+/* QNamedComboBox - White */
+
+QWidget[color='white'] QWidget[QNamedComboBox=true][color='main'] QComboBox:focus, QWidget[QNamedComboBox=true][color='white'] QComboBox:focus {
+	border-bottom-color: #EFEFEF;
+}
+
+QWidget[color='white'] QWidget[QNamedComboBox=true][color='main'] QLabel[focus=true], QWidget[QNamedComboBox=true][color='white'] QLabel[focus=true] {
+	color: #EFEFEF;
+}

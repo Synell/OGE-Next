@@ -1,0 +1,13 @@
+{
+    "info": {
+        "name": "Neutron",
+        "version": 1.0,
+        "description": "Theme for QT6 App."
+    },
+    "qss": {
+        "dark": {
+            "displayName": "Dark",
+            "location": ""
+        }
+    }
+}

@@ -1,0 +1,19 @@
+
+/* QTextEdit */
+
+QTextEdit {
+	background-color: transparent;
+	color: #FFFFFF;
+	border-radius: 5px;
+	border: 1px solid #313131;
+}
+
+QTextEdit:hover {
+	border: 1px solid #3C3C3C;
+	background-color: #262626;
+}
+
+QTextEdit:focus {
+	border: 1px solid #515151;
+	background-color: #262626;
+}

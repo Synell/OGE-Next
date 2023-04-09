@@ -1,0 +1,231 @@
+
+/* QDockWidget */
+
+QDockWidget {
+	background-color: #262626;
+	color: #fefefe;
+	border: none;
+	border-color: #4f5b62;
+	titlebar-close-icon: url({path}dockwidget/close.png);
+	titlebar-normal-icon:  url({path}dockwidget/sendToFront.png);
+}
+
+QDockWidget QFrame, QDockWidget QWidget {
+	background-color: #262626;
+	color: #fefefe;
+}
+
+QDockWidget::title {
+	background-color: #262626;
+	color: #fefefe;
+	text-align: center;
+	border: none;
+	border-bottom: 1px solid #606060;
+}
+
+QWidget[QDockWidget=true] {
+	background-color: #202020;
+}
+
+QMainWindow > QTabBar::tab {
+	background-color: transparent;
+	color: #fefefe;
+	text-align: center;
+	border: none;
+	padding: 0px 10px;
+	height: 20px;
+	border-radius: 10px;
+	margin: 0px 5px;
+}
+
+QMainWindow > QTabBar::tab:selected {
+	background-color: #cccccc;
+}
+
+
+
+/* QDockWidget QTabBar - Blue */
+
+QMainWindow[color='blue'] > QTabBar::tab:selected {
+	background-color: #1473E6;
+}
+
+QMainWindow[color='blue'] > QTabBar::tab:hover {
+	background-color: #0D66D0;
+}
+
+QMainWindow[color='blue'] > QTabBar::tab:disabled {
+	background-color: #375782;
+	color: #8F8F8F;
+}
+
+
+
+/* QDockWidget QTabBar - Red */
+
+QMainWindow[color='red'] > QTabBar::tab:selected {
+	background-color: #E61E14;
+}
+
+QMainWindow[color='red'] > QTabBar::tab:hover {
+	background-color: #D0150D;
+}
+
+QMainWindow[color='red'] > QTabBar::tab:disabled {
+	background-color: #A5413C;
+	color: #8F8F8F;
+}
+
+
+
+/* QDockWidget QTabBar - Green */
+
+QMainWindow[color='green'] > QTabBar::tab:selected {
+	background-color: #00D20A;
+}
+
+QMainWindow[color='green'] > QTabBar::tab:hover {
+	background-color: #00BC0C;
+}
+
+QMainWindow[color='green'] > QTabBar::tab:disabled {
+	background-color: #236E29;
+	color: #8F8F8F;
+}
+
+
+
+/* QDockWidget QTabBar - Yellow */
+
+QMainWindow[color='yellow'] > QTabBar::tab:selected {
+	background-color: #D2A800;
+}
+
+QMainWindow[color='yellow'] > QTabBar::tab:hover {
+	background-color: #BC9900;
+}
+
+QMainWindow[color='yellow'] > QTabBar::tab:disabled {
+	background-color: #6E6123;
+	color: #8F8F8F;
+}
+
+
+
+/* QDockWidget QTabBar - Magenta */
+
+QMainWindow[color='magenta'] > QTabBar::tab:selected {
+	background-color: #E614DC;
+}
+
+QMainWindow[color='magenta'] > QTabBar::tab:hover {
+	background-color: #D00DC9;
+}
+
+QMainWindow[color='magenta'] > QTabBar::tab:disabled {
+	background-color: #A53CA1;
+	color: #8F8F8F;
+}
+
+
+
+/* QDockWidget QTabBar - Cyan */
+
+QMainWindow[color='cyan'] > QTabBar::tab:selected {
+	background-color: #00B4BE;
+}
+
+QMainWindow[color='cyan'] > QTabBar::tab:hover {
+	background-color: #009CA8;
+}
+
+QMainWindow[color='cyan'] > QTabBar::tab:disabled {
+	background-color: #0F545A;
+	color: #8F8F8F;
+}
+
+
+
+/* QDockWidget QTabBar - Orange */
+
+QMainWindow[color='orange'] > QTabBar::tab:selected {
+	background-color: #D27300;
+}
+
+QMainWindow[color='orange'] > QTabBar::tab:hover {
+	background-color: #BC6A00;
+}
+
+QMainWindow[color='orange'] > QTabBar::tab:disabled {
+	background-color: #6E4E23;
+	color: #8F8F8F;
+}
+
+
+
+/* QDockWidget QTabBar - Pink */
+
+QMainWindow[color='pink'] > QTabBar::tab:selected {
+	background-color: #D2005F;
+}
+
+QMainWindow[color='pink'] > QTabBar::tab:hover {
+	background-color: #BC0052;
+}
+
+QMainWindow[color='pink'] > QTabBar::tab:disabled {
+	background-color: #6E2343;
+	color: #8F8F8F;
+}
+
+
+
+/* QDockWidget QTabBar - Lime */
+
+QMainWindow[color='lime'] > QTabBar::tab:selected {
+	background-color: #5FD200;
+}
+
+QMainWindow[color='lime'] > QTabBar::tab:hover {
+	background-color: #52BC00;
+}
+
+QMainWindow[color='lime'] > QTabBar::tab:disabled {
+	background-color: #436E23;
+	color: #8F8F8F;
+}
+
+
+
+/* QDockWidget QTabBar - Turquoise */
+
+QMainWindow[color='turquoise'] > QTabBar::tab:selected {
+	background-color: #00D2A8;
+}
+
+QMainWindow[color='turquoise'] > QTabBar::tab:hover {
+	background-color: #00BC99;
+}
+
+QMainWindow[color='turquoise'] > QTabBar::tab:disabled {
+	background-color: #236E61;
+	color: #8F8F8F;
+}
+
+
+
+/* QDockWidget QTabBar - White */
+
+QMainWindow[color='white'] > QTabBar::tab:selected {
+	background-color: #E3E3E3;
+	color: #000000;
+}
+
+QMainWindow[color='white'] > QTabBar::tab:hover {
+	background-color: #D7D7D7;
+}
+
+QMainWindow[color='white'] > QTabBar::tab:disabled {
+	background-color: #CACACA;
+	color: #8F8F8F;
+}

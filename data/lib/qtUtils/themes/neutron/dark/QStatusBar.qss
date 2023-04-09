@@ -1,0 +1,10 @@
+
+/* QStatusBar */
+
+QStatusBar {
+	background-color: #262626;
+}
+
+QStatusBar::item {
+	border: none;
+}

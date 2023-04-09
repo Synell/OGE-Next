@@ -1,0 +1,5 @@
+
+/* QIconWidget */
+QWidget[QIconWidget=true] {
+	background-color: transparent;
+}

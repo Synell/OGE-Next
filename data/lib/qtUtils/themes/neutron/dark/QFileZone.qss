@@ -1,0 +1,7 @@
+
+/* QFileZone */
+QWidget[QFileZone=true] {
+	background-color: #262626;
+	border: 2px dashed #FFFFFF;
+	border-radius: 10px;
+}

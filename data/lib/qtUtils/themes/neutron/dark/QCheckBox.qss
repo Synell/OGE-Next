@@ -1,0 +1,32 @@
+
+/* QCheckBox */
+
+QCheckBox {
+	background-color: transparent;
+}
+
+QCheckBox::indicator {
+    background-color: transparent;
+	color: #f5f5f5;
+	border-radius: 5px;
+	border: 2px solid #232629;
+	width: 16%;
+    height: 16%;
+}
+
+QCheckBox::indicator:focus {
+	border: 2px solid #FFFFFF;
+	color: #FFFFFF;
+}
+
+QCheckBox::indicator:unchecked {
+    image: none;
+}
+
+QCheckBox::indicator:checked {
+    image: url({path}checkbox/checked.png);
+}
+
+QCheckBox::indicator:indeterminate {
+    image: url({path}checkbox/partiallyChecked.png);
+}

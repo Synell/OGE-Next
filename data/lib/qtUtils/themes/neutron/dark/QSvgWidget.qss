@@ -1,0 +1,6 @@
+
+/* QSvgWidget */
+
+QSvgWidget {
+	background-color: transparent;
+}

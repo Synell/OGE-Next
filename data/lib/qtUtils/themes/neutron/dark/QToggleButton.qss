@@ -1,0 +1,106 @@
+
+/* QToggleButton */
+
+QWidget[QToggleButton=true] QCheckBox {
+	color: #44999999;
+}
+
+QWidget[QToggleButton=true] QCheckBox::handle {
+	color: #5D5D5D;
+}
+
+QWidget[QToggleButton=true] QCheckBox:checked {
+	color: #0466C7;
+}
+
+QWidget[QToggleButton=true] QCheckBox:checked::handle {
+	color: #FBFEFB;
+}
+
+
+
+/* QToggleButton - Blue */
+
+QWidget[color='blue'] QWidget[QToggleButton=true] QCheckBox:checked {
+	color: #1B80FC;
+}
+
+
+
+/* QToggleButton - Red */
+
+QWidget[color='red'] QWidget[QToggleButton=true] QCheckBox:checked {
+	color: #FC271B;
+}
+
+
+
+/* QToggleButton - Green */
+
+QWidget[color='green'] QWidget[QToggleButton=true] QCheckBox:checked {
+	color: #07E813;
+}
+
+
+
+/* QToggleButton - Yellow */
+
+QWidget[color='yellow'] QWidget[QToggleButton=true] QCheckBox:checked {
+	color: #E8BC07;
+}
+
+
+
+/* QToggleButton - Magenta */
+
+QWidget[color='magenta'] QWidget[QToggleButton=true] QCheckBox:checked {
+	color: #FC1BF1;
+}
+
+
+
+/* QToggleButton - Cyan */
+
+QWidget[color='cyan'] QWidget[QToggleButton=true] QCheckBox:checked {
+	color: #00C8D4;
+}
+
+
+
+/* QToggleButton - Orange */
+
+QWidget[color='orange'] QWidget[QToggleButton=true] QCheckBox:checked {
+	color: #E88307;
+}
+
+
+
+/* QToggleButton - Pink */
+
+QWidget[color='pink'] QWidget[QToggleButton=true] QCheckBox:checked {
+	color: #E8076C;
+}
+
+
+
+/* QToggleButton - Lime */
+
+QWidget[color='lime'] QWidget[QToggleButton=true] QCheckBox:checked {
+	color: #6CE807;
+}
+
+
+
+/* QToggleButton - Turquoise */
+
+QWidget[color='turquoise'] QWidget[QToggleButton=true] QCheckBox:checked {
+	color: #07E8BC;
+}
+
+
+
+/* QToggleButton - White */
+
+QWidget[color='white'] QWidget[QToggleButton=true] QCheckBox:checked {
+	color: #EFEFEF;
+}

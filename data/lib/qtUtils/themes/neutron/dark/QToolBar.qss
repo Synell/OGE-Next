@@ -1,0 +1,7 @@
+
+/* QToolBar */
+
+QToolBar {
+	background-color: #1A1A1A;
+	border: 1px solid #4f5b62;
+}

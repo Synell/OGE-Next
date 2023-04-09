@@ -1,0 +1,46 @@
+
+/* QSideBar */   /*TODO:*/
+
+QWidget[QSideBar=true] {
+	background-color: #232629;
+	border: none;
+	margin: 0 0 0 0;
+	spacing: 0;
+}
+
+QPushButton[QSideBar=true] {
+	background-color: #232629;
+	color: #fefefe;
+	border: none;
+	border-radius: 0px;
+	height: 50px;
+	text-align: left;
+	font-size: 24px;
+	qproperty-iconSize: 60px;
+	padding-left: -1px;
+}
+
+QPushButton[QSideBarSeparator=true] {
+	background-color: #232629;
+	color: #fefefe;
+	border: none;
+	border-radius: 0px;
+	height: 20px;
+	text-align: center;
+	font-size: 24px;
+	padding-left: -1px;
+}
+
+QPushButton:hover[QSideBar=true] {
+	background-color: #555555;
+	color: #fefefe;
+}
+
+QPushButton:pressed[QSideBar=true] {
+	background-color: #666666;
+	color: #fefefe;
+}
+
+QPushButton:focus[QSideBar=true] {
+	border: none;
+}

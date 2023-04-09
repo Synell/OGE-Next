@@ -1,0 +1,9 @@
+
+/* QToolTip */
+QToolTip {
+	background-color: #747474;
+	color: #FFFFFF;
+	border-radius: 8px;
+	font-size: 10px;
+	font-weight: bold;
+}

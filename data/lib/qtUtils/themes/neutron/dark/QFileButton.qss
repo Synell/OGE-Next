@@ -1,0 +1,38 @@
+
+/* QFileButton */
+
+QWidget[QFileButton=true] QPushButton {
+	height: 50px;
+	border: none;
+	background-color: #262626;
+	font-size: 14px;
+	font-weight: bold;
+	padding-top: 16px;
+	padding-left: 24px;
+	padding-right: 19px;
+	text-align: left;
+	min-width: 12em;
+}
+
+QWidget[QFileButton=true] QPushButton:hover {
+	background-color: #333333;
+}
+
+QWidget[QFileButton=true] QPushButton:focus { }
+
+QWidget[QFileButton=true] QLabel {
+	color: #909090;
+	height: 50px;
+	border: none;
+	font-size: 12px;
+	padding-bottom: 24px;
+	padding-left: 16px;
+}
+
+QWidget[QFileButton=true] QLabel[hover=true] {
+	color: #909090;
+}
+
+QWidget[QFileButton=true] QLabel[focus=true] {
+	color: #3C6FB2;
+}

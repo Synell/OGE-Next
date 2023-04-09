@@ -1,0 +1,16 @@
+
+/* QGroupBox */
+
+QGroupBox {
+	background-color: transparent;
+	color: #fefefe;
+	border: 1px solid #fefefe;
+	border-radius: 5px;
+	margin-top: 3ex;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top center;
+    padding: 0 3px;
+}

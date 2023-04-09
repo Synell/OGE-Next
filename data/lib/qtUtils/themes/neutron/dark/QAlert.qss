@@ -1,0 +1,98 @@
+
+/* QAlert */
+
+QLabel[QAlert=true] {
+	border-radius: 10px;
+	background-color: #64404040;
+	color: #ffffff;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+
+
+/* QAlert - Blue */
+
+QWidget[color='blue'] QWidget[QAlert=true][color='main'] QLabel, QWidget[QAlert=true][color='blue'] QLabel, QLabel[QAlert=true][color='blue'], QWidget[color='blue'] QLabel[QAlert=true][color='main'] {
+	background-color: #641B80FC;
+}
+
+
+
+/* QAlert - Red */
+
+QWidget[color='red'] QWidget[QAlert=true][color='main'] QLabel, QWidget[QAlert=true][color='red'] QLabel, QLabel[QAlert=true][color='red'], QWidget[color='red'] QLabel[QAlert=true][color='main'] {
+	background-color: #64FC271B;
+}
+
+
+
+/* QAlert - Green */
+
+QWidget[color='green'] QWidget[QAlert=true][color='main'] QLabel, QWidget[QAlert=true][color='green'] QLabel, QLabel[QAlert=true][color='green'], QWidget[color='green'] QLabel[QAlert=true][color='main'] {
+	background-color: #6407E813;
+}
+
+
+
+/* QAlert - Yellow */
+
+QWidget[color='yellow'] QWidget[QAlert=true][color='main'] QLabel, QWidget[QAlert=true][color='yellow'] QLabel, QLabel[QAlert=true][color='yellow'], QWidget[color='yellow'] QLabel[QAlert=true][color='main'] {
+	background-color: #64E8BC07;
+}
+
+
+
+/* QAlert - Magenta */
+
+QWidget[color='magenta'] QWidget[QAlert=true][color='main'] QLabel, QWidget[QAlert=true][color='magenta'] QLabel, QLabel[QAlert=true][color='magenta'], QWidget[color='magenta'] QLabel[QAlert=true][color='main'] {
+	background-color: #64FC1BF1;
+}
+
+
+
+/* QAlert - Cyan */
+
+QWidget[color='cyan'] QWidget[QAlert=true][color='main'] QLabel, QWidget[QAlert=true][color='cyan'] QLabel, QLabel[QAlert=true][color='cyan'], QWidget[color='cyan'] QLabel[QAlert=true][color='main'] {
+	background-color: #6400C8D4;
+}
+
+
+
+/* QAlert - Orange */
+
+QWidget[color='orange'] QWidget[QAlert=true][color='main'] QLabel, QWidget[QAlert=true][color='orange'] QLabel, QLabel[QAlert=true][color='orange'], QWidget[color='orange'] QLabel[QAlert=true][color='main'] {
+	background-color: #64E88307;
+}
+
+
+
+/* QAlert - Pink */
+
+QWidget[color='pink'] QWidget[QAlert=true][color='main'] QLabel, QWidget[QAlert=true][color='pink'] QLabel, QLabel[QAlert=true][color='pink'], QWidget[color='pink'] QLabel[QAlert=true][color='main'] {
+	background-color: #64E8076C;
+}
+
+
+
+/* QAlert - Lime */
+
+QWidget[color='lime'] QWidget[QAlert=true][color='main'] QLabel, QWidget[QAlert=true][color='lime'] QLabel, QLabel[QAlert=true][color='lime'], QWidget[color='lime'] QLabel[QAlert=true][color='main'] {
+	background-color: #646CE807;
+}
+
+
+
+/* QAlert - Turquoise */
+
+QWidget[color='turquoise'] QWidget[QAlert=true][color='main'] QLabel, QWidget[QAlert=true][color='turquoise'] QLabel, QLabel[QAlert=true][color='turquoise'], QWidget[color='turquoise'] QLabel[QAlert=true][color='main'] {
+	background-color: #6407E8BC;
+}
+
+
+
+/* QAlert - White */
+
+QWidget[color='white'] QWidget[QAlert=true][color='main'] QLabel, QWidget[QAlert=true][color='white'] QLabel, QLabel[QAlert=true][color='white'], QWidget[color='white'] QLabel[QAlert=true][color='main'] {
+	background-color: #64EFEFEF;
+}

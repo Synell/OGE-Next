@@ -1,0 +1,94 @@
+
+.UEWidget {
+    background-color: #545454;
+    border-radius: 8px;
+    border: 2px solid #ffffff;
+    /* border-top-left-radius: 8px;
+    border-top-right-radius: 8px; */
+}
+
+.UEWidget QLabel.title {
+    font-size: 16px;
+    font-weight: bold;
+    padding-left: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.UEWidget QLabel.moyenne {
+    font-size: 14px;
+    font-weight: bold;
+    padding-right: 8px;
+}
+
+
+.PoleWidget {
+    background-color: #454545;
+    border-top: 2px solid #ffffff;
+    border-radius: 0;
+}
+
+.PoleWidget QLabel.title {
+    font-size: 14px;
+    font-weight: bold;
+    padding-left: 8px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.PoleWidget QLabel.moyenne {
+    font-size: 14px;
+    font-weight: bold;
+    padding-right: 8px;
+}
+
+
+.MatiereWidget {
+    background-color: #373737;
+    /* border-top: 2px solid #ffffff; */
+    border-radius: 0;
+}
+
+.MatiereWidget QLabel.title {
+    font-size: 14px;
+    font-weight: bold;
+    padding-left: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.MatiereWidget QLabel.moyenne {
+    font-size: 14px;
+    font-weight: bold;
+    padding-right: 8px;
+}
+
+
+.NoteGroupWidget {
+    background-color: #282828;
+    border-radius: 0;
+}
+
+.NoteGroupWidget QLabel.title {
+    font-size: 12px;
+    font-weight: bold;
+    padding-left: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.NoteGroupWidget QLabel.moyenne {
+    font-size: 14px;
+    font-weight: bold;
+    padding-right: 8px;
+}
+
+
+.NoteWidget QLabel.note {
+    font-size: 12px;
+}
+
+.NoteWidget QLabel.coeff {
+    font-size: 10px;
+    margin-top: 4px;
+}

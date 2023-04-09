@@ -1,0 +1,121 @@
+
+/* QProgressBar */
+
+QProgressBar
+{
+	border-radius: 4px;
+	color: #ffffff;
+	background-color: #1A1A1A;
+	height: 12px;
+	text-align: center;
+}
+QProgressBar::chunk
+{
+	background-color: #05b8cc;
+	border-radius: 4px;
+}
+
+QProgressBar[small=true]
+{
+	height: 6px;
+	/* border-radius: 3px; */
+	border-radius: 0px;
+}
+QProgressBar::chunk[small=true]
+{
+	/* border-radius: 3px; */
+	border-radius: 0px;
+}
+
+QProgressBar[light=true]
+{
+	background-color: #808080;
+}
+
+
+
+/* QProgressBar - Blue */
+
+QWidget[color='blue'] QProgressBar[color='main']::chunk, QProgressBar[color='blue']::chunk {
+	color: #1B80FC;
+}
+
+
+
+/* QProgressBar - Red */
+
+QWidget[color='red'] QProgressBar[color='main']::chunk, QProgressBar[color='red']::chunk {
+	color: #FC271B;
+}
+
+
+
+/* QProgressBar - Green */
+
+QWidget[color='green'] QProgressBar[color='main']::chunk, QProgressBar[color='green']::chunk {
+	color: #07E813;
+}
+
+
+
+/* QProgressBar - Yellow */
+
+QWidget[color='yellow'] QProgressBar[color='main']::chunk, QProgressBar[color='yellow']::chunk {
+	color: #E8BC07;
+}
+
+
+
+/* QProgressBar - Magenta */
+
+QWidget[color='magenta'] QProgressBar[color='main']::chunk, QProgressBar[color='magenta']::chunk {
+	color: #FC1BF1;
+}
+
+
+
+/* QProgressBar - Cyan */
+
+QWidget[color='cyan'] QProgressBar[color='main']::chunk, QProgressBar[color='cyan']::chunk {
+	color: #00C8D4;
+}
+
+
+
+/* QProgressBar - Orange */
+
+QWidget[color='orange'] QProgressBar[color='main']::chunk, QProgressBar[color='orange']::chunk {
+	color: #E88307;
+}
+
+
+
+/* QProgressBar - Pink */
+
+QWidget[color='pink'] QProgressBar[color='main']::chunk, QProgressBar[color='pink']::chunk {
+	color: #E8076C;
+}
+
+
+
+/* QProgressBar - Lime */
+
+QWidget[color='lime'] QProgressBar[color='main']::chunk, QProgressBar[color='lime']::chunk {
+	color: #6CE807;
+}
+
+
+
+/* QProgressBar - Turquoise */
+
+QWidget[color='turquoise'] QProgressBar[color='main']::chunk, QProgressBar[color='turquoise']::chunk {
+	color: #07E8BC;
+}
+
+
+
+/* QProgressBar - White */
+
+QWidget[color='white'] QProgressBar[color='main']::chunk, QProgressBar[color='white']::chunk {
+	color: #EFEFEF;
+}

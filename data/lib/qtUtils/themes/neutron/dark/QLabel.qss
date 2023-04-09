@@ -1,0 +1,142 @@
+
+/* QLabel */
+
+QLabel {
+	color: #fefefe;
+	background-color: transparent;
+	/*font-family: "Arial";*/
+}
+
+QLabel[small=true] {
+	font-size: 12px;
+	padding-left: 4px;
+}
+
+QLabel[h='1'] {
+	font-size: 32px;
+	font-weight: bold;
+}
+
+QLabel[h='2'] {
+	font-size: 24px;
+	font-weight: bold;
+}
+
+QLabel[h='3'] {
+	font-size: 18.72px;
+	font-weight: bold;
+}
+
+QLabel[h='4'] {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+QLabel[h='5'] {
+	font-size: 13.28px;
+	font-weight: bold;
+}
+
+QLabel[h='6'] {
+	font-size: 10.72px;
+	font-weight: bold;
+}
+
+QLabel[bold=true] {
+	font-weight: bold;
+}
+
+QLabel[file=true] {
+	font-size: 12px;
+	font-style: italic;
+}
+
+QLabel[error=true] {
+	font-size: 12px;
+	font-style: italic;
+	color: #dc3545;
+}
+
+QLabel[warning=true] {
+	font-size: 12px;
+	font-style: italic;
+	color: #ffc107;
+}
+
+QLabel[success=true] {
+	font-size: 12px;
+	font-style: italic;
+	color: #17a2b8;
+}
+
+QLabel[required=true] {
+	font-size: 12px;
+	font-style: italic;
+	color: #ff4b00;
+}
+
+QLabel[bigtitle=true] {
+	font-weight: bold;
+	color: #666666;
+	font-size: 18px;
+	text-align: center;
+}
+
+QLabel[bigbrighttitle=true] {
+	font-weight: bold;
+	color: #FFFFFF;
+	font-size: 18px;
+	text-align: center;
+}
+
+QLabel[spacedtitle=true] {
+	font-weight: bold;
+	color: #777777;
+	font-size: 12px;
+	letter-spacing: 2px;
+	text-align: center;
+}
+
+QLabel[title=true] {
+	font-weight: bold;
+	color: #666666;
+	font-size: 14px;
+	text-align: center;
+}
+
+QLabel[brighttitle=true] {
+	font-weight: bold;
+	color: #FFFFFF;
+	font-size: 14px;
+	text-align: center;
+}
+
+QLabel[subtitle=true] {
+	color: #666666;
+	font-size: 14px;
+	text-align: center;
+}
+
+QLabel[normal=true] {
+	color: #4C4C4C;
+	font-size: 14px;
+	text-align: center;
+}
+
+QLabel[smallnormal=true] {
+	color: #4C4C4C;
+	font-size: 12px;
+	text-align: center;
+}
+
+QLabel[smallbrightnormal=true] {
+	color: #999999;
+	font-size: 12px;
+	text-align: center;
+}
+
+QLabel[brightnormal=true] {
+	color: #999999;
+	font-size: 14px;
+	text-align: center;
+}

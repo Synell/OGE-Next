@@ -1,0 +1,148 @@
+
+/* QWidget */
+
+QWidget, QFrame {
+	background-color: #1A1A1A;
+	color: #fefefe;
+	border: none;
+	border-color: #4f5b62;
+}
+
+QWidget[light=true], QFrame[light=true] {
+	background-color: #262626;
+}
+
+QWidget[transparent=true] {
+	background-color: transparent;
+}
+
+
+
+/* QWidget - Global Rounded */
+
+QWidget[side='top'] {
+	background-color: #262626;
+	border-radius: 0px;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+}
+
+QWidget[side='middle'] {
+	background-color: #262626;
+	border-radius: 0px;
+}
+
+QWidget[side='bottom'] {
+	background-color: #262626;
+	border-radius: 0px;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+
+QWidget[side='all'] {
+	background-color: #262626;
+	border-radius: 0px;
+	border-radius: 4px;
+}
+
+QWidget[side='all-hover'] {
+	background-color: #262626;
+	border-radius: 0px;
+	border-radius: 4px;
+	border: 2px solid transparent;
+}
+
+QWidget[side='all-hover']:hover {
+	background-color: #303030;
+	border-radius: 0px;
+	border-radius: 4px;
+	border: 2px solid #8AAEDB;
+}
+
+
+
+/* QWidget - Blue */
+
+QWidget[color='blue']:hover, QWidget[color='blue'] QWidget[color='main']:hover {
+	border-color: #0D66D0;
+}
+
+
+
+/* QWidget - Red */
+
+QWidget[color='red']:hover, QWidget[color='red'] QWidget[color='main']:hover {
+	border-color: #D0150D;
+}
+
+
+
+/* QWidget - Green */
+
+QWidget[color='green']:hover, QWidget[color='green'] QWidget[color='main']:hover {
+	border-color: #00BC0C;
+}
+
+
+
+/* QWidget - Yellow */
+
+QWidget[color='yellow']:hover, QWidget[color='yellow'] QWidget[color='main']:hover {
+	border-color: #BC9900;
+}
+
+
+
+/* QWidget - Magenta */
+
+QWidget[color='magenta']:hover, QWidget[color='magenta'] QWidget[color='main']:hover {
+	border-color: #D00DC9;
+}
+
+
+
+/* QWidget - Cyan */
+
+QWidget[color='cyan']:hover, QWidget[color='cyan'] QWidget[color='main']:hover {
+	border-color: #009CA8;
+}
+
+
+
+/* QWidget - Orange */
+
+QWidget[color='orange']:hover, QWidget[color='orange'] QWidget[color='main']:hover {
+	border-color: #BC6A00;
+}
+
+
+
+/* QWidget - Pink */
+
+QWidget[color='pink']:hover, QWidget[color='pink'] QWidget[color='main']:hover {
+	border-color: #BC0052;
+}
+
+
+
+/* QWidget - Lime */
+
+QWidget[color='lime']:hover, QWidget[color='lime'] QWidget[color='main']:hover {
+	border-color: #52BC00;
+}
+
+
+
+/* QWidget - Turquoise */
+
+QWidget[color='turquoise']:hover, QWidget[color='turquoise'] QWidget[color='main']:hover {
+	border-color: #00BC99;
+}
+
+
+
+/* QWidget - White */
+
+QWidget[color='white']:hover, QWidget[color='white'] QWidget[color='main']:hover {
+	border-color: #D7D7D7;
+}

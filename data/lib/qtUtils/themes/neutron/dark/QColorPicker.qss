@@ -1,0 +1,72 @@
+
+/* QColorPicker */
+QWidget[QColorPicker=true] {
+	background-color: transparent;
+}
+
+QWidget[QColorPicker=true] QFrame[Rounded=true] {
+	border-radius: 4px;
+}
+
+QWidget[QColorPicker=true] QFrame[ColorInput=true] QFrame {
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+}
+
+QWidget[QColorPicker=true] QFrame[ColorInput=true] QFrame[Bottom=true] {
+	background-color: transparent;
+	border-right: 1px solid #C3C3C3;
+	border-left: 1px solid #C3C3C3;
+	border-bottom: 1px solid #C3C3C3;
+	border-radius: 0px;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+
+QWidget[QColorPicker=true] QFrame[Hue=true] {
+	margin: 0px 3px;
+}
+
+QWidget[QColorPicker=true] QLabel {
+	color: #C3C3C3;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+QWidget[QColorPicker=true] QLineEdit {
+	background-color: transparent;
+	color: #FFFFFF;
+	border-radius: 5px;
+	padding: 0px 4px;
+	border: 1px solid #313131;
+	height: 24px;
+}
+
+QWidget[QColorPicker=true] QLineEdit:hover {
+	border: 1px solid #3C3C3C;
+	background-color: #262626;
+}
+
+QWidget[QColorPicker=true] QLineEdit:focus {
+	border: 1px solid #515151;
+	background-color: #262626;
+}
+
+QWidget[QColorPicker=true] QSpinBox, QWidget[QColorPicker=true] QDoubleSpinBox {
+	background-color: transparent;
+	color: #FFFFFF;
+	border-radius: 5px;
+	padding: 0px 4px;
+	border: 1px solid #313131;
+	height: 24px;
+}
+
+QWidget[QColorPicker=true] QSpinBox:hover, QWidget[QColorPicker=true] QDoubleSpinBox:hover {
+	border: 1px solid #3C3C3C;
+	background-color: #262626;
+}
+
+QWidget[QColorPicker=true] QSpinBox:focus, QWidget[QColorPicker=true] QDoubleSpinBox:focus {
+	border: 1px solid #515151;
+	background-color: #262626;
+}

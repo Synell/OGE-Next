@@ -1,0 +1,20 @@
+
+/* QToolButton */   /*TODO:*/
+
+QToolButton {
+	color: #fefefe;
+	background-color: transparent;
+	border: 1px solid transparent;
+	border-radius: 8px;
+	margin: 0px 1px;
+}
+
+QToolButton:hover {
+	background-color: #24009ceb;
+}
+
+QToolButton:pressed {
+	background-color: #32009ceb;
+	padding-left: 1px;
+	padding-top: 1px;
+}

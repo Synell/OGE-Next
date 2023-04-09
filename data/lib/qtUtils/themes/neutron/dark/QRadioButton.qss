@@ -1,0 +1,45 @@
+
+/* QRadioButton */   /*TODO:*/
+
+QRadioButton {
+	background-color: #333333;
+	color: #999999;
+	height: 42px;
+	border-radius: 4px;
+	padding-left: 12px;
+	font-size: 13px;
+}
+
+QRadioButton:hover {
+	background-color: #333333;
+	color: #B3B3B3;
+}
+
+QRadioButton::indicator {
+    border-radius: 9px;
+	border: 5px solid #FFFFFF;
+    background-color: #FFFFFF;
+	width: 8px;
+	height: 8px;
+	margin-right: 6px;
+}
+
+QRadioButton::indicator:hover {
+	border-color: #6493CE;
+}
+
+QRadioButton::indicator:unchecked:!hover {
+	border-color: #FFFFFF;
+}
+
+QRadioButton::indicator:unchecked:hover {
+	border-color: #398EEF;
+}
+
+QRadioButton::indicator:checked:!hover {
+	border-color: #3D77C2;
+}
+
+QRadioButton::indicator:checked:hover {
+	border-color: #6493CE;
+}

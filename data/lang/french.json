@@ -1,0 +1,250 @@
+{
+    "info": {
+        "name": "Français",
+        "version": "07e7554a",
+        "description": "Langage français pour l'application OGE Next."
+    },
+    "data": {
+        "QMainWindow": {
+            "title": "OGE Next",
+            "mainPage": {
+                "QSidePanel": {
+                    "emptyPanel": {
+                        "QLoginWidget": {
+                            "QNamedLineEdit": {
+                                "username": "Nom d'utilisateur",
+                                "password": "Mot de passe"
+                            },
+                            "QNamedToggleButton": {
+                                "remember": "Se souvenir de moi"
+                            }
+                        },
+                        "QPushButton": {
+                            "login": "Se connecter"
+                        }
+                    },
+                    "dataPanel": {
+                        "QPushButton": {
+                            "refresh": "Rafraîchir"
+                        }
+                    }
+                }
+            },
+            "QSideBar": {
+                "semester": "Semestre %s"
+            },
+            "showMessage": {
+                "emptyUsername": "Vous devez entrer un nom d'utilisateur.",
+                "emptyPassword": "Vous devez entrer un mot de passe.",
+                "loginFailed": "Échec de la connexion.",
+                "loginSuccess": "Connexion réussie.",
+                "createPanels": "Création des panneaux..."
+            }
+        },
+        "QSettingsDialog": {
+            "title": "OGE Next > Paramètres",
+            "QSidePanel": {
+                "appearance": {
+                    "title": "Apparence",
+                    "QLabel": {
+                        "language": {
+                            "title": "Langage",
+                            "description": "Sélectionnez un langage à afficher pour OGE Next."
+                        },
+                        "theme": {
+                            "title": "Thème",
+                            "description": "Sélectionnez un thème à afficher pour OGE Next."
+                        }
+                    },
+                    "QNamedComboBox": {
+                        "language": "Langage",
+                        "theme": "Thème",
+                        "themeVariant": "Variante du Thème"
+                    }
+                },
+                "updates": {
+                    "title": "Mises à Jour",
+                    "QLabel": {
+                        "checkForUpdates": {
+                            "title": "Vérifier les Mises à Jour",
+                            "description": "Détermine la fréquence de vérification des mises à jour de OGE Next."
+                        },
+                        "checkForAppsUpdates": {
+                            "title": "Vérifier les Mises à Jour des Applications",
+                            "description": "Détermine la fréquence de vérification des mises à jour des applications."
+                        },
+                        "newAppsCheckForUpdates": {
+                            "title": "Paramètre de fréquence des Mises à Jour pour les Nouvelles Applications",
+                            "description": "Détermine le paramètre de fréquence des mises à jour pour les nouvelles applications."
+                        },
+                        "newAppsAutoUpdate": {
+                            "title": "Paramètre de Mise à Jour Automatique pour les Nouvelles Applications",
+                            "description": "Détermine le paramètre de mise à jour automatique pour les nouvelles applications."
+                        }
+                    },
+                    "QNamedComboBox": {
+                        "checkForUpdates": {
+                            "title": "Vérifier les Mises à Jour",
+                            "values": {
+                                "never": "Jamais",
+                                "daily": "Quotidienne",
+                                "weekly": "Hebdomadaire",
+                                "monthly": "Mensuelle",
+                                "atLaunch": "Au lancement"
+                            }
+                        },
+                        "checkForAppsUpdates": {
+                            "title": "Vérifier les Mises à Jour des Applications",
+                            "values": {
+                                "never": "Jamais",
+                                "daily": "Quotidienne",
+                                "weekly": "Hebdomadaire",
+                                "monthly": "Mensuelle",
+                                "atLaunch": "Au lancement"
+                            }
+                        },
+                        "newAppsCheckForUpdates": {
+                            "title": "Vérifier les Mises à Jour",
+                            "values": {
+                                "never": "Jamais",
+                                "daily": "Quotidienne",
+                                "weekly": "Hebdomadaire",
+                                "monthly": "Mensuelle",
+                                "atLaunch": "Au lancement"
+                            }
+                        }
+                    },
+                    "QToggleButton": {
+                        "newAppsAutoUpdate": "Mise à Jour Automatique"
+                    }
+                },
+                "data": {
+                    "title": "Données",
+                    "QLabel": {
+                        "clearData": {
+                            "title": "Effacer les Données",
+                            "description": "Efface toutes les données et redémarre l'application."
+                        },
+                        "importData": {
+                            "title": "Importer les Données",
+                            "description": "Importe des données à partir d'un fichier et redémarre l'application."
+                        },
+                        "exportData": {
+                            "title": "Exporter les Données",
+                            "description": "Exporte les données vers un fichier."
+                        }
+                    },
+                    "QPushButton": {
+                        "clearData": "Effacer les Données",
+                        "importData": "Importer les Données",
+                        "exportData": "Exporter les Données"
+                    },
+                    "QFileDialog": {
+                        "importData": "OGE Next > Paramètres > Données > Importer les Données",
+                        "exportData": "OGE Next > Paramètres > Données > Exporter les Données"
+                    }
+                }
+            },
+            "QPushButton": {
+                "cancel": "Annuler",
+                "apply": "Appliquer"
+            }
+        },
+        "QMessageBox": {
+            "critical": {
+                "notImplemented": {
+                    "title": "OGE Next > Fonctionnalité Non-Implémentée",
+                    "text": "Cette fonctionnalité n'existe pas encore et sera\ndisponible dans une version ultérieure du logiciel.",
+                    "details": "Détails"
+                }
+            },
+            "warning": {},
+            "information": {
+                "settingsReload": {
+                    "title": "OGE Next > Paramètres",
+                    "text": "Un redémarrage du logiciel est nécessaire afin\nd'appliquer correctement tous les paramètres."
+                }
+            }
+        },
+        "QAbout": {
+            "OGENext": {
+                "title": "A propos d'OGE Next",
+                "texts": [
+                    "OGE Next est un logiciel libre qui permet de consulter ses notes et plus particulièrement ses moyennes à partir du site OGE.",
+                    "OGE Next est développé par %s, est écrit en Python, utilise le framework PySide 6 pour l'interface graphique et est disponible pour Windows, MacOS et Linux.",
+                    "Idée de logo par %s, réalisé par %s.",
+                    "Merci à %s pour son aide sur BeautifulSoup et sur le regex.",
+                    "Allez sur le %s pour plus d'informations."
+                ]
+            }
+        },
+        "QMenu": {
+            "about": {
+                "PySide": "A Propos de PySide...",
+                "OGENext": "A Propos de OGE Next..."
+            },
+            "donate": {
+                "title": "Faire un Don"
+            }
+        },
+        "QStatusBar": {
+            "QPushButton": {
+                "update": "Mettre à Jour"
+            }
+        },
+        "QUpdater": {
+            "title": "OGE Next Updater",
+            "QLabel": {
+                "downloading": "Téléchargement... (%s %)",
+                "installing": "Installation... (%s %)",
+                "calculatingRemainingTime": "Calcul du Temps Restant...",
+                "waiting": "En Attente...",
+                "remainingTime": "Temps Restant: %s",
+                "done": "Terminé",
+                "bytes": "%s/s",
+                "packages": "%s paquets/s",
+                "eta": "Temps Restant: %s",
+                "days": "%s jours",
+                "hours": "%s heures",
+                "minutes": "%s minutes",
+                "seconds": "%s secondes",
+                "day": "%s jour",
+                "hour": "%s heure",
+                "minute": "%s minute",
+                "second": "%s seconde",
+                "undefined": "Indéfini"
+            },
+            "QSlidingStackedWidget": {
+                "texts": [
+                    "OGE Next est en train de se mettre à jour.",
+                    "OGE Next vous permet de ???.",
+                    "???.",
+                    "???.",
+                    "Vous pouvez choisir la fréquence de vérification des mises à jour dans les paramètres."
+                ]
+            },
+            "QMessageBox": {
+                "critical": {
+                    "downloadFailed": {
+                        "title": "Erreur de Téléchargement",
+                        "text": "Une erreur est survenue lors du téléchargement de la mise à jour."
+                    },
+                    "installFailed": {
+                        "title": "Erreur d'Installation",
+                        "text": "Une erreur est survenue lors de l'installation de la mise à jour."
+                    },
+                    "openAppFailed": {
+                        "title": "Erreur d'Ouverture",
+                        "text": "Une erreur est survenue lors de l'ouverture de OGE Next."
+                    },
+                    "appNotFound": {
+                        "title": "Application Introuvable",
+                        "text": "L'application à exécuter n'a pas été trouvée."
+                    }
+                },
+                "warning": {},
+                "information": {}
+            }
+        }
+    }
+}

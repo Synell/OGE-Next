@@ -1,0 +1,10 @@
+
+/* QColorButton */
+QPushButton[QColorButton=true] {
+	border: 2px solid #5A5A5A;
+	border-radius: 8px;
+}
+
+QPushButton[QColorButton=true]:hover {
+	border-color: #8AAEDB;
+}

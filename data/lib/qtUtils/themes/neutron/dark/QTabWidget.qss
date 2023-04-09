@@ -1,0 +1,173 @@
+
+/* QTabWidget */   /*TODO:*/
+
+QTabWidget {
+	padding: 2px;
+	selection-background-color: transparent;
+}
+
+QTabWidget QWidget {
+	background-color: transparent;
+	border-radius: 4px;
+}
+
+QTabWidget::pane {
+	background-color: transparent;
+	border-bottom: 2px solid transparent;
+	color: #808080;
+}
+
+QTabWidget::pane:selected {
+	color: #B3B3B3;
+}
+
+QTabBar, QDockWidget QTabBar {
+	qproperty-drawBase: 0;
+	border-radius: 4px;
+	margin: 0px;
+	padding: 2px;
+	border: 0;
+}
+
+QTabBar::tab, QDockWidget QTabBar::tab {
+	border-bottom: 2px solid transparent;
+}
+
+QTabBar::tab:top:selected:disabled, QDockWidget QTabBar::tab:top:selected:disabled {
+	border-bottom: 2px solid #26486B;
+	color: #808080;
+	background-color: #455364;
+}
+
+QTabBar::tab:top:!selected:disabled, QDockWidget QTabBar::tab:top:!selected:disabled {
+	border-bottom: 2px solid #3D77C2;
+	color: #808080;
+	background-color: #3D77C2;
+}
+
+QTabBar::tab:top:!selected, QDockWidget QTabBar::tab:top:!selected {
+	border-bottom: 2px solid transparent;
+	margin-top: 2px;
+	color: #808080;
+}
+
+QTabBar::tab:top, QDockWidget QTabBar::tab:top {
+	background-color: transparent;
+	margin-left: 12px;
+	margin-right: 12px;
+	padding-left: 4px;
+	padding-right: 4px;
+	padding-top: 2px;
+	padding-bottom: 10px;
+	min-width: 8px;
+	border-bottom: 2px solid transparent;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+QTabBar::tab:top:selected, QDockWidget QTabBar::tab:top:selected {
+	background-color: transparent;
+	color: #FFFFFF;
+	border-bottom: 2px solid #3D77C2;
+}
+
+QTabBar::tab:top:!selected:hover, QDockWidget QTabBar::tab:top:!selected:hover {
+	border-bottom: 2px solid transparent;
+	color: #B3B3B3;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+QTabBar QToolButton, QDockWidget QTabBar QToolButton {
+	background-color: transparent;
+	height: 12px;
+	width: 12px;
+}
+
+
+
+/* QTabWidget - Blue */
+
+QWidget[color='blue'] QTabBar[color='main']::tab:top:selected, QTabBar[color='blue']::tab:top:selected, QWidget[color='blue'] QDockWidget QTabBar[color='main']::tab:top:selected, QDockWidget QTabBar[color='blue']::tab:top:selected {
+	border-bottom-color: #1B80FC;
+}
+
+
+
+/* QTabWidget - Red */
+
+QWidget[color='red'] QTabBar[color='main']::tab:top:selected, QTabBar[color='red']::tab:top:selected, QWidget[color='red'] QDockWidget QTabBar[color='main']::tab:top:selected, QDockWidget QTabBar[color='red']::tab:top:selected {
+	border-bottom-color: #FC271B;
+}
+
+
+
+/* QTabWidget - Green */
+
+QWidget[color='green'] QTabBar[color='main']::tab:top:selected, QTabBar[color='green']::tab:top:selected, QWidget[color='green'] QDockWidget QTabBar[color='main']::tab:top:selected, QDockWidget QTabBar[color='green']::tab:top:selected {
+	border-bottom-color: #07E813;
+}
+
+
+
+/* QTabWidget - Yellow */
+
+QWidget[color='yellow'] QTabBar[color='main']::tab:top:selected, QTabBar[color='yellow']::tab:top:selected, QWidget[color='yellow'] QDockWidget QTabBar[color='main']::tab:top:selected, QDockWidget QTabBar[color='yellow']::tab:top:selected {
+	border-bottom-color: #E8BC07;
+}
+
+
+
+/* QTabWidget - Magenta */
+
+QWidget[color='magenta'] QTabBar[color='main']::tab:top:selected, QTabBar[color='magenta']::tab:top:selected, QWidget[color='magenta'] QDockWidget QTabBar[color='main']::tab:top:selected, QDockWidget QTabBar[color='magenta']::tab:top:selected {
+	border-bottom-color: #FC1BF1;
+}
+
+
+
+/* QTabWidget - Cyan */
+
+QWidget[color='cyan'] QTabBar[color='main']::tab:top:selected, QTabBar[color='cyan']::tab:top:selected, QWidget[color='cyan'] QDockWidget QTabBar[color='main']::tab:top:selected, QDockWidget QTabBar[color='cyan']::tab:top:selected {
+	border-bottom-color: #00C8D4;
+}
+
+
+
+/* QTabWidget - Orange */
+
+QWidget[color='orange'] QTabBar[color='main']::tab:top:selected, QTabBar[color='orange']::tab:top:selected, QWidget[color='orange'] QDockWidget QTabBar[color='main']::tab:top:selected, QDockWidget QTabBar[color='orange']::tab:top:selected {
+	border-bottom-color: #E88307;
+}
+
+
+
+/* QTabWidget - Pink */
+
+QWidget[color='pink'] QTabBar[color='main']::tab:top:selected, QTabBar[color='pink']::tab:top:selected, QWidget[color='pink'] QDockWidget QTabBar[color='main']::tab:top:selected, QDockWidget QTabBar[color='pink']::tab:top:selected {
+	border-bottom-color: #E8076C;
+}
+
+
+
+/* QTabWidget - Lime */
+
+QWidget[color='lime'] QTabBar[color='main']::tab:top:selected, QTabBar[color='lime']::tab:top:selected, QWidget[color='lime'] QDockWidget QTabBar[color='main']::tab:top:selected, QDockWidget QTabBar[color='lime']::tab:top:selected {
+	border-bottom-color: #6CE807;
+}
+
+
+
+/* QTabWidget - Turquoise */
+
+QWidget[color='turquoise'] QTabBar[color='main']::tab:top:selected, QTabBar[color='turquoise']::tab:top:selected, QWidget[color='turquoise'] QDockWidget QTabBar[color='main']::tab:top:selected, QDockWidget QTabBar[color='turquoise']::tab:top:selected {
+	border-bottom-color: #07E8BC;
+}
+
+
+
+/* QTabWidget - White */
+
+QWidget[color='white'] QTabBar[color='main']::tab:top:selected, QTabBar[color='white']::tab:top:selected, QWidget[color='white'] QDockWidget QTabBar[color='main']::tab:top:selected, QDockWidget QTabBar[color='white']::tab:top:selected {
+	border-bottom-color: #EFEFEF;
+}

@@ -1,0 +1,68 @@
+
+/* QSlider - Horizontal */
+
+QSlider {
+	background-color: transparent;
+}
+
+QSlider::groove:horizontal {
+	background-color: #232629;
+	height: 4px;
+	border-radius: 2px;
+}
+
+QSlider::handle:horizontal {
+	background-color: #FFFFFF;
+	border: 2px solid #FFFFFF;
+	width: 10px;
+	height: 20px;
+	line-height: 20px;
+	margin-top: -5px;
+	margin-bottom: -5px;
+	border-radius: 7px;
+}
+
+QSlider::handle:horizontal:pressed {
+	background-color: #17ba92;
+    border-color: #17ba92;
+}
+
+QSlider::sub-page:horizontal {
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #FFFFFF, stop: 1 #FFFFFF);
+	background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1, stop: 0 #FFFFFF, stop: 1 #FFFFFF);
+	height: 10px;
+	border-radius: 2px;
+}
+
+
+
+/* QSlider - Vertical */
+
+QSlider::groove:vertical {
+	background-color: #232629;
+	width: 4px;
+	border-radius: 2px;
+}
+
+QSlider::handle:vertical {
+	background-color: #FFFFFF;
+	border: 2px solid #FFFFFF;
+	width: 20px;
+	height: 10px;
+	line-height: 20px;
+	margin-left: -5px;
+	margin-right: -5px;
+	border-radius: 7px;
+}
+
+QSlider::handle:vertical:pressed {
+	background-color: #17ba92;
+    border-color: #17ba92;
+}
+
+QSlider::add-page:vertical {
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #FFFFFF, stop: 1 #FFFFFF);
+	background: qlineargradient(x1: 0.2, y1: 0, x2: 1, y2: 1, stop: 0 #FFFFFF, stop: 1 #FFFFFF);
+	width: 10px;
+	border-radius: 2px;
+}
