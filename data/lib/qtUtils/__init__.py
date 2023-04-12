@@ -27,7 +27,9 @@ from .QFiles import QFiles
 from .QLinkLabel import QLinkLabel
 from .QIconWidget import QIconWidget
 from .QFileZone import QFileZone
-from .QFlowWidget import QFlowWidget, QFlowLayout
+from .QFlowWidget import QFlowWidget
+from .QFlowScrollableWidget import QFlowScrollableWidget
+from .QFlowLayout import QFlowLayout
 from .QColorPicker import QColorPicker
 from .QColorButton import QColorButton
 from .QColorDialog import QColorDialog

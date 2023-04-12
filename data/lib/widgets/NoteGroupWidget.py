@@ -4,7 +4,7 @@
 from PySide6.QtWidgets import QLabel, QWidget
 from PySide6.QtCore import Qt
 
-from data.lib.qtUtils import QFlowLayout
+from data.lib.qtUtils import QFlowWidget
 from .OGEWidget import OGEWidget
 from data.lib.oge import NoteGroup
 from .NoteWidget import NoteWidget
@@ -31,14 +31,11 @@ class NoteGroupWidget(OGEWidget):
         label.setAlignment(Qt.AlignmentFlag.AlignVCenter | Qt.AlignmentFlag.AlignRight)
         self.grid_layout.addWidget(label, 0, 1)
 
-        flow_widget = QWidget()
-        flow_widget.grid_layout = QFlowLayout(None, Qt.Orientation.Horizontal)
-        flow_widget.setContentsMargins(10, 10, 10, 10)
-        flow_widget.setLayout(flow_widget.grid_layout)
+        flow_widget = QFlowWidget(None, Qt.Orientation.Horizontal, 10)
         flow_widget.setProperty('class', 'note-group')
         self.grid_layout.addWidget(flow_widget, 1, 0, 1, 2)
 
         for note in note_group.notes:
             frame = NoteWidget(note)
-            flow_widget.grid_layout.addWidget(frame)
+            flow_widget.flow_layout.addWidget(frame)
 #----------------------------------------------------------------------
