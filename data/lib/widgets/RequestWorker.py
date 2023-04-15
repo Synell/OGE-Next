@@ -29,7 +29,7 @@ class RequestWorker(QThread):
             try:
                 response = requests.get(
                     f'{app.replace("https://github.com/", "https://api.github.com/repos/")}/releases',
-                    headers = {'Authorization': f'token {self.token["github"]}'} if self.token['github'] else None
+                    headers = {'Authorization': f'token {self.token}'} if self.token else None
                 )
                 if response.status_code != 200: continue
                 response = response.json()

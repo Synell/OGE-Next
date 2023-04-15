@@ -14,7 +14,7 @@ from data.lib import *
 
     # Class
 class Application(QBaseApplication):
-    BUILD = '07e7554a'
+    BUILD = '07e7557b'
     VERSION = 'Experimental'
 
     SERVER_NAME = 'OgeNext'
@@ -49,6 +49,8 @@ class Application(QBaseApplication):
         self.window.setProperty('color', 'yellow')
 
         self.setWindowIcon(QIcon('./data/icons/OGENext.svg'))
+
+        SemesterWidget.ICON = f'{self.save_data.getIconsDir()}/sidepanel/semester_%s.png'
 
         self.load_colors()
         self.create_widgets()
@@ -281,6 +283,8 @@ class Application(QBaseApplication):
             self.save_data.username = ''
             self.save_data.password = ''
 
+        self.save_data.remember = self.main_page.empty_panel.auth.remember
+
         self.save_data.save()
 
         if self.must_init_panels:
@@ -290,18 +294,18 @@ class Application(QBaseApplication):
             send_param = lambda i: lambda: self.change_semester(i + 1)
 
             for i in range(c):
-                self.main_page.side_panel.add_item(
-                    QSidePanelItem(
-                        self.save_data.language_data['QMainWindow']['QSideBar']['semester'].replace('%s', str(i + 1)),
-                        f'{self.save_data.getIconsDir()}/sidepanel/semester.png',
-                        send_param(i)
-                    )
+                item = QSidePanelItem(
+                    self.save_data.language_data['QMainWindow']['QSideBar']['semester'].replace('%s', str(i + 1)),
+                    f'{self.save_data.getIconsDir()}/sidepanel/semester_unknown.png',
+                    send_param(i)
                 )
 
-                widget = SemesterWidget(self.save_data.language_data['QMainWindow']['mainPage']['QSidePanel']['dataPanel'], i + 1)
+                widget = SemesterWidget(self.save_data.language_data['QMainWindow']['mainPage']['QSidePanel']['dataPanel'], i + 1, item)
                 widget.refreshed.connect(lambda j: self.change_semester(j, True))
                 self.main_page.right.semesters.addWidget(widget)
                 self.data_panels.append(widget)
+
+                self.main_page.side_panel.add_item(item)
 
             self.main_page.right.slide_in_index(1)
 

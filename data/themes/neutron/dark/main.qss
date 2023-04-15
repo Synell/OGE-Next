@@ -1,4 +1,16 @@
 
+.SemesterWidget QLabel[title=true] {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.SemesterWidget QLabel[desc=true] {
+    font-size: 14px;
+    font-weight: bold;
+    color: #c0c0c0;
+}
+
 .UEWidget {
     background-color: #545454;
     border-radius: 8px;

@@ -18,7 +18,7 @@ from data.lib.widgets.updater import data as updater_data
 
     # Class
 class QUpdater(QBaseApplication):
-    BUILD = '07e7554a'
+    BUILD = '07e7557b'
     VERSION = 'Experimental'
 
     UPDATE_LINK = ''
@@ -26,7 +26,7 @@ class QUpdater(QBaseApplication):
     def __init__(self,  platform: QPlatform):
         super().__init__(platform)
 
-        self.setOrganizationName('Synell')
+        self.setOrganizationName('Synel')
         # self.setApplicationDisplayName('OGE Next')
         self.setApplicationName('OGE Next')
         self.setApplicationVersion(self.VERSION)

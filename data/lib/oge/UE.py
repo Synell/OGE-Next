@@ -11,6 +11,7 @@ class UE:
         self._title = title
         self._coeff = coeff
         self._poles = poles
+        self._avg = None
 
     @property
     def title(self) -> str:
@@ -26,6 +27,8 @@ class UE:
 
     @property
     def moyenne(self) -> float|None:
+        if self._avg is not None: return self._avg
+
         note, coeff = 0, 0
         for pole in self._poles:
             if pole.moyenne is None: continue
@@ -35,7 +38,9 @@ class UE:
 
         if coeff == 0: return None
 
-        return note / coeff
+        self._avg = note / coeff
+
+        return self._avg
 
     def __str__(self) -> str:
         return f'{self.title} ({self.coeff})\n' + '\n'.join([f'\t{pole}' for pole in self.poles])

@@ -73,7 +73,7 @@ class SaveData(QSaveData):
 
 
     def get_extra(self, extra_tabs: dict = {}):
-        pass #todo
+        pass
 
 
 
@@ -110,11 +110,17 @@ class SaveData(QSaveData):
         with exc: self.last_check_for_updates = datetime.strptime(extra_data['lastCheckForUpdates'], self.dateformat)
         with exc: self.username = extra_data['username']
         with exc: self.password = Fernet(extra_data['key']).decrypt(extra_data['password']).decode('utf-8')
+        with exc: self.remember = extra_data['remember']
 
         self.save()
 
     def export_extra_data(self) -> dict:
         dct = self.save_extra_data()
+
+        del dct['username']
+        del dct['key']
+        del dct['password']
+        del dct['remember']
 
         return dct
 #----------------------------------------------------------------------

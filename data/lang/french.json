@@ -1,7 +1,7 @@
 {
     "info": {
         "name": "Français",
-        "version": "07e7554a",
+        "version": "07e7557b",
         "description": "Langage français pour l'application OGE Next."
     },
     "data": {
@@ -26,6 +26,15 @@
                     "dataPanel": {
                         "QPushButton": {
                             "refresh": "Rafraîchir"
+                        },
+                        "QLabel": {
+                            "perfectSemester": "Semestre parfait, félicitations !",
+                            "goodSemester": "Semestre valide, continuez comme ça !",
+                            "alertSemester": "Semestre en alerte, attention à vos notes !",
+                            "badSemester": "Semestre en difficulté, cherchez à combler vos lacunes !",
+                            "between8And10": "UEs comprises entre 8/20 et 10/20 à améliorer :\n%s",
+                            "below8": "UEs en dessous de 8/20 à améliorer :\n%s",
+                            "allBelow8": "Toutes les UE sont en dessous de 8/20, travaillez plus si vous voulez réussir !"
                         }
                     }
                 }
@@ -68,42 +77,10 @@
                         "checkForUpdates": {
                             "title": "Vérifier les Mises à Jour",
                             "description": "Détermine la fréquence de vérification des mises à jour de OGE Next."
-                        },
-                        "checkForAppsUpdates": {
-                            "title": "Vérifier les Mises à Jour des Applications",
-                            "description": "Détermine la fréquence de vérification des mises à jour des applications."
-                        },
-                        "newAppsCheckForUpdates": {
-                            "title": "Paramètre de fréquence des Mises à Jour pour les Nouvelles Applications",
-                            "description": "Détermine le paramètre de fréquence des mises à jour pour les nouvelles applications."
-                        },
-                        "newAppsAutoUpdate": {
-                            "title": "Paramètre de Mise à Jour Automatique pour les Nouvelles Applications",
-                            "description": "Détermine le paramètre de mise à jour automatique pour les nouvelles applications."
                         }
                     },
                     "QNamedComboBox": {
                         "checkForUpdates": {
-                            "title": "Vérifier les Mises à Jour",
-                            "values": {
-                                "never": "Jamais",
-                                "daily": "Quotidienne",
-                                "weekly": "Hebdomadaire",
-                                "monthly": "Mensuelle",
-                                "atLaunch": "Au lancement"
-                            }
-                        },
-                        "checkForAppsUpdates": {
-                            "title": "Vérifier les Mises à Jour des Applications",
-                            "values": {
-                                "never": "Jamais",
-                                "daily": "Quotidienne",
-                                "weekly": "Hebdomadaire",
-                                "monthly": "Mensuelle",
-                                "atLaunch": "Au lancement"
-                            }
-                        },
-                        "newAppsCheckForUpdates": {
                             "title": "Vérifier les Mises à Jour",
                             "values": {
                                 "never": "Jamais",
@@ -217,9 +194,9 @@
             "QSlidingStackedWidget": {
                 "texts": [
                     "OGE Next est en train de se mettre à jour.",
-                    "OGE Next vous permet de ???.",
-                    "???.",
-                    "???.",
+                    "OGE Next vous permet de consulter ses notes et plus particulièrement ses moyennes à partir du site OGE.",
+                    "Un message d'encouragement est placé au dessus de chaque semestre pour vous aider à vous progresser ou à continuer ainsi.",
+                    "OGE Next existe car OGE ne fournit pas de calculateur de moyenne avant la toute fin du semestre.",
                     "Vous pouvez choisir la fréquence de vérification des mises à jour dans les paramètres."
                 ]
             },

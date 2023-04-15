@@ -11,6 +11,7 @@ class Matiere:
         self._title = title
         self._coeff = coeff
         self._note_groups = note_groups
+        self._avg = None
 
     @property
     def title(self) -> str:
@@ -26,6 +27,8 @@ class Matiere:
 
     @property
     def moyenne(self) -> float|None:
+        if self._avg is not None: return self._avg
+
         note, coeff = 0, 0
         for note_group in self._note_groups:
             if note_group.moyenne is None: continue
@@ -35,7 +38,9 @@ class Matiere:
 
         if coeff == 0: return None
 
-        return note / coeff
+        self._avg = note / coeff
+
+        return self._avg
 
     def __str__(self) -> str:
         return f'{self.title} ({self.coeff})\n\t' + '\n'.join([f'\t{note_group}' for note_group in self.note_groups]).replace('\n', '\n\t')

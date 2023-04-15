@@ -1,7 +1,7 @@
 {
     "info": {
         "name": "English",
-        "version": "07e7554a",
+        "version": "07e7557b",
         "description": "English language for OGE Next."
     },
     "data": {
@@ -26,6 +26,15 @@
                     "dataPanel": {
                         "QPushButton": {
                             "refresh": "Refresh"
+                        },
+                        "QLabel": {
+                            "perfectSemester": "Perfect semester, keep it up !",
+                            "goodSemester": "Good semester, almost perfect !",
+                            "alertSemester": "Alert semester, find a way to improve !",
+                            "badSemester": "Bad semester, work harder !",
+                            "between8And10": "UEs between 8/20 and 10/20 to improve :\n%s",
+                            "below8": "UEs below 8/20 to improve :\n%s",
+                            "allBelow8": "All UEs are below 8/20, work harder if you want to pass !"
                         }
                     }
                 }
@@ -68,42 +77,10 @@
                         "checkForUpdates": {
                             "title": "Check for Updates",
                             "description": "Determines how often OGE Next checks for updates."
-                        },
-                        "checkForAppsUpdates": {
-                            "title": "Check for Apps Updates",
-                            "description": "Determines how often OGE Next checks for apps updates."
-                        },
-                        "newAppsCheckForUpdates": {
-                            "title": "Check for Updates Frequency Setting for New Apps",
-                            "description": "Determines the check for updates frequency setting for new apps."
-                        },
-                        "newAppsAutoUpdate": {
-                            "title": "Auto Update Setting for New Apps",
-                            "description": "Determines the auto update setting for new apps."
                         }
                     },
                     "QNamedComboBox": {
                         "checkForUpdates": {
-                            "title": "Check for Updates",
-                            "values": {
-                                "never": "Never",
-                                "daily": "Daily",
-                                "weekly": "Weekly",
-                                "monthly": "Monthly",
-                                "atLaunch": "At Launch"
-                            }
-                        },
-                        "checkForAppsUpdates": {
-                            "title": "Check for Apps Updates",
-                            "values": {
-                                "never": "Never",
-                                "daily": "Daily",
-                                "weekly": "Weekly",
-                                "monthly": "Monthly",
-                                "atLaunch": "At Launch"
-                            }
-                        },
-                        "newAppsCheckForUpdates": {
                             "title": "Check for Updates",
                             "values": {
                                 "never": "Never",
@@ -217,9 +194,9 @@
             "QSlidingStackedWidget": {
                 "texts": [
                     "OGE Next is being updated to the latest version.",
-                    "OGE Next allows you to ???.",
-                    "???.",
-                    "???.",
+                    "OGE Next allows you to access your school's online gradebook and average from OGE..",
+                    "A motivational message is placed above each semester to help you stay motivated and focused on your studies.",
+                    "OGE Next exists because OGE doesn't provide any average calculation feature before the very end of the semester.",
                     "You can choose how often OGE Next checks for updates in the settings."
                 ]
             },

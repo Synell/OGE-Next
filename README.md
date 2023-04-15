@@ -73,8 +73,36 @@ OGE Next is a grade viewer for Windows, Linux and MacOS. It allows you to view y
 
 ### Connecting
 
-<!-- todo -->
+<img alt="Login screen" src="https://raw.githubusercontent.com/Synell/Assets/main/OGENext/readme/login.png" />
+
+Enter your username and password in the login screen and click on the "Login" button. If the connection is successful, you will be redirected to the main screen.
+
+*Note that OGE is super slow sometimes, so it may take a while to load the grades.*
 
 ### Viewing grades
 
-<!-- todo -->
+<img alt="Grades" src="https://raw.githubusercontent.com/Synell/Assets/main/OGENext/readme/grades.png" />
+
+#### Sidebar
+
+On the left side of the screen, you can see the sidebar. It contains the semester list and the settings button.
+
+Once the semester loaded, you can see an icon next to the semester ID. This icon indicates the status of the semester:
+
+- <img alt="Perfect semester" src="https://raw.githubusercontent.com/Synell/Assets/main/OGENext/data/themes/neutron/dark/icons/sidepanel/semester_perfect.png" /> Perfect semester: you have no failed UE.
+
+- <img alt="Good semester" src="https://raw.githubusercontent.com/Synell/Assets/main/OGENext/data/themes/neutron/dark/icons/sidepanel/semester_good.png" /> Good semester: you have one or two UE between 8/20 and 10/20 with the other UEs between 10/20 and 20/20.
+
+- <img alt="Bad semester" src="https://raw.githubusercontent.com/Synell/Assets/main/OGENext/data/themes/neutron/dark/icons/sidepanel/semester_alert.png" /> Alert semester: you have at least one UE between 0/20 and 8/20.
+
+- <img alt="Bad semester" src="https://raw.githubusercontent.com/Synell/Assets/main/OGENext/data/themes/neutron/dark/icons/sidepanel/semester_bad.png" /> Bad semester: you have all your UEs between 0/20 and 8/20.
+
+- <img alt="Blue globe" src="https://raw.githubusercontent.com/Synell/Assets/main/OGENext/data/themes/neutron/dark/icons/sidepanel/semester_unknown.png" /> Missing data: the semester is not loaded yet and will be loaded when you click on it.
+
+*Note that loading a semester may take a while as it makes a new request to the OGE website.*
+
+#### Semesters
+
+On the right side of the screen, you can see the UE list with their average grade.
+
+On top of the UE list, you can see a refresh button and an encouragement message with the UEs to focus on if you want to improve your average grades (when you don't have the perfect grade).

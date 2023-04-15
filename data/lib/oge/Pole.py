@@ -11,6 +11,7 @@ class Pole:
         self._title = title
         self._coeff = coeff
         self._matieres = matieres
+        self._avg = None
 
     @property
     def title(self) -> str:
@@ -26,6 +27,8 @@ class Pole:
 
     @property
     def moyenne(self) -> float|None:
+        if self._avg is not None: return self._avg
+
         note, coeff = 0, 0
         for matiere in self._matieres:
             if matiere.moyenne is None: continue
@@ -35,7 +38,9 @@ class Pole:
 
         if coeff == 0: return None
 
-        return note / coeff
+        self._avg = note / coeff
+
+        return self._avg
 
     def __str__(self) -> str:
         return f'{self.title} ({self.coeff})\n\t' + '\n'.join([f'\t{matiere}' for matiere in self.matieres]).replace('\n', '\n\t')
