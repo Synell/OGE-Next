@@ -89,15 +89,15 @@ On the left side of the screen, you can see the sidebar. It contains the semeste
 
 Once the semester loaded, you can see an icon next to the semester ID. This icon indicates the status of the semester:
 
-- <img alt="Perfect semester" src="https://raw.githubusercontent.com/Synell/Assets/main/OGENext/data/themes/neutron/dark/icons/sidepanel/semester_perfect.png" /> Perfect semester: you have no failed UE.
+- <img alt="Perfect semester" src="https://raw.githubusercontent.com/Synell/OGE-Next/main/data/themes/neutron/dark/icons/sidepanel/semester_perfect.png" width=32px align="center" /> Perfect semester: you have no failed UE.
 
-- <img alt="Good semester" src="https://raw.githubusercontent.com/Synell/Assets/main/OGENext/data/themes/neutron/dark/icons/sidepanel/semester_good.png" /> Good semester: you have one or two UE between 8/20 and 10/20 with the other UEs between 10/20 and 20/20.
+- <img alt="Good semester" src="https://raw.githubusercontent.com/Synell/OGE-Next/main/data/themes/neutron/dark/icons/sidepanel/semester_good.png" width=32px align="center" /> Good semester: you have one or two UE between 8/20 and 10/20 with the other UEs between 10/20 and 20/20.
 
-- <img alt="Bad semester" src="https://raw.githubusercontent.com/Synell/Assets/main/OGENext/data/themes/neutron/dark/icons/sidepanel/semester_alert.png" /> Alert semester: you have at least one UE between 0/20 and 8/20.
+- <img alt="Bad semester" src="https://raw.githubusercontent.com/Synell/OGE-Next/main/data/themes/neutron/dark/icons/sidepanel/semester_alert.png" width=32px align="center" /> Alert semester: you have at least one UE between 0/20 and 8/20.
 
-- <img alt="Bad semester" src="https://raw.githubusercontent.com/Synell/Assets/main/OGENext/data/themes/neutron/dark/icons/sidepanel/semester_bad.png" /> Bad semester: you have all your UEs between 0/20 and 8/20.
+- <img alt="Bad semester" src="https://raw.githubusercontent.com/Synell/OGE-Next/main/data/themes/neutron/dark/icons/sidepanel/semester_bad.png" width=32px align="center" /> Bad semester: you have all your UEs between 0/20 and 8/20.
 
-- <img alt="Blue globe" src="https://raw.githubusercontent.com/Synell/Assets/main/OGENext/data/themes/neutron/dark/icons/sidepanel/semester_unknown.png" /> Missing data: the semester is not loaded yet and will be loaded when you click on it.
+- <img alt="Blue globe" src="https://raw.githubusercontent.com/Synell/OGE-Next/main/data/themes/neutron/dark/icons/sidepanel/semester_unknown.png" width=32px align="center" /> Missing data: the semester is not loaded yet and will be loaded when you click on it.
 
 *Note that loading a semester may take a while as it makes a new request to the OGE website.*
 
