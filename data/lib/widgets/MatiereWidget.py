@@ -5,24 +5,24 @@ from PySide6.QtWidgets import QLabel
 from PySide6.QtCore import Qt
 
 from .OGEWidget import OGEWidget
-from data.lib.oge import Matiere
+from data.lib.oge import Subject
 from .NoteGroupWidget import NoteGroupWidget
 #----------------------------------------------------------------------
 
     # Class
 class MatiereWidget(OGEWidget):
-    def __init__(self, matiere: Matiere) -> None:
+    def __init__(self, matiere: Subject) -> None:
         super().__init__()
 
         self.grid_layout.setContentsMargins(0, 0, 0, 0)
         self.grid_layout.setSpacing(0)
         self.setProperty('class', 'MatiereWidget')
 
-        label = QLabel(f'{matiere.title} ({matiere.coeff})')
+        label = QLabel(f'{matiere.title} ({matiere.coefficient})')
         label.setProperty('class', 'title')
         self.grid_layout.addWidget(label, 0, 0)
 
-        avg = matiere.moyenne
+        avg = matiere.average
 
         label = QLabel(f'{avg:.2f}/20')
         label.setStyleSheet(f'color: {self.perc2color(avg / 20)}')
@@ -30,7 +30,7 @@ class MatiereWidget(OGEWidget):
         label.setAlignment(Qt.AlignmentFlag.AlignVCenter | Qt.AlignmentFlag.AlignRight)
         self.grid_layout.addWidget(label, 0, 1)
 
-        for index, note_group in enumerate(matiere.note_groups):
+        for index, note_group in enumerate(matiere.grade_groups):
             frame = NoteGroupWidget(note_group)
             self.grid_layout.addWidget(frame, index + 1, 0, 1, 2)
 #----------------------------------------------------------------------

@@ -2,15 +2,15 @@
 #----------------------------------------------------------------------
 
     # Libraries
-from .Matiere import Matiere
+from .Subject import Subject
 #----------------------------------------------------------------------
 
     # Class
 class Pole:
-    def __init__(self, title: str, coeff: float, matieres: list[Matiere]) -> None:
+    def __init__(self, title: str, coefficient: float, subjects: list[Subject]) -> None:
         self._title = title
-        self._coeff = coeff
-        self._matieres = matieres
+        self._coefficient = coefficient
+        self._subjects = subjects
         self._avg = None
 
     @property
@@ -18,23 +18,23 @@ class Pole:
         return self._title
 
     @property
-    def coeff(self) -> float:
-        return self._coeff
+    def coefficient(self) -> float:
+        return self._coefficient
 
     @property
-    def matieres(self) -> list[Matiere]:
-        return self._matieres.copy()
+    def matieres(self) -> list[Subject]:
+        return self._subjects.copy()
 
     @property
-    def moyenne(self) -> float|None:
+    def average(self) -> float|None:
         if self._avg is not None: return self._avg
 
         note, coeff = 0, 0
-        for matiere in self._matieres:
-            if matiere.moyenne is None: continue
+        for matiere in self._subjects:
+            if matiere.average is None: continue
 
-            note += matiere.moyenne * matiere.coeff
-            coeff += matiere.coeff
+            note += matiere.average * matiere.coefficient
+            coeff += matiere.coefficient
 
         if coeff == 0: return None
 
@@ -43,5 +43,5 @@ class Pole:
         return self._avg
 
     def __str__(self) -> str:
-        return f'{self.title} ({self.coeff})\n\t' + '\n'.join([f'\t{matiere}' for matiere in self.matieres]).replace('\n', '\n\t')
+        return f'{self.title} ({self.coefficient})\n\t' + '\n'.join([f'\t{matiere}' for matiere in self.matieres]).replace('\n', '\n\t')
 #----------------------------------------------------------------------

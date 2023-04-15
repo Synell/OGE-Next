@@ -5,12 +5,12 @@ from PySide6.QtWidgets import QLabel
 from PySide6.QtCore import Qt
 
 from .OGEWidget import OGEWidget
-from data.lib.oge import Note
+from data.lib.oge import Grade
 #----------------------------------------------------------------------
 
     # Class
 class NoteWidget(OGEWidget):
-    def __init__(self, note: Note) -> None:
+    def __init__(self, note: Grade) -> None:
         super().__init__()
 
         self.grid_layout.setContentsMargins(0, 0, 0, 0)
@@ -22,7 +22,7 @@ class NoteWidget(OGEWidget):
         label.setProperty('class', 'note')
         self.grid_layout.addWidget(label, 0, 0)
 
-        label = QLabel(f'({note.coeff})')
+        label = QLabel(f'({note.coefficient})')
         label.setProperty('class', 'coeff')
         self.grid_layout.addWidget(label, 0, 1)
 

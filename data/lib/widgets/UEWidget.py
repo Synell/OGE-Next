@@ -18,11 +18,11 @@ class UEWidget(OGEWidget):
         self.grid_layout.setSpacing(0)
         self.setProperty('class', 'UEWidget')
 
-        label = QLabel(f'{ue.title} ({ue.coeff})')
+        label = QLabel(f'{ue.title} ({ue.coefficient})')
         label.setProperty('class', 'title')
         self.grid_layout.addWidget(label, 0, 0)
 
-        avg = ue.moyenne
+        avg = ue.average
 
         label = QLabel(f'{avg:.2f}/20')
         label.setStyleSheet(f'color: {self.perc2color(avg / 20)}')

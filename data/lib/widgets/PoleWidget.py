@@ -18,11 +18,11 @@ class PoleWidget(OGEWidget):
         self.grid_layout.setSpacing(0)
         self.setProperty('class', 'PoleWidget')
 
-        label = QLabel(f'{pole.title} ({pole.coeff})')
+        label = QLabel(f'{pole.title} ({pole.coefficient})')
         label.setProperty('class', 'title')
         self.grid_layout.addWidget(label, 0, 0)
 
-        avg = pole.moyenne
+        avg = pole.average
 
         label = QLabel(f'{avg:.2f}/20')
         label.setStyleSheet(f'color: {self.perc2color(avg / 20)}')

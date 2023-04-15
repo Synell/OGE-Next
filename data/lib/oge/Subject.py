@@ -2,15 +2,15 @@
 #----------------------------------------------------------------------
 
     # Libraries
-from .Pole import Pole
+from .GradeGroup import GradeGroup
 #----------------------------------------------------------------------
 
     # Class
-class UE:
-    def __init__(self, title: str, coefficient: float, poles: list[Pole]) -> None:
+class Subject:
+    def __init__(self, title: str, coefficient: float, grade_groups: list[GradeGroup]) -> None:
         self._title = title
         self._coefficient = coefficient
-        self._poles = poles
+        self._grade_groups = grade_groups
         self._avg = None
 
     @property
@@ -22,26 +22,26 @@ class UE:
         return self._coefficient
 
     @property
-    def poles(self) -> list[Pole]:
-        return self._poles.copy()
+    def grade_groups(self) -> list[GradeGroup]:
+        return self._grade_groups.copy()
 
     @property
     def average(self) -> float|None:
         if self._avg is not None: return self._avg
 
-        grade, coeff = 0, 0
-        for pole in self._poles:
-            if pole.average is None: continue
+        note, coeff = 0, 0
+        for note_group in self._grade_groups:
+            if note_group.average is None: continue
 
-            grade += pole.average * pole.coefficient
-            coeff += pole.coefficient
+            note += note_group.average * note_group.coefficient
+            coeff += note_group.coefficient
 
         if coeff == 0: return None
 
-        self._avg = grade / coeff
+        self._avg = note / coeff
 
         return self._avg
 
     def __str__(self) -> str:
-        return f'{self.title} ({self.coefficient})\n' + '\n'.join([f'\t{pole}' for pole in self.poles])
+        return f'{self.title} ({self.coefficient})\n\t' + '\n'.join([f'\t{note_group}' for note_group in self.grade_groups]).replace('\n', '\n\t')
 #----------------------------------------------------------------------

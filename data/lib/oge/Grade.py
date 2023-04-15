@@ -2,11 +2,11 @@
 #----------------------------------------------------------------------
 
     # Class
-class Note:
-    def __init__(self, value: float, total: float, coeff: float) -> None:
+class Grade:
+    def __init__(self, value: float, total: float, coefficient: float) -> None:
         self._value = value
         self._total = total
-        self._coeff = coeff
+        self._coefficient = coefficient
 
     @property
     def value(self) -> str:
@@ -21,9 +21,9 @@ class Note:
         return self._value * (20 / self._total)
 
     @property
-    def coeff(self) -> float:
-        return self._coeff
+    def coefficient(self) -> float:
+        return self._coefficient
 
     def __str__(self) -> str:
-        return f'{self.value}/{self.total} ({self.coeff})'
+        return f'{self.value}/{self.total} ({self.coefficient})'
 #----------------------------------------------------------------------

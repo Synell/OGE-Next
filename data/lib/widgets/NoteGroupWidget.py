@@ -6,24 +6,24 @@ from PySide6.QtCore import Qt
 
 from data.lib.qtUtils import QFlowWidget
 from .OGEWidget import OGEWidget
-from data.lib.oge import NoteGroup
+from data.lib.oge import GradeGroup
 from .NoteWidget import NoteWidget
 #----------------------------------------------------------------------
 
     # Class
 class NoteGroupWidget(OGEWidget):
-    def __init__(self, note_group: NoteGroup) -> None:
+    def __init__(self, note_group: GradeGroup) -> None:
         super().__init__()
 
         self.grid_layout.setContentsMargins(0, 0, 0, 0)
         self.grid_layout.setSpacing(0)
         self.setProperty('class', 'NoteGroupWidget')
 
-        label = QLabel(f'{note_group.title} ({note_group.coeff})')
+        label = QLabel(f'{note_group.title} ({note_group.coefficient})')
         label.setProperty('class', 'title')
         self.grid_layout.addWidget(label, 0, 0)
 
-        avg = note_group.moyenne
+        avg = note_group.average
 
         label = QLabel(f'{avg:.2f}/20')
         label.setStyleSheet(f'color: {self.perc2color(avg / 20)}')

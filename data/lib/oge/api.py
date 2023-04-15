@@ -5,9 +5,9 @@ from bs4.element import Tag, ResultSet
 from requests import session, Session
 import re
 from bs4 import BeautifulSoup as BS
-from .Note import Note
-from .NoteGroup import NoteGroup
-from .Matiere import Matiere
+from .Grade import Grade
+from .GradeGroup import GradeGroup
+from .Subject import Subject
 from .Pole import Pole
 from .UE import UE
 from .InfoType import InfoType
@@ -165,11 +165,11 @@ class OGE(QObject):
 
             is_sae = False
 
-            matieres_resource: list[Matiere] = []
+            matieres_resource: list[Subject] = []
 
             name_sae = ''
             coeff_sae = 0.0
-            matieres_sae: list[Matiere] = []
+            matieres_sae: list[Subject] = []
 
             for row in rows:
                 if row.attrs.get('class', None) == ['cell_BUT_SAE']:
@@ -185,7 +185,7 @@ class OGE(QObject):
                 matiere_coeff = float(matiere_children[1].text.strip().replace('\n', '').replace('(', '').replace(')', ''))
                 # print('>>', matiere, matiere_coeff)
 
-                note_groups: list[NoteGroup] = []
+                note_groups: list[GradeGroup] = []
 
                 for note_tag in matiere_tag:
                     children = list(note_tag.children)
@@ -197,7 +197,7 @@ class OGE(QObject):
                     coeff = float(children.pop(-1).text.replace('\n', '').replace('(', '').replace(')', '').strip())
                     # print('>>>', name, coeff)
 
-                    notes: list[Note] = []
+                    notes: list[Grade] = []
 
                     while children:
                         child = children.pop(0)
@@ -213,12 +213,12 @@ class OGE(QObject):
                                 coef = float(child.text.replace('\n', '').replace('(', '').replace(')', '').strip())
 
                                 # print('>>>>', f'{note}/{total}', coef)
-                                notes.append(Note(note, total, coef))
+                                notes.append(Grade(note, total, coef))
 
-                    note_group = NoteGroup(name, coeff, notes)
+                    note_group = GradeGroup(name, coeff, notes)
                     note_groups.append(note_group)
 
-                matiere = Matiere(matiere, matiere_coeff, note_groups)
+                matiere = Subject(matiere, matiere_coeff, note_groups)
 
                 if is_sae:
                     matieres_sae.append(matiere)

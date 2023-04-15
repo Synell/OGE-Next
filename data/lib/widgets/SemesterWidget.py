@@ -75,11 +75,11 @@ class SemesterWidget(QScrollableGridFrame):
             ue_widget = UEWidget(ue)
             self.scroll_layout.addWidget(ue_widget, index + 1, 0)
 
-            if ue.moyenne:
-                if ue.moyenne >= 10:
+            if ue.average:
+                if ue.average >= 10:
                     ue10.append(ue)
 
-                elif ue.moyenne >= 8:
+                elif ue.average >= 8:
                     ue8.append(ue)
 
                 else:
