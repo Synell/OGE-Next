@@ -33,7 +33,7 @@ class SaveData(QSaveData):
 
     def settings_menu_extra(self):
         return {
-            self.language_data['QSettingsDialog']['QSidePanel']['updates']['title']: (self.settings_menu_updates(), f'{self.getIconsDir()}/sidepanel/updates.png'),
+            self.language_data['QSettingsDialog']['QSidePanel']['updates']['title']: (self.settings_menu_updates(), f'{self.get_icon_dir()}/sidepanel/updates.png'),
         }, self.get_extra
 
 
@@ -103,7 +103,7 @@ class SaveData(QSaveData):
             'remember': self.remember
         }
 
-    def load_extra_data(self, extra_data: dict = ...) -> None:
+    def load_extra_data(self, extra_data: dict = ..., reload: list = []) -> None:
         exc = suppress(Exception)
 
         with exc: self.check_for_updates = extra_data['checkForUpdates']

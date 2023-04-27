@@ -144,8 +144,8 @@ class QBaseApplication(QApplication):
 
     def load_colors(self) -> QssParser:
         qss = QssParser(
-            self.save_data.getStyleSheet(app = self, mode = self.save_data.StyleSheetMode.Local) + '\n' +
-            self.save_data.getStyleSheet(app = self, mode = self.save_data.StyleSheetMode.Global)
+            self.save_data.get_stylesheet(app = self, mode = self.save_data.StyleSheetMode.Local) + '\n' +
+            self.save_data.get_stylesheet(app = self, mode = self.save_data.StyleSheetMode.Global)
         )
 
         self.COLOR_LINK = QUtilsColor(

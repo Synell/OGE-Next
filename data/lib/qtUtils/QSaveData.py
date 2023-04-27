@@ -42,7 +42,7 @@ class QSaveData:
 
     def save_extra_data(self) -> dict: return {}
 
-    def load(self, safe_mode: bool = False) -> None:
+    def load(self, safe_mode: bool = False, reload: list = []) -> None:
         if not os.path.exists(self.path): self.save()
         try:
             with open(self.path, 'r', encoding = 'utf-8') as infile:
@@ -50,13 +50,18 @@ class QSaveData:
 
             exc = suppress(Exception)
 
-            with exc: self.language = data['language']
-            with exc: self.theme = data['theme']
-            with exc: self.theme_variant = data['themeVariant']
+            with exc:
+                if (not reload) or ('language' in reload):
+                    self.language = data['language']
+                    self.load_language_data()
 
-            self.load_language_data()
-            self.load_theme_data()
-            self.load_extra_data(data)
+            with exc:
+                if (not reload) or ('theme' in reload):
+                    self.theme = data['theme']
+                    self.theme_variant = data['themeVariant']
+                    self.load_theme_data()
+
+            with exc: self.load_extra_data(data, reload)
 
         except Exception as e:
             self.save()
@@ -82,18 +87,18 @@ class QSaveData:
 
             self.theme_data = self.theme_data.replace('{path}', f'data/lib/qtUtils/themes/{self.theme}/{self.theme_variant}/{path}/icons/'.replace('//', '/'))
 
-    def load_extra_data(self, extra_data: dict = {}) -> None: pass
+    def load_extra_data(self, extra_data: dict = {}, reload: list = []) -> None: pass
 
-    def setStyleSheet(self, app: QBaseApplication = None) -> None:
+    def set_stylesheet(self, app: QBaseApplication = None) -> None:
         if not app: return
-        app.setStyleSheet(self.getStyleSheet(app, QSaveData.StyleSheetMode.All))
+        app.setStyleSheet(self.get_stylesheet(app, QSaveData.StyleSheetMode.All))
 
-    def getStyleSheet(self, app: QBaseApplication = None, mode: StyleSheetMode = StyleSheetMode.All) -> str:
+    def get_stylesheet(self, app: QBaseApplication = None, mode: StyleSheetMode = StyleSheetMode.All) -> str:
         if not app: return ''
 
         match mode:
             case QSaveData.StyleSheetMode.All:
-                return self.getStyleSheet(app, QSaveData.StyleSheetMode.Global) + self.getStyleSheet(app, QSaveData.StyleSheetMode.Local)
+                return self.get_stylesheet(app, QSaveData.StyleSheetMode.Global) + self.get_stylesheet(app, QSaveData.StyleSheetMode.Local)
             case QSaveData.StyleSheetMode.Global:
                 return self.theme_data
             case QSaveData.StyleSheetMode.Local:
@@ -113,10 +118,10 @@ class QSaveData:
                 return theme_data.replace('{path}', f'{self.themes_folder}/{self.theme}/{self.theme_variant}/icons/'.replace('//', '/'))
         return ''
 
-    def getIconsDir(self) -> str:
+    def get_icon_dir(self) -> str:
         return f'{self.themes_folder}/{self.theme}/{self.theme_variant}/icons/'
 
-    def getIcon(self, path, asQIcon = True, mode: IconMode = IconMode.Local) -> QIcon|str:
+    def get_icon(self, path, asQIcon = True, mode: IconMode = IconMode.Local) -> QIcon|str:
         if mode == QSaveData.IconMode.Local:
             if asQIcon: return QIcon(f'{self.themes_folder}/{self.theme}/{self.theme_variant}/icons/{path}')
             return f'{self.themes_folder}/{self.theme}/{self.theme_variant}/icons/{path}'
@@ -146,13 +151,21 @@ class QSaveData:
 
         response = dialog.exec()
         if response != None:
-            self.language = response[0]
-            self.theme = response[1]
-            self.theme_variant = response[2]
+            reload_list = []
+
+            if response[0] != self.language:
+                self.language = response[0]
+                reload_list.append('language')
+
+            if response[1] != self.theme or response[2] != self.theme_variant:
+                self.theme = response[1]
+                self.theme_variant = response[2]
+                reload_list.append('theme')
+
 
             self.save()
-            self.load()
-            self.setStyleSheet(app)
+            self.load(False, reload_list)
+            self.set_stylesheet(app)
             QMessageBoxWithWidget(app,
                 self.language_data['QMessageBox']['information']['settingsReload']['title'],
                 self.language_data['QMessageBox']['information']['settingsReload']['text'],

@@ -45,12 +45,12 @@ class Application(QBaseApplication):
         self.oge_worker = None
         self.must_init_panels = True
 
-        self.save_data.setStyleSheet(self)
+        self.save_data.set_stylesheet(self)
         self.window.setProperty('color', 'yellow')
 
         self.setWindowIcon(QIcon('./data/icons/OGENext.svg'))
 
-        SemesterWidget.ICON = f'{self.save_data.getIconsDir()}/sidepanel/semester_%s.png'
+        SemesterWidget.ICON = f'{self.save_data.get_icon_dir()}/sidepanel/semester_%s.png'
 
         self.load_colors()
         self.create_widgets()
@@ -122,7 +122,7 @@ class Application(QBaseApplication):
 
 
     def change_status_message(self, info_type: InfoType, message: str) -> None:
-        self.status_bar.status.icon.setPixmap(self.save_data.getIcon(f'statusbar/{info_type.value}.png').pixmap(16, 16))
+        self.status_bar.status.icon.setPixmap(self.save_data.get_icon(f'statusbar/{info_type.value}.png').pixmap(16, 16))
         self.status_bar.status.label.setText(message)
 
     def create_status_bar(self) -> None:
@@ -207,14 +207,14 @@ class Application(QBaseApplication):
 
         button = QPushButton()
         button.setCursor(Qt.CursorShape.PointingHandCursor)
-        button.setIcon(self.save_data.getIcon('/pushbutton/note.png'))
+        button.setIcon(self.save_data.get_icon('/pushbutton/note.png'))
         button.clicked.connect(self.about_menu_clicked)
         left_top.grid_layout.addWidget(button, 0, 0)
         left_top.grid_layout.setAlignment(button, Qt.AlignmentFlag.AlignLeft)
 
         button = QPushButton()
         button.setCursor(Qt.CursorShape.PointingHandCursor)
-        button.setIcon(self.save_data.getIcon('/pushbutton/settings.png'))
+        button.setIcon(self.save_data.get_icon('/pushbutton/settings.png'))
         button.clicked.connect(self.settings_menu)
         left_top.grid_layout.addWidget(button, 0, 1)
         left_top.grid_layout.setAlignment(button, Qt.AlignmentFlag.AlignRight)
@@ -296,7 +296,7 @@ class Application(QBaseApplication):
             for i in range(c):
                 item = QSidePanelItem(
                     self.save_data.language_data['QMainWindow']['QSideBar']['semester'].replace('%s', str(i + 1)),
-                    f'{self.save_data.getIconsDir()}/sidepanel/semester_unknown.png',
+                    f'{self.save_data.get_icon_dir()}/sidepanel/semester_unknown.png',
                     send_param(i)
                 )
 
@@ -373,7 +373,7 @@ class Application(QBaseApplication):
         self.about_menu = QMenu(self.window)
         self.about_menu.setCursor(Qt.CursorShape.PointingHandCursor)
 
-        act = self.about_menu.addAction(self.save_data.getIcon('menubar/qt.png', mode = QSaveData.IconMode.Global), self.save_data.language_data['QMenu']['about']['PySide'])
+        act = self.about_menu.addAction(self.save_data.get_icon('menubar/qt.png', mode = QSaveData.IconMode.Global), self.save_data.language_data['QMenu']['about']['PySide'])
         act.triggered.connect(self.aboutQt)
 
         act = self.about_menu.addAction(QIcon('./data/icons/OGENext.svg'), self.save_data.language_data['QMenu']['about']['OGENext'])
@@ -383,9 +383,9 @@ class Application(QBaseApplication):
 
         def create_donate_menu():
             donate_menu = QMenu(self.save_data.language_data['QMenu']['donate']['title'], self.window)
-            donate_menu.setIcon(self.save_data.getIcon('menubar/donate.png'))
+            donate_menu.setIcon(self.save_data.get_icon('menubar/donate.png'))
 
-            buymeacoffee_action = QAction(self.save_data.getIcon('menubar/buyMeACoffee.png'), 'Buy Me a Coffee', self.window)
+            buymeacoffee_action = QAction(self.save_data.get_icon('menubar/buyMeACoffee.png'), 'Buy Me a Coffee', self.window)
             buymeacoffee_action.triggered.connect(lambda: QDesktopServices.openUrl(QUrl('https://www.buymeacoffee.com/Synell')))
 
             donate_menu.addAction(buymeacoffee_action)
