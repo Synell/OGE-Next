@@ -103,8 +103,9 @@ class SaveData(QSaveData):
             'remember': self.remember
         }
 
-    def load_extra_data(self, extra_data: dict = ..., reload: list = []) -> None:
+    def load_extra_data(self, extra_data: dict = ..., reload: list = []) -> bool:
         exc = suppress(Exception)
+        res = False
 
         with exc: self.check_for_updates = extra_data['checkForUpdates']
         with exc: self.last_check_for_updates = datetime.strptime(extra_data['lastCheckForUpdates'], self.dateformat)
@@ -112,7 +113,7 @@ class SaveData(QSaveData):
         with exc: self.password = Fernet(extra_data['key']).decrypt(extra_data['password']).decode('utf-8')
         with exc: self.remember = extra_data['remember']
 
-        self.save()
+        return res
 
     def export_extra_data(self) -> dict:
         dct = self.save_extra_data()

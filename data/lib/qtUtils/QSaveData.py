@@ -42,7 +42,9 @@ class QSaveData:
 
     def save_extra_data(self) -> dict: return {}
 
-    def load(self, safe_mode: bool = False, reload: list = []) -> None:
+    def load(self, safe_mode: bool = False, reload: list = []) -> bool:
+        res = False
+
         if not os.path.exists(self.path): self.save()
         try:
             with open(self.path, 'r', encoding = 'utf-8') as infile:
@@ -54,14 +56,16 @@ class QSaveData:
                 if (not reload) or ('language' in reload):
                     self.language = data['language']
                     self.load_language_data()
+                    res |= True
 
             with exc:
                 if (not reload) or ('theme' in reload):
                     self.theme = data['theme']
                     self.theme_variant = data['themeVariant']
                     self.load_theme_data()
+                    res |= True
 
-            with exc: self.load_extra_data(data, reload)
+            with exc: res |= self.load_extra_data(data, reload)
 
         except Exception as e:
             self.save()
@@ -87,7 +91,7 @@ class QSaveData:
 
             self.theme_data = self.theme_data.replace('{path}', f'data/lib/qtUtils/themes/{self.theme}/{self.theme_variant}/{path}/icons/'.replace('//', '/'))
 
-    def load_extra_data(self, extra_data: dict = {}, reload: list = []) -> None: pass
+    def load_extra_data(self, extra_data: dict = {}, reload: list = []) -> bool: pass
 
     def set_stylesheet(self, app: QBaseApplication = None) -> None:
         if not app: return
@@ -164,8 +168,8 @@ class QSaveData:
 
 
             self.save()
-            self.load(False, reload_list)
-            self.set_stylesheet(app)
+            res = self.load(False, (reload_list if reload_list else [None]))
+            if 'theme' in reload_list: self.set_stylesheet(app)
             QMessageBoxWithWidget(app,
                 self.language_data['QMessageBox']['information']['settingsReload']['title'],
                 self.language_data['QMessageBox']['information']['settingsReload']['text'],
