@@ -27,6 +27,10 @@ class SemesterWidget(QScrollableGridFrame):
 
         self._data: Semester = None
 
+    @property
+    def loaded(self) -> bool:
+        return self._data is not None
+
     def set_data(self, data: Semester, force: bool = False) -> None:
         if self._data and not force: return
 

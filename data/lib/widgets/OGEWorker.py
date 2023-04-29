@@ -57,6 +57,16 @@ class OGEWorker(QThread):
     def force(self, value: bool) -> None:
         self._force = value
 
+    @property
+    def loaded_semesters(self) -> list:
+        return self._oge.loaded_semesters
+
+    def get_loaded_semester(self, semester: int) -> Semester | None:
+        if semester in self.loaded_semesters:
+            return self._oge.get_semestre_data(semester)
+
+        return None
+
     def _load_data(self) -> dict:
         try:
             with open(self.CACHE_FILE.replace('%s', self._username), 'r', encoding = 'utf-8') as f:

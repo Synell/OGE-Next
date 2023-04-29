@@ -270,7 +270,6 @@ class Application(QBaseApplication):
         self.oge_worker.signals.finished.connect(self.login_success)
         self.oge_worker.signals.info_changed.connect(self.change_status_message)
         self.oge_worker.signals.failed.connect(self.login_failed)
-        # todo: set semester to the last one
         self.oge_worker.start()
 
         self.show_alert(self.save_data.language_data['QMainWindow']['showMessage']['ogeLoading'], pause_duration = 4300)
@@ -322,6 +321,12 @@ class Application(QBaseApplication):
         self.main_page.right.semesters.slide_in_index(semester.id - 1, QSlidingStackedWidget.Direction.Bottom2Top)
 
         self.change_status_message(InfoType.Success, self.save_data.language_data['QMainWindow']['showMessage']['loginSuccess'])
+
+        semesters_to_load = [i + 1 for i, s in enumerate(self.data_panels) if (not s.loaded) and (i + 1 in self.oge_worker.loaded_semesters)]
+
+        for i in semesters_to_load:
+            self.data_panels[i - 1].set_data(self.oge_worker.get_loaded_semester(i), True)
+
         self.set_panel_disabled(False)
 
     def login_failed(self, error: Exception) -> None:
