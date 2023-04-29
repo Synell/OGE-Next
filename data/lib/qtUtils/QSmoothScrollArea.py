@@ -25,7 +25,7 @@ class QSmoothScrollArea(QScrollArea):
         self._smooth_move_timer.timeout.connect(self._slot_smooth_move)
 
         self._fps = 1000
-        self._duration = 250
+        self._duration = 70
         self._smooth_mode = QSmoothScrollArea.SmoothMode.Cosine
         self._acceleration = 2.5
 

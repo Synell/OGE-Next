@@ -1,8 +1,9 @@
 #----------------------------------------------------------------------
 
     # Libraries
+from PySide6.QtGui import QKeyEvent
 from PySide6.QtWidgets import QLineEdit
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, Signal
 
 from .QGridFrame import QGridFrame
 from .QNamedLineEdit import QNamedLineEdit
@@ -11,6 +12,8 @@ from .QNamedToggleButton import QNamedToggleButton
 
     # Class
 class QLoginWidget(QGridFrame):
+    enter_key_pressed = Signal()
+
     def __init__(self, parent = None , lang: dict = {}, username: str = '', password: str = '', remember_checkbox: bool = True, remember: bool = False) -> None:
         super().__init__(parent)
 
@@ -55,4 +58,10 @@ class QLoginWidget(QGridFrame):
     def remember(self) -> bool:
         if self._remember: return self._remember.isChecked()
         else: return False
+
+    def keyPressEvent(self, event: QKeyEvent) -> None:
+        if event.key() in [Qt.Key.Key_Return, Qt.Key.Key_Enter]:
+            self.enter_key_pressed.emit()
+
+        return super().keyPressEvent(event)
 #----------------------------------------------------------------------

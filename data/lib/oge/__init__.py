@@ -3,6 +3,7 @@
 
     # Libraries
 from .api import OGE
+from .Semester import Semester
 from .UE import UE
 from .Pole import Pole
 from .Subject import Subject

@@ -10,6 +10,7 @@ from .GradeGroup import GradeGroup
 from .Subject import Subject
 from .Pole import Pole
 from .UE import UE
+from .Semester import Semester
 from .InfoType import InfoType
 from PySide6.QtCore import QObject, Signal
 #----------------------------------------------------------------------
@@ -19,15 +20,15 @@ class OGE(QObject):
     info_changed = Signal(InfoType, str)
     failed = Signal(Exception)
 
-    _URL_SITE = 'http://casiut21.u-bourgogne.fr/login?service=https%3A%2F%2Fiutdijon.u-bourgogne.fr%2Foge%2F'
-    _URL_NOTE = 'https://iutdijon.u-bourgogne.fr/oge/stylesheets/etu/bilanEtu.xhtml'
+    _URL_WEBSITE = 'http://casiut21.u-bourgogne.fr/login?service=https%3A%2F%2Fiutdijon.u-bourgogne.fr%2Foge%2F'
+    _URL_GRADES = 'https://iutdijon.u-bourgogne.fr/oge/stylesheets/etu/bilanEtu.xhtml'
 
     def __init__(self, username: str, password: str) -> None:
         super().__init__()
 
         self._username = username
         self._password = password
-        self._semester_data = {}
+        self._semester_data: dict[int, Semester] = {}
         self._semester_count = 0
 
 
@@ -36,16 +37,38 @@ class OGE(QObject):
         return self._semester_count
 
 
-    def get_semestre_data(self, semester: int, force: bool = False) -> list[UE]:
+    @property
+    def loaded_semesters(self) -> list[int]:
+        return list(self._semester_data.keys())
+
+
+    def set_data_from_json(self, json: list[dict]) -> None:
+        self._semester_data = {}
+
+        self._semester_count = json['semester_count']
+
+        for semester in json['semesters']:
+            s = Semester.from_json(semester)
+            self._semester_data[s.id] = s
+
+
+    def get_data_as_json(self) -> dict:
+        return {
+            'semester_count': self._semester_count,
+            'semesters': [self._semester_data[semester].to_json() for semester in self._semester_data if self._semester_data[semester].id != self._semester_count]
+        }
+
+
+    def get_semestre_data(self, semester: int, force: bool = False) -> Semester:
         try:
             if (semester not in self._semester_data) or force:
                 html, sc = self._get_html(semester)
                 self._semester_count = max(sc, self._semester_count)
 
-                self._semester_data[semester] = self._parse_html(html)
+                self._semester_data[semester] = Semester(semester, self._parse_html(html))
 
             return self._semester_data[semester]
-        
+
         except Exception as err:
             self.info_changed.emit(InfoType.Error, str(err))
             self.failed.emit(str(err.with_traceback(None)))
@@ -55,7 +78,7 @@ class OGE(QObject):
         self.info_changed.emit(InfoType.Info, 'Trying to get a key...')
 
         try:
-            key_results = re.findall(r'name=\"execution\" value=\"(.*?)\"/>', session.get(self._URL_SITE).text)
+            key_results = re.findall(r'name=\"execution\" value=\"(.*?)\"/>', session.get(self._URL_WEBSITE).text)
 
         except Exception as err:
             raise Exception(f'Unable to get a key!\n{err}')
@@ -72,7 +95,7 @@ class OGE(QObject):
         self.info_changed.emit(InfoType.Info, 'Trying to get a viewState key...')
 
         try:
-            r = session_.get(self._URL_NOTE)
+            r = session_.get(self._URL_GRADES)
             id = re.findall(r'<li class=\"ui-tabmenuitem(?:.*?)onclick=\"PrimeFaces\.ab\({s:&quot;(.*?)&quot;,f:(?:.*?)</li>', r.text)
             view_state = re.findall(r'id=\"javax\.faces\.ViewState\" value=\"(.*?)\" />', r.text)
 
@@ -87,7 +110,7 @@ class OGE(QObject):
             return id[0], view_state[0]
 
 
-    def _get_html(self, semestre: int) -> str:
+    def _get_html(self, semester: int) -> str:
         session_ = session()
 
         data = {
@@ -100,7 +123,7 @@ class OGE(QObject):
 
         self.info_changed.emit(InfoType.Info, 'Creating a new session...')
 
-        request = session_.post(self._URL_SITE, data, {'referer': self._URL_SITE})
+        request = session_.post(self._URL_WEBSITE, data, {'referer': self._URL_WEBSITE})
 
         if request.status_code == 200:
             self.info_changed.emit(InfoType.Success, 'Session successfully created!')
@@ -116,15 +139,15 @@ class OGE(QObject):
             'javax.faces.partial.execute': 'mainBilanForm:j_id_15',
             'javax.faces.partial.render': 'mainBilanForm',
             'mainBilanForm:j_id_15': 'mainBilanForm:j_id_15',
-            'i': str(semestre - 1),
-            'mainBilanForm:j_id_15_menuid': str(semestre - 1),
+            'i': str(semester - 1),
+            'mainBilanForm:j_id_15_menuid': str(semester - 1),
             'mainBilanForm_SUBMIT': '1',
             'javax.faces.ViewState': self._get_view_state(session_)[1]
         }
 
         self.info_changed.emit(InfoType.Info, 'Waiting for POST request...')
 
-        code = session_.post(self._URL_NOTE, data, headers = {'referer': self._URL_NOTE})
+        code = session_.post(self._URL_GRADES, data, headers = {'referer': self._URL_GRADES})
 
         session_.close()
 

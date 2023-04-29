@@ -47,7 +47,8 @@
                 "emptyPassword": "You must enter a password.",
                 "loginFailed": "Login failed.",
                 "loginSuccess": "Login successful.",
-                "createPanels": "Creating panels..."
+                "createPanels": "Creating panels...",
+                "ogeLoading": "Loading data from OGE... Note that this may take a while."
             }
         },
         "QSettingsDialog": {

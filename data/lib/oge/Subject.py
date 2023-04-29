@@ -44,4 +44,19 @@ class Subject:
 
     def __str__(self) -> str:
         return f'{self.title} ({self.coefficient})\n\t' + '\n'.join([f'\t{note_group}' for note_group in self.grade_groups]).replace('\n', '\n\t')
+    
+    def to_json(self) -> dict:
+        return {
+            'title': self.title,
+            'coefficient': self.coefficient,
+            'grade_groups': [grade_group.to_json() for grade_group in self.grade_groups]
+        }
+    
+    @staticmethod
+    def from_json(json: dict) -> 'Subject':
+        return Subject(
+            json['title'],
+            json['coefficient'],
+            [GradeGroup.from_json(grade_group) for grade_group in json['grade_groups']]
+        )
 #----------------------------------------------------------------------

@@ -7,7 +7,7 @@ from PySide6.QtWidgets import *
 from PySide6.QtSvg import *
 from PySide6.QtSvgWidgets import *
 from math import *
-import os, sys
+import os, sys, json
 from datetime import datetime, timedelta
 from data.lib import *
 #----------------------------------------------------------------------
@@ -51,6 +51,7 @@ class Application(QBaseApplication):
         self.setWindowIcon(QIcon('./data/icons/OGENext.svg'))
 
         SemesterWidget.ICON = f'{self.save_data.get_icon_dir()}/sidepanel/semester_%s.png'
+        OGEWorker.CACHE_FILE = './data/oge_cache/%s.json'
 
         self.load_colors()
         self.create_widgets()
@@ -71,6 +72,8 @@ class Application(QBaseApplication):
                     if deltatime > timedelta(weeks = 4): self.check_updates()
 
         self.window.setMinimumSize(int(self.primaryScreen().size().width() * (8 / 15)), int(self.primaryScreen().size().height() * (14 / 27))) # 128x71 -> 1022x568
+
+        self.window.closeEvent = self.close_event
 
 
 
@@ -235,6 +238,7 @@ class Application(QBaseApplication):
         self.main_page.empty_panel.grid_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.main_page.empty_panel.auth = QLoginWidget(None, lang['QLoginWidget'], self.save_data.username, self.save_data.password, True, self.save_data.remember)
+        self.main_page.empty_panel.auth.enter_key_pressed.connect(self.login)
         grid.grid_layout.addWidget(self.main_page.empty_panel.auth, 0, 0)
 
         self.main_page.empty_panel.login_button = QPushButton(lang['QPushButton']['login'])
@@ -269,7 +273,9 @@ class Application(QBaseApplication):
         # todo: set semester to the last one
         self.oge_worker.start()
 
-    def login_success(self, data: list[UE], semester: int) -> None:
+        self.show_alert(self.save_data.language_data['QMainWindow']['showMessage']['ogeLoading'], pause_duration = 4300)
+
+    def login_success(self, semester: Semester) -> None:
         self.oge_worker.exit()
         self.change_status_message(InfoType.Info, self.save_data.language_data['QMainWindow']['showMessage']['createPanels'])
 
@@ -309,11 +315,11 @@ class Application(QBaseApplication):
 
             self.main_page.right.slide_in_index(1)
 
-        self.data_panels[semester - 1].set_data(data, self.oge_worker.force)
+        self.data_panels[semester.id - 1].set_data(semester, self.oge_worker.force)
         self.oge_worker.force = False
-        self.main_page.side_panel.set_current_index(semester - 1)
+        self.main_page.side_panel.set_current_index(semester.id - 1)
 
-        self.main_page.right.semesters.slide_in_index(semester - 1, QSlidingStackedWidget.Direction.Bottom2Top)
+        self.main_page.right.semesters.slide_in_index(semester.id - 1, QSlidingStackedWidget.Direction.Bottom2Top)
 
         self.change_status_message(InfoType.Success, self.save_data.language_data['QMainWindow']['showMessage']['loginSuccess'])
         self.set_panel_disabled(False)
@@ -432,6 +438,8 @@ class Application(QBaseApplication):
 
             if self.oge_worker.isRunning():
                 self.oge_worker.terminate()
+
+            self.oge_worker.save_data()
 
         super().exit()
 #----------------------------------------------------------------------

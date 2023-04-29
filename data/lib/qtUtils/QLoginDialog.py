@@ -25,6 +25,7 @@ class QLoginDialog(QDialog):
         self.root.grid_layout.setAlignment(frame, Qt.AlignmentFlag.AlignTop)
 
         self.login_widget = QLoginWidget(None, lang, username, password, remember_checkbox, remember)
+        self.login_widget.enter_key_pressed.connect(self.accept)
         frame.grid_layout.addWidget(self.login_widget, 0, 0)
         frame.grid_layout.setAlignment(self.login_widget, Qt.AlignmentFlag.AlignCenter)
 

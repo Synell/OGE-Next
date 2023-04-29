@@ -5,7 +5,7 @@ from PySide6.QtCore import Qt, Signal
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QPushButton, QLabel
 from data.lib.qtUtils import QScrollableGridFrame, QGridFrame, QSidePanelItem
-from data.lib.oge import UE
+from data.lib.oge import UE, Semester
 from .UEWidget import UEWidget
 #----------------------------------------------------------------------
 
@@ -16,7 +16,6 @@ class SemesterWidget(QScrollableGridFrame):
 
     def __init__(self, lang: dict, semester: int, item: QSidePanelItem) -> None:
         super().__init__()
-        self.set_smooth_mode(QScrollableGridFrame.SmoothMode.Cosine)
 
         self._lang = lang
         self._semester = semester
@@ -26,9 +25,9 @@ class SemesterWidget(QScrollableGridFrame):
         self.scroll_layout.setSpacing(50)
         self.setProperty('class', 'SemesterWidget')
 
-        self._data = []
+        self._data: Semester = None
 
-    def set_data(self, data: list[UE], force: bool = False) -> None:
+    def set_data(self, data: Semester, force: bool = False) -> None:
         if self._data and not force: return
 
         self._data = data
@@ -71,7 +70,7 @@ class SemesterWidget(QScrollableGridFrame):
         ue8: list[UE] = []
         ue_other: list[UE] = []
 
-        for index, ue in enumerate(self._data):
+        for index, ue in enumerate(self._data.ues):
             ue_widget = UEWidget(ue)
             self.scroll_layout.addWidget(ue_widget, index + 1, 0)
 
@@ -85,7 +84,7 @@ class SemesterWidget(QScrollableGridFrame):
                 else:
                     ue_other.append(ue)
 
-        total_ue = len(self._data)
+        total_ue = len(self._data.ues)
         ue10_count = len(ue10)
         ue8_count = len(ue8)
 
@@ -100,7 +99,7 @@ class SemesterWidget(QScrollableGridFrame):
         elif ue10_count > total_ue / 2 and ue8_count >= total_ue - ue10_count:
             icon = self.ICON.replace('%s', 'good')
             title = self._lang['QLabel']['goodSemester']
-            texts.append(self._lang['QLabel']['between8And10'].replace('%s', '\n'.join([f' • {ue.title}' for ue in ue8])))
+            texts.append(self._lang['QLabel']['between8And10'].replace('%s', '\n'.join([f' • {ue.title} ({ue.average:.2f}/20)' for ue in ue8])))
 
         elif ue10_count + ue8_count != total_ue:
             icon = self.ICON.replace('%s', 'bad')
@@ -111,7 +110,7 @@ class SemesterWidget(QScrollableGridFrame):
             icon = self.ICON.replace('%s', 'alert')
             title = self._lang['QLabel']['alertSemester']
             texts.append(self._lang['QLabel']['between8And10'].replace('%s', '\n'.join([f' • {ue.title}' for ue in ue8])))
-            texts.append(self._lang['QLabel']['below8'].replace('%s', '\n'.join([f' • {ue.title}' for ue in ue_other])))
+            texts.append(self._lang['QLabel']['below8'].replace('%s', '\n'.join([f' • {ue.title} ({ue.average:.2f}/20)' for ue in ue_other])))
 
         title_label.setText(title)
         icon = QIcon(icon)

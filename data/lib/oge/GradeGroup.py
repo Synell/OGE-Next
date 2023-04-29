@@ -42,4 +42,19 @@ class GradeGroup:
 
     def __str__(self) -> str:
         return f'{self.title} ({self.coefficient})\n\t' + '\n'.join([f'\t{note}' for note in self.notes]).replace('\n', '\n\t')
+
+    def to_json(self) -> dict:
+        return {
+            'title': self.title,
+            'coefficient': self.coefficient,
+            'notes': [note.to_json() for note in self.notes]
+        }
+    
+    @staticmethod
+    def from_json(json: dict) -> 'GradeGroup':
+        return GradeGroup(
+            json['title'],
+            json['coefficient'],
+            [Grade.from_json(note) for note in json['notes']]
+        )
 #----------------------------------------------------------------------

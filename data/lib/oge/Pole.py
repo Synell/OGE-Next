@@ -44,4 +44,19 @@ class Pole:
 
     def __str__(self) -> str:
         return f'{self.title} ({self.coefficient})\n\t' + '\n'.join([f'\t{matiere}' for matiere in self.matieres]).replace('\n', '\n\t')
+    
+    def to_json(self) -> dict:
+        return {
+            'title': self.title,
+            'coefficient': self.coefficient,
+            'subjects': [subject.to_json() for subject in self.matieres]
+        }
+    
+    @staticmethod
+    def from_json(json: dict) -> 'Pole':
+        return Pole(
+            json['title'],
+            json['coefficient'],
+            [Subject.from_json(subject) for subject in json['subjects']]
+        )
 #----------------------------------------------------------------------

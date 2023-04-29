@@ -44,4 +44,19 @@ class UE:
 
     def __str__(self) -> str:
         return f'{self.title} ({self.coefficient})\n' + '\n'.join([f'\t{pole}' for pole in self.poles])
+    
+    def to_json(self) -> dict:
+        return {
+            'title': self.title,
+            'coefficient': self.coefficient,
+            'poles': [pole.to_json() for pole in self.poles]
+        }
+    
+    @staticmethod
+    def from_json(json: dict) -> 'UE':
+        return UE(
+            json['title'],
+            json['coefficient'],
+            [Pole.from_json(pole) for pole in json['poles']]
+        )
 #----------------------------------------------------------------------

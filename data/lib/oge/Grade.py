@@ -26,4 +26,19 @@ class Grade:
 
     def __str__(self) -> str:
         return f'{self.value}/{self.total} ({self.coefficient})'
+
+    def to_json(self) -> dict:
+        return {
+            'value': self.value,
+            'total': self.total,
+            'coefficient': self.coefficient
+        }
+
+    @staticmethod
+    def from_json(json: dict) -> 'Grade':
+        return Grade(
+            json['value'],
+            json['total'],
+            json['coefficient']
+        )
 #----------------------------------------------------------------------

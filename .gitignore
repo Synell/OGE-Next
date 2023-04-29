@@ -166,3 +166,4 @@ data/lib/widgets/updater/*.png
 *.bat
 compileConfig.json
 *.ai
+data/oge_cache/
