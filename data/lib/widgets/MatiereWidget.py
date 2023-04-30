@@ -18,8 +18,9 @@ class MatiereWidget(OGEWidget):
         self.grid_layout.setSpacing(0)
         self.setProperty('class', 'MatiereWidget')
 
-        label = QLabel(f'{matiere.title} ({matiere.coefficient})')
+        label = QLabel(f'{matiere.title} ({matiere.coefficient if matiere.coefficient else "?"})')
         label.setProperty('class', 'title')
+        if matiere.coefficient == 0: label.setToolTip(self._OGE_WEIRD_TOOLTIP)
         self.grid_layout.addWidget(label, 0, 0)
 
         avg = matiere.average

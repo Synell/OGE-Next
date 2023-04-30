@@ -18,10 +18,10 @@ from data.lib.widgets.updater import data as updater_data
 
     # Class
 class QUpdater(QBaseApplication):
-    BUILD = '07e7557b'
+    BUILD = '07e755f6'
     VERSION = 'Experimental'
 
-    UPDATE_LINK = ''
+    UPDATE_LINK = 'https://github.com/Synell/OGE-Next'
 
     def __init__(self,  platform: QPlatform):
         super().__init__(platform)

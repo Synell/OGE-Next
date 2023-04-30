@@ -1,14 +1,12 @@
 #----------------------------------------------------------------------
 
     # Libraries
-from PySide6.QtWidgets import QLabel
-from PySide6.QtCore import Qt
-
 from data.lib.qtUtils import QGridFrame
 #----------------------------------------------------------------------
 
     # Class
 class OGEWidget(QGridFrame):
+    _OGE_WEIRD_TOOLTIP: str = ''
     def __init__(self) -> None:
         super().__init__()
 

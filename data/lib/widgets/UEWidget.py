@@ -18,8 +18,9 @@ class UEWidget(OGEWidget):
         self.grid_layout.setSpacing(0)
         self.setProperty('class', 'UEWidget')
 
-        label = QLabel(f'{ue.title} ({ue.coefficient})')
+        label = QLabel(f'{ue.title} ({ue.coefficient if ue.coefficient else "?"})')
         label.setProperty('class', 'title')
+        if ue.coefficient == 0: label.setToolTip(self._OGE_WEIRD_TOOLTIP)
         self.grid_layout.addWidget(label, 0, 0)
 
         avg = ue.average

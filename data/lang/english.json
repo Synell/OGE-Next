@@ -1,7 +1,7 @@
 {
     "info": {
         "name": "English",
-        "version": "07e7557b",
+        "version": "07e755f6",
         "description": "English language for OGE Next."
     },
     "data": {
@@ -35,6 +35,9 @@
                             "between8And10": "UEs between 8/20 and 10/20 to improve :\n%s",
                             "below8": "UEs below 8/20 to improve :\n%s",
                             "allBelow8": "All UEs are below 8/20, work harder if you want to pass !"
+                        },
+                        "QToolTip": {
+                            "ogeWeird": "OGE is weird, this is not a bug of OGE Next.\nYour average will be correct when OGE will give the correct data."
                         }
                     }
                 }

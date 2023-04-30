@@ -1,7 +1,7 @@
 {
     "info": {
         "name": "Français",
-        "version": "07e7557b",
+        "version": "07e755f6",
         "description": "Langage français pour l'application OGE Next."
     },
     "data": {
@@ -35,6 +35,9 @@
                             "between8And10": "UEs comprises entre 8/20 et 10/20 à améliorer :\n%s",
                             "below8": "UEs en dessous de 8/20 à améliorer :\n%s",
                             "allBelow8": "Toutes les UE sont en dessous de 8/20, travaillez plus si vous voulez réussir !"
+                        },
+                        "QToolTip": {
+                            "ogeWeird": "OGE est bizarre, ce n'est pas un bug avec OGE Next.\nVotre moyenne sera corrigée quand OGE fournira les bonnes données."
                         }
                     }
                 }

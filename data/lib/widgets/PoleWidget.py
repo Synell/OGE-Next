@@ -18,8 +18,9 @@ class PoleWidget(OGEWidget):
         self.grid_layout.setSpacing(0)
         self.setProperty('class', 'PoleWidget')
 
-        label = QLabel(f'{pole.title} ({pole.coefficient})')
+        label = QLabel(f'{pole.title} ({pole.coefficient if pole.coefficient else "?"})')
         label.setProperty('class', 'title')
+        if pole.coefficient == 0: label.setToolTip(self._OGE_WEIRD_TOOLTIP)
         self.grid_layout.addWidget(label, 0, 0)
 
         avg = pole.average

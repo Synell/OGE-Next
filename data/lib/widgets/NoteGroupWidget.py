@@ -19,8 +19,9 @@ class NoteGroupWidget(OGEWidget):
         self.grid_layout.setSpacing(0)
         self.setProperty('class', 'NoteGroupWidget')
 
-        label = QLabel(f'{note_group.title} ({note_group.coefficient})')
+        label = QLabel(f'{note_group.title} ({note_group.coefficient if note_group.coefficient else "?"})')
         label.setProperty('class', 'title')
+        if note_group.coefficient == 0: label.setToolTip(self._OGE_WEIRD_TOOLTIP)
         self.grid_layout.addWidget(label, 0, 0)
 
         avg = note_group.average

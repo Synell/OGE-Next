@@ -7,14 +7,14 @@ from PySide6.QtWidgets import *
 from PySide6.QtSvg import *
 from PySide6.QtSvgWidgets import *
 from math import *
-import os, sys, json
+import os, sys
 from datetime import datetime, timedelta
 from data.lib import *
 #----------------------------------------------------------------------
 
     # Class
 class Application(QBaseApplication):
-    BUILD = '07e7557b'
+    BUILD = '07e755f6'
     VERSION = 'Experimental'
 
     SERVER_NAME = 'OgeNext'
@@ -52,6 +52,7 @@ class Application(QBaseApplication):
 
         SemesterWidget.ICON = f'{self.save_data.get_icon_dir()}/sidepanel/semester_%s.png'
         OGEWorker.CACHE_FILE = './data/oge_cache/%s.json'
+        OGEWidget._OGE_WEIRD_TOOLTIP = self.save_data.language_data['QMainWindow']['mainPage']['QSidePanel']['dataPanel']['QToolTip']['ogeWeird']
 
         self.load_colors()
         self.create_widgets()
