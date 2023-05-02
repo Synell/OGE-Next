@@ -196,7 +196,7 @@ class QUpdater(QBaseApplication):
         self.slide_worker.signals.slide_changed.connect(self.slide)
         self.slide_worker.start()
 
-        self.update_worker = UpdateWorker(self.UPDATE_LINK, self.save_data.token, self.save_data.downloads_folder)
+        self.update_worker = UpdateWorker(self.UPDATE_LINK, '', self.save_data.downloads_folder)
         self.update_worker.signals.download_progress_changed.connect(self.download_progress_changed)
         self.update_worker.signals.download_speed_changed.connect(self.download_speed_changed)
         self.update_worker.signals.download_eta_changed.connect(self.download_eta_changed)
