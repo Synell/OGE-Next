@@ -139,7 +139,7 @@ class Application(QBaseApplication):
         self.status_bar.status.setContentsMargins(0, 0, 0, 0)
         self.status_bar.status.grid_layout.setContentsMargins(10, 5, 0, 5)
         self.status_bar.status.grid_layout.setSpacing(10)
-        self.status_bar.addPermanentWidget(self.status_bar.status, 60)
+        self.status_bar.addPermanentWidget(self.status_bar.status, 40)
 
         self.status_bar.status.icon = QLabel()
         self.status_bar.status.icon.setAlignment(Qt.AlignmentFlag.AlignLeft)
@@ -154,6 +154,23 @@ class Application(QBaseApplication):
         self.change_status_message(InfoType.Info, 'Not connected')
 
 
+        progress_widget = QGridWidget()
+        progress_widget.setContentsMargins(0, 0, 0, 0)
+        progress_widget.grid_layout.setContentsMargins(0, 0, 0, 0)
+        progress_widget.grid_layout.setSpacing(0)
+        self.status_bar.addPermanentWidget(progress_widget, 20)
+
+        # self.status_bar.progress = QAnimatedProgressBar()
+        # self.status_bar.progress.setProperty('color', 'main')
+        # self.status_bar.progress.setProperty('small', True)
+        # self.status_bar.progress.setFixedHeight(6)
+        # self.status_bar.progress.setTextVisible(False)
+        # self.status_bar.progress.setRange(0, 100)
+        # self.status_bar.progress.setValue(0)
+        # progress_widget.grid_layout.addWidget(self.status_bar.progress, 0, 0)
+        # self.status_bar.progress.setVisible(False)
+
+
         empty_widget = QGridWidget()
         empty_widget.setContentsMargins(0, 0, 0, 0)
         empty_widget.grid_layout.setContentsMargins(0, 0, 0, 0)
@@ -161,18 +178,18 @@ class Application(QBaseApplication):
         self.status_bar.addPermanentWidget(empty_widget, 30)
 
 
-        empty_widget = QGridWidget()
-        empty_widget.setContentsMargins(0, 0, 0, 0)
-        empty_widget.grid_layout.setContentsMargins(0, 0, 0, 0)
-        empty_widget.grid_layout.setSpacing(0)
-        self.status_bar.addPermanentWidget(empty_widget, 10)
+        update_widget = QGridWidget()
+        update_widget.setContentsMargins(0, 0, 0, 0)
+        update_widget.grid_layout.setContentsMargins(0, 0, 0, 0)
+        update_widget.grid_layout.setSpacing(0)
+        self.status_bar.addPermanentWidget(update_widget, 10)
 
         self.update_button = QPushButton(self.save_data.language_data['QStatusBar']['QPushButton']['update'])
         self.update_button.setCursor(Qt.CursorShape.PointingHandCursor)
         self.update_button.clicked.connect(self.update_click)
         self.update_button.setProperty('color', 'main')
         self.update_button.setProperty('transparent', True)
-        empty_widget.grid_layout.addWidget(self.update_button, 0, 0)
+        update_widget.grid_layout.addWidget(self.update_button, 0, 0)
         self.update_button.setVisible(False)
 
 
@@ -274,11 +291,15 @@ class Application(QBaseApplication):
         self.oge_worker.signals.failed.connect(self.login_failed)
         self.oge_worker.start()
 
+        # self.status_bar.progress.setValue(10)
+        # self.status_bar.progress.setVisible(True)
         self.show_alert(self.save_data.language_data['QMainWindow']['showMessage']['ogeLoading'], pause_duration = 4300)
 
     def login_success(self, semester: Semester) -> None:
         self.oge_worker.exit()
         self.change_status_message(InfoType.Info, self.save_data.language_data['QMainWindow']['showMessage']['createPanels'])
+
+        # self.status_bar.progress.setValue(70)
 
         self.save_data.remember = self.main_page.empty_panel.auth.remember
 
@@ -316,6 +337,8 @@ class Application(QBaseApplication):
 
             self.main_page.right.slide_in_index(1)
 
+        # self.status_bar.progress.setValue(100)
+
         self.data_panels[semester.id - 1].set_data(semester, self.oge_worker.force)
         self.oge_worker.force = False
         self.main_page.side_panel.set_current_index(semester.id - 1)
@@ -331,6 +354,9 @@ class Application(QBaseApplication):
 
         self.set_panel_disabled(False)
 
+        # self.status_bar.progress.setVisible(False)
+        # self.status_bar.progress.setValue(0)
+
     def login_failed(self, error: Exception) -> None:
         self.oge_worker.exit()
         self.main_page.empty_panel.auth.set_disabled(False)
@@ -339,6 +365,9 @@ class Application(QBaseApplication):
         self.change_status_message(InfoType.Error, self.save_data.language_data['QMainWindow']['showMessage']['loginFailed'])
         self.set_panel_disabled(False)
 
+        # self.status_bar.progress.setVisible(False)
+        # self.status_bar.progress.setValue(0)
+
 
 
     def change_semester(self, semester: int, force: bool = False) -> None:
@@ -346,6 +375,9 @@ class Application(QBaseApplication):
         self.oge_worker.force = force
         self.set_panel_disabled(True)
         self.oge_worker.start()
+
+        # self.status_bar.progress.setVisible(True)
+        # self.status_bar.progress.setValue(10)
 
 
 
