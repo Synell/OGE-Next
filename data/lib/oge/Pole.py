@@ -12,6 +12,7 @@ class Pole:
         self._coefficient = coefficient
         self._subjects = subjects
         self._avg = None
+        self._has_missing_data = None
 
     @property
     def title(self) -> str:
@@ -42,16 +43,21 @@ class Pole:
 
         return self._avg
 
+    @property
+    def has_missing_data(self) -> bool:
+        if self._has_missing_data is None: self._has_missing_data = any(subject.has_missing_data for subject in self._subjects) or self.coefficient is None or self.coefficient == 0
+        return self._has_missing_data
+
     def __str__(self) -> str:
         return f'{self.title} ({self.coefficient})\n\t' + '\n'.join([f'\t{matiere}' for matiere in self.matieres]).replace('\n', '\n\t')
-    
+
     def to_json(self) -> dict:
         return {
             'title': self.title,
             'coefficient': self.coefficient,
             'subjects': [subject.to_json() for subject in self.matieres]
         }
-    
+
     @staticmethod
     def from_json(json: dict) -> 'Pole':
         return Pole(

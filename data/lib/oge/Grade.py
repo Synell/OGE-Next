@@ -7,6 +7,7 @@ class Grade:
         self._value = value
         self._total = total
         self._coefficient = coefficient
+        self._has_missing_data = None
 
     @property
     def value(self) -> str:
@@ -23,6 +24,11 @@ class Grade:
     @property
     def coefficient(self) -> float:
         return self._coefficient
+
+    @property
+    def has_missing_data(self) -> bool:
+        if self._has_missing_data is None: self._has_missing_data = self.value is None or self.total is None or self.coefficient is None or self.coefficient == 0
+        return self._has_missing_data
 
     def __str__(self) -> str:
         return f'{self.value}/{self.total} ({self.coefficient})'

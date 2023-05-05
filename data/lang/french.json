@@ -37,7 +37,8 @@
                             "allBelow8": "Toutes les UE sont en dessous de 8/20, travaillez plus si vous voulez réussir !"
                         },
                         "QToolTip": {
-                            "ogeWeird": "OGE est bizarre, ce n'est pas un bug avec OGE Next.\nVotre moyenne sera corrigée quand OGE fournira les bonnes données."
+                            "ogeWeird": "OGE est bizarre, ce n'est pas un bug avec OGE Next.\nVotre moyenne sera corrigée quand OGE fournira les bonnes données.",
+                            "ogeWeirdTop": "Cette information peut être incorrecte, voir les info-bulles des UEs pour plus de détails."
                         }
                     }
                 }

@@ -1,12 +1,15 @@
 #----------------------------------------------------------------------
 
     # Libraries
+from PySide6.QtGui import QPixmap
 from data.lib.qtUtils import QGridFrame
 #----------------------------------------------------------------------
 
     # Class
 class OGEWidget(QGridFrame):
     _OGE_WEIRD_TOOLTIP: str = ''
+    _OGE_WEIRD_ICON: QPixmap = None
+
     def __init__(self) -> None:
         super().__init__()
 

@@ -12,6 +12,7 @@ class UE:
         self._coefficient = coefficient
         self._poles = poles
         self._avg = None
+        self._has_missing_data = None
 
     @property
     def title(self) -> str:
@@ -42,16 +43,21 @@ class UE:
 
         return self._avg
 
+    @property
+    def has_missing_data(self) -> bool:
+        if self._has_missing_data is None: self._has_missing_data = any(pole.has_missing_data for pole in self._poles) or self.coefficient is None or self.coefficient == 0
+        return self._has_missing_data
+
     def __str__(self) -> str:
         return f'{self.title} ({self.coefficient})\n' + '\n'.join([f'\t{pole}' for pole in self.poles])
-    
+
     def to_json(self) -> dict:
         return {
             'title': self.title,
             'coefficient': self.coefficient,
             'poles': [pole.to_json() for pole in self.poles]
         }
-    
+
     @staticmethod
     def from_json(json: dict) -> 'UE':
         return UE(

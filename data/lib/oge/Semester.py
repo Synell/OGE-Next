@@ -11,6 +11,7 @@ class Semester:
         self._id = id_
         self._ues = ues
         self._avg = None
+        self._has_missing_data = None
 
     @property
     def id(self) -> int:
@@ -36,16 +37,21 @@ class Semester:
         self._avg = grade / coeff
 
         return self._avg
+    
+    @property
+    def has_missing_data(self) -> bool:
+        if self._has_missing_data is None: self._has_missing_data = any(ue.has_missing_data for ue in self._ues)
+        return self._has_missing_data
 
     def __str__(self) -> str:
         return f'Semester {self.id}\n' + '\n'.join([f'\t{ue}' for ue in self.ues])
-    
+
     def to_json(self) -> dict:
         return {
             'id': self.id,
             'ues': [ue.to_json() for ue in self.ues]
         }
-    
+
     @staticmethod
     def from_json(json: dict) -> 'Semester':
         return Semester(

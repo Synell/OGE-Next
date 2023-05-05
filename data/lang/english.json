@@ -37,7 +37,8 @@
                             "allBelow8": "All UEs are below 8/20, work harder if you want to pass !"
                         },
                         "QToolTip": {
-                            "ogeWeird": "OGE is weird, this is not a bug of OGE Next.\nYour average will be correct when OGE will give the correct data."
+                            "ogeWeird": "OGE is weird, this is not a bug of OGE Next.\nYour average will be correct when OGE will give the correct data.",
+                            "ogeWeirdTop": "This information may be incorrect, see the tooltips of the UEs for more information."
                         }
                     }
                 }

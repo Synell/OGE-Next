@@ -117,6 +117,7 @@ class SemesterWidget(QScrollableGridFrame):
             texts.append(self._lang['QLabel']['below8'].replace('%s', '\n'.join([f' • {ue.title} ({ue.average:.2f}/20)' for ue in ue_other])))
 
         title_label.setText(title)
+        if self._data.has_missing_data: subwidget.setToolTip(self._lang['QToolTip']['ogeWeirdTop'])
         icon = QIcon(icon)
         icon_label.setPixmap(icon.pixmap(32, 32))
         self._item.icon = icon

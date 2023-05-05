@@ -27,7 +27,7 @@
     padding-bottom: 8px;
 }
 
-.UEWidget QLabel.moyenne {
+.UEWidget .average QLabel {
     font-size: 14px;
     font-weight: bold;
     padding-right: 8px;
@@ -48,20 +48,20 @@
     padding-bottom: 6px;
 }
 
-.PoleWidget QLabel.moyenne {
+.PoleWidget .average QLabel {
     font-size: 14px;
     font-weight: bold;
     padding-right: 8px;
 }
 
 
-.MatiereWidget {
+.SubjectWidget {
     background-color: #373737;
     /* border-top: 2px solid #ffffff; */
     border-radius: 0;
 }
 
-.MatiereWidget QLabel.title {
+.SubjectWidget QLabel.title {
     font-size: 14px;
     font-weight: bold;
     padding-left: 8px;
@@ -69,19 +69,19 @@
     padding-bottom: 4px;
 }
 
-.MatiereWidget QLabel.moyenne {
+.SubjectWidget .average QLabel {
     font-size: 14px;
     font-weight: bold;
     padding-right: 8px;
 }
 
 
-.NoteGroupWidget {
+.GradeGroupWidget {
     background-color: #282828;
     border-radius: 0;
 }
 
-.NoteGroupWidget QLabel.title {
+.GradeGroupWidget QLabel.title {
     font-size: 12px;
     font-weight: bold;
     padding-left: 8px;
@@ -89,18 +89,25 @@
     padding-bottom: 4px;
 }
 
-.NoteGroupWidget QLabel.moyenne {
+.GradeGroupWidget .average QLabel {
     font-size: 14px;
     font-weight: bold;
     padding-right: 8px;
 }
 
 
-.NoteWidget QLabel.note {
+.GradeWidget QLabel.grade {
     font-size: 12px;
 }
 
-.NoteWidget QLabel.coeff {
+.GradeWidget QLabel.coefficient {
     font-size: 10px;
     margin-top: 4px;
+}
+
+
+
+.UEWidget .average[oge-weird=true] QLabel, .PoleWidget .average[oge-weird=true] QLabel, .SubjectWidget .average[oge-weird=true] QLabel, .GradeGroupWidget .average[oge-weird=true] QLabel {
+    color: #00DEFF;
+    text-decoration: line-through;
 }

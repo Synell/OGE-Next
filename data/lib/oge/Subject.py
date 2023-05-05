@@ -12,6 +12,7 @@ class Subject:
         self._coefficient = coefficient
         self._grade_groups = grade_groups
         self._avg = None
+        self._has_missing_data = None
 
     @property
     def title(self) -> str:
@@ -42,16 +43,21 @@ class Subject:
 
         return self._avg
 
+    @property
+    def has_missing_data(self) -> bool:
+        if self._has_missing_data is None: self._has_missing_data = any(note_group.has_missing_data for note_group in self._grade_groups) or self.coefficient is None or self.coefficient == 0
+        return self._has_missing_data
+
     def __str__(self) -> str:
         return f'{self.title} ({self.coefficient})\n\t' + '\n'.join([f'\t{note_group}' for note_group in self.grade_groups]).replace('\n', '\n\t')
-    
+
     def to_json(self) -> dict:
         return {
             'title': self.title,
             'coefficient': self.coefficient,
             'grade_groups': [grade_group.to_json() for grade_group in self.grade_groups]
         }
-    
+
     @staticmethod
     def from_json(json: dict) -> 'Subject':
         return Subject(
