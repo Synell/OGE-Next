@@ -25,8 +25,9 @@ class UEWidget(OGEWidget):
 
         avg = ue.average
 
-        label = QLabel(f'{avg:.2f}/20')
-        label.setStyleSheet(f'color: {self.perc2color(avg / 20)}')
+        label = QLabel(f'{avg:.2f}/20' if avg is not None else '?/20')
+        if avg is None: label.setToolTip(self._OGE_WEIRD_TOOLTIP)
+        else: label.setStyleSheet(f'color: {self.perc2color(avg / 20)}')
         label.setProperty('class', 'moyenne')
         label.setAlignment(Qt.AlignmentFlag.AlignVCenter | Qt.AlignmentFlag.AlignRight)
         self.grid_layout.addWidget(label, 0, 1)
