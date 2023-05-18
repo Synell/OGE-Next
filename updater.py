@@ -113,6 +113,7 @@ class QUpdater(QBaseApplication):
         self.progress.setProperty('color', 'main')
         self.progress.setProperty('small', True)
         self.progress.setProperty('light', True)
+        self.progress.setProperty('not-rounded', True)
         self.progress.setFixedHeight(8)
         self.progress.setTextVisible(False)
         self.progress.setValue(0)

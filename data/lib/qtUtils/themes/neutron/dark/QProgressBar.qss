@@ -18,12 +18,19 @@ QProgressBar::chunk
 QProgressBar[small=true]
 {
 	height: 6px;
-	/* border-radius: 3px; */
-	border-radius: 0px;
+	border-radius: 3px;
 }
 QProgressBar::chunk[small=true]
 {
-	/* border-radius: 3px; */
+	border-radius: 3px;
+}
+
+QProgressBar[not-rounded=true]
+{
+	border-radius: 0px;
+}
+QProgressBar[not-rounded=true]::chunk
+{
 	border-radius: 0px;
 }
 
@@ -37,7 +44,7 @@ QProgressBar[light=true]
 /* QProgressBar - Blue */
 
 QWidget[color='blue'] QProgressBar[color='main']::chunk, QProgressBar[color='blue']::chunk {
-	color: #1B80FC;
+	background-color: #1B80FC;
 }
 
 
@@ -45,7 +52,7 @@ QWidget[color='blue'] QProgressBar[color='main']::chunk, QProgressBar[color='blu
 /* QProgressBar - Red */
 
 QWidget[color='red'] QProgressBar[color='main']::chunk, QProgressBar[color='red']::chunk {
-	color: #FC271B;
+	background-color: #FC271B;
 }
 
 
@@ -53,7 +60,7 @@ QWidget[color='red'] QProgressBar[color='main']::chunk, QProgressBar[color='red'
 /* QProgressBar - Green */
 
 QWidget[color='green'] QProgressBar[color='main']::chunk, QProgressBar[color='green']::chunk {
-	color: #07E813;
+	background-color: #07E813;
 }
 
 
@@ -61,7 +68,7 @@ QWidget[color='green'] QProgressBar[color='main']::chunk, QProgressBar[color='gr
 /* QProgressBar - Yellow */
 
 QWidget[color='yellow'] QProgressBar[color='main']::chunk, QProgressBar[color='yellow']::chunk {
-	color: #E8BC07;
+	background-color: #E8BC07;
 }
 
 
@@ -69,7 +76,7 @@ QWidget[color='yellow'] QProgressBar[color='main']::chunk, QProgressBar[color='y
 /* QProgressBar - Magenta */
 
 QWidget[color='magenta'] QProgressBar[color='main']::chunk, QProgressBar[color='magenta']::chunk {
-	color: #FC1BF1;
+	background-color: #FC1BF1;
 }
 
 
@@ -77,7 +84,7 @@ QWidget[color='magenta'] QProgressBar[color='main']::chunk, QProgressBar[color='
 /* QProgressBar - Cyan */
 
 QWidget[color='cyan'] QProgressBar[color='main']::chunk, QProgressBar[color='cyan']::chunk {
-	color: #00C8D4;
+	background-color: #00C8D4;
 }
 
 
@@ -85,7 +92,7 @@ QWidget[color='cyan'] QProgressBar[color='main']::chunk, QProgressBar[color='cya
 /* QProgressBar - Orange */
 
 QWidget[color='orange'] QProgressBar[color='main']::chunk, QProgressBar[color='orange']::chunk {
-	color: #E88307;
+	background-color: #E88307;
 }
 
 
@@ -93,7 +100,7 @@ QWidget[color='orange'] QProgressBar[color='main']::chunk, QProgressBar[color='o
 /* QProgressBar - Pink */
 
 QWidget[color='pink'] QProgressBar[color='main']::chunk, QProgressBar[color='pink']::chunk {
-	color: #E8076C;
+	background-color: #E8076C;
 }
 
 
@@ -101,7 +108,7 @@ QWidget[color='pink'] QProgressBar[color='main']::chunk, QProgressBar[color='pin
 /* QProgressBar - Lime */
 
 QWidget[color='lime'] QProgressBar[color='main']::chunk, QProgressBar[color='lime']::chunk {
-	color: #6CE807;
+	background-color: #6CE807;
 }
 
 
@@ -109,7 +116,7 @@ QWidget[color='lime'] QProgressBar[color='main']::chunk, QProgressBar[color='lim
 /* QProgressBar - Turquoise */
 
 QWidget[color='turquoise'] QProgressBar[color='main']::chunk, QProgressBar[color='turquoise']::chunk {
-	color: #07E8BC;
+	background-color: #07E8BC;
 }
 
 
@@ -117,5 +124,5 @@ QWidget[color='turquoise'] QProgressBar[color='main']::chunk, QProgressBar[color
 /* QProgressBar - White */
 
 QWidget[color='white'] QProgressBar[color='main']::chunk, QProgressBar[color='white']::chunk {
-	color: #EFEFEF;
+	background-color: #EFEFEF;
 }
