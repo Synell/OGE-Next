@@ -76,7 +76,7 @@ class QIconWidget(QGridFrame):
             if os.path.isfile(icon):
                 if QIconWidget._check_extension(icon, ['.png', '.jpg', '.jpeg', '.bmp', '.gif', '.ico', '.svg']): return False
             else: return False
-        elif isinstance(icon, [bytes, QPixmap, QSvgWidget, QIcon, QLabel]): return False
+        elif isinstance(icon, (bytes, QPixmap, QSvgWidget, QIcon, QLabel)): return False
         return True
 
     @staticmethod
