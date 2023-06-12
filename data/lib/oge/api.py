@@ -3,7 +3,7 @@
     # Libraries
 from bs4.element import Tag, ResultSet
 from requests import session, Session
-import re
+import re, traceback, os
 from bs4 import BeautifulSoup as BS
 from .Grade import Grade
 from .GradeGroup import GradeGroup
@@ -60,6 +60,8 @@ class OGE(QObject):
 
 
     def get_semestre_data(self, semester: int, force: bool = False) -> Semester:
+        html = None
+
         try:
             if (semester not in self._semester_data) or force:
                 html, sc = self._get_html(semester)
@@ -71,7 +73,12 @@ class OGE(QObject):
 
         except Exception as err:
             self.info_changed.emit(InfoType.Error, str(err))
-            self.failed.emit(str(err.with_traceback(None)))
+            self.failed.emit(Exception('An error has occurred while trying to get or parse OGE data!\nYou can find more information in the api-error.log file.'))
+
+            if html:
+                if not os.path.exists('./log/'): os.mkdir('./log/')
+                with open(f'./log/api-error.log', 'w', encoding='utf-8') as file:
+                    file.write(f'OGE API crashed!\n\n-----=====<( Python Traceback )>=====-----\n\n{traceback.format_exc()}\n\n\n-----=====<( HTML Code )>=====-----\n\n{html.prettify()}')
 
 
     def _get_key(self, session: Session) -> str:
@@ -110,7 +117,7 @@ class OGE(QObject):
             return id[0], view_state[0]
 
 
-    def _get_html(self, semester: int) -> str:
+    def _get_html(self, semester: int) -> tuple[BS, int]:
         session_ = session()
 
         data = {
@@ -164,6 +171,8 @@ class OGE(QObject):
         return title, coeff
 
     def _parse_html(self, code: BS) -> list[UE]:
+        log = [] # for debug
+
         self.info_changed.emit(InfoType.Info, 'Parsing OGE data...')
 
         data = []
@@ -178,8 +187,10 @@ class OGE(QObject):
             tbody = moy_ue.find('tbody')
 
             rows: list[Tag]|ResultSet = tbody.find_all('tr')
+            if len(rows) == 0: raise Exception('Couldn\'t find children in source code!')
 
             resource_tag = rows.pop(0)
+
             if resource_tag.attrs.get('class', None) != ['cell_BUT_RESSOURCE']:
                 raise Exception('Couldn\'t find valid children in source code!')
 
@@ -203,6 +214,10 @@ class OGE(QObject):
 
                 matiere_tag: list[Tag]|ResultSet = row.find('td').find_all('div')
 
+                if len(matiere_tag) == 0:
+                    log.append(f'Couldn\'t find valid children (row.find(\'td\').find_all(\'div\')) in source code!\nChildren:\n{matiere_tag.__repr__()}')
+                    continue
+
                 matiere_children: list[Tag]|ResultSet = matiere_tag.pop(0).find_all('span')
                 matiere = matiere_children[0].text.strip().replace('\n', '')
                 if len(matiere_children) == 1: matiere_coeff = 0.0 # bc OGE sucks
@@ -213,6 +228,10 @@ class OGE(QObject):
 
                 for note_tag in matiere_tag:
                     children = list(note_tag.children)
+                    if len(children) < 2:
+                        log.append(f'Couldn\'t find valid children (note_tag.children) in source code!\nChildren:\n{children.__repr__()}')
+                        continue
+
                     name = children.pop(0).text.replace('\n', '').replace('[', '').strip()
 
                     while children[-1].text == '\n':
@@ -228,6 +247,10 @@ class OGE(QObject):
 
                         if isinstance(child, Tag):
                             if child.name == 'span':
+                                if len(children) < 2:
+                                    log.append(f'Couldn\'t find valid children (while note_tag.children) in source code!\nChildren:\n{children.__repr__()}')
+                                    continue
+
                                 note = float(child.text.strip().replace('\n', ''))
 
                                 child = children.pop(0)
@@ -259,6 +282,12 @@ class OGE(QObject):
                 ]
             )
             data.append(ue)
+
+        if log:
+            if not os.path.exists('./log/'): os.mkdir('./log/')
+
+            with open(f'./logs/api-warnings.log', 'w', encoding='utf-8') as file:
+                file.write(f'OGE API warnings!\n\n-----=====<( API Warnings ({len(log)}) )>=====-----\n\n' + ('\n' + ('-' * 50) + '\n').join(log))
 
         return data
 #----------------------------------------------------------------------

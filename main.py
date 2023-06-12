@@ -79,7 +79,9 @@ def main() -> None:
     except Exception as err:
         print(err)
 
-        with open('./error.log', 'w', encoding = 'utf-8') as f:
+        if not os.path.exists('./log/'): os.mkdir('./log/')
+
+        with open('./log/error.log', 'w', encoding = 'utf-8') as f:
             f.write(str(err) + '\n\n')
             f.write(traceback.format_exc())
 

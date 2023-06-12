@@ -14,7 +14,7 @@ from data.lib import *
 
     # Class
 class Application(QBaseApplication):
-    BUILD = '07e76a94'
+    BUILD = '07e77f62'
     VERSION = 'Experimental'
 
     SERVER_NAME = 'OgeNext'
@@ -361,7 +361,7 @@ class Application(QBaseApplication):
         self.oge_worker.exit()
         self.main_page.empty_panel.auth.set_disabled(False)
         self.main_page.empty_panel.login_button.setDisabled(False)
-        self.show_alert(error)
+        self.show_alert(str(error))
         self.change_status_message(InfoType.Error, self.save_data.language_data['QMainWindow']['showMessage']['loginFailed'])
         self.set_panel_disabled(False)
 
