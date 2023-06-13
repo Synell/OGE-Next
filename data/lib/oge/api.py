@@ -286,7 +286,7 @@ class OGE(QObject):
         if log:
             if not os.path.exists('./log/'): os.mkdir('./log/')
 
-            with open(f'./logs/api-warnings.log', 'w', encoding='utf-8') as file:
+            with open(f'./log/api-warnings.log', 'w', encoding='utf-8') as file:
                 file.write(f'OGE API warnings!\n\n-----=====<( API Warnings ({len(log)}) )>=====-----\n\n' + ('\n' + ('-' * 50) + '\n').join(log))
 
         return data
