@@ -18,6 +18,7 @@ from cryptography.fernet import Fernet
 class SaveData(QSaveData):
     dateformat = '%Y-%m-%dT%H:%M:%SZ'
     COLOR_LINK = QUtilsColor()
+    downloads_folder = './OGENext/'
 
     def __init__(self, save_path: str = './data/save.dat') -> None:
         self.platform = PlatformType.Windows

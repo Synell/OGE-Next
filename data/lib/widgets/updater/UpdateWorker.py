@@ -21,12 +21,12 @@ class __WorkerSignals__(QObject):
         install_failed = Signal(str, int)
 
 class UpdateWorker(QThread):
-    def __init__(self, link: str, token: str, download_folder: str):
+    def __init__(self, link: str, token: str, download_folder: str) -> None:
         super(UpdateWorker, self).__init__()
         self.signals = __WorkerSignals__()
         self.link = link
         self.token = token
-        self.dest_path = f'{download_folder}/AppManager'
+        self.dest_path = download_folder
         self.out_path = './temp/' if sys.argv[0].endswith('.py') else './'
         if not os.path.exists(self.out_path): os.makedirs(self.out_path)
         self.timer = TimeWorker(timedelta(milliseconds = 500))
