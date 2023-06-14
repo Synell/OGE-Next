@@ -7,6 +7,7 @@ class Grade:
         self._value = value
         self._total = total
         self._coefficient = coefficient
+        self._is_new = False
         self._has_missing_data = None
 
     @property
@@ -24,6 +25,14 @@ class Grade:
     @property
     def coefficient(self) -> float:
         return self._coefficient
+
+    @property
+    def is_new(self) -> bool:
+        return self._is_new
+    
+    @is_new.setter
+    def is_new(self, value: bool) -> None:
+        self._is_new = value
 
     @property
     def has_missing_data(self) -> bool:
