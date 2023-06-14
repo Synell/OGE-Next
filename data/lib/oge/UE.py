@@ -26,6 +26,11 @@ class UE:
     def poles(self) -> list[Pole]:
         return self._poles.copy()
 
+    def find_pole_by_name(self, name: str) -> Pole | None:
+        for pole in self._poles:
+            if pole.title == name: return pole
+        return None
+
     @property
     def average(self) -> float|None:
         if self._avg is not None: return self._avg
@@ -47,6 +52,9 @@ class UE:
     def has_missing_data(self) -> bool:
         if self._has_missing_data is None: self._has_missing_data = any(pole.has_missing_data for pole in self._poles) or self.coefficient is None or self.coefficient == 0
         return self._has_missing_data
+
+    def set_as_new(self) -> None:
+        for pole in self._poles: pole.set_as_new()
 
     def __str__(self) -> str:
         return f'{self.title} ({self.coefficient})\n' + '\n'.join([f'\t{pole}' for pole in self.poles])

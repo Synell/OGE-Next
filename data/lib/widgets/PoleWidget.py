@@ -40,7 +40,7 @@ class PoleWidget(OGEWidget):
         label.setAlignment(Qt.AlignmentFlag.AlignVCenter | Qt.AlignmentFlag.AlignRight)
         self.grid_layout.addWidget(label, 0, 1)
 
-        for index, subject in enumerate(pole.matieres):
+        for index, subject in enumerate(pole.subjects):
             frame = SubjectWidget(subject)
             self.grid_layout.addWidget(frame, index + 1, 0, 1, 2)
 #----------------------------------------------------------------------

@@ -30,6 +30,7 @@ class OGE(QObject):
         self._password = password
         self._semester_data: dict[int, Semester] = {}
         self._semester_count = 0
+        self._new_semester: Semester = None
 
 
     @property
@@ -42,20 +43,31 @@ class OGE(QObject):
         return list(self._semester_data.keys())
 
 
-    def set_data_from_json(self, json: list[dict]) -> None:
+    def set_data_from_json(self, json: dict) -> None:
         self._semester_data = {}
 
         self._semester_count = json['semester_count']
 
         for semester in json['semesters']:
-            s = Semester.from_json(semester)
+            s = None
+
+            try: s = Semester.from_json(semester)
+            except: continue
+
             self._semester_data[s.id] = s
+
+        if json.get('last_semester', None) is not None:
+            s = Semester.from_json(json['last_semester'])
+
+            if s.id == self._semester_count:
+                self._new_semester = s
 
 
     def get_data_as_json(self) -> dict:
         return {
             'semester_count': self._semester_count,
-            'semesters': [self._semester_data[semester].to_json() for semester in self._semester_data if self._semester_data[semester].id != self._semester_count]
+            'semesters': [self._semester_data[semester].to_json() for semester in self._semester_data if self._semester_data[semester].id != self._semester_count],
+            'last_semester': self._semester_data[self._semester_count].to_json() if self._semester_count in self._semester_data else None
         }
 
 
@@ -68,6 +80,7 @@ class OGE(QObject):
                 self._semester_count = max(sc, self._semester_count)
 
                 self._semester_data[semester] = Semester(semester, self._parse_html(html))
+                if semester == self._semester_count: self._set_new()
 
             return self._semester_data[semester]
 
@@ -290,4 +303,49 @@ class OGE(QObject):
                 file.write(f'OGE API warnings!\n\n-----=====<( API Warnings ({len(log)}) )>=====-----\n\n' + ('\n' + ('-' * 50) + '\n').join(log))
 
         return data
+
+
+    def _set_new(self) -> None:
+        if self._new_semester is None:
+            self._semester_data[self._semester_count].set_as_new()
+            return
+
+        for ue in self._semester_data[self._semester_count].ues:
+            # Get UE
+            ue_progress = self._new_semester.find_ue_by_name(ue.title)
+            if ue_progress is None: continue
+
+            for pole in ue.poles:
+                # Get Pole
+                pole_progress = ue_progress.find_pole_by_name(pole.title)
+                if pole_progress is None: continue
+
+                for subject in pole.subjects:
+                    # Get Subject
+                    subject_progress = pole_progress.find_subject_by_name(subject.title)
+                    if subject_progress is None: continue
+
+                    for grade_group in subject.grade_groups:
+                        # Get Grade Group
+                        grade_group_progress = subject_progress.find_grade_group_by_name(grade_group.title)
+                        if grade_group_progress is None: continue
+
+                        lst_new = grade_group.grades.copy()
+                        lst_old = grade_group_progress.grades.copy()
+
+                        while lst_new and lst_old:
+                            grade_new = lst_new[0]
+                            grade_old = lst_old[0]
+
+                            if grade_new == grade_old:
+                                grade_new.is_new = False
+                                lst_new.pop(0)
+                                lst_old.pop(0)
+                                continue
+
+                            grade_new.is_new = True
+                            lst_new.pop(0)
+
+                        for grade in lst_new:
+                            grade.is_new = True
 #----------------------------------------------------------------------

@@ -26,16 +26,21 @@ class Subject:
     def grade_groups(self) -> list[GradeGroup]:
         return self._grade_groups.copy()
 
+    def find_grade_group_by_name(self, name: str) -> GradeGroup | None:
+        for grade_group in self._grade_groups:
+            if grade_group.title == name: return grade_group
+        return None
+
     @property
     def average(self) -> float|None:
         if self._avg is not None: return self._avg
 
         note, coeff = 0, 0
-        for note_group in self._grade_groups:
-            if note_group.average is None: continue
+        for grade_group in self._grade_groups:
+            if grade_group.average is None: continue
 
-            note += note_group.average * note_group.coefficient
-            coeff += note_group.coefficient
+            note += grade_group.average * grade_group.coefficient
+            coeff += grade_group.coefficient
 
         if coeff == 0: return None
 
@@ -45,11 +50,14 @@ class Subject:
 
     @property
     def has_missing_data(self) -> bool:
-        if self._has_missing_data is None: self._has_missing_data = any(note_group.has_missing_data for note_group in self._grade_groups) or self.coefficient is None or self.coefficient == 0
+        if self._has_missing_data is None: self._has_missing_data = any(grade_group.has_missing_data for grade_group in self._grade_groups) or self.coefficient is None or self.coefficient == 0
         return self._has_missing_data
 
+    def set_as_new(self) -> None:
+        for grade_group in self._grade_groups: grade_group.set_as_new()
+
     def __str__(self) -> str:
-        return f'{self.title} ({self.coefficient})\n\t' + '\n'.join([f'\t{note_group}' for note_group in self.grade_groups]).replace('\n', '\n\t')
+        return f'{self.title} ({self.coefficient})\n\t' + '\n'.join([f'\t{grade_group}' for grade_group in self.grade_groups]).replace('\n', '\n\t')
 
     def to_json(self) -> dict:
         return {

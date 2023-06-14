@@ -31,9 +31,9 @@ class GradeGroup:
         if self._avg is not None: return self._avg
 
         grade, coefficient = 0, 0
-        for note_ in self._grades:
-            grade += note_.value_20 * note_.coefficient
-            coefficient += note_.coefficient
+        for grade_ in self._grades:
+            grade += grade_.value_20 * grade_.coefficient
+            coefficient += grade_.coefficient
 
         if coefficient == 0: return None
 
@@ -43,17 +43,20 @@ class GradeGroup:
 
     @property
     def has_missing_data(self) -> bool:
-        if self._has_missing_data is None: self._has_missing_data = any(note.has_missing_data for note in self._grades) or self.coefficient is None or self.coefficient == 0
+        if self._has_missing_data is None: self._has_missing_data = any(grade.has_missing_data for grade in self._grades) or self.coefficient is None or self.coefficient == 0
         return self._has_missing_data
 
+    def set_as_new(self) -> None:
+        for grade in self._grades: grade.is_new = True
+
     def __str__(self) -> str:
-        return f'{self.title} ({self.coefficient})\n\t' + '\n'.join([f'\t{note}' for note in self.grades]).replace('\n', '\n\t')
+        return f'{self.title} ({self.coefficient})\n\t' + '\n'.join([f'\t{grade}' for grade in self.grades]).replace('\n', '\n\t')
 
     def to_json(self) -> dict:
         return {
             'title': self.title,
             'coefficient': self.coefficient,
-            'notes': [note.to_json() for note in self.grades]
+            'grades': [grade.to_json() for grade in self.grades]
         }
 
     @staticmethod
@@ -61,6 +64,6 @@ class GradeGroup:
         return GradeGroup(
             json['title'],
             json['coefficient'],
-            [Grade.from_json(note) for note in json['notes']]
+            [Grade.from_json(grade) for grade in json['grades']]
         )
 #----------------------------------------------------------------------

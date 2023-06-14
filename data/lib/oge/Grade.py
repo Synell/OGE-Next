@@ -42,6 +42,12 @@ class Grade:
     def __str__(self) -> str:
         return f'{self.value}/{self.total} ({self.coefficient})'
 
+    def __eq__(self, __value: object) -> bool:
+        if isinstance(__value, Grade):
+            return self.value == __value.value and self.total == __value.total and self.coefficient == __value.coefficient
+        else:
+            return False
+
     def to_json(self) -> dict:
         return {
             'value': self.value,

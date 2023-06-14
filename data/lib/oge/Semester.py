@@ -21,6 +21,16 @@ class Semester:
     def ues(self) -> list[UE]:
         return self._ues.copy()
 
+    def find_ue_by_id(self, id_: int) -> UE | None:
+        for ue in self._ues:
+            if ue.id == id_: return ue
+        return None
+    
+    def find_ue_by_name(self, name: str) -> UE | None:
+        for ue in self._ues:
+            if ue.title == name: return ue
+        return None
+
     @property
     def average(self) -> float|None:
         if self._avg is not None: return self._avg
@@ -42,6 +52,9 @@ class Semester:
     def has_missing_data(self) -> bool:
         if self._has_missing_data is None: self._has_missing_data = any(ue.has_missing_data for ue in self._ues)
         return self._has_missing_data
+
+    def set_as_new(self) -> None:
+        for ue in self._ues: ue.set_as_new()
 
     def __str__(self) -> str:
         return f'Semester {self.id}\n' + '\n'.join([f'\t{ue}' for ue in self.ues])
