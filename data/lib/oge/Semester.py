@@ -11,6 +11,7 @@ class Semester:
         self._id = id_
         self._ues = ues
         self._avg = None
+        self._new_grade_count = None
         self._has_missing_data = None
 
     @property
@@ -47,7 +48,16 @@ class Semester:
         self._avg = grade / coeff
 
         return self._avg
-    
+
+    @property
+    def new_grade_count(self) -> int:
+        if self._new_grade_count == None: self._new_grade_count = sum(ue.new_grade_count for ue in self._ues)
+        return self._new_grade_count
+
+    @new_grade_count.setter
+    def new_grade_count(self, value: int) -> None:
+        self._new_grade_count = value
+
     @property
     def has_missing_data(self) -> bool:
         if self._has_missing_data is None: self._has_missing_data = any(ue.has_missing_data for ue in self._ues)

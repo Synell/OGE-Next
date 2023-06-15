@@ -49,6 +49,10 @@ class Pole:
         return self._avg
 
     @property
+    def new_grade_count(self) -> int:
+        return sum(subject.new_grade_count for subject in self._subjects)
+
+    @property
     def has_missing_data(self) -> bool:
         if self._has_missing_data is None: self._has_missing_data = any(subject.has_missing_data for subject in self._subjects) or self.coefficient is None or self.coefficient == 0
         return self._has_missing_data

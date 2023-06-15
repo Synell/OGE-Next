@@ -34,7 +34,9 @@
                             "badSemester": "Semestre en difficulté, cherchez à combler vos lacunes !",
                             "between8And10": "UEs comprises entre 8/20 et 10/20 à améliorer :\n%s",
                             "below8": "UEs en dessous de 8/20 à améliorer :\n%s",
-                            "allBelow8": "Toutes les UE sont en dessous de 8/20, travaillez plus si vous voulez réussir !"
+                            "allBelow8": "Toutes les UE sont en dessous de 8/20, travaillez plus si vous voulez réussir !",
+                            "newGrade": "Une nouvelle note est apparue !",
+                            "newGrades": "%s nouvelles notes sont apparues !"
                         },
                         "QToolTip": {
                             "ogeWeird": "OGE est bizarre, ce n'est pas un bug avec OGE Next.\nVotre moyenne sera corrigée quand OGE fournira les bonnes données.",

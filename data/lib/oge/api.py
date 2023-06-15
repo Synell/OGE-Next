@@ -306,6 +306,10 @@ class OGE(QObject):
 
 
     def _set_new(self) -> None:
+        for i in range(self._semester_count - 1):
+            if i not in self._semester_data: continue
+            self._semester_data[i].new_grade_count = 0
+
         if self._new_semester is None:
             self._semester_data[self._semester_count].set_as_new()
             return
@@ -313,22 +317,30 @@ class OGE(QObject):
         for ue in self._semester_data[self._semester_count].ues:
             # Get UE
             ue_progress = self._new_semester.find_ue_by_name(ue.title)
-            if ue_progress is None: continue
+            if ue_progress is None:
+                ue.set_as_new()
+                continue
 
             for pole in ue.poles:
                 # Get Pole
                 pole_progress = ue_progress.find_pole_by_name(pole.title)
-                if pole_progress is None: continue
+                if pole_progress is None:
+                    pole.set_as_new()
+                    continue
 
                 for subject in pole.subjects:
                     # Get Subject
                     subject_progress = pole_progress.find_subject_by_name(subject.title)
-                    if subject_progress is None: continue
+                    if subject_progress is None:
+                        subject.set_as_new()
+                        continue
 
                     for grade_group in subject.grade_groups:
                         # Get Grade Group
                         grade_group_progress = subject_progress.find_grade_group_by_name(grade_group.title)
-                        if grade_group_progress is None: continue
+                        if grade_group_progress is None:
+                            grade_group.set_as_new()
+                            continue
 
                         lst_new = grade_group.grades.copy()
                         lst_old = grade_group_progress.grades.copy()
@@ -338,7 +350,6 @@ class OGE(QObject):
                             grade_old = lst_old[0]
 
                             if grade_new == grade_old:
-                                grade_new.is_new = False
                                 lst_new.pop(0)
                                 lst_old.pop(0)
                                 continue

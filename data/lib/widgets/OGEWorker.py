@@ -13,7 +13,7 @@ class __WorkerSignals__(QObject):
     finished = Signal(Semester)
 
 class OGEWorker(QThread):
-    CACHE_FILE = './data/oge_cache/%s.json'
+    _CACHE_FILE = './data/oge_cache/%s.json'
 
     def __init__(self, parent: QObject = None, username: str = None, password: str = None) -> None:
         super(OGEWorker, self).__init__(parent)
@@ -69,7 +69,7 @@ class OGEWorker(QThread):
 
     def _load_data(self) -> dict:
         try:
-            with open(self.CACHE_FILE.replace('%s', self._username), 'r', encoding = 'utf-8') as f:
+            with open(self._CACHE_FILE.replace('%s', self._username), 'r', encoding = 'utf-8') as f:
                 return json.load(f)
         except FileNotFoundError:
             return {}
@@ -79,7 +79,7 @@ class OGEWorker(QThread):
 
         data = self._oge.get_data_as_json()
 
-        file = self.CACHE_FILE.replace('%s', self._username)
+        file = self._CACHE_FILE.replace('%s', self._username)
         dir_ = os.path.dirname(file)
 
         if not os.path.exists(dir_):

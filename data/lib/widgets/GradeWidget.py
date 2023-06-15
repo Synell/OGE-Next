@@ -3,6 +3,7 @@
     # Libraries
 from PySide6.QtWidgets import QLabel
 from PySide6.QtCore import Qt, QSize
+from PySide6.QtGui import QPixmap
 
 from .OGEWidget import OGEWidget
 from data.lib.oge import Grade
@@ -11,7 +12,7 @@ from data.lib.qtUtils import QIconWidget
 
     # Class
 class GradeWidget(OGEWidget):
-    _OGE_NEW_ICON = None
+    _OGE_NEW_ICON: QPixmap = None
 
     def __init__(self, grade: Grade) -> None:
         super().__init__()

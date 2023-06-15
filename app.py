@@ -50,11 +50,14 @@ class Application(QBaseApplication):
 
         self.setWindowIcon(QIcon('./data/icons/OGENext.svg'))
 
-        SemesterWidget.ICON = f'{self.save_data.get_icon_dir()}/sidepanel/semester_%s.png'
-        OGEWorker.CACHE_FILE = './data/oge_cache/%s.json'
+        SemesterWidget._ICON = f'{self.save_data.get_icon_dir()}/sidepanel/semester_%s.png'
+        OGEWorker._CACHE_FILE = './data/oge_cache/%s.json'
         OGEWidget._OGE_WEIRD_TOOLTIP = self.save_data.language_data['QMainWindow']['mainPage']['QSidePanel']['dataPanel']['QToolTip']['ogeWeird']
         OGEWidget._OGE_WEIRD_ICON = QIcon(f'{self.save_data.get_icon_dir()}/oge/about.png').pixmap(16, 16)
-        GradeWidget._OGE_NEW_ICON = QIcon(f'{self.save_data.get_icon_dir()}/oge/new.png').pixmap(16, 16)
+
+        oge_new_icon = QIcon(f'{self.save_data.get_icon_dir()}/oge/new.png')
+        SemesterWidget._OGE_NEW_ICON = oge_new_icon.pixmap(32, 32)
+        GradeWidget._OGE_NEW_ICON = oge_new_icon.pixmap(16, 16)
 
         self.load_colors()
         self.create_widgets()

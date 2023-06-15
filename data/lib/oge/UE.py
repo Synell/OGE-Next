@@ -49,6 +49,10 @@ class UE:
         return self._avg
 
     @property
+    def new_grade_count(self) -> int:
+        return sum(pole.new_grade_count for pole in self._poles)
+
+    @property
     def has_missing_data(self) -> bool:
         if self._has_missing_data is None: self._has_missing_data = any(pole.has_missing_data for pole in self._poles) or self.coefficient is None or self.coefficient == 0
         return self._has_missing_data
