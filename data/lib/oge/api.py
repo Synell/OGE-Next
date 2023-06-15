@@ -311,7 +311,7 @@ class OGE(QObject):
             self._semester_data[i].new_grade_count = 0
 
         if self._new_semester is None:
-            self._semester_data[self._semester_count].set_as_new()
+            # self._semester_data[self._semester_count].set_as_new()
             return
 
         for ue in self._semester_data[self._semester_count].ues:
