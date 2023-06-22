@@ -59,7 +59,7 @@ class UE:
         for pole in self._poles:
             if pole.new_grade_count <= 0: continue
 
-            lst.append(f'• {self._title}\n\t' + pole.new_grades_str.replace('\n', '\n\t'))
+            lst.append(f'• {self._title}\n        ' + pole.new_grades_str.replace('\n', '\n        '))
 
         return '\n\n'.join(lst)
 

@@ -59,7 +59,7 @@ class Pole:
         for subject in self._subjects:
             if subject.new_grade_count <= 0: continue
 
-            lst.append(f'• {self._title}\n\t' + subject.new_grades_str.replace('\n', '\n\t'))
+            lst.append(f'• {self._title}\n        ' + subject.new_grades_str.replace('\n', '\n        '))
 
         return '\n\n'.join(lst)
 
