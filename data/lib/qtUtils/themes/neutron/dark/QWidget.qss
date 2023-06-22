@@ -41,20 +41,17 @@ QWidget[side='bottom'] {
 
 QWidget[side='all'] {
 	background-color: #262626;
-	border-radius: 0px;
 	border-radius: 4px;
 }
 
 QWidget[side='all-hover'] {
 	background-color: #262626;
-	border-radius: 0px;
 	border-radius: 4px;
 	border: 2px solid transparent;
 }
 
 QWidget[side='all-hover']:hover {
 	background-color: #303030;
-	border-radius: 0px;
 	border-radius: 4px;
 	border: 2px solid #8AAEDB;
 }

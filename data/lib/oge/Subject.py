@@ -51,23 +51,35 @@ class Subject:
     @property
     def new_grade_count(self) -> int:
         return sum(grade_group.new_grade_count for grade_group in self._grade_groups)
+    
+    @property
+    def new_grades_str(self) -> list[str]:
+        lst = []
+
+        for grade_group in self._grade_groups:
+            if grade_group.new_grade_count <= 0: continue
+            
+            for s in grade_group.new_grades_str:
+                lst.append(f'{self._title} > {s}')
+
+        return lst
 
     @property
     def has_missing_data(self) -> bool:
-        if self._has_missing_data is None: self._has_missing_data = any(grade_group.has_missing_data for grade_group in self._grade_groups) or self.coefficient is None or self.coefficient == 0
+        if self._has_missing_data is None: self._has_missing_data = any(grade_group.has_missing_data for grade_group in self._grade_groups) or self._coefficient is None or self._coefficient == 0
         return self._has_missing_data
 
     def set_as_new(self) -> None:
         for grade_group in self._grade_groups: grade_group.set_as_new()
 
     def __str__(self) -> str:
-        return f'{self.title} ({self.coefficient})\n\t' + '\n'.join([f'\t{grade_group}' for grade_group in self.grade_groups]).replace('\n', '\n\t')
+        return f'{self._title} ({self._coefficient})\n\t' + '\n'.join([f'\t{grade_group}' for grade_group in self._grade_groups]).replace('\n', '\n\t')
 
     def to_json(self) -> dict:
         return {
-            'title': self.title,
-            'coefficient': self.coefficient,
-            'grade_groups': [grade_group.to_json() for grade_group in self.grade_groups]
+            'title': self._title,
+            'coefficient': self._coefficient,
+            'grade_groups': [grade_group.to_json() for grade_group in self._grade_groups]
         }
 
     @staticmethod

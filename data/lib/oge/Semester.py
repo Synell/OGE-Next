@@ -54,6 +54,18 @@ class Semester:
         if self._new_grade_count == None: self._new_grade_count = sum(ue.new_grade_count for ue in self._ues)
         return self._new_grade_count
 
+    @property
+    def new_grades_str(self) -> list[str]:
+        lst = []
+
+        for ue in self._ues:
+            if ue.new_grade_count <= 0: continue
+            
+            for s in ue.new_grades_str:
+                lst.append(s)
+
+        return lst
+
     @new_grade_count.setter
     def new_grade_count(self, value: int) -> None:
         self._new_grade_count = value
@@ -67,12 +79,12 @@ class Semester:
         for ue in self._ues: ue.set_as_new()
 
     def __str__(self) -> str:
-        return f'Semester {self.id}\n' + '\n'.join([f'\t{ue}' for ue in self.ues])
+        return f'Semester {self._id}\n' + '\n'.join([f'\t{ue}' for ue in self._ues])
 
     def to_json(self) -> dict:
         return {
-            'id': self.id,
-            'ues': [ue.to_json() for ue in self.ues]
+            'id': self._id,
+            'ues': [ue.to_json() for ue in self._ues]
         }
 
     @staticmethod

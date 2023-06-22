@@ -51,23 +51,35 @@ class UE:
     @property
     def new_grade_count(self) -> int:
         return sum(pole.new_grade_count for pole in self._poles)
+    
+    @property
+    def new_grades_str(self) -> list[str]:
+        lst = []
+
+        for pole in self._poles:
+            if pole.new_grade_count <= 0: continue
+            
+            for s in pole.new_grades_str:
+                lst.append(f'{self._title} > {s}')
+
+        return lst
 
     @property
     def has_missing_data(self) -> bool:
-        if self._has_missing_data is None: self._has_missing_data = any(pole.has_missing_data for pole in self._poles) or self.coefficient is None or self.coefficient == 0
+        if self._has_missing_data is None: self._has_missing_data = any(pole.has_missing_data for pole in self._poles) or self._coefficient is None or self._coefficient == 0
         return self._has_missing_data
 
     def set_as_new(self) -> None:
         for pole in self._poles: pole.set_as_new()
 
     def __str__(self) -> str:
-        return f'{self.title} ({self.coefficient})\n' + '\n'.join([f'\t{pole}' for pole in self.poles])
+        return f'{self._title} ({self._coefficient})\n' + '\n'.join([f'\t{pole}' for pole in self._poles])
 
     def to_json(self) -> dict:
         return {
-            'title': self.title,
-            'coefficient': self.coefficient,
-            'poles': [pole.to_json() for pole in self.poles]
+            'title': self._title,
+            'coefficient': self._coefficient,
+            'poles': [pole.to_json() for pole in self._poles]
         }
 
     @staticmethod

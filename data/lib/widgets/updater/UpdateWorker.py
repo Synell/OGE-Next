@@ -9,7 +9,8 @@ from time import sleep
 #----------------------------------------------------------------------
 
     # Class
-class __WorkerSignals__(QObject):
+class UpdateWorker(QThread):
+    class _WorkerSignals(QObject):
         download_progress_changed = Signal(float)
         install_progress_changed = Signal(float)
         download_speed_changed = Signal(float)
@@ -20,10 +21,9 @@ class __WorkerSignals__(QObject):
         install_done = Signal()
         install_failed = Signal(str, int)
 
-class UpdateWorker(QThread):
     def __init__(self, link: str, token: str, download_folder: str) -> None:
         super(UpdateWorker, self).__init__()
-        self.signals = __WorkerSignals__()
+        self.signals = UpdateWorker._WorkerSignals()
         self.link = link
         self.token = token
         self.dest_path = download_folder

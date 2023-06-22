@@ -36,23 +36,23 @@ class Grade:
 
     @property
     def has_missing_data(self) -> bool:
-        if self._has_missing_data is None: self._has_missing_data = self.value is None or self.total is None or self.coefficient is None or self.coefficient == 0
+        if self._has_missing_data is None: self._has_missing_data = self._value is None or self._total is None or self._coefficient is None or self._coefficient == 0
         return self._has_missing_data
 
     def __str__(self) -> str:
-        return f'{self.value}/{self.total} ({self.coefficient})'
+        return f'{self._value}/{self._total} ({self._coefficient})'
 
     def __eq__(self, __value: object) -> bool:
         if isinstance(__value, Grade):
-            return self.value == __value.value and self.total == __value.total and self.coefficient == __value.coefficient
+            return self._value == __value.value and self._total == __value.total and self._coefficient == __value.coefficient
         else:
             return False
 
     def to_json(self) -> dict:
         return {
-            'value': self.value,
-            'total': self.total,
-            'coefficient': self.coefficient
+            'value': self._value,
+            'total': self._total,
+            'coefficient': self._coefficient
         }
 
     @staticmethod

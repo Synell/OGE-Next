@@ -51,23 +51,35 @@ class Pole:
     @property
     def new_grade_count(self) -> int:
         return sum(subject.new_grade_count for subject in self._subjects)
+    
+    @property
+    def new_grades_str(self) -> list[str]:
+        lst = []
+
+        for subject in self._subjects:
+            if subject.new_grade_count <= 0: continue
+            
+            for s in subject.new_grades_str:
+                lst.append(f'{self._title} > {s}')
+
+        return lst
 
     @property
     def has_missing_data(self) -> bool:
-        if self._has_missing_data is None: self._has_missing_data = any(subject.has_missing_data for subject in self._subjects) or self.coefficient is None or self.coefficient == 0
+        if self._has_missing_data is None: self._has_missing_data = any(subject.has_missing_data for subject in self._subjects) or self._coefficient is None or self._coefficient == 0
         return self._has_missing_data
 
     def set_as_new(self) -> None:
         for subject in self._subjects: subject.set_as_new()
 
     def __str__(self) -> str:
-        return f'{self.title} ({self.coefficient})\n\t' + '\n'.join([f'\t{matiere}' for matiere in self.subjects]).replace('\n', '\n\t')
+        return f'{self._title} ({self._coefficient})\n\t' + '\n'.join([f'\t{matiere}' for matiere in self._subjects]).replace('\n', '\n\t')
 
     def to_json(self) -> dict:
         return {
-            'title': self.title,
-            'coefficient': self.coefficient,
-            'subjects': [subject.to_json() for subject in self.subjects]
+            'title': self._title,
+            'coefficient': self._coefficient,
+            'subjects': [subject.to_json() for subject in self._subjects]
         }
 
     @staticmethod

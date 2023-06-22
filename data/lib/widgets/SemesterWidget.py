@@ -133,13 +133,23 @@ class SemesterWidget(QScrollableGridFrame):
             new_grades_subwidget.grid_layout.setContentsMargins(0, 0, 0, 0)
             new_grades_subwidget.grid_layout.setSpacing(10)
             widget.grid_layout.addWidget(new_grades_subwidget, widget.grid_layout.count(), 0)
+            new_grades_subwidget.grid_layout.setColumnStretch(2, 1)
+
+            new_grades_title_subwidget = QGridFrame()
+            new_grades_title_subwidget.grid_layout.setContentsMargins(0, 0, 0, 0)
+            new_grades_title_subwidget.grid_layout.setSpacing(10)
+            new_grades_subwidget.grid_layout.addWidget(new_grades_title_subwidget, new_grades_subwidget.grid_layout.count(), 0)
+            new_grades_title_subwidget.grid_layout.setColumnStretch(2, 1)
 
             new_grades_sw_icon_label = QIconWidget(None, self._OGE_NEW_ICON, QSize(32, 32), False)
-            new_grades_subwidget.grid_layout.addWidget(new_grades_sw_icon_label, 0, 0)
+            new_grades_title_subwidget.grid_layout.addWidget(new_grades_sw_icon_label, 0, 0)
 
             new_grades_sw_title_label = QLabel(self._lang['QLabel']['newGrade' + ('s' if self._data.new_grade_count > 1 else '')].replace('%s', str(self._data.new_grade_count)))
             new_grades_sw_title_label.setProperty('title', True)
-            new_grades_subwidget.grid_layout.addWidget(new_grades_sw_title_label, 0, 1)
+            new_grades_title_subwidget.grid_layout.addWidget(new_grades_sw_title_label, 0, 1)
 
-            new_grades_subwidget.grid_layout.setColumnStretch(2, 1)
+            new_grades_sw_desc_label = QLabel('\n'.join(self._data.new_grades_str))
+            new_grades_sw_desc_label.setProperty('desc', True)
+            # new_grades_sw_desc_label.setWordWrap(True)
+            new_grades_subwidget.grid_layout.addWidget(new_grades_sw_desc_label, new_grades_subwidget.grid_layout.count(), 0)
 #----------------------------------------------------------------------
