@@ -14,7 +14,7 @@ from data.lib import *
 
     # Class
 class Application(QBaseApplication):
-    BUILD = '07e77f83'
+    BUILD = '07e77fb4'
     VERSION = 'Experimental'
 
     SERVER_NAME = 'OgeNext'
