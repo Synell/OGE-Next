@@ -55,16 +55,15 @@ class Semester:
         return self._new_grade_count
 
     @property
-    def new_grades_str(self) -> list[str]:
+    def new_grades_str(self) -> str:
         lst = []
 
         for ue in self._ues:
             if ue.new_grade_count <= 0: continue
-            
-            for s in ue.new_grades_str:
-                lst.append(s)
 
-        return lst
+            lst.append(ue.new_grades_str)
+
+        return '\n\n'.join(lst)
 
     @new_grade_count.setter
     def new_grade_count(self, value: int) -> None:

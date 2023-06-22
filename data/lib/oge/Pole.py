@@ -53,16 +53,15 @@ class Pole:
         return sum(subject.new_grade_count for subject in self._subjects)
     
     @property
-    def new_grades_str(self) -> list[str]:
+    def new_grades_str(self) -> str:
         lst = []
 
         for subject in self._subjects:
             if subject.new_grade_count <= 0: continue
-            
-            for s in subject.new_grades_str:
-                lst.append(f'{self._title} > {s}')
 
-        return lst
+            lst.append(f'• {self._title}\n\t' + subject.new_grades_str.replace('\n', '\n\t'))
+
+        return '\n\n'.join(lst)
 
     @property
     def has_missing_data(self) -> bool:

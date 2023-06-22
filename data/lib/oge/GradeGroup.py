@@ -46,8 +46,8 @@ class GradeGroup:
         return sum(grade.is_new for grade in self._grades)
     
     @property
-    def new_grades_str(self) -> list[str]:
-        return [f'{self._title} > {grade}' for grade in self._grades if grade.is_new]
+    def new_grades_str(self) -> str:
+        return f'• {self._title}\n' + '\n'.join([f'\t• {grade}' for grade in self._grades if grade.is_new])
 
     @property
     def has_missing_data(self) -> bool:
