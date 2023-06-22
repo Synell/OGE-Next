@@ -150,6 +150,5 @@ class SemesterWidget(QScrollableGridFrame):
 
             new_grades_sw_desc_label = QLabel(self._data.new_grades_str)
             new_grades_sw_desc_label.setProperty('desc', True)
-            # new_grades_sw_desc_label.setWordWrap(True)
             new_grades_subwidget.grid_layout.addWidget(new_grades_sw_desc_label, new_grades_subwidget.grid_layout.count(), 0)
 #----------------------------------------------------------------------
