@@ -430,6 +430,11 @@ class Application(QBaseApplication):
 
         self.about_menu.addSeparator()
 
+        act = self.about_menu.addAction(self.save_data.get_icon('menubar/bug.png', mode = QSaveData.IconMode.Local), self.save_data.language_data['QMenu']['reportBug'])
+        act.triggered.connect(lambda: QDesktopServices.openUrl(QUrl('https://github.com/Synell/App-Manager/issues')))
+
+        self.about_menu.addSeparator()
+
         def create_donate_menu():
             donate_menu = QMenu(self.save_data.language_data['QMenu']['donate']['title'], self.window)
             donate_menu.setIcon(self.save_data.get_icon('menubar/donate.png'))
@@ -437,7 +442,11 @@ class Application(QBaseApplication):
             buymeacoffee_action = QAction(self.save_data.get_icon('menubar/buyMeACoffee.png'), 'Buy Me a Coffee', self.window)
             buymeacoffee_action.triggered.connect(lambda: QDesktopServices.openUrl(QUrl('https://www.buymeacoffee.com/Synell')))
 
+            patreon_action = QAction(self.save_data.get_icon('menubar/patreon.png'), 'Patreon', self.window)
+            patreon_action.triggered.connect(lambda: QDesktopServices.openUrl(QUrl('https://www.patreon.com/synel')))
+
             donate_menu.addAction(buymeacoffee_action)
+            donate_menu.addAction(patreon_action)
 
             return donate_menu
 
