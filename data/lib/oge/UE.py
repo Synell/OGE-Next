@@ -54,14 +54,7 @@ class UE:
     
     @property
     def new_grades_str(self) -> str:
-        lst = []
-
-        for pole in self._poles:
-            if pole.new_grade_count <= 0: continue
-
-            lst.append(f'• {self._title}\n        ' + pole.new_grades_str.replace('\n', '\n        '))
-
-        return '\n\n'.join(lst)
+        return f'• {self._title}\n' + '\n\n'.join(pole.new_grades_str.replace('\n', '\n        ') for pole in self._poles if pole.new_grade_count > 0)
 
     @property
     def has_missing_data(self) -> bool:

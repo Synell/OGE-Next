@@ -54,14 +54,7 @@ class Subject:
     
     @property
     def new_grades_str(self) -> str:
-        lst = []
-
-        for grade_group in self._grade_groups:
-            if grade_group.new_grade_count <= 0: continue
-
-            lst.append(f'• {self._title}\n        ' + grade_group.new_grades_str.replace('\n', '\n        '))
-
-        return '\n\n'.join(lst)
+        return f'• {self._title}\n' + '\n\n'.join(grade_group.new_grades_str.replace('\n', '\n        ') for grade_group in self._grade_groups if grade_group.new_grade_count > 0)
 
     @property
     def has_missing_data(self) -> bool:

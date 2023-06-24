@@ -47,7 +47,7 @@ class GradeGroup:
     
     @property
     def new_grades_str(self) -> str:
-        return f'• {self._title}\n' + '\n'.join([f'        • {grade}' for grade in self._grades if grade.is_new])
+        return f'• {self._title}\n' + '\n'.join([f'• {grade}' for grade in self._grades if grade.is_new])
 
     @property
     def has_missing_data(self) -> bool:

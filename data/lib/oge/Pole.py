@@ -54,14 +54,7 @@ class Pole:
     
     @property
     def new_grades_str(self) -> str:
-        lst = []
-
-        for subject in self._subjects:
-            if subject.new_grade_count <= 0: continue
-
-            lst.append(f'• {self._title}\n        ' + subject.new_grades_str.replace('\n', '\n        '))
-
-        return '\n\n'.join(lst)
+        return f'• {self._title}\n' + '\n\n'.join(subject.new_grades_str.replace('\n', '\n        ') for subject in self._subjects if subject.new_grade_count > 0)
 
     @property
     def has_missing_data(self) -> bool:
