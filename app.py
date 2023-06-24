@@ -431,7 +431,7 @@ class Application(QBaseApplication):
         self.about_menu.addSeparator()
 
         act = self.about_menu.addAction(self.save_data.get_icon('menubar/bug.png', mode = QSaveData.IconMode.Local), self.save_data.language_data['QMenu']['reportBug'])
-        act.triggered.connect(lambda: QDesktopServices.openUrl(QUrl('https://github.com/Synell/App-Manager/issues')))
+        act.triggered.connect(lambda: QDesktopServices.openUrl(QUrl('https://github.com/Synell/OGE-Next/issues')))
 
         self.about_menu.addSeparator()
 
