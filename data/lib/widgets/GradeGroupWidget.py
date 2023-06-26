@@ -21,7 +21,6 @@ class GradeGroupWidget(OGEWidget):
             self.setProperty('class', 'oge-header')
             self.grid_layout.setContentsMargins(0, 0, 0, 0)
             self.grid_layout.setSpacing(0)
-            self.setProperty('background', 'transparent')
 
             label = QLabel(f'{grade_group.title} ({grade_group.coefficient if grade_group.coefficient else "?"})')
             label.setProperty('class', 'title')
@@ -55,9 +54,15 @@ class GradeGroupWidget(OGEWidget):
         self._header = self._Header(grade_group)
         self.grid_layout.addWidget(self._header, 0, 0)
 
+        self._content_frame = QGridFrame()
+        self._content_frame.setProperty('class', 'oge-content')
+        self._content_frame.grid_layout.setContentsMargins(0, 0, 0, 0)
+        self._content_frame.grid_layout.setSpacing(0)
+        self.grid_layout.addWidget(self._content_frame, 1, 0)
+
         flow_widget = QFlowWidget(None, Qt.Orientation.Horizontal, 10)
-        flow_widget.setProperty('class', 'grade-group')
-        self.grid_layout.addWidget(flow_widget, 1, 0)
+        flow_widget.setProperty('class', 'oge-subcontent')
+        self._content_frame.grid_layout.addWidget(flow_widget, 0, 0)
 
         for grade in grade_group.grades:
             frame = GradeWidget(grade)

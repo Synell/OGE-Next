@@ -35,10 +35,27 @@
 
 
 .PoleWidget {
+    background-color: transparent;
+}
+
+.PoleWidget[first-child=true] {
+    background-color: #545454;
+}
+
+.PoleWidget > .oge-header {
     background-color: #454545;
     border-top: 2px solid #ffffff;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
+}
+
+.PoleWidget > .oge-content {
+    background-color: #454545;
+}
+
+.PoleWidget[last-child=true], .PoleWidget[last-child=true] > .oge-content {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 
 .PoleWidget QLabel.title {
@@ -57,11 +74,28 @@
 
 
 .SubjectWidget {
+    background-color: #1A1A1A;
+}
+
+.SubjectWidget[first-child=true] {
+    background-color: #454545;
+}
+
+.SubjectWidget > .oge-header {
     background-color: #373737;
-    /* border-top: 2px solid #ffffff; */
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 }
+
+.SubjectWidget > .oge-content {
+    background-color: #373737;
+}
+
+.PoleWidget[last-child=true] .SubjectWidget[last-child=true], .PoleWidget[last-child=true] .SubjectWidget[last-child=true] > .oge-content {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
 
 .SubjectWidget QLabel.title {
     font-size: 14px;
@@ -79,9 +113,32 @@
 
 
 .GradeGroupWidget {
+    background-color: #1A1A1A;
+}
+
+.GradeGroupWidget[first-child=true] {
+    background-color: #373737;
+}
+
+.GradeGroupWidget > .oge-header {
     background-color: #282828;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
+}
+
+.GradeGroupWidget > .oge-content {
+    background-color: #282828;
+}
+
+.GradeGroupWidget > .oge-content > .oge-subcontent {
+    background-color: #1A1A1A;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.PoleWidget[last-child=true] .SubjectWidget[last-child=true] .GradeGroupWidget[last-child=true], .PoleWidget[last-child=true] .SubjectWidget[last-child=true] .GradeGroupWidget[last-child=true] > .oge-content, .PoleWidget[last-child=true] .SubjectWidget[last-child=true] .GradeGroupWidget[last-child=true] > .oge-content > .oge-subcontent {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 
 .GradeGroupWidget QLabel.title {

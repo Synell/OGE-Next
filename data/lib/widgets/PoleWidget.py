@@ -20,7 +20,6 @@ class PoleWidget(OGEWidget):
             self.setProperty('class', 'oge-header')
             self.grid_layout.setContentsMargins(0, 0, 0, 0)
             self.grid_layout.setSpacing(0)
-            self.setProperty('background', 'transparent')
 
             label = QLabel(f'{pole.title} ({pole.coefficient if pole.coefficient else "?"})')
             label.setProperty('class', 'title')
@@ -54,12 +53,18 @@ class PoleWidget(OGEWidget):
         self._header = self._Header(pole)
         self.grid_layout.addWidget(self._header, 0, 0)
 
+        self._content_frame = QGridFrame()
+        self._content_frame.setProperty('class', 'oge-content')
+        self._content_frame.grid_layout.setContentsMargins(0, 0, 0, 0)
+        self._content_frame.grid_layout.setSpacing(0)
+        self.grid_layout.addWidget(self._content_frame, 1, 0)
+
         last_child = None
 
         for index, subject in enumerate(pole.subjects):
             frame = SubjectWidget(subject)
             if index == 0: frame.setProperty('first-child', True)
-            self.grid_layout.addWidget(frame, index + 1, 0)
+            self._content_frame.grid_layout.addWidget(frame, index, 0)
             last_child = frame
 
         if last_child: last_child.setProperty('last-child', True)
