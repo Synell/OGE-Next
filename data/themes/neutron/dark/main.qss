@@ -19,6 +19,10 @@
     border-top-right-radius: 8px; */
 }
 
+.UEWidget > .oge-content {
+    background-color: transparent;
+}
+
 .UEWidget QLabel.title {
     font-size: 16px;
     font-weight: bold;
@@ -35,7 +39,12 @@
 
 
 .PoleWidget {
-    background-color: transparent;
+    background-color: #1A1A1A;
+}
+
+.PoleWidget[last-child=true] {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 
 .PoleWidget[first-child=true] {
@@ -51,11 +60,6 @@
 
 .PoleWidget > .oge-content {
     background-color: #454545;
-}
-
-.PoleWidget[last-child=true], .PoleWidget[last-child=true] > .oge-content {
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
 }
 
 .PoleWidget QLabel.title {
@@ -90,12 +94,6 @@
 .SubjectWidget > .oge-content {
     background-color: #373737;
 }
-
-.PoleWidget[last-child=true] .SubjectWidget[last-child=true], .PoleWidget[last-child=true] .SubjectWidget[last-child=true] > .oge-content {
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-}
-
 
 .SubjectWidget QLabel.title {
     font-size: 14px;
@@ -136,11 +134,6 @@
     border-top-right-radius: 8px;
 }
 
-.PoleWidget[last-child=true] .SubjectWidget[last-child=true] .GradeGroupWidget[last-child=true], .PoleWidget[last-child=true] .SubjectWidget[last-child=true] .GradeGroupWidget[last-child=true] > .oge-content, .PoleWidget[last-child=true] .SubjectWidget[last-child=true] .GradeGroupWidget[last-child=true] > .oge-content > .oge-subcontent {
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-}
-
 .GradeGroupWidget QLabel.title {
     font-size: 12px;
     font-weight: bold;
@@ -170,4 +163,21 @@
 .UEWidget .average[oge-weird=true] QLabel, .PoleWidget .average[oge-weird=true] QLabel, .SubjectWidget .average[oge-weird=true] QLabel, .GradeGroupWidget .average[oge-weird=true] QLabel {
     color: #00DEFF;
     text-decoration: line-through;
+}
+
+
+
+.PoleWidget[last-child=true], .PoleWidget[last-child=true] > .oge-content {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.PoleWidget[last-child=true] .SubjectWidget[last-child=true], .PoleWidget[last-child=true] .SubjectWidget[last-child=true] > .oge-content {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.PoleWidget[last-child=true] .SubjectWidget[last-child=true] .GradeGroupWidget[last-child=true], .PoleWidget[last-child=true] .SubjectWidget[last-child=true] .GradeGroupWidget[last-child=true] > .oge-content, .PoleWidget[last-child=true] .SubjectWidget[last-child=true] .GradeGroupWidget[last-child=true] > .oge-content > .oge-subcontent {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
