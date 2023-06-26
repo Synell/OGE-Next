@@ -45,7 +45,7 @@ class QMessageBoxWithWidget(QDialog):
                 case QMessageBoxWithWidget.Icon.Critical: app.beep()
 
         pixmap = QLabel()
-        pixmap.setPixmap(self.__generatePixmap__(icon))
+        pixmap.setPixmap(self._generatePixmap(icon))
         self._left_layout.addWidget(pixmap)
         self._left_layout.setAlignment(pixmap, Qt.AlignmentFlag.AlignTop)
         self._left_layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
@@ -74,7 +74,7 @@ class QMessageBoxWithWidget(QDialog):
         self._layout.setAlignment(right_buttons, Qt.AlignmentFlag.AlignRight)
 
 
-    def __generatePixmap__(self, icon: Icon|QIcon = Icon.NoIcon):
+    def _generatePixmap(self, icon: Icon|QIcon = Icon.NoIcon):
         if type(icon) is QMessageBoxWithWidget.Icon:
             style = self.style()
             icon_size = style.pixelMetric(QStyle.PixelMetric.PM_MessageBoxIconSize)
