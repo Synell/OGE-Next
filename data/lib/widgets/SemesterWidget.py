@@ -24,7 +24,7 @@ class SemesterWidget(QScrollableGridFrame):
         self._item = item
 
         self.scroll_layout.setContentsMargins(20, 20, 20, 20)
-        self.scroll_layout.setSpacing(30)
+        self.scroll_layout.setSpacing(20)
         self.setProperty('class', 'SemesterWidget')
 
         self._data: Semester = None
