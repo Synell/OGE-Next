@@ -49,4 +49,5 @@ from .QCrashReport import QCrashReport
 from .QSavableDockWidget import QSavableDockWidget
 # from .QMemoryCondition import QMemoryCondition
 from .QIconLabel import QIconLabel
+from .QMoreButton import QMoreButton
 #----------------------------------------------------------------------

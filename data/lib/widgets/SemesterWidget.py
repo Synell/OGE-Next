@@ -5,7 +5,7 @@ from PySide6.QtCore import Qt, Signal, QSize
 from PySide6.QtGui import QIcon, QPixmap
 from PySide6.QtWidgets import QPushButton, QLabel
 
-from data.lib.qtUtils import QScrollableGridFrame, QGridFrame, QSidePanelItem, QIconWidget
+from data.lib.qtUtils import QScrollableGridFrame, QGridFrame, QSidePanelItem, QIconWidget, QDropDownWidget
 from data.lib.oge import UE, Semester
 from .UEWidget import UEWidget
 #----------------------------------------------------------------------
@@ -24,7 +24,7 @@ class SemesterWidget(QScrollableGridFrame):
         self._item = item
 
         self.scroll_layout.setContentsMargins(20, 20, 20, 20)
-        self.scroll_layout.setSpacing(50)
+        self.scroll_layout.setSpacing(30)
         self.setProperty('class', 'SemesterWidget')
 
         self._data: Semester = None
@@ -45,7 +45,7 @@ class SemesterWidget(QScrollableGridFrame):
 
         widget = QGridFrame()
         widget.grid_layout.setContentsMargins(0, 0, 0, 0)
-        widget.grid_layout.setSpacing(20)
+        widget.grid_layout.setSpacing(5)
         self.scroll_layout.addWidget(widget, 0, 0)
 
         button = QPushButton(self._lang['QPushButton']['refresh'])
@@ -129,16 +129,9 @@ class SemesterWidget(QScrollableGridFrame):
             widget.grid_layout.addWidget(details_sw_desc_label, widget.grid_layout.count(), 0)
 
         if self._data.new_grade_count:
-            new_grades_subwidget = QGridFrame()
-            new_grades_subwidget.grid_layout.setContentsMargins(0, 0, 0, 0)
-            new_grades_subwidget.grid_layout.setSpacing(10)
-            widget.grid_layout.addWidget(new_grades_subwidget, widget.grid_layout.count(), 0)
-            new_grades_subwidget.grid_layout.setColumnStretch(2, 1)
-
             new_grades_title_subwidget = QGridFrame()
             new_grades_title_subwidget.grid_layout.setContentsMargins(0, 0, 0, 0)
             new_grades_title_subwidget.grid_layout.setSpacing(10)
-            new_grades_subwidget.grid_layout.addWidget(new_grades_title_subwidget, new_grades_subwidget.grid_layout.count(), 0)
             new_grades_title_subwidget.grid_layout.setColumnStretch(2, 1)
 
             new_grades_sw_icon_label = QIconWidget(None, self._OGE_NEW_ICON, QSize(32, 32), False)
@@ -150,5 +143,7 @@ class SemesterWidget(QScrollableGridFrame):
 
             new_grades_sw_desc_label = QLabel(self._data.new_grades_str)
             new_grades_sw_desc_label.setProperty('desc', True)
-            new_grades_subwidget.grid_layout.addWidget(new_grades_sw_desc_label, new_grades_subwidget.grid_layout.count(), 0)
+
+            new_grades_subwidget = QDropDownWidget(new_grades_title_subwidget, new_grades_sw_desc_label, True)
+            widget.grid_layout.addWidget(new_grades_subwidget, widget.grid_layout.count(), 0)
 #----------------------------------------------------------------------

@@ -58,6 +58,13 @@ QWidget[side='all-hover']:hover {
 
 
 
+/* QWidget - Transparent */
+QWidget[background='transparent'] {
+	background-color: transparent;
+}
+
+
+
 /* QWidget - Blue */
 
 QWidget[color='blue']:hover, QWidget[color='blue'] QWidget[color='main']:hover {

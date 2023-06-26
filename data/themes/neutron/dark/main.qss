@@ -37,7 +37,8 @@
 .PoleWidget {
     background-color: #454545;
     border-top: 2px solid #ffffff;
-    border-radius: 0;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
 .PoleWidget QLabel.title {
@@ -58,7 +59,8 @@
 .SubjectWidget {
     background-color: #373737;
     /* border-top: 2px solid #ffffff; */
-    border-radius: 0;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
 .SubjectWidget QLabel.title {
@@ -78,7 +80,8 @@
 
 .GradeGroupWidget {
     background-color: #282828;
-    border-radius: 0;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
 .GradeGroupWidget QLabel.title {

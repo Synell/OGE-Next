@@ -59,6 +59,8 @@ class Application(QBaseApplication):
         SemesterWidget._OGE_NEW_ICON = oge_new_icon.pixmap(32, 32)
         GradeWidget._OGE_NEW_ICON = oge_new_icon.pixmap(16, 16)
 
+        QDropDownWidget.init(self)
+
         self.load_colors()
         self.create_widgets()
         self.update_title()

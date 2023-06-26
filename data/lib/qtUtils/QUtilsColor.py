@@ -10,55 +10,55 @@ import colorsys
 class QUtilsColor:
     @dispatch()
     def __init__(self) -> None:
-        self.__red__ = 0
-        self.__green__ = 0
-        self.__blue__ = 0
-        self.__alpha__ = 255
+        self._red = 0
+        self._green = 0
+        self._blue = 0
+        self._alpha = 255
 
     @dispatch(int, int, int)
     def __init__(self, red: int, green: int, blue: int) -> None:
-        self.__red__ = self.__byte_range__(red)
-        self.__green__ = self.__byte_range__(green)
-        self.__blue__ = self.__byte_range__(blue)
-        self.__alpha__ = 255
+        self._red = self._byte_range(red)
+        self._green = self._byte_range(green)
+        self._blue = self._byte_range(blue)
+        self._alpha = 255
 
     @dispatch(int, int, int, int)
     def __init__(self, red: int, green: int, blue: int, alpha: int) -> None:
-        self.__red__ = self.__byte_range__(red)
-        self.__green__ = self.__byte_range__(green)
-        self.__blue__ = self.__byte_range__(blue)
-        self.__alpha__ = self.__byte_range__(alpha)
+        self._red = self._byte_range(red)
+        self._green = self._byte_range(green)
+        self._blue = self._byte_range(blue)
+        self._alpha = self._byte_range(alpha)
 
     @dispatch(tuple)
     def __init__(self, rgb: tuple[int, int, int]) -> None:
-        self.__red__ = self.__byte_range__(rgb[0])
-        self.__green__ = self.__byte_range__(rgb[1])
-        self.__blue__ = self.__byte_range__(rgb[2])
-        self.__alpha__ = 255
+        self._red = self._byte_range(rgb[0])
+        self._green = self._byte_range(rgb[1])
+        self._blue = self._byte_range(rgb[2])
+        self._alpha = 255
 
     @dispatch(tuple)
     def __init__(self, rgba: tuple[int, int, int, int]) -> None:
-        self.__red__ = self.__byte_range__(rgba[0])
-        self.__green__ = self.__byte_range__(rgba[1])
-        self.__blue__ = self.__byte_range__(rgba[2])
-        self.__alpha__ = self.__byte_range__(rgba[3])
+        self._red = self._byte_range(rgba[0])
+        self._green = self._byte_range(rgba[1])
+        self._blue = self._byte_range(rgba[2])
+        self._alpha = self._byte_range(rgba[3])
 
     @dispatch(QColor)
     def __init__(self, color: QColor) -> None:
-        self.__red__ = color.red()
-        self.__green__ = color.green()
-        self.__blue__ = color.blue()
-        self.__alpha__ = color.alpha()
+        self._red = color.red()
+        self._green = color.green()
+        self._blue = color.blue()
+        self._alpha = color.alpha()
 
     @dispatch(str)
     def __init__(self, color: str) -> None:
         color = color.replace('#', '')
-        self.__red__ = int(color[0:2], 16)
-        self.__green__ = int(color[2:4], 16)
-        self.__blue__ = int(color[4:6], 16)
-        self.__alpha__ = int(color[6:8], 16) if len(color) == 8 else 255
+        self._red = int(color[0:2], 16)
+        self._green = int(color[2:4], 16)
+        self._blue = int(color[4:6], 16)
+        self._alpha = int(color[6:8], 16) if len(color) == 8 else 255
 
-    def __byte_range__(self, value: int) -> int:
+    def _byte_range(self, value: int) -> int:
         return int(max(0, min(value, 255)))
 
 
@@ -110,10 +110,10 @@ class QUtilsColor:
     def from_ahex(color: str) -> 'QUtilsColor':
         c = QUtilsColor()
         color.replace('#', '')
-        c.__alpha__ = int(color[0:2], 16)
-        c.__red__ = int(color[2:4], 16)
-        c.__green__ = int(color[4:6], 16)
-        c.__blue__ = int(color[6:8], 16)
+        c._alpha = int(color[0:2], 16)
+        c._red = int(color[2:4], 16)
+        c._green = int(color[4:6], 16)
+        c._blue = int(color[6:8], 16)
 
 
     @dispatch((int, float), (int, float), (int, float))
@@ -241,35 +241,35 @@ class QUtilsColor:
 
     @property
     def red(self) -> int:
-        return self.__red__
+        return self._red
 
     @red.setter
     def red(self, red: int) -> None:
-        self.__red__ = self.__byte_range__(red)
+        self._red = self._byte_range(red)
 
     @property
     def green(self) -> int:
-        return self.__green__
+        return self._green
 
     @green.setter
     def green(self, green: int) -> None:
-        self.__green__ = self.__byte_range__(green)
+        self._green = self._byte_range(green)
 
     @property
     def blue(self) -> int:
-        return self.__blue__
+        return self._blue
 
     @blue.setter
     def blue(self, blue: int) -> None:
-        self.__blue__ = self.__byte_range__(blue)
+        self._blue = self._byte_range(blue)
 
     @property
     def alpha(self) -> int:
-        return self.__alpha__
+        return self._alpha
 
     @alpha.setter
     def alpha(self, alpha: int) -> None:
-        self.__alpha__ = self.__byte_range__(alpha)
+        self._alpha = self._byte_range(alpha)
 
 
     @property

@@ -1,0 +1,23 @@
+
+/* QMoreButton */
+
+QWidget[QMoreButton=true] {
+	height: 24px;
+}
+
+QWidget[QMoreButton=true] QPushButton[mainButton=true] {
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+QWidget[QMoreButton=true] QPushButton[moreButton=true] {
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+	padding: 4px 2px;
+	qproperty-icon: url({path}morebutton/downArrow.png);
+	qproperty-iconSize: 24px;
+}
+
+QWidget[QMoreButton=true] QPushButton[moreButton=true][disabled=true] {
+	qproperty-icon: url({path}morebutton/downArrowDisabled.png);
+}

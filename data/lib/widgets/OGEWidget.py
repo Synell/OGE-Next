@@ -13,7 +13,8 @@ class OGEWidget(QGridFrame):
     def __init__(self) -> None:
         super().__init__()
 
-    def perc2color(self, perc: float) -> str:
+    @staticmethod
+    def perc2color(perc: float) -> str:
         r, g, b = 0, 0, 0
         if perc < 0.5:
             r = 255

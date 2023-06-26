@@ -7,8 +7,8 @@ from PySide6.QtCore import Qt, QItemSelectionModel, QModelIndex, QSize
 #----------------------------------------------------------------------
 
     # Class
-class __verification__:
-    def goodHeaders(headers = None):
+class _verification:
+    def good_headers(headers = None):
         if type(headers) is not list: return False
         if len(headers) < 1: return False
         for i in headers:
@@ -19,7 +19,7 @@ class __verification__:
 
 class QBetterListWidget(QTreeView):
     def __new__(cls, headers = ['column'], minimum_section_size: int = 50, alignment_flag = Qt.AlignmentFlag.AlignCenter) -> 'QBetterListWidget':
-        if not __verification__.goodHeaders(headers):
+        if not _verification.good_headers(headers):
             print('Headers must be a list of strings!')
             return
         return super().__new__(cls, headers, minimum_section_size, alignment_flag)
@@ -41,12 +41,12 @@ class QBetterListWidget(QTreeView):
         self.setIconSize(QSize(16, 16))
 
     def set_headers(self, headers = ['column']) -> None:
-        if not __verification__.goodHeaders(headers): return
+        if not _verification.good_headers(headers): return
         self._headers = headers
         self.tree_view_model.setHorizontalHeaderLabels(self._headers)
 
     def add_header(self, header = 'column') -> None:
-        if not __verification__.goodHeaders([header]): return
+        if not _verification.good_headers([header]): return
         self._headers.append(header)
 
     def set_header_alignment(self, alignment_flag: Qt.AlignmentFlag = Qt.AlignmentFlag.AlignLeft) -> None:
@@ -81,7 +81,7 @@ class QBetterListWidget(QTreeView):
         return len(self.get_items())
 
     def add_item(self, items: list[str], icon = None, alignmentFlag: Qt.AlignmentFlag = Qt.AlignmentFlag.AlignLeft) -> None:
-        if not __verification__.goodHeaders(items):
+        if not _verification.good_headers(items):
             print('Items must be strings!')
             return
 

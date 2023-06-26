@@ -1,7 +1,7 @@
 
 /* QDropDownWidget */
 
-QPushButton[QDropDownWidget=true] {
+/* QPushButton[QDropDownWidget=true] {
 	background-color: transparent;
 	color: #fefefe;
 	border: none;
@@ -29,4 +29,4 @@ QPushButton[QDropDownWidget=true]:checked:hover {
 
 QPushButton[QDropDownWidget=true]:pressed {
 	color: #fefefe;
-}
+} */

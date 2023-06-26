@@ -26,7 +26,7 @@ class GradeWidget(OGEWidget):
             self.grid_layout.addWidget(iw, 0, self.grid_layout.count(), Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
 
         label = QLabel(f'{grade.value}/{grade.total}')
-        label.setStyleSheet(f'color: {self.perc2color(grade.value / grade.total)}')
+        label.setStyleSheet(f'color: {GradeWidget.perc2color(grade.value / grade.total)}')
         label.setProperty('class', 'grade')
         self.grid_layout.addWidget(label, 0, self.grid_layout.count())
 
