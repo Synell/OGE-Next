@@ -32,15 +32,15 @@ class SaveData(QSaveData):
         super().__init__(save_path)
 
 
-    def settings_menu_extra(self):
+    def _settings_menu_extra(self):
         return {
-            self.language_data['QSettingsDialog']['QSidePanel']['updates']['title']: (self.settings_menu_updates(), f'{self.get_icon_dir()}/sidepanel/updates.png'),
+            self.get_lang_data('QSettingsDialog.QSidePanel.updates.title'): (self.settings_menu_updates(), f'{self.get_icon_dir()}/sidepanel/updates.png'),
         }, self.get_extra
 
 
 
     def settings_menu_updates(self):
-        lang = self.language_data['QSettingsDialog']['QSidePanel']['updates']
+        lang = self.get_lang_data('QSettingsDialog.QSidePanel.updates')
         widget = QScrollableGridWidget()
         widget.scroll_layout.setSpacing(0)
         widget.scroll_layout.setContentsMargins(0, 0, 0, 0)
@@ -53,16 +53,16 @@ class SaveData(QSaveData):
         widget.scroll_layout.setAlignment(root_frame, Qt.AlignmentFlag.AlignTop)
 
 
-        label = QSettingsDialog.textGroup(lang['QLabel']['checkForUpdates']['title'], lang['QLabel']['checkForUpdates']['description'])
+        label = QSettingsDialog._text_group(lang.get_data('QLabel.checkForUpdates.title'), lang.get_data('QLabel.checkForUpdates.description'))
         root_frame.grid_layout.addWidget(label, 0, 0)
 
-        widget.check_for_updates_combobox = QNamedComboBox(None, lang['QNamedComboBox']['checkForUpdates']['title'])
+        widget.check_for_updates_combobox = QNamedComboBox(None, lang.get_data('QNamedComboBox.checkForUpdates.title'))
         widget.check_for_updates_combobox.combo_box.addItems([
-            lang['QNamedComboBox']['checkForUpdates']['values']['never'],
-            lang['QNamedComboBox']['checkForUpdates']['values']['daily'],
-            lang['QNamedComboBox']['checkForUpdates']['values']['weekly'],
-            lang['QNamedComboBox']['checkForUpdates']['values']['monthly'],
-            lang['QNamedComboBox']['checkForUpdates']['values']['atLaunch']
+            lang.get_data('QNamedComboBox.checkForUpdates.values.never'),
+            lang.get_data('QNamedComboBox.checkForUpdates.values.daily'),
+            lang.get_data('QNamedComboBox.checkForUpdates.values.weekly'),
+            lang.get_data('QNamedComboBox.checkForUpdates.values.monthly'),
+            lang.get_data('QNamedComboBox.checkForUpdates.values.atLaunch')
         ])
         widget.check_for_updates_combobox.combo_box.setCurrentIndex(self.check_for_updates)
         root_frame.grid_layout.addWidget(widget.check_for_updates_combobox, 1, 0)
@@ -90,7 +90,7 @@ class SaveData(QSaveData):
         return list(dict.fromkeys(l))
 
 
-    def save_extra_data(self) -> dict:
+    def _save_extra_data(self) -> dict:
         # encrypt password so it's not stored in plain text
         key = Fernet.generate_key()
         fernet = Fernet(key)
@@ -104,7 +104,7 @@ class SaveData(QSaveData):
             'remember': self.remember
         }
 
-    def load_extra_data(self, extra_data: dict = ..., reload: list = []) -> bool:
+    def _load_extra_data(self, extra_data: dict = ..., reload: list = []) -> bool:
         exc = suppress(Exception)
         res = False
 
@@ -117,7 +117,7 @@ class SaveData(QSaveData):
         return res
 
     def export_extra_data(self) -> dict:
-        dct = self.save_extra_data()
+        dct = self._save_extra_data()
 
         del dct['username']
         del dct['key']

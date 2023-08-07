@@ -72,6 +72,10 @@ class QSlidingStackedWidget(QStackedWidget):
     def active(self) -> bool:
         return self._active
 
+    @property
+    def current_index(self) -> int:
+        return self._next_index[0] if (self._next_index is not None) else self._next
+
     def slide_loop_next(self, direction: Direction = Direction.Automatic) -> None:
         result = self.slide_in_next()
         if (not result): self.slide_in_index(0, direction)
@@ -202,7 +206,7 @@ class QSlidingStackedWidget(QStackedWidget):
         self._anim_group.start(QAbstractAnimation.DeletionPolicy.DeleteWhenStopped)
 
     def _animation_done_slot(self) -> None:
-        self.setCurrentIndex(self._next)
+        super().setCurrentIndex(self._next)
         self.widget(self._now).hide()
         self.widget(self._now).move(self._p_now)
         self._active = False
@@ -211,4 +215,10 @@ class QSlidingStackedWidget(QStackedWidget):
         if self._next_index is not None:
             self.slide_in_index(self._next_index[0], self._next_index[1])
             self._next_index = None
+
+    def setCurrentIndex(self, index: int) -> None:
+        self._next = index
+        self._next_index = None
+        self._animation_done_slot()
+        self._now = index
 #----------------------------------------------------------------------

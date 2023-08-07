@@ -183,6 +183,10 @@ class QSidePanel(QScrollableGridFrame):
         self._items.remove(item)
         self.update()
 
+    def remove_item_at(self, index: int) -> None:
+        self._items.pop(index)
+        self.update()
+
     def remove_items(self, items: Iterator[QSidePanelItem]) -> None:
         for item in items: self.remove_item(item)
 
@@ -193,6 +197,10 @@ class QSidePanel(QScrollableGridFrame):
 
     def clear(self) -> None:
         self._items = []
+        self.update()
+
+    def set_item_callback(self, index: int, callback: Callable) -> None:
+        self._items[index].connect = callback
         self.update()
 
     @property

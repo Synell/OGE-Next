@@ -12,7 +12,7 @@ from .QGridWidget import QGridWidget
 class QSidePanelWidget(QWidget):
     current_index_changed = Signal(int)
 
-    def __init__(self, parent = None, width: int = 120, direction: QSlidingStackedWidget.Direction = QSlidingStackedWidget.Direction.Bottom2Top) -> None:
+    def __init__(self, parent = None, width: int = 120, direction: QSlidingStackedWidget.Direction = QSlidingStackedWidget.Direction.Bottom2Top, content_margins: tuple = (16, 16, 16, 16)) -> None:
         super().__init__(parent)
         self._layout = QGridLayout(self)
         self._direction = direction
@@ -22,7 +22,7 @@ class QSidePanelWidget(QWidget):
 
         w = QGridWidget()
         w.grid_layout.setSpacing(0)
-        w.grid_layout.setContentsMargins(16, 16, 16, 16)
+        w.grid_layout.setContentsMargins(*content_margins)
 
         self._widget = QSlidingStackedWidget()
         self._widget.set_orientation(Qt.Orientation.Vertical)
@@ -38,6 +38,19 @@ class QSidePanelWidget(QWidget):
         self._widget.addWidget(widget)
         i = self._widget.count() - 1
         self.sidepanel.add_item(QSidePanelItem(title, icon, lambda: self.set_current_index(i)))
+
+    def remove_widget(self, index: int) -> None:
+        self._widget.removeWidget(self._widget.widget(index))
+        self.sidepanel.remove_item_at(index)
+
+        for index, item in enumerate(self.sidepanel.items):
+            if type(item) is QSidePanelItem:
+                item.connect = lambda: self.set_current_index(index)
+
+        self.sidepanel.update()
+
+        if self._widget.current_index == index and self._widget.count() > 0:
+            self.set_current_index(0)
 
     def current_index(self) -> int:
         return self._widget.currentIndex()

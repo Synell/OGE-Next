@@ -52,7 +52,7 @@ class Application(QBaseApplication):
 
         SemesterWidget._ICON = f'{self.save_data.get_icon_dir()}/sidepanel/semester_%s.png'
         OGEWorker._CACHE_FILE = './data/oge_cache/%s.json'
-        OGEWidget._OGE_WEIRD_TOOLTIP = self.save_data.language_data['QMainWindow']['mainPage']['QSidePanel']['dataPanel']['QToolTip']['ogeWeird']
+        OGEWidget._OGE_WEIRD_TOOLTIP = self.get_lang_data('QMainWindow.mainPage.QSidePanel.dataPanel.QToolTip.ogeWeird')
         OGEWidget._OGE_WEIRD_ICON = QIcon(f'{self.save_data.get_icon_dir()}/oge/about.png').pixmap(16, 16)
 
         oge_new_icon = QIcon(f'{self.save_data.get_icon_dir()}/oge/new.png')
@@ -92,7 +92,7 @@ class Application(QBaseApplication):
 
 
     def update_title(self) -> None:
-        self.window.setWindowTitle(self.save_data.language_data['QMainWindow']['title'] + f' | Version: {self.VERSION} | Build: {self.BUILD}')
+        self.window.setWindowTitle(self.get_lang_data('QMainWindow.title') + f' | Version: {self.VERSION} | Build: {self.BUILD}')
 
     def load_colors(self) -> None:
         qss = super().load_colors()
@@ -108,16 +108,16 @@ class Application(QBaseApplication):
 
 
     def not_implemented(self, text = '') -> None:
-        if text:
-            w = QDropDownWidget(text = lang['details'], widget = QLabel(text))
-        else: w = None
+        lang = self.get_lang_data('QMessageBox.critical.notImplemented')
 
-        lang = self.save_data.language_data['QMessageBox']['critical']['notImplemented']
+        if text:
+            w = QDropDownWidget(text = lang.get_data('details'), widget = QLabel(text))
+        else: w = None
 
         QMessageBoxWithWidget(
             app = self,
-            title = lang['title'],
-            text = lang['text'],
+            title = lang.get_data('title'),
+            text = lang.get_data('text'),
             icon = QMessageBoxWithWidget.Icon.Critical,
             widget = w
         ).exec()
@@ -190,7 +190,7 @@ class Application(QBaseApplication):
         update_widget.grid_layout.setSpacing(0)
         self.status_bar.addPermanentWidget(update_widget, 10)
 
-        self.update_button = QPushButton(self.save_data.language_data['QStatusBar']['QPushButton']['update'])
+        self.update_button = QPushButton(self.get_lang_data('QStatusBar.QPushButton.update'))
         self.update_button.setCursor(Qt.CursorShape.PointingHandCursor)
         self.update_button.clicked.connect(self.update_click)
         self.update_button.setProperty('color', 'main')
@@ -252,7 +252,7 @@ class Application(QBaseApplication):
         self.main_page.left.grid_layout.addWidget(self.main_page.side_panel, 1, 0)
 
     def create_empty_panel(self) -> None:
-        lang = self.save_data.language_data['QMainWindow']['mainPage']['QSidePanel']['emptyPanel']
+        lang = self.get_lang_data('QMainWindow.mainPage.QSidePanel.emptyPanel')
 
         self.main_page.empty_panel = QGridWidget()
 
@@ -262,11 +262,11 @@ class Application(QBaseApplication):
         self.main_page.empty_panel.grid_layout.addWidget(grid, 0, 0)
         self.main_page.empty_panel.grid_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.main_page.empty_panel.auth = QLoginWidget(None, lang['QLoginWidget'], self.save_data.username, self.save_data.password, True, self.save_data.remember)
+        self.main_page.empty_panel.auth = QLoginWidget(None, lang.get_data('QLoginWidget'), self.save_data.username, self.save_data.password, True, self.save_data.remember)
         self.main_page.empty_panel.auth.enter_key_pressed.connect(self.login)
         grid.grid_layout.addWidget(self.main_page.empty_panel.auth, 0, 0)
 
-        self.main_page.empty_panel.login_button = QPushButton(lang['QPushButton']['login'])
+        self.main_page.empty_panel.login_button = QPushButton(lang.get_data('QPushButton.login'))
         self.main_page.empty_panel.login_button.setProperty('color', 'main')
         self.main_page.empty_panel.login_button.setProperty('transparent', True)
         self.main_page.empty_panel.login_button.setCursor(Qt.CursorShape.PointingHandCursor)
@@ -281,11 +281,11 @@ class Application(QBaseApplication):
 
     def login(self) -> None:
         if not self.main_page.empty_panel.auth.username:
-            self.show_alert(self.save_data.language_data['QMainWindow']['showMessage']['emptyUsername'])
+            self.show_alert(self.get_lang_data('QMainWindow.showMessage.emptyUsername'))
             return
 
         if not self.main_page.empty_panel.auth.password:
-            self.show_alert(self.save_data.language_data['QMainWindow']['showMessage']['emptyPassword'])
+            self.show_alert(self.get_lang_data('QMainWindow.showMessage.emptyPassword'))
             return
 
         self.main_page.empty_panel.auth.set_disabled(True)
@@ -299,11 +299,11 @@ class Application(QBaseApplication):
 
         # self.status_bar.progress.setValue(10)
         # self.status_bar.progress.setVisible(True)
-        self.show_alert(self.save_data.language_data['QMainWindow']['showMessage']['ogeLoading'], pause_duration = 4300)
+        self.show_alert(self.get_lang_data('QMainWindow.showMessage.ogeLoading'), pause_duration = 4300)
 
     def login_success(self, semester: Semester) -> None:
         self.oge_worker.exit()
-        self.change_status_message(InfoType.Info, self.save_data.language_data['QMainWindow']['showMessage']['createPanels'])
+        self.change_status_message(InfoType.Info, self.get_lang_data('QMainWindow.showMessage.createPanels'))
 
         # self.status_bar.progress.setValue(70)
 
@@ -329,12 +329,12 @@ class Application(QBaseApplication):
 
             for i in range(c):
                 item = QSidePanelItem(
-                    self.save_data.language_data['QMainWindow']['QSideBar']['semester'].replace('%s', str(i + 1)),
+                    self.get_lang_data('QMainWindow.QSideBar.semester').replace('%s', str(i + 1)),
                     f'{self.save_data.get_icon_dir()}/sidepanel/semester_unknown.png',
                     send_param(i)
                 )
 
-                widget = SemesterWidget(self.save_data.language_data['QMainWindow']['mainPage']['QSidePanel']['dataPanel'], i + 1, item)
+                widget = SemesterWidget(self.get_lang_data('QMainWindow.mainPage.QSidePanel.dataPanel'), i + 1, item)
                 widget.refreshed.connect(lambda j: self.change_semester(j, True))
                 self.main_page.right.semesters.addWidget(widget)
                 self.data_panels.append(widget)
@@ -351,7 +351,7 @@ class Application(QBaseApplication):
 
         self.main_page.right.semesters.slide_in_index(semester.id - 1, QSlidingStackedWidget.Direction.Bottom2Top)
 
-        self.change_status_message(InfoType.Success, self.save_data.language_data['QMainWindow']['showMessage']['loginSuccess'])
+        self.change_status_message(InfoType.Success, self.get_lang_data('QMainWindow.showMessage.loginSuccess'))
 
         semesters_to_load = [i + 1 for i, s in enumerate(self.data_panels) if (not s.loaded) and (i + 1 in self.oge_worker.loaded_semesters)]
 
@@ -368,7 +368,7 @@ class Application(QBaseApplication):
         self.main_page.empty_panel.auth.set_disabled(False)
         self.main_page.empty_panel.login_button.setDisabled(False)
         self.show_alert(str(error))
-        self.change_status_message(InfoType.Error, self.save_data.language_data['QMainWindow']['showMessage']['loginFailed'])
+        self.change_status_message(InfoType.Error, self.get_lang_data('QMainWindow.showMessage.loginFailed'))
         self.set_panel_disabled(False)
 
         # self.status_bar.progress.setVisible(False)
@@ -424,21 +424,21 @@ class Application(QBaseApplication):
         self.about_menu = QMenu(self.window)
         self.about_menu.setCursor(Qt.CursorShape.PointingHandCursor)
 
-        act = self.about_menu.addAction(self.save_data.get_icon('menubar/qt.png', mode = QSaveData.IconMode.Global), self.save_data.language_data['QMenu']['about']['PySide'])
+        act = self.about_menu.addAction(self.save_data.get_icon('menubar/qt.png', mode = QSaveData.IconMode.Global), self.get_lang_data('QMenu.about.PySide'))
         act.triggered.connect(self.aboutQt)
 
-        act = self.about_menu.addAction(QIcon('./data/icons/OGENext.svg'), self.save_data.language_data['QMenu']['about']['OGENext'])
+        act = self.about_menu.addAction(QIcon('./data/icons/OGENext.svg'), self.get_lang_data('QMenu.about.OGENext'))
         act.triggered.connect(self.about_clicked)
 
         self.about_menu.addSeparator()
 
-        act = self.about_menu.addAction(self.save_data.get_icon('menubar/bug.png', mode = QSaveData.IconMode.Local), self.save_data.language_data['QMenu']['reportBug'])
+        act = self.about_menu.addAction(self.save_data.get_icon('menubar/bug.png', mode = QSaveData.IconMode.Local), self.get_lang_data('QMenu.reportBug'))
         act.triggered.connect(lambda: QDesktopServices.openUrl(QUrl('https://github.com/Synell/OGE-Next/issues')))
 
         self.about_menu.addSeparator()
 
         def create_donate_menu():
-            donate_menu = QMenu(self.save_data.language_data['QMenu']['donate']['title'], self.window)
+            donate_menu = QMenu(self.get_lang_data('QMenu.donate.title'), self.window)
             donate_menu.setIcon(self.save_data.get_icon('menubar/donate.png'))
 
             buymeacoffee_action = QAction(self.save_data.get_icon('menubar/buyMeACoffee.png'), 'Buy Me a Coffee', self.window)
@@ -458,20 +458,17 @@ class Application(QBaseApplication):
         self.about_menu.popup(QCursor.pos())
 
     def about_clicked(self) -> None:
-        lang = self.save_data.language_data['QAbout']['OGENext']
-        supports = '\n'.join(f'&nbsp;&nbsp;&nbsp;• <a href=\"{link}\" style=\"color: {self.COLOR_LINK.hex}; text-decoration: none;\">{name}</a>' for name, link in [
-            ('GitHub', 'https://github.com')
-        ])
+        lang = self.get_lang_data('QAbout.OGENext')
         QAboutBox(
             app = self,
-            title = lang['title'],
+            title = lang.get_data('title'),
             logo = './data/icons/OGENext.svg',
             texts = [
-                lang['texts'][0],
-                lang['texts'][1].replace('%s', f'<a href=\"https://github.com/Synell\" style=\"color: {self.COLOR_LINK.hex}; text-decoration: none;\">Synel</a>'),
-                lang['texts'][2].replace('%s', f'<a href=\"https://github.com/Zenitude71\" style=\"color: {self.COLOR_LINK.hex}; text-decoration: none;\">Zenitude</a>', 1).replace('%s', f'<a href=\"https://github.com/Synell\" style=\"color: {self.COLOR_LINK.hex}; text-decoration: none;\">Synel</a>', 1),
-                lang['texts'][3].replace('%s', f'<a href=\"https://github.com/Nikolasitude\" style=\"color: {self.COLOR_LINK.hex}; text-decoration: none;\">Nikolasitude</a>'),
-                lang['texts'][4].replace('%s', f'<a href=\"https://github.com/Synell/OGE-Next\" style=\"color: {self.COLOR_LINK.hex}; text-decoration: none;\">OGE Next Github</a>')
+                lang.get_data('texts')[0],
+                lang.get_data('texts')[1].replace('%s', f'<a href=\"https://github.com/Synell\" style=\"color: {self.COLOR_LINK.hex}; text-decoration: none;\">Synel</a>'),
+                lang.get_data('texts')[2].replace('%s', f'<a href=\"https://github.com/Zenitude71\" style=\"color: {self.COLOR_LINK.hex}; text-decoration: none;\">Zenitude</a>', 1).replace('%s', f'<a href=\"https://github.com/Synell\" style=\"color: {self.COLOR_LINK.hex}; text-decoration: none;\">Synel</a>', 1),
+                lang.get_data('texts')[3].replace('%s', f'<a href=\"https://github.com/Nikolasitude\" style=\"color: {self.COLOR_LINK.hex}; text-decoration: none;\">Nikolasitude</a>'),
+                lang.get_data('texts')[4].replace('%s', f'<a href=\"https://github.com/Synell/OGE-Next\" style=\"color: {self.COLOR_LINK.hex}; text-decoration: none;\">OGE Next Github</a>')
             ]
         ).exec()
 

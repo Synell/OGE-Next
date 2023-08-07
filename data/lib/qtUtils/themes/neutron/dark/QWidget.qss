@@ -8,7 +8,7 @@ QWidget, QFrame {
 	border-color: #4f5b62;
 }
 
-QWidget[light=true], QFrame[light=true] {
+QWidget[light=true], QFrame[light=true], QFrame[light=true] QFrame, QWidget[light=true] QFrame {
 	background-color: #262626;
 }
 

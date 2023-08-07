@@ -1,9 +1,10 @@
 #----------------------------------------------------------------------
 
     # Libraries
-from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QApplication, QStyleOption, QStyle, QLabel
-from PySide6.QtGui import QMouseEvent, QDropEvent, QDragEnterEvent, QPaintEvent, QPainter
+from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QStyleOption, QStyle
+from PySide6.QtGui import QMouseEvent, QPaintEvent, QPainter
 from PySide6.QtCore import Qt, Signal
+from typing import Generator
 
 from .QGridFrame import QGridFrame
 #----------------------------------------------------------------------
@@ -13,13 +14,13 @@ class QDragListItem(QGridFrame):
     normal_cursor = Qt.CursorShape.ArrowCursor
     drag_cursor = Qt.CursorShape.ClosedHandCursor
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self.setCursor(self.normal_cursor)
 
     def mouseMoveEvent(self, event: QMouseEvent) -> None:
         if (not (event.buttons() == Qt.MouseButton.LeftButton)): return
-        if (self.isMinimumDistanceRiched(event)): return
+        if (self._is_minimum_distance_riched(event)): return
         if (self.cursor() != self.drag_cursor): self.setCursor(self.drag_cursor)
         self.raise_()
 
@@ -44,11 +45,11 @@ class QDragListItem(QGridFrame):
         self.mouse_click_x = event.globalPosition().x()
         self.mouse_click_y = event.globalPosition().y()
 
-    def isMinimumDistanceRiched(self, event: QMouseEvent) -> bool:
+    def _is_minimum_distance_riched(self, event: QMouseEvent) -> bool:
         return False
         # return (event.position() - self.dragStartPosition).manhattanLength() < QApplication.startDragDistance()
 
-    def moveInLayout(self, widget: QWidget, direction: str) -> bool:
+    def _move_in_layout(self, widget: QWidget, direction: str) -> bool:
         layout = widget.parentWidget().layout()
 
         index = layout.indexOf(widget)
@@ -56,7 +57,7 @@ class QDragListItem(QGridFrame):
         if (direction == 'MoveDown' and index == layout.count() - 1): return False
         newIndex = index - 1 if direction == 'MoveUp' else index + 1
         layout.removeWidget(widget)
-        layout.insertWidget(newIndex , widget)
+        layout.insertWidget(newIndex, widget)
         self.parentWidget().moved.emit(index, newIndex)
         return True
 
@@ -93,7 +94,7 @@ class QDragListItem(QGridFrame):
                 direct = 'MoveDown'
             count = offset // self.width()
 
-        for _ in range(count): self.moveInLayout(self, direct)
+        for _ in range(count): self._move_in_layout(self, direct)
         self.update()
         layout = self.parentWidget().layout()
         layout.update()
@@ -125,13 +126,15 @@ class QDragList(QWidget):
 
     def set_orientation(self, orientation: Qt.Orientation) -> None:
         self._orientation = orientation
-        children = self.findChildren(QDragListItem)
+        children = list(self.items)
+
+        for child in children: self.remove_item(child)
 
         if self._orientation == Qt.Orientation.Vertical: self._layout = QVBoxLayout()
         else: self._layout = QHBoxLayout()
         self.setLayout(self._layout)
 
-        for child in children: self._layout.addWidget(child)
+        for child in children: self.add_item(child)
 
     def add_item(self, item: QDragListItem):
         self._layout.addWidget(item)
@@ -141,9 +144,14 @@ class QDragList(QWidget):
         item.setParent(None)
 
     def clear(self):
-        for child in self.findChildren(QDragListItem): self.remove_item(child)
+        for child in list(self.items): self.remove_item(child)
 
     @property
-    def items(self) -> list:
-        return self.findChildren(QDragListItem)
+    def items(self) -> Generator[QDragListItem, None, None]:
+        for i in range(self._layout.count()):
+            if (not self._layout.itemAt(i)): continue
+
+            w = self._layout.itemAt(i).widget()
+            if (isinstance(w, QDragListItem)):
+                yield w
 #----------------------------------------------------------------------

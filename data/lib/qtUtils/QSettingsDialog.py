@@ -134,7 +134,7 @@ class QSettingsDialog(QDialog):
         widget.scroll_layout.addWidget(root_frame, 0, 0)
         widget.scroll_layout.setAlignment(root_frame, Qt.AlignmentFlag.AlignTop)
 
-        label = QSettingsDialog.textGroup(lang_data['QLabel']['language']['title'], lang_data['QLabel']['language']['description'])
+        label = QSettingsDialog._text_group(lang_data['QLabel']['language']['title'], lang_data['QLabel']['language']['description'])
         root_frame.grid_layout.addWidget(label, root_frame.grid_layout.count(), 0)
 
         self.lang_dropdown = QNamedComboBox(None, lang_data['QNamedComboBox']['language'])
@@ -154,7 +154,7 @@ class QSettingsDialog(QDialog):
         root_frame.grid_layout.addWidget(frame, root_frame.grid_layout.count(), 0)
 
 
-        label = QSettingsDialog.textGroup(lang_data['QLabel']['theme']['title'], lang_data['QLabel']['theme']['description'])
+        label = QSettingsDialog._text_group(lang_data['QLabel']['theme']['title'], lang_data['QLabel']['theme']['description'])
         root_frame.grid_layout.addWidget(label, root_frame.grid_layout.count(), 0)
 
         self.themes_dropdown = QNamedComboBox(None, lang_data['QNamedComboBox']['theme'])
@@ -187,7 +187,7 @@ class QSettingsDialog(QDialog):
         widget.scroll_layout.addWidget(root_frame, 0, 0)
         widget.scroll_layout.setAlignment(root_frame, Qt.AlignmentFlag.AlignTop)
 
-        label = QSettingsDialog.textGroup(lang_data['QLabel']['clearData']['title'], lang_data['QLabel']['clearData']['description'])
+        label = QSettingsDialog._text_group(lang_data['QLabel']['clearData']['title'], lang_data['QLabel']['clearData']['description'])
         root_frame.grid_layout.addWidget(label, root_frame.grid_layout.count(), 0)
 
         button = QPushButton(lang_data['QPushButton']['clearData'])
@@ -203,7 +203,7 @@ class QSettingsDialog(QDialog):
         root_frame.grid_layout.addWidget(frame, root_frame.grid_layout.count(), 0)
 
 
-        label = QSettingsDialog.textGroup(lang_data['QLabel']['importData']['title'], lang_data['QLabel']['importData']['description'])
+        label = QSettingsDialog._text_group(lang_data['QLabel']['importData']['title'], lang_data['QLabel']['importData']['description'])
         root_frame.grid_layout.addWidget(label, root_frame.grid_layout.count(), 0)
 
         button = QPushButton(lang_data['QPushButton']['importData'])
@@ -219,7 +219,7 @@ class QSettingsDialog(QDialog):
         root_frame.grid_layout.addWidget(frame, root_frame.grid_layout.count(), 0)
 
 
-        label = QSettingsDialog.textGroup(lang_data['QLabel']['exportData']['title'], lang_data['QLabel']['exportData']['description'])
+        label = QSettingsDialog._text_group(lang_data['QLabel']['exportData']['title'], lang_data['QLabel']['exportData']['description'])
         root_frame.grid_layout.addWidget(label, root_frame.grid_layout.count(), 0)
 
         button = QPushButton(lang_data['QPushButton']['exportData'])
@@ -232,7 +232,7 @@ class QSettingsDialog(QDialog):
         return widget
 
 
-    def textGroup(title: str = '', description: str = '') -> QGridWidget:
+    def _text_group(title: str = '', description: str = '') -> QGridWidget:
         widget = QGridWidget()
         widget.grid_layout.setSpacing(0)
         widget.grid_layout.setContentsMargins(0, 0, 0, 0)

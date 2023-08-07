@@ -6,7 +6,7 @@ from PySide6.QtWidgets import QGridLayout, QWidget, QDialog, QPushButton, QStyle
 from PySide6.QtGui import QIcon, QPixmap
 from PySide6.QtCore import Qt
 
-from .QBaseApplication import QBaseApplication
+from . import QBaseApplication
 from .QGridWidget import QGridWidget
 #----------------------------------------------------------------------
 
