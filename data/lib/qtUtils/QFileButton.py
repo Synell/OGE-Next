@@ -6,14 +6,27 @@ from PySide6.QtCore import Qt, QEvent, Signal
 from PySide6.QtGui import QIcon
 from .QGridWidget import QGridWidget
 from .QFiles import QFiles
+from . import QBaseApplication
+from .QssSelector import QssSelector
 #----------------------------------------------------------------------
 
     # Class
 class QFileButton(QGridWidget):
-    normal_color = '#FFFFFF'
-    hover_color = '#FFFFFF'
+    _normal_color = '#FFFFFF'
+    _hover_color = '#FFFFFF'
 
     path_changed = Signal(str)
+
+    @staticmethod
+    def init(app: QBaseApplication) -> None:
+        QFileButton._normal_color = app.qss.search(
+            QssSelector(widget = 'QWidget', attributes = {'QFileButton': True}),
+            QssSelector(widget = 'QLabel')
+        )['color']
+        QFileButton._hover_color = app.qss.search(
+            QssSelector(widget = 'QWidget', attributes = {'QFileButton': True}),
+            QssSelector(widget = 'QLabel', attributes = {'hover': True})
+        )['color']
 
     def __init__(self, parent = None, lang: dict = {}, default_path: str = './', icon: str = None, type: QFiles.Dialog = QFiles.Dialog.ExistingDirectory, filter: str = '', end_with: str = ''):
         super().__init__(parent)
@@ -44,11 +57,11 @@ class QFileButton(QGridWidget):
 
     def enterEvent(self, event: QEvent = None):
         self.label.setProperty('hover', True)
-        self.label.setStyleSheet(f'color: {self.hover_color}')
+        self.label.setStyleSheet(f'color: {self._hover_color}')
 
     def leaveEvent(self, event: QEvent = None):
         self.label.setProperty('hover', False)
-        self.label.setStyleSheet(f'color: {self.normal_color}')
+        self.label.setStyleSheet(f'color: {self._normal_color}')
 
     def button_clicked(self):
         path = None

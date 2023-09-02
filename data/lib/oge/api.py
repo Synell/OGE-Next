@@ -180,7 +180,8 @@ class OGE(QObject):
 
     def _parse_title_coeff(self, div: Tag) -> tuple[str, float]:
         title = list(div.children)[0].text.strip().replace('\n', '')
-        coeff = float(div.find('span').text.strip().replace('\n', '').replace('(', '').replace(')', ''))
+        coeff_s = div.find('span').text.strip().replace('\n', '').replace('(', '').replace(')', '')
+        coeff = float(coeff_s) if coeff_s else 0.0
         return title, coeff
 
     def _parse_html(self, code: BS) -> list[UE]:

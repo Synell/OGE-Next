@@ -22,6 +22,8 @@ class QSlidingStackedWidget(QStackedWidget):
     def __init__(self, parent = None) -> None:
         super().__init__(parent)
 
+        self.setProperty('transparent', True)
+
         self._orientation = Qt.Orientation.Horizontal
         self._speed = 300
         self._animation_type = QEasingCurve.Type.OutQuart

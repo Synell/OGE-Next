@@ -57,6 +57,9 @@ class GradeGroup:
     def set_as_new(self) -> None:
         for grade in self._grades: grade.is_new = True
 
+    def is_empty(self) -> bool:
+        return len(self._grades) == 0
+
     def __str__(self) -> str:
         return f'{self._title} ({self._coefficient})\n\t' + '\n'.join([f'\t{grade}' for grade in self._grades]).replace('\n', '\n\t')
 

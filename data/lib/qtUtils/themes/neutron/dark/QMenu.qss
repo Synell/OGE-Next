@@ -49,134 +49,26 @@ QMenu::icon {
 
 
 
-/* QMenu - Blue */
+/* QMenu - Main Color */
 
-QWidget[color='blue'] QMenu::item:selected {
-	background-color: #0D66D0;
+QWidget[color='{main-color-name}'] QMenu::item:selected {
+	background-color: #{main-color-hover};
 }
 
-QWidget[color='blue'] QMenu::item:pressed {
-	background-color: #1B80FC;
-}
-
-
-
-/* QMenu - Red */
-
-QWidget[color='red'] QMenu::item:selected {
-	background-color: #D0150D;
-}
-
-QWidget[color='red'] QMenu::item:pressed {
-	background-color: #FC271B;
+QWidget[color='{main-color-name}'] QMenu::item:pressed {
+	background-color: #{main-color-pressed};
 }
 
 
 
-/* QMenu - Green */
+/* QMenu - Neutral Color */
 
-QWidget[color='green'] QMenu::item:selected {
-	background-color: #00BC0C;
-}
-
-QWidget[color='green'] QMenu::item:pressed {
-	background-color: #07E813;
-}
-
-
-
-/* QMenu - Yellow */
-
-QWidget[color='yellow'] QMenu::item:selected {
-	background-color: #BC9900;
-}
-
-QWidget[color='yellow'] QMenu::item:pressed {
-	background-color: #E8BC07;
-}
-
-
-
-/* QMenu - Magenta */
-
-QWidget[color='magenta'] QMenu::item:selected {
-	background-color: #D00DC9;
-}
-
-QWidget[color='magenta'] QMenu::item:pressed {
-	background-color: #FC1BF1;
-}
-
-
-
-/* QMenu - Cyan */
-
-QWidget[color='cyan'] QMenu::item:selected {
-	background-color: #009CA8;
-}
-
-QWidget[color='cyan'] QMenu::item:pressed {
-	background-color: #00C8D4;
-}
-
-
-
-/* QMenu - Orange */
-
-QWidget[color='orange'] QMenu::item:selected {
-	background-color: #BC6A00;
-}
-
-QWidget[color='orange'] QMenu::item:pressed {
-	background-color: #E88307;
-}
-
-
-
-/* QMenu - Pink */
-
-QWidget[color='pink'] QMenu::item:selected {
-	background-color: #BC0052;
-}
-
-QWidget[color='pink'] QMenu::item:pressed {
-	background-color: #E8076C;
-}
-
-
-
-/* QMenu - Lime */
-
-QWidget[color='lime'] QMenu::item:selected {
-	background-color: #52BC00;
-}
-
-QWidget[color='lime'] QMenu::item:pressed {
-	background-color: #6CE807;
-}
-
-
-
-/* QMenu - Turquoise */
-
-QWidget[color='turquoise'] QMenu::item:selected {
-	background-color: #00BC99;
-}
-
-QWidget[color='turquoise'] QMenu::item:pressed {
-	background-color: #07E8BC;
-}
-
-
-
-/* QMenu - White */
-
-QWidget[color='white'] QMenu::item:selected {
-	background-color: #D7D7D7;
+QWidget[color='{neutral-color-name}'] QMenu::item:selected {
+	background-color: #{neutral-color-hover};
 	color: #000000;
 }
 
-QWidget[color='white'] QMenu::item:pressed {
-	background-color: #EFEFEF;
+QWidget[color='{neutral-color-name}'] QMenu::item:pressed {
+	background-color: #{neutral-color-pressed};
 	color: #000000;
 }

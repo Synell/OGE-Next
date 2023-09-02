@@ -1,0 +1,8 @@
+{
+    "emptyUsername": "Vous devez entrer un nom d'utilisateur.",
+    "emptyPassword": "Vous devez entrer un mot de passe.",
+    "loginFailed": "Échec de la connexion.",
+    "loginSuccess": "Connexion réussie.",
+    "createPanels": "Création des panneaux...",
+    "ogeLoading": "Chargement des données OGE... Notez que cela peut prendre un certain temps."
+}

@@ -125,88 +125,16 @@ QComboBox[dark=true] QListView::item:selected {
 
 
 
-/* QComboBox - Blue */
+/* QComboBox - Main Color */
 
-QWidget[color='blue'] QComboBox:focus {
-	border-bottom-color: #1B80FC;
+QWidget[color='{main-color-name}'] QComboBox:focus {
+	border-bottom-color: #{main-color-pressed};
 }
 
 
 
-/* QComboBox - Red */
+/* QComboBox - Neutral Color */
 
-QWidget[color='red'] QComboBox:focus {
-	border-bottom-color: #FC271B;
-}
-
-
-
-/* QComboBox - Green */
-
-QWidget[color='green'] QComboBox:focus {
-	border-bottom-color: #07E813;
-}
-
-
-
-/* QComboBox - Yellow */
-
-QWidget[color='yellow'] QComboBox:focus {
-	border-bottom-color: #E8BC07;
-}
-
-
-
-/* QComboBox - Magenta */
-
-QWidget[color='magenta'] QComboBox:focus {
-	border-bottom-color: #FC1BF1;
-}
-
-
-
-/* QComboBox - Cyan */
-
-QWidget[color='cyan'] QComboBox:focus {
-	border-bottom-color: #00C8D4;
-}
-
-
-
-/* QComboBox - Orange */
-
-QWidget[color='orange'] QComboBox:focus {
-	border-bottom-color: #E88307;
-}
-
-
-
-/* QComboBox - Pink */
-
-QWidget[color='pink'] QComboBox:focus {
-	border-bottom-color: #E8076C;
-}
-
-
-
-/* QComboBox - Lime */
-
-QWidget[color='lime'] QComboBox:focus {
-	border-bottom-color: #6CE807;
-}
-
-
-
-/* QComboBox - Turquoise */
-
-QWidget[color='turquoise'] QComboBox:focus {
-	border-bottom-color: #07E8BC;
-}
-
-
-
-/* QComboBox - White */
-
-QWidget[color='white'] QComboBox:focus {
-	border-bottom-color: #EFEFEF;
+QWidget[color='{neutral-color-name}'] QComboBox:focus {
+	border-bottom-color: #{neutral-color-pressed};
 }

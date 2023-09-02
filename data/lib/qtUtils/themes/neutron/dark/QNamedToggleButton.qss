@@ -6,6 +6,7 @@ QWidget[QNamedToggleButton=true] {
 }
 
 QWidget[QNamedToggleButton=true] QLabel {
+	background-color: transparent;
 	color: #909090;
 	border: none;
 	font-size: 12px;

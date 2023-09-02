@@ -33,7 +33,7 @@ class QSavableDockWidget(QDockWidget):
             'isFloating': self.is_floating,
             'tabified': [dw.objectName() for dw in self.tabified],
             'size': [self.size().width(), self.size().height()],
-            'visible': self.isVisible()
+            'visible': not self.isHidden()
             # 'orientation': self.orientation().value
         }
 

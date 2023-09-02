@@ -14,29 +14,31 @@ from data.lib.qtUtils import *
 from data.lib.widgets import SaveData
 from data.lib.widgets.updater import *
 from data.lib.widgets.updater import data as updater_data
+from data.lib.globalinfo import *
 #----------------------------------------------------------------------
 
     # Class
 class QUpdater(QBaseApplication):
-    BUILD = '07e77fd5'
-    VERSION = 'Experimental'
-
-    UPDATE_LINK = 'https://github.com/Synell/OGE-Next'
+    UPDATE_LINK = ''
 
     def __init__(self,  platform: QPlatform):
-        super().__init__(platform)
+        super().__init__(platform, app_type = QAppType.Updater)
 
         self.setOrganizationName('Synel')
-        # self.setApplicationDisplayName('OGE Next')
-        self.setApplicationName('OGE Next')
-        self.setApplicationVersion(self.VERSION)
+        # self.setApplicationDisplayName(Info.application_name)
+        self.setApplicationName(Info.application_name)
+        self.setApplicationVersion(Info.version)
 
-        self.save_data = SaveData(save_path = os.path.abspath('./data/save.dat').replace('\\', '/'))
+        self.save_data = self.save_data = SaveData(
+            app = self,
+            save_path = Info.save_path,
+            main_color_set = Info.main_color_set,
+            neutral_color_set = Info.neutral_color_set
+        )
 
         self.save_data.set_stylesheet(self)
-        self.window.setProperty('color', updater_data.color)
 
-        self.setWindowIcon(QIcon(updater_data.icon))
+        self.setWindowIcon(QIcon(Info.icon_path))
 
         self.window.setFixedSize(int(self.primaryScreen().size().width() * (7 / 30)), int(self.primaryScreen().size().height() * (16 / 27)))
 
@@ -49,7 +51,7 @@ class QUpdater(QBaseApplication):
 
 
     def update_title(self):
-        self.window.setWindowTitle(self.get_lang_data('QUpdater.title') + f' | Version: {self.VERSION} | Build: {self.BUILD}')
+        self.window.setWindowTitle(self.get_lang_data('QUpdater.title') + f' | Version: {Info.version} | Build: {Info.build}')
 
     def load_colors(self):
         qss = super().load_colors()

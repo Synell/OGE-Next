@@ -1,5 +1,5 @@
 
-/* QTabWidget */   /*TODO:*/
+/* QTabWidget */
 
 QTabWidget {
 	padding: 2px;
@@ -86,88 +86,16 @@ QTabBar QToolButton, QDockWidget QTabBar QToolButton {
 
 
 
-/* QTabWidget - Blue */
+/* QTabWidget - Main Color */
 
-QWidget[color='blue'] QTabBar[color='main']::tab:top:selected, QTabBar[color='blue']::tab:top:selected, QWidget[color='blue'] QDockWidget QTabBar[color='main']::tab:top:selected, QDockWidget QTabBar[color='blue']::tab:top:selected {
-	border-bottom-color: #1B80FC;
+QWidget[color='{main-color-name}'] QTabBar[color='main']::tab:top:selected, QTabBar[color='{main-color-name}']::tab:top:selected, QWidget[color='{main-color-name}'] QDockWidget QTabBar[color='main']::tab:top:selected, QDockWidget QTabBar[color='{main-color-name}']::tab:top:selected {
+	border-bottom-color: #{main-color-pressed};
 }
 
 
 
-/* QTabWidget - Red */
+/* QTabWidget - Neutral Color */
 
-QWidget[color='red'] QTabBar[color='main']::tab:top:selected, QTabBar[color='red']::tab:top:selected, QWidget[color='red'] QDockWidget QTabBar[color='main']::tab:top:selected, QDockWidget QTabBar[color='red']::tab:top:selected {
-	border-bottom-color: #FC271B;
-}
-
-
-
-/* QTabWidget - Green */
-
-QWidget[color='green'] QTabBar[color='main']::tab:top:selected, QTabBar[color='green']::tab:top:selected, QWidget[color='green'] QDockWidget QTabBar[color='main']::tab:top:selected, QDockWidget QTabBar[color='green']::tab:top:selected {
-	border-bottom-color: #07E813;
-}
-
-
-
-/* QTabWidget - Yellow */
-
-QWidget[color='yellow'] QTabBar[color='main']::tab:top:selected, QTabBar[color='yellow']::tab:top:selected, QWidget[color='yellow'] QDockWidget QTabBar[color='main']::tab:top:selected, QDockWidget QTabBar[color='yellow']::tab:top:selected {
-	border-bottom-color: #E8BC07;
-}
-
-
-
-/* QTabWidget - Magenta */
-
-QWidget[color='magenta'] QTabBar[color='main']::tab:top:selected, QTabBar[color='magenta']::tab:top:selected, QWidget[color='magenta'] QDockWidget QTabBar[color='main']::tab:top:selected, QDockWidget QTabBar[color='magenta']::tab:top:selected {
-	border-bottom-color: #FC1BF1;
-}
-
-
-
-/* QTabWidget - Cyan */
-
-QWidget[color='cyan'] QTabBar[color='main']::tab:top:selected, QTabBar[color='cyan']::tab:top:selected, QWidget[color='cyan'] QDockWidget QTabBar[color='main']::tab:top:selected, QDockWidget QTabBar[color='cyan']::tab:top:selected {
-	border-bottom-color: #00C8D4;
-}
-
-
-
-/* QTabWidget - Orange */
-
-QWidget[color='orange'] QTabBar[color='main']::tab:top:selected, QTabBar[color='orange']::tab:top:selected, QWidget[color='orange'] QDockWidget QTabBar[color='main']::tab:top:selected, QDockWidget QTabBar[color='orange']::tab:top:selected {
-	border-bottom-color: #E88307;
-}
-
-
-
-/* QTabWidget - Pink */
-
-QWidget[color='pink'] QTabBar[color='main']::tab:top:selected, QTabBar[color='pink']::tab:top:selected, QWidget[color='pink'] QDockWidget QTabBar[color='main']::tab:top:selected, QDockWidget QTabBar[color='pink']::tab:top:selected {
-	border-bottom-color: #E8076C;
-}
-
-
-
-/* QTabWidget - Lime */
-
-QWidget[color='lime'] QTabBar[color='main']::tab:top:selected, QTabBar[color='lime']::tab:top:selected, QWidget[color='lime'] QDockWidget QTabBar[color='main']::tab:top:selected, QDockWidget QTabBar[color='lime']::tab:top:selected {
-	border-bottom-color: #6CE807;
-}
-
-
-
-/* QTabWidget - Turquoise */
-
-QWidget[color='turquoise'] QTabBar[color='main']::tab:top:selected, QTabBar[color='turquoise']::tab:top:selected, QWidget[color='turquoise'] QDockWidget QTabBar[color='main']::tab:top:selected, QDockWidget QTabBar[color='turquoise']::tab:top:selected {
-	border-bottom-color: #07E8BC;
-}
-
-
-
-/* QTabWidget - White */
-
-QWidget[color='white'] QTabBar[color='main']::tab:top:selected, QTabBar[color='white']::tab:top:selected, QWidget[color='white'] QDockWidget QTabBar[color='main']::tab:top:selected, QDockWidget QTabBar[color='white']::tab:top:selected {
-	border-bottom-color: #EFEFEF;
+QWidget[color='{neutral-color-name}'] QTabBar[color='main']::tab:top:selected, QTabBar[color='{neutral-color-name}']::tab:top:selected, QWidget[color='{neutral-color-name}'] QDockWidget QTabBar[color='main']::tab:top:selected, QDockWidget QTabBar[color='{neutral-color-name}']::tab:top:selected {
+	border-bottom-color: #{neutral-color-pressed};
 }

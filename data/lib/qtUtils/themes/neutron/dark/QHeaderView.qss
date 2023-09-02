@@ -16,3 +16,11 @@ QHeaderView::section {
 	margin-bottom: 5px;
 	margin-top: 5px;
 }
+
+QHeaderView::down-arrow {
+	image: url({path}tabwidget/downArrow.png);
+}
+
+QHeaderView::up-arrow {
+	image: url({path}tabwidget/upArrow.png);
+}

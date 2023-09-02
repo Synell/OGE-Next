@@ -1,0 +1,12 @@
+{
+    "about": {
+        "PySide": "About PySide...",
+        "OGENext": "About OGE Next..."
+    },
+    "whatsNew": "What's New...",
+    "changelog": "Changelog...",
+    "reportBug": "Report a Bug...",
+    "donate": {
+        "title": "Donate"
+    }
+}

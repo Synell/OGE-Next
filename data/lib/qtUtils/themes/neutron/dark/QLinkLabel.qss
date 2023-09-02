@@ -7,88 +7,16 @@ QLabel::link {
 
 
 
-/* QLinkLabel - Blue */
+/* QLinkLabel - Main Color */
 
-QLabel[color='blue']::link {
-	color: #1B80FC;
+QLabel[color='{main-color-name}']::link {
+	color: #{main-color-pressed};
 }
 
 
 
-/* QLinkLabel - Red */
+/* QLinkLabel - Neutral Color */
 
-QLabel[color='red']::link {
-	color: #FC271B;
-}
-
-
-
-/* QLinkLabel - Green */
-
-QLabel[color='green']::link {
-	color: #07E813;
-}
-
-
-
-/* QLinkLabel - Yellow */
-
-QLabel[color='yellow']::link {
-	color: #E8BC07;
-}
-
-
-
-/* QLinkLabel - Magenta */
-
-QLabel[color='magenta']::link {
-	color: #FC1BF1;
-}
-
-
-
-/* QLinkLabel - Cyan */
-
-QLabel[color='cyan']::link {
-	color: #00C8D4;
-}
-
-
-
-/* QLinkLabel - Orange */
-
-QLabel[color='orange']::link {
-	color: #E88307;
-}
-
-
-
-/* QLinkLabel - Pink */
-
-QLabel[color='pink']::link {
-	color: #E8076C;
-}
-
-
-
-/* QLinkLabel - Lime */
-
-QLabel[color='lime']::link {
-	color: #6CE807;
-}
-
-
-
-/* QLinkLabel - Turquoise */
-
-QLabel[color='turquoise']::link {
-	color: #07E8BC;
-}
-
-
-
-/* QLinkLabel - White */
-
-QLabel[color='white']::link {
-	color: #EFEFEF;
+QLabel[color='{neutral-color-name}']::link {
+	color: #{neutral-color-pressed};
 }

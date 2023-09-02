@@ -1,0 +1,12 @@
+{
+    "OGENext": {
+        "title": "A propos d'OGE Next",
+        "texts": [
+            "OGE Next est un logiciel libre qui permet de consulter ses notes et plus particulièrement ses moyennes à partir du site OGE.",
+            "OGE Next est développé par %s, est écrit en Python, utilise le framework PySide 6 pour l'interface graphique et est disponible pour Windows, MacOS et Linux.",
+            "Idée de logo par %s, réalisé par %s.",
+            "Merci à %s pour son aide sur BeautifulSoup et sur le regex.",
+            "Allez sur le %s pour plus d'informations."
+        ]
+    }
+}

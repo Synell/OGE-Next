@@ -64,6 +64,9 @@ class UE:
     def set_as_new(self) -> None:
         for pole in self._poles: pole.set_as_new()
 
+    def is_empty(self) -> bool:
+        return len(self._poles) == 0 or all(pole.is_empty() for pole in self._poles)
+
     def __str__(self) -> str:
         return f'{self._title} ({self._coefficient})\n' + '\n'.join([f'\t{pole}' for pole in self._poles])
 

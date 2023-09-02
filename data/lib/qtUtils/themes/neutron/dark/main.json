@@ -38,6 +38,7 @@
         "QDropDownWidget",
         "QNamedLineEdit",
         "QNamedTextEdit",
+        "QNamedTextBrowser",
         "QNamedComboBox",
         "QNamedSpinBox",
         "QNamedDoubleSpinBox",

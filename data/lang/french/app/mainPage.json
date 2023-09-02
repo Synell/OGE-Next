@@ -1,0 +1,38 @@
+{
+    "QSidePanel": {
+        "emptyPanel": {
+            "QLoginWidget": {
+                "QNamedLineEdit": {
+                    "username": "Nom d'utilisateur",
+                    "password": "Mot de passe"
+                },
+                "QNamedToggleButton": {
+                    "remember": "Se souvenir de moi"
+                }
+            },
+            "QPushButton": {
+                "login": "Se connecter"
+            }
+        },
+        "dataPanel": {
+            "QPushButton": {
+                "refresh": "Rafraîchir"
+            },
+            "QLabel": {
+                "perfectSemester": "Semestre parfait, félicitations !",
+                "goodSemester": "Semestre valide, continuez comme ça !",
+                "alertSemester": "Semestre en alerte, attention à vos notes !",
+                "badSemester": "Semestre en difficulté, cherchez à combler vos lacunes !",
+                "between8And10": "UEs comprises entre 8/20 et 10/20 à améliorer :\n%s",
+                "below8": "UEs en dessous de 8/20 à améliorer :\n%s",
+                "allBelow8": "Toutes les UE sont en dessous de 8/20, travaillez plus si vous voulez réussir !",
+                "newGrade": "Une nouvelle note est apparue !",
+                "newGrades": "%s nouvelles notes sont apparues !"
+            },
+            "QToolTip": {
+                "ogeWeird": "OGE est bizarre, ce n'est pas un bug avec OGE Next.\nVotre moyenne sera corrigée quand OGE fournira les bonnes données.",
+                "ogeWeirdTop": "Cette information peut être incorrecte, voir les info-bulles des UEs pour plus de détails."
+            }
+        }
+    }
+}

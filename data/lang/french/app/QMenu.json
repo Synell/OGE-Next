@@ -1,0 +1,12 @@
+{
+    "about": {
+        "PySide": "A Propos de PySide...",
+        "OGENext": "A Propos de OGE Next..."
+    },
+    "whatsNew": "Nouveautés...",
+    "changelog": "Journal des Modifications...",
+    "reportBug": "Signaler un Bug...",
+    "donate": {
+        "title": "Faire un Don"
+    }
+}

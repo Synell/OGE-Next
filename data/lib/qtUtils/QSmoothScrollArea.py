@@ -1,8 +1,8 @@
 #----------------------------------------------------------------------
 
     # Libraries
-from PySide6.QtWidgets import QScrollArea, QWidget, QApplication
-from PySide6.QtCore import QTimer, Qt, QDateTime, QPoint
+from PySide6.QtWidgets import QScrollArea, QWidget, QApplication, QScroller, QScrollerProperties, QAbstractItemView
+from PySide6.QtCore import QTimer, Qt, QDateTime, QPoint, QEasingCurve
 from PySide6.QtGui import QWheelEvent
 from enum import Enum
 from math import cos, pi
@@ -17,8 +17,23 @@ class QSmoothScrollArea(QScrollArea):
         Quadratic = 3
         Cosine = 4
 
-    def __init__(self, parent: QWidget = None) -> None:
+    def __init__(self, parent: QWidget = None) -> None: # TODO: Fix speed inconsistencies due to widget size
         super().__init__(parent)
+
+        QScroller.scroller(self.viewport()).grabGesture(self.viewport(), QScroller.ScrollerGestureType.TouchGesture)
+        prop: QScrollerProperties = QScroller.scroller(self.viewport()).scrollerProperties()
+        prop.setScrollMetric(QScrollerProperties.ScrollMetric.AxisLockThreshold, 0.66)
+        prop.setScrollMetric(QScrollerProperties.ScrollMetric.ScrollingCurve, QEasingCurve(QEasingCurve.Type.OutExpo))
+        prop.setScrollMetric(QScrollerProperties.ScrollMetric.DecelerationFactor, 0.05)
+        prop.setScrollMetric(QScrollerProperties.ScrollMetric.MaximumVelocity, 0.635)
+        prop.setScrollMetric(QScrollerProperties.ScrollMetric.OvershootDragResistanceFactor, 0.33)
+        prop.setScrollMetric(QScrollerProperties.ScrollMetric.OvershootScrollDistanceFactor, 0.33)
+        prop.setScrollMetric(QScrollerProperties.ScrollMetric.SnapPositionRatio, 0.93)
+        prop.setScrollMetric(QScrollerProperties.ScrollMetric.DragStartDistance, 0.001)
+        prop.setScrollMetric(QScrollerProperties.ScrollMetric.VerticalOvershootPolicy, QScrollerProperties.OvershootPolicy.OvershootAlwaysOff)
+        prop.setScrollMetric(QScrollerProperties.ScrollMetric.HorizontalOvershootPolicy, QScrollerProperties.OvershootPolicy.OvershootAlwaysOff)
+        QScroller.scroller(self.viewport()).setScrollerProperties(prop)
+
 
         self._last_wheel_event = None
         self._smooth_move_timer = QTimer(self)

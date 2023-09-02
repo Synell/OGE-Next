@@ -1,0 +1,56 @@
+{
+    "QUpdater": {
+        "title": "OGE Next Updater",
+        "QLabel": {
+            "downloading": "Downloading... (%s)",
+            "installing": "Installing... (%s)",
+            "calculatingRemainingTime": "Calculating remaining time...",
+            "remainingTime": "Remaining time: %s",
+            "waiting": "Waiting...",
+            "done": "Done",
+            "bytes": "%s/s",
+            "items": "%s packages/s",
+            "eta": "ETA: %s",
+            "days": "%s days",
+            "hours": "%s hours",
+            "minutes": "%s minutes",
+            "seconds": "%s seconds",
+            "day": "%s day",
+            "hour": "%s hour",
+            "minute": "%s minute",
+            "second": "%s second",
+            "undefined": "Undefined"
+        },
+        "QSlidingStackedWidget": {
+            "texts": [
+                "OGE Next is being updated to the latest version.",
+                "OGE Next allows you to access your school's online gradebook and average from OGE..",
+                "A motivational message is placed above each semester to help you stay motivated and focused on your studies.",
+                "OGE Next exists because OGE doesn't provide any average calculation feature before the very end of the semester.",
+                "You can choose how often OGE Next checks for updates in the settings."
+            ]
+        },
+        "QMessageBox": {
+            "critical": {
+                "downloadFailed": {
+                    "title": "Download Failed",
+                    "text": "An error occurred while downloading the update."
+                },
+                "installFailed": {
+                    "title": "Install Failed",
+                    "text": "An error occurred while installing the update."
+                },
+                "openAppFailed": {
+                    "title": "Open App Failed",
+                    "text": "An error occurred while opening the app."
+                },
+                "appNotFound": {
+                    "title": "App Not Found",
+                    "text": "The app was not found."
+                }
+            },
+            "warning": {},
+            "information": {}
+        }
+    }
+}

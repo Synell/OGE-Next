@@ -41,88 +41,16 @@ QProgressBar[light=true]
 
 
 
-/* QProgressBar - Blue */
+/* QProgressBar - Main Color */
 
-QWidget[color='blue'] QProgressBar[color='main']::chunk, QProgressBar[color='blue']::chunk {
-	background-color: #1B80FC;
+QWidget[color='{main-color-name}'] QProgressBar[color='main']::chunk, QProgressBar[color='{main-color-name}']::chunk {
+	background-color: #{main-color-pressed};
 }
 
 
 
-/* QProgressBar - Red */
+/* QProgressBar - Neutral Color */
 
-QWidget[color='red'] QProgressBar[color='main']::chunk, QProgressBar[color='red']::chunk {
-	background-color: #FC271B;
-}
-
-
-
-/* QProgressBar - Green */
-
-QWidget[color='green'] QProgressBar[color='main']::chunk, QProgressBar[color='green']::chunk {
-	background-color: #07E813;
-}
-
-
-
-/* QProgressBar - Yellow */
-
-QWidget[color='yellow'] QProgressBar[color='main']::chunk, QProgressBar[color='yellow']::chunk {
-	background-color: #E8BC07;
-}
-
-
-
-/* QProgressBar - Magenta */
-
-QWidget[color='magenta'] QProgressBar[color='main']::chunk, QProgressBar[color='magenta']::chunk {
-	background-color: #FC1BF1;
-}
-
-
-
-/* QProgressBar - Cyan */
-
-QWidget[color='cyan'] QProgressBar[color='main']::chunk, QProgressBar[color='cyan']::chunk {
-	background-color: #00C8D4;
-}
-
-
-
-/* QProgressBar - Orange */
-
-QWidget[color='orange'] QProgressBar[color='main']::chunk, QProgressBar[color='orange']::chunk {
-	background-color: #E88307;
-}
-
-
-
-/* QProgressBar - Pink */
-
-QWidget[color='pink'] QProgressBar[color='main']::chunk, QProgressBar[color='pink']::chunk {
-	background-color: #E8076C;
-}
-
-
-
-/* QProgressBar - Lime */
-
-QWidget[color='lime'] QProgressBar[color='main']::chunk, QProgressBar[color='lime']::chunk {
-	background-color: #6CE807;
-}
-
-
-
-/* QProgressBar - Turquoise */
-
-QWidget[color='turquoise'] QProgressBar[color='main']::chunk, QProgressBar[color='turquoise']::chunk {
-	background-color: #07E8BC;
-}
-
-
-
-/* QProgressBar - White */
-
-QWidget[color='white'] QProgressBar[color='main']::chunk, QProgressBar[color='white']::chunk {
-	background-color: #EFEFEF;
+QWidget[color='{neutral-color-name}'] QProgressBar[color='main']::chunk, QProgressBar[color='{neutral-color-name}']::chunk {
+	background-color: #{neutral-color-pressed};
 }

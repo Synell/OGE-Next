@@ -1,0 +1,16 @@
+{
+    "critical": {
+        "notImplemented": {
+            "title": "OGE Next > Not Implemented Feature",
+            "text": "This functionality doesn't exist yet and will be\navailable in a later version of the software.",
+            "details": "Details"
+        }
+    },
+    "warning": {},
+    "information": {
+        "settingsReload": {
+            "title": "OGE Next > Settings",
+            "text": "A restart of the software is necessary in order\nto correctly apply all the settings."
+        }
+    }
+}

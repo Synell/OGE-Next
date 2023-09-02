@@ -64,6 +64,9 @@ class Subject:
     def set_as_new(self) -> None:
         for grade_group in self._grade_groups: grade_group.set_as_new()
 
+    def is_empty(self) -> bool:
+        return len(self._grade_groups) == 0 or all(grade_group.is_empty() for grade_group in self._grade_groups)
+
     def __str__(self) -> str:
         return f'{self._title} ({self._coefficient})\n\t' + '\n'.join([f'\t{grade_group}' for grade_group in self._grade_groups]).replace('\n', '\n\t')
 

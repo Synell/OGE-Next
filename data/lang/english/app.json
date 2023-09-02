@@ -1,0 +1,13 @@
+{
+    "QMainWindow": {
+        "title": "OGE Next",
+        "mainPage": "#ref: app/mainPage",
+        "QSideBar": "#ref: app/QSideBar",
+        "showMessage": "#ref: app/showMessage"
+    },
+    "QSettingsDialog": "#ref: app/QSettingsDialog",
+    "QMessageBox": "#ref: app/QMessageBox",
+    "QAbout": "#ref: app/QAbout",
+    "QMenu": "#ref: app/QMenu",
+    "QStatusBar": "#ref: app/QStatusBar"
+}

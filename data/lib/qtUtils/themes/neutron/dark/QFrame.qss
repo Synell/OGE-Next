@@ -28,3 +28,8 @@ QWidget[border-right=true], QWidget[border-right=true]:hover, QWidget[border-rig
 	border-right: 1px solid #313131;
 	border-radius: 0px;
 }
+
+QWidget[separator=true], QWidget[separator=true]:hover, QWidget[separator=true]:focus, QWidget[separator=true]:disabled {
+	border: 2px solid #aaaaaa;
+	border-radius: 2px;
+}

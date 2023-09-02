@@ -109,311 +109,59 @@ QWidget[QSidePanel=true][border-right=true], QWidget[QSidePanel=true][border-rig
 
 
 
-/* QSidePanel - Blue */
+/* QSidePanel - Main Color */
 
-QWidget[color='blue'] QWidget[QSidePanel=true][color='main'] QPushButton, QWidget[QSidePanel=true][color='blue'] QPushButton {
+QWidget[color='{main-color-name}'] QWidget[QSidePanel=true][color='main'] QPushButton, QWidget[QSidePanel=true][color='{main-color-name}'] QPushButton {
 	background-color: transparent;
 }
 
-QWidget[color='blue'] QWidget[QSidePanel=true][color='main'] QPushButton:hover, QWidget[QSidePanel=true][color='blue'] QPushButton:hover {
-	background-color: #500D66D0;
+QWidget[color='{main-color-name}'] QWidget[QSidePanel=true][color='main'] QPushButton:hover, QWidget[QSidePanel=true][color='{main-color-name}'] QPushButton:hover {
+	background-color: #50{main-color-hover};
 }
 
-QWidget[color='blue'] QWidget[QSidePanel=true][color='main'] QPushButton:focus, QWidget[QSidePanel=true][color='blue'] QPushButton:focus {
-	background-color: #0D66D0;
+QWidget[color='{main-color-name}'] QWidget[QSidePanel=true][color='main'] QPushButton:focus, QWidget[QSidePanel=true][color='{main-color-name}'] QPushButton:focus {
+	background-color: #{main-color-hover};
 }
 
-QWidget[color='blue'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true], QWidget[QSidePanel=true][color='blue'] QPushButton[selected=true] {
-	background-color: #1473E6;
+QWidget[color='{main-color-name}'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true], QWidget[QSidePanel=true][color='{main-color-name}'] QPushButton[selected=true] {
+	background-color: #{main-color-normal};
 }
 
-QWidget[color='blue'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true]:hover, QWidget[QSidePanel=true][color='blue'] QPushButton[selected=true]:hover {
-	background-color: #1473E6;
+QWidget[color='{main-color-name}'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true]:hover, QWidget[QSidePanel=true][color='{main-color-name}'] QPushButton[selected=true]:hover {
+	background-color: #{main-color-normal};
 }
 
-QWidget[color='blue'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true]:focus, QWidget[QSidePanel=true][color='blue'] QPushButton[selected=true]:focus {
-	background-color: #1473E6;
+QWidget[color='{main-color-name}'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true]:focus, QWidget[QSidePanel=true][color='{main-color-name}'] QPushButton[selected=true]:focus {
+	background-color: #{main-color-normal};
 }
 
 
 
-/* QSidePanel - Red */
+/* QSidePanel - Neutral Color */
 
-QWidget[color='red'] QWidget[QSidePanel=true][color='main'] QPushButton, QWidget[QSidePanel=true][color='red'] QPushButton {
+QWidget[color='{neutral-color-name}'] QWidget[QSidePanel=true][color='main'] QPushButton, QWidget[QSidePanel=true][color='{neutral-color-name}'] QPushButton {
 	background-color: transparent;
 }
 
-QWidget[color='red'] QWidget[QSidePanel=true][color='main'] QPushButton:hover, QWidget[QSidePanel=true][color='red'] QPushButton:hover {
-	background-color: #50D0150D;
+QWidget[color='{neutral-color-name}'] QWidget[QSidePanel=true][color='main'] QPushButton:hover, QWidget[QSidePanel=true][color='{neutral-color-name}'] QPushButton:hover {
+	background-color: #50{neutral-color-hover};
 }
 
-QWidget[color='red'] QWidget[QSidePanel=true][color='main'] QPushButton:focus, QWidget[QSidePanel=true][color='red'] QPushButton:focus {
-	background-color: #D0150D;
+QWidget[color='{neutral-color-name}'] QWidget[QSidePanel=true][color='main'] QPushButton:focus, QWidget[QSidePanel=true][color='{neutral-color-name}'] QPushButton:focus {
+	background-color: #{neutral-color-hover};
 }
 
-QWidget[color='red'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true], QWidget[QSidePanel=true][color='red'] QPushButton[selected=true] {
-	background-color: #E61E14;
-}
-
-QWidget[color='red'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true]:hover, QWidget[QSidePanel=true][color='red'] QPushButton[selected=true]:hover {
-	background-color: #E61E14;
-}
-
-QWidget[color='red'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true]:focus, QWidget[QSidePanel=true][color='red'] QPushButton[selected=true]:focus {
-	background-color: #E61E14;
-}
-
-
-
-/* QSidePanel - Green */
-
-QWidget[color='green'] QWidget[QSidePanel=true][color='main'] QPushButton, QWidget[QSidePanel=true][color='green'] QPushButton {
-	background-color: transparent;
-}
-
-QWidget[color='green'] QWidget[QSidePanel=true][color='main'] QPushButton:hover, QWidget[QSidePanel=true][color='green'] QPushButton:hover {
-	background-color: #5000BC0C;
-}
-
-QWidget[color='green'] QWidget[QSidePanel=true][color='main'] QPushButton:focus, QWidget[QSidePanel=true][color='green'] QPushButton:focus {
-	background-color: #00BC0C;
-}
-
-QWidget[color='green'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true], QWidget[QSidePanel=true][color='green'] QPushButton[selected=true] {
-	background-color: #00D20A;
-}
-
-QWidget[color='green'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true]:hover, QWidget[QSidePanel=true][color='green'] QPushButton[selected=true]:hover {
-	background-color: #00D20A;
-}
-
-QWidget[color='green'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true]:focus, QWidget[QSidePanel=true][color='green'] QPushButton[selected=true]:focus {
-	background-color: #00D20A;
-}
-
-
-
-/* QSidePanel - Yellow */
-
-QWidget[color='yellow'] QWidget[QSidePanel=true][color='main'] QPushButton, QWidget[QSidePanel=true][color='yellow'] QPushButton {
-	background-color: transparent;
-}
-
-QWidget[color='yellow'] QWidget[QSidePanel=true][color='main'] QPushButton:hover, QWidget[QSidePanel=true][color='yellow'] QPushButton:hover {
-	background-color: #50BC9900;
-}
-
-QWidget[color='yellow'] QWidget[QSidePanel=true][color='main'] QPushButton:focus, QWidget[QSidePanel=true][color='yellow'] QPushButton:focus {
-	background-color: #BC9900;
-}
-
-QWidget[color='yellow'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true], QWidget[QSidePanel=true][color='yellow'] QPushButton[selected=true] {
-	background-color: #D2A800;
-}
-
-QWidget[color='yellow'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true]:hover, QWidget[QSidePanel=true][color='yellow'] QPushButton[selected=true]:hover {
-	background-color: #D2A800;
-}
-
-QWidget[color='yellow'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true]:focus, QWidget[QSidePanel=true][color='yellow'] QPushButton[selected=true]:focus {
-	background-color: #D2A800;
-}
-
-
-
-/* QSidePanel - Magenta */
-
-QWidget[color='magenta'] QWidget[QSidePanel=true][color='main'] QPushButton, QWidget[QSidePanel=true][color='magenta'] QPushButton {
-	background-color: transparent;
-}
-
-QWidget[color='magenta'] QWidget[QSidePanel=true][color='main'] QPushButton:hover, QWidget[QSidePanel=true][color='magenta'] QPushButton:hover {
-	background-color: #50D00DC9;
-}
-
-QWidget[color='magenta'] QWidget[QSidePanel=true][color='main'] QPushButton:focus, QWidget[QSidePanel=true][color='magenta'] QPushButton:focus {
-	background-color: #D00DC9;
-}
-
-QWidget[color='magenta'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true], QWidget[QSidePanel=true][color='magenta'] QPushButton[selected=true] {
-	background-color: #E614DC;
-}
-
-QWidget[color='magenta'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true]:hover, QWidget[QSidePanel=true][color='magenta'] QPushButton[selected=true]:hover {
-	background-color: #E614DC;
-}
-
-QWidget[color='magenta'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true]:focus, QWidget[QSidePanel=true][color='magenta'] QPushButton[selected=true]:focus {
-	background-color: #E614DC;
-}
-
-
-
-/* QSidePanel - Cyan */
-
-QWidget[color='cyan'] QWidget[QSidePanel=true][color='main'] QPushButton, QWidget[QSidePanel=true][color='cyan'] QPushButton {
-	background-color: transparent;
-}
-
-QWidget[color='cyan'] QWidget[QSidePanel=true][color='main'] QPushButton:hover, QWidget[QSidePanel=true][color='cyan'] QPushButton:hover {
-	background-color: #50009CA8;
-}
-
-QWidget[color='cyan'] QWidget[QSidePanel=true][color='main'] QPushButton:focus, QWidget[QSidePanel=true][color='cyan'] QPushButton:focus {
-	background-color: #009CA8;
-}
-
-QWidget[color='cyan'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true], QWidget[QSidePanel=true][color='cyan'] QPushButton[selected=true] {
-	background-color: #00B4BE;
-}
-
-QWidget[color='cyan'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true]:hover, QWidget[QSidePanel=true][color='cyan'] QPushButton[selected=true]:hover {
-	background-color: #00B4BE;
-}
-
-QWidget[color='cyan'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true]:focus, QWidget[QSidePanel=true][color='cyan'] QPushButton[selected=true]:focus {
-	background-color: #00B4BE;
-}
-
-
-
-/* QSidePanel - Orange */
-
-QWidget[color='orange'] QWidget[QSidePanel=true][color='main'] QPushButton, QWidget[QSidePanel=true][color='orange'] QPushButton {
-	background-color: transparent;
-}
-
-QWidget[color='orange'] QWidget[QSidePanel=true][color='main'] QPushButton:hover, QWidget[QSidePanel=true][color='orange'] QPushButton:hover {
-	background-color: #50BC6A00;
-}
-
-QWidget[color='orange'] QWidget[QSidePanel=true][color='main'] QPushButton:focus, QWidget[QSidePanel=true][color='orange'] QPushButton:focus {
-	background-color: #BC6A00;
-}
-
-QWidget[color='orange'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true], QWidget[QSidePanel=true][color='orange'] QPushButton[selected=true] {
-	background-color: #D27300;
-}
-
-QWidget[color='orange'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true]:hover, QWidget[QSidePanel=true][color='orange'] QPushButton[selected=true]:hover {
-	background-color: #D27300;
-}
-
-QWidget[color='orange'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true]:focus, QWidget[QSidePanel=true][color='orange'] QPushButton[selected=true]:focus {
-	background-color: #D27300;
-}
-
-
-
-/* QSidePanel - Pink */
-
-QWidget[color='pink'] QWidget[QSidePanel=true][color='main'] QPushButton, QWidget[QSidePanel=true][color='pink'] QPushButton {
-	background-color: transparent;
-}
-
-QWidget[color='pink'] QWidget[QSidePanel=true][color='main'] QPushButton:hover, QWidget[QSidePanel=true][color='pink'] QPushButton:hover {
-	background-color: #50BC0052;
-}
-
-QWidget[color='pink'] QWidget[QSidePanel=true][color='main'] QPushButton:focus, QWidget[QSidePanel=true][color='pink'] QPushButton:focus {
-	background-color: #BC0052;
-}
-
-QWidget[color='pink'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true], QWidget[QSidePanel=true][color='pink'] QPushButton[selected=true] {
-	background-color: #D2005F;
-}
-
-QWidget[color='pink'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true]:hover, QWidget[QSidePanel=true][color='pink'] QPushButton[selected=true]:hover {
-	background-color: #D2005F;
-}
-
-QWidget[color='pink'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true]:focus, QWidget[QSidePanel=true][color='pink'] QPushButton[selected=true]:focus {
-	background-color: #D2005F;
-}
-
-
-
-/* QSidePanel - Lime */
-
-QWidget[color='lime'] QWidget[QSidePanel=true][color='main'] QPushButton, QWidget[QSidePanel=true][color='lime'] QPushButton {
-	background-color: transparent;
-}
-
-QWidget[color='lime'] QWidget[QSidePanel=true][color='main'] QPushButton:hover, QWidget[QSidePanel=true][color='lime'] QPushButton:hover {
-	background-color: #5052BC00;
-}
-
-QWidget[color='lime'] QWidget[QSidePanel=true][color='main'] QPushButton:focus, QWidget[QSidePanel=true][color='lime'] QPushButton:focus {
-	background-color: #52BC00;
-}
-
-QWidget[color='lime'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true], QWidget[QSidePanel=true][color='lime'] QPushButton[selected=true] {
-	background-color: #5FD200;
-}
-
-QWidget[color='lime'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true]:hover, QWidget[QSidePanel=true][color='lime'] QPushButton[selected=true]:hover {
-	background-color: #5FD200;
-}
-
-QWidget[color='lime'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true]:focus, QWidget[QSidePanel=true][color='lime'] QPushButton[selected=true]:focus {
-	background-color: #5FD200;
-}
-
-
-
-/* QSidePanel - Turquoise */
-
-QWidget[color='turquoise'] QWidget[QSidePanel=true][color='main'] QPushButton, QWidget[QSidePanel=true][color='turquoise'] QPushButton {
-	background-color: transparent;
-}
-
-QWidget[color='turquoise'] QWidget[QSidePanel=true][color='main'] QPushButton:hover, QWidget[QSidePanel=true][color='turquoise'] QPushButton:hover {
-	background-color: #5000BC99;
-}
-
-QWidget[color='turquoise'] QWidget[QSidePanel=true][color='main'] QPushButton:focus, QWidget[QSidePanel=true][color='turquoise'] QPushButton:focus {
-	background-color: #00BC99;
-}
-
-QWidget[color='turquoise'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true], QWidget[QSidePanel=true][color='turquoise'] QPushButton[selected=true] {
-	background-color: #00D2A8;
-}
-
-QWidget[color='turquoise'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true]:hover, QWidget[QSidePanel=true][color='turquoise'] QPushButton[selected=true]:hover {
-	background-color: #00D2A8;
-}
-
-QWidget[color='turquoise'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true]:focus, QWidget[QSidePanel=true][color='turquoise'] QPushButton[selected=true]:focus {
-	background-color: #00D2A8;
-}
-
-
-
-/* QSidePanel - White */
-
-QWidget[color='white'] QWidget[QSidePanel=true][color='main'] QPushButton, QWidget[QSidePanel=true][color='white'] QPushButton {
-	background-color: transparent;
-}
-
-QWidget[color='white'] QWidget[QSidePanel=true][color='main'] QPushButton:hover, QWidget[QSidePanel=true][color='white'] QPushButton:hover {
-	background-color: #50D7D7D7;
-}
-
-QWidget[color='white'] QWidget[QSidePanel=true][color='main'] QPushButton:focus, QWidget[QSidePanel=true][color='white'] QPushButton:focus {
-	background-color: #D7D7D7;
-}
-
-QWidget[color='white'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true], QWidget[QSidePanel=true][color='white'] QPushButton[selected=true] {
-	background-color: #E3E3E3;
+QWidget[color='{neutral-color-name}'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true], QWidget[QSidePanel=true][color='{neutral-color-name}'] QPushButton[selected=true] {
+	background-color: #{neutral-color-normal};
 	color: #000000;
 }
 
-QWidget[color='white'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true]:hover, QWidget[QSidePanel=true][color='white'] QPushButton[selected=true]:hover {
-	background-color: #E3E3E3;
+QWidget[color='{neutral-color-name}'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true]:hover, QWidget[QSidePanel=true][color='{neutral-color-name}'] QPushButton[selected=true]:hover {
+	background-color: #{neutral-color-normal};
 	color: #000000;
 }
 
-QWidget[color='white'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true]:focus, QWidget[QSidePanel=true][color='white'] QPushButton[selected=true]:focus {
-	background-color: #E3E3E3;
+QWidget[color='{neutral-color-name}'] QWidget[QSidePanel=true][color='main'] QPushButton[selected=true]:focus, QWidget[QSidePanel=true][color='{neutral-color-name}'] QPushButton[selected=true]:focus {
+	background-color: #{neutral-color-normal};
 	color: #000000;
 }

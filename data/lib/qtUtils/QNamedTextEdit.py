@@ -4,13 +4,31 @@
 from PySide6.QtWidgets import QTextEdit, QLabel
 from PySide6.QtCore import Qt, QEvent
 from .QGridWidget import QGridWidget
+from . import QBaseApplication
+from .QssSelector import QssSelector
 #----------------------------------------------------------------------
 
     # Class
 class QNamedTextEdit(QGridWidget):
-    normal_color = '#FFFFFF'
-    hover_color = '#FFFFFF'
-    focus_color = '#FFFFFF'
+    _normal_color = '#FFFFFF'
+    _hover_color = '#FFFFFF'
+    _focus_color = '#FFFFFF'
+
+    @staticmethod
+    def init(app: QBaseApplication) -> None:
+        QNamedTextEdit._normal_color = app.qss.search(
+            QssSelector(widget = 'QWidget', attributes = {'QNamedTextEdit': True}),
+            QssSelector(widget = 'QLabel')
+        )['color']
+        QNamedTextEdit._hover_color = app.qss.search(
+            QssSelector(widget = 'QWidget', attributes = {'QNamedTextEdit': True}),
+            QssSelector(widget = 'QLabel', attributes = {'hover': True})
+        )['color']
+        QNamedTextEdit._focus_color = app.qss.search(
+            QssSelector(widget = 'QWidget', attributes = {'color': app.window.property('color')}),
+            QssSelector(widget = 'QWidget', attributes = {'QNamedTextEdit': True, 'color': 'main'}),
+            QssSelector(widget = 'QLabel', attributes = {'focus': True})
+        )['color']
 
     def __init__(self, parent = None, placeholder: str = '', name: str = '') -> None:
         super().__init__(parent)
@@ -39,28 +57,36 @@ class QNamedTextEdit(QGridWidget):
 
     def enterEvent(self, event: QEvent = None) -> None:
         self.label.setProperty('inputhover', True)
-        if not self.label.property('inputfocus'): self.label.setStyleSheet(f'color: {self.hover_color}')
+        if not self.label.property('inputfocus'): self.label.setStyleSheet(f'color: {self._hover_color}')
 
     def leaveEvent(self, event: QEvent = None) -> None:
         self.label.setProperty('inputhover', False)
-        if not self.label.property('inputfocus'): self.label.setStyleSheet(f'color: {self.normal_color}')
+        if not self.label.property('inputfocus'): self.label.setStyleSheet(f'color: {self._normal_color}')
 
     def focusInEvent(self, event: QEvent = None) -> None:
         self.label.setProperty('inputfocus', True)
         self.text_edit.base_focusInEvent(event)
-        self.label.setStyleSheet(f'color: {self.focus_color}')
+        self.label.setStyleSheet(f'color: {self._focus_color}')
 
     def focusOutEvent(self, event: QEvent = None) -> None:
         self.label.setProperty('inputfocus', False)
         self.text_edit.base_focusOutEvent(event)
-        if self.label.property('inputhover'): self.label.setStyleSheet(f'color: {self.hover_color}')
-        else: self.label.setStyleSheet(f'color: {self.normal_color}')
+        if self.label.property('inputhover'): self.label.setStyleSheet(f'color: {self._hover_color}')
+        else: self.label.setStyleSheet(f'color: {self._normal_color}')
 
     def text(self) -> str:
         return self.text_edit.toPlainText()
 
     def setText(self, text: str) -> None:
         self.text_edit.setText(text)
+        # self.setLineHeight(self._line_height)
+
+    def append(self, text: str) -> None:
+        self.text_edit.append(text)
+        # self.setLineHeight(self._line_height)
+
+    def clear(self) -> None:
+        self.text_edit.clear()
 
     def placeholderText(self) -> str:
         return self.text_edit.placeholderText()

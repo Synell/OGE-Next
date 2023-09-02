@@ -22,6 +22,11 @@ QLabel[h='2'] {
 	font-weight: bold;
 }
 
+QLabel[h='2'][small=true] {
+	font-size: 20px;
+	font-weight: bold;
+}
+
 QLabel[h='3'] {
 	font-size: 18.72px;
 	font-weight: bold;
@@ -139,4 +144,39 @@ QLabel[brightnormal=true] {
 	color: #999999;
 	font-size: 14px;
 	text-align: center;
+}
+
+QLabel[brightsubtitle=true] {
+	color: #909090;
+	background-color: transparent;
+	border: none;
+	font-size: 12px;
+}
+
+QLabel[power=true] {
+	padding-bottom: 6px;
+	padding-top: 0px;
+	font-size: 10px;
+}
+
+QLabel[indice=true] {
+	padding-top: 6px;
+	padding-bottom: 0px;
+	font-size: 10px;
+}
+
+QLabel[margin-left='8'] {
+	margin-left: 8px;
+}
+
+QLabel[margin-left='16'] {
+	margin-left: 16px;
+}
+
+QLabel[margin-left='24'] {
+	margin-left: 24px;
+}
+
+QLabel[margin-left='32'] {
+	margin-left: 32px;
 }

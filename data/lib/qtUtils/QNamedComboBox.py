@@ -1,16 +1,34 @@
 #----------------------------------------------------------------------
 
     # Libraries
-from PySide6.QtWidgets import QComboBox, QLabel, QLayout
+from PySide6.QtWidgets import QComboBox, QLabel
 from PySide6.QtCore import Qt, QEvent
 from .QGridWidget import QGridWidget
+from . import QBaseApplication
+from .QssSelector import QssSelector
 #----------------------------------------------------------------------
 
     # Class
 class QNamedComboBox(QGridWidget):
-    normal_color = '#FFFFFF'
-    hover_color = '#FFFFFF'
-    focus_color = '#FFFFFF'
+    _normal_color = '#FFFFFF'
+    _hover_color = '#FFFFFF'
+    _focus_color = '#FFFFFF'
+
+    @staticmethod
+    def init(app: QBaseApplication) -> None:
+        QNamedComboBox._normal_color = app.qss.search(
+            QssSelector(widget = 'QWidget', attributes = {'QNamedComboBox': True}),
+            QssSelector(widget = 'QLabel')
+        )['color']
+        QNamedComboBox._hover_color = app.qss.search(
+            QssSelector(widget = 'QWidget', attributes = {'QNamedComboBox': True}),
+            QssSelector(widget = 'QLabel', attributes = {'hover': True})
+        )['color']
+        QNamedComboBox._focus_color = app.qss.search(
+            QssSelector(widget = 'QWidget', attributes = {'color': app.window.property('color')}),
+            QssSelector(widget = 'QWidget', attributes = {'QNamedComboBox': True, 'color': 'main'}),
+            QssSelector(widget = 'QLabel', attributes = {'focus': True})
+        )['color']
 
     def __init__(self, parent = None, name: str = '') -> None:
         super().__init__(parent)
@@ -19,6 +37,7 @@ class QNamedComboBox(QGridWidget):
 
         self.setProperty('QNamedComboBox', True)
         self.setProperty('color', 'main')
+        self.setProperty('transparent', True)
 
         self.combo_box = QComboBox()
         self.combo_box.setCursor(Qt.CursorShape.PointingHandCursor)
@@ -39,20 +58,20 @@ class QNamedComboBox(QGridWidget):
 
     def enterEvent(self, event: QEvent = None) -> None:
         self.label.setProperty('inputhover', True)
-        if not self.label.property('inputfocus'): self.label.setStyleSheet(f'color: {self.hover_color}')
+        if not self.label.property('inputfocus'): self.label.setStyleSheet(f'color: {self._hover_color}')
 
     def leaveEvent(self, event: QEvent = None) -> None:
         self.label.setProperty('inputhover', False)
-        if not self.label.property('inputfocus'): self.label.setStyleSheet(f'color: {self.normal_color}')
+        if not self.label.property('inputfocus'): self.label.setStyleSheet(f'color: {self._normal_color}')
 
     def focusInEvent(self, event: QEvent = None) -> None:
         self.label.setProperty('inputfocus', True)
         self.combo_box.base_focusInEvent(event)
-        self.label.setStyleSheet(f'color: {self.focus_color}')
+        self.label.setStyleSheet(f'color: {self._focus_color}')
 
     def focusOutEvent(self, event: QEvent = None) -> None:
         self.label.setProperty('inputfocus', False)
         self.combo_box.base_focusOutEvent(event)
-        if self.label.property('inputhover'): self.label.setStyleSheet(f'color: {self.hover_color}')
-        else: self.label.setStyleSheet(f'color: {self.normal_color}')
+        if self.label.property('inputhover'): self.label.setStyleSheet(f'color: {self._hover_color}')
+        else: self.label.setStyleSheet(f'color: {self._normal_color}')
 #----------------------------------------------------------------------

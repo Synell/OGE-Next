@@ -1,0 +1,56 @@
+{
+    "QUpdater": {
+        "title": "OGE Next Updater",
+        "QLabel": {
+            "downloading": "Téléchargement... (%s %)",
+            "installing": "Installation... (%s %)",
+            "calculatingRemainingTime": "Calcul du Temps Restant...",
+            "waiting": "En Attente...",
+            "remainingTime": "Temps Restant: %s",
+            "done": "Terminé",
+            "bytes": "%s/s",
+            "packages": "%s paquets/s",
+            "eta": "Temps Restant: %s",
+            "days": "%s jours",
+            "hours": "%s heures",
+            "minutes": "%s minutes",
+            "seconds": "%s secondes",
+            "day": "%s jour",
+            "hour": "%s heure",
+            "minute": "%s minute",
+            "second": "%s seconde",
+            "undefined": "Indéfini"
+        },
+        "QSlidingStackedWidget": {
+            "texts": [
+                "OGE Next est en train de se mettre à jour.",
+                "OGE Next vous permet de consulter ses notes et plus particulièrement ses moyennes à partir du site OGE.",
+                "Un message d'encouragement est placé au dessus de chaque semestre pour vous aider à vous progresser ou à continuer ainsi.",
+                "OGE Next existe car OGE ne fournit pas de calculateur de moyenne avant la toute fin du semestre.",
+                "Vous pouvez choisir la fréquence de vérification des mises à jour dans les paramètres."
+            ]
+        },
+        "QMessageBox": {
+            "critical": {
+                "downloadFailed": {
+                    "title": "Erreur de Téléchargement",
+                    "text": "Une erreur est survenue lors du téléchargement de la mise à jour."
+                },
+                "installFailed": {
+                    "title": "Erreur d'Installation",
+                    "text": "Une erreur est survenue lors de l'installation de la mise à jour."
+                },
+                "openAppFailed": {
+                    "title": "Erreur d'Ouverture",
+                    "text": "Une erreur est survenue lors de l'ouverture de OGE Next."
+                },
+                "appNotFound": {
+                    "title": "Application Introuvable",
+                    "text": "L'application à exécuter n'a pas été trouvée."
+                }
+            },
+            "warning": {},
+            "information": {}
+        }
+    }
+}

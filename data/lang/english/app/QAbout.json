@@ -1,0 +1,12 @@
+{
+    "OGENext": {
+        "title": "About OGE Next",
+        "texts": [
+            "OGE Next is an open-source software that allows you to access your school's online gradebook and average from OGE.",
+            "OGE Next was programmed by %s, is written in Python, uses PySide 6 for the interface and is available for Windows, MacOS and Linux.",
+            "Logo idea and design by %s, realization by %s.",
+            "Thanks to %s for the help with BeautifulSoup and regex.",
+            "Go to the %s for more information."
+        ]
+    }
+}

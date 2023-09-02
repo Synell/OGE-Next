@@ -3,6 +3,7 @@
     # Libraries
 from PySide6.QtWidgets import QDialog, QFrame, QLabel, QGridLayout, QWidget, QPushButton, QFileDialog
 from PySide6.QtCore import Qt, Signal
+from typing import Callable
 from data.lib.qtUtils.QGridFrame import QGridFrame
 
 from data.lib.qtUtils.QGridWidget import QGridWidget
@@ -19,7 +20,7 @@ from .QSlidingStackedWidget import QSlidingStackedWidget
     # Class
 class _QData:
     class _QLang:
-        def __init__(self, lang_folder = '', lang_path = ''):
+        def __init__(self, lang_folder: str, lang_path: str) -> None:
             with open(f'{lang_folder}/{lang_path}', encoding = 'utf-8') as infile:
                 data = json.load(infile)
                 self.display_name = data['info']['name']
@@ -29,22 +30,22 @@ class _QData:
 
 
     class _QTheme:
-        def __init__(self, themes_folder = '', themePath = ''):
-            with open(f'{themes_folder}/{themePath}', encoding = 'utf-8') as infile:
+        def __init__(self, themes_folder: str, theme_path: str) -> None:
+            with open(f'{themes_folder}/{theme_path}', encoding = 'utf-8') as infile:
                 data = json.load(infile)
                 self.display_name = data['info']['name']
                 self.version = data['info']['version']
                 self.desc = data['info']['description']
-                self.filename = '.'.join(themePath.split('.')[:-1])
+                self.filename = '.'.join(theme_path.split('.')[:-1])
                 self.variants = data['qss']
 
 
-    def __init__(self, lang_folder = '', themes_folder = ''):
-        self.lang = []
+    def __init__(self, lang_folder: str, themes_folder: str) -> None:
+        self.lang: list[_QData._QLang] = []
         for file in QFileExplorer.get_files(lang_folder, ['json'], False, True):
             self.lang.append(self._QLang(lang_folder, file))
 
-        self.themes = []
+        self.themes: list[_QData._QTheme] = []
         for file in QFileExplorer.get_files(themes_folder, ['json'], False, True):
             self.themes.append(self._QTheme(themes_folder, file))
 
@@ -57,7 +58,7 @@ class QSettingsDialog(QDialog):
     import_data = Signal(str)
     export_data = Signal(str)
 
-    def __init__(self, parent = None, settings_data = {}, lang_folder = '', themes_folder = '', current_lang = '', current_theme = '', current_theme_variant = '', extra_tabs: dict[str: QWidget] = {}, get_function = None):
+    def __init__(self, parent = None, settings_data = {}, lang_folder: str = '', themes_folder: str = '', current_lang: str = '', current_theme: str = '', current_theme_variant: str = '', extra_tabs: dict[str: QWidget] = {}, get_function: Callable = None):
         super().__init__(parent)
 
         self._layout = QGridLayout()
@@ -123,6 +124,7 @@ class QSettingsDialog(QDialog):
 
         self.setMinimumSize(int(parent.window().size().width() * (205 / 256)), int(parent.window().size().height() * (13 / 15)))
 
+
     def _appearance_tab_widget(self, lang_data = {}, current_lang = '', current_theme = '', current_theme_variant = ''):
         widget = QScrollableGridWidget()
         widget.scroll_layout.setSpacing(0)
@@ -160,8 +162,8 @@ class QSettingsDialog(QDialog):
         self.themes_dropdown = QNamedComboBox(None, lang_data['QNamedComboBox']['theme'])
         self.themes_dropdown.combo_box.addItems(list(theme.display_name for theme in self._data.themes))
         i = 0
-        for themeId in range(len(self._data.themes)):
-            if self._data.themes[themeId].filename == current_theme: i = themeId
+        for theme_id in range(len(self._data.themes)):
+            if self._data.themes[theme_id].filename == current_theme: i = theme_id
         self.themes_dropdown.combo_box.setCurrentIndex(i)
         self.themes_dropdown.combo_box.currentIndexChanged.connect(self._load_theme_variants)
         root_frame.grid_layout.addWidget(self.themes_dropdown, root_frame.grid_layout.count(), 0)

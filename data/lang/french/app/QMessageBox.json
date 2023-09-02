@@ -1,0 +1,16 @@
+{
+    "critical": {
+        "notImplemented": {
+            "title": "OGE Next > Fonctionnalité Non-Implémentée",
+            "text": "Cette fonctionnalité n'existe pas encore et sera\ndisponible dans une version ultérieure du logiciel.",
+            "details": "Détails"
+        }
+    },
+    "warning": {},
+    "information": {
+        "settingsReload": {
+            "title": "OGE Next > Paramètres",
+            "text": "Un redémarrage du logiciel est nécessaire afin\nd'appliquer correctement tous les paramètres."
+        }
+    }
+}

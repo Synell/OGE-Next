@@ -11,28 +11,76 @@ from typing import Union
 from .QMessageBoxWithWidget import QMessageBoxWithWidget
 from . import QBaseApplication
 from .QSettingsDialog import QSettingsDialog
+from .QUtilsColor import QUtilsColor
+from .QAppType import QAppType
 #----------------------------------------------------------------------
 
     # Class
 class QSaveData:
-    color = 'blue'
-
+    # color = 'blue'
     class StyleSheetMode(Enum):
         All = 'all'
         Global = 'global'
         Local = 'local'
 
+
     class IconMode(Enum):
         Global = 'global'
         Local = 'local'
 
+
+    class ColorSet:
+        def __init__(self, name: str, normal: QUtilsColor, hover: QUtilsColor, pressed: QUtilsColor, disabled: QUtilsColor) -> None:
+            self._name = name
+            self._normal = normal
+            self._hover = hover
+            self._pressed = pressed
+            self._disabled = disabled
+
+        @property
+        def name(self) -> str: return self._name
+
+        @property
+        def normal(self) -> QUtilsColor: return self._normal
+
+        @property
+        def hover(self) -> QUtilsColor: return self._hover
+
+        @property
+        def pressed(self) -> QUtilsColor: return self._pressed
+
+        @property
+        def disabled(self) -> QUtilsColor: return self._disabled
+
+        @property
+        def items(self) -> tuple[tuple[str, QUtilsColor]]:
+            return (
+                ('color-normal', self._normal),
+                ('color-hover', self._hover),
+                ('color-pressed', self._pressed),
+                ('color-disabled', self._disabled)
+            )
+
+
     class LangData(dict):
-        def __init__(self, data: dict = {}) -> None:
+        def __init__(self, data: dict = {}, cwd: str = './') -> None:
             d = {}
 
             for key, value in data.items():
-                if isinstance(value, dict): d[key] = QSaveData.LangData(value)
-                else: d[key] = value
+                if isinstance(value, dict):
+                    d[key] = QSaveData.LangData(value, cwd)
+                    continue
+
+                if isinstance(value, str):
+                    if value.startswith('#ref:'):
+                        file = value.replace('#ref:', '').replace(' ', '').replace('\\', '/')
+
+                        with open(f'{cwd}{file}.json', 'r', encoding = 'utf-8') as infile:
+                            d[key] = QSaveData.LangData(json.load(infile), cwd)
+
+                        continue
+
+                d[key] = value
 
             super().__init__(d)
 
@@ -46,16 +94,41 @@ class QSaveData:
             return data
 
 
-    def __init__(self, save_path = './data/save.dat', lang_folder = './data/lang/', themes_folder = './data/themes/', default_language = 'english', default_theme = 'neutron', default_theme_variant = 'dark') -> None:
-        self._language = default_language
-        self._theme = default_theme
-        self._theme_variant = default_theme_variant
-        self._path = save_path
-        self._lang_folder = lang_folder
-        self._themes_folder = themes_folder
-        self._first_time = False
+    def __init__(self,
+        app: QBaseApplication,
+        save_path = './data/save.dat',
+        lang_folder = './data/lang/',
+        themes_folder = './data/themes/',
+        default_language = 'english',
+        default_theme = 'neutron',
+        default_theme_variant = 'dark',
+        main_color_set: 'QSaveData.ColorSet' = ColorSet(
+            'smth',
+            QUtilsColor('#000000'),
+            QUtilsColor('#000000'),
+            QUtilsColor('#000000'),
+            QUtilsColor('#000000')
+        ),
+        neutral_color_set: 'QSaveData.ColorSet' = ColorSet(
+            'smthelse',
+            QUtilsColor('#000000'),
+            QUtilsColor('#000000'),
+            QUtilsColor('#000000'),
+            QUtilsColor('#000000')
+        )
+    ) -> None:
+        self._app_type: QAppType = app.app_type
+        self._language: str = default_language
+        self._theme: str = default_theme
+        self._theme_variant: str = default_theme_variant
+        self._path: str = save_path
+        self._lang_folder: str = lang_folder
+        self._themes_folder: str = themes_folder
+        self._first_time: bool = False
+        self._main_color_set: 'QSaveData.ColorSet' = main_color_set
+        self._neutral_color_set: 'QSaveData.ColorSet' = neutral_color_set
 
-        self._load()
+        self._load(reload_all = True)
 
     def get_lang_data(self, path: str) -> Union[str, 'QSaveData.LangData', list[Union[str, 'QSaveData.LangData']]]:
         keys = path.split('.')
@@ -73,7 +146,7 @@ class QSaveData:
 
     def _save_extra_data(self) -> dict: return {}
 
-    def _load(self, safe_mode: bool = False, reload: list = []) -> bool:
+    def _load(self, safe_mode: bool = False, reload: list = [], reload_all: bool = False) -> bool:
         res = False
 
         if not os.path.exists(self._path):
@@ -87,27 +160,32 @@ class QSaveData:
             exc = suppress(Exception)
 
             with exc:
-                if (not reload) or ('language' in reload):
+                if 'language' in reload or reload_all:
                     self._language = data['language']
                     self._load_language_data()
                     res |= True
 
             with exc:
-                if (not reload) or ('theme' in reload):
+                if 'theme' in reload or reload_all:
                     self._theme = data['theme']
                     self._theme_variant = data['themeVariant']
                     self._load_theme_data()
                     res |= True
 
-            with exc: res |= self._load_extra_data(data, reload)
+            with exc: res |= self._load_extra_data(data, reload, reload_all)
 
         except Exception as e:
             self.save()
-            if not safe_mode: self._load()
+            if not safe_mode: return self._load()
+
+        return res
 
     def _load_language_data(self) -> None:
         with open(f'{self._lang_folder}{self._language}.json', 'r', encoding = 'utf-8') as infile:
-            self._language_data = QSaveData.LangData(json.load(infile)['data'])
+            filename = json.load(infile)['root'][self._app_type.value]
+        
+        with open(f'{self._lang_folder}{self._language}/{filename}.json', 'r', encoding = 'utf-8') as infile:
+            self._language_data = QSaveData.LangData(json.load(infile), f'{self._lang_folder}{self._language}/')
 
     def _load_theme_data(self) -> None:
         self._theme_data = ''
@@ -123,22 +201,42 @@ class QSaveData:
                 with open(f'data/lib/qtUtils/themes/{self._theme}/{self._theme_variant}/{path}/{file}.qss', 'r', encoding = 'utf-8') as infile:
                     self._theme_data += infile.read()
 
-            self._theme_data = self._theme_data.replace('{path}', f'data/lib/qtUtils/themes/{self._theme}/{self._theme_variant}/{path}/icons/'.replace('//', '/'))
+            self._theme_data = self._theme_data.replace(
+                '{path}',
+                f'data/lib/qtUtils/themes/{self._theme}/{self._theme_variant}/{path}/icons/'.replace('//', '/')
+            )
 
-    def _load_extra_data(self, extra_data: dict = {}, reload: list = []) -> bool: pass
+            self._theme_data = self._theme_data.replace('{main-color-name}', self._main_color_set.name)
+            for key, value in self._main_color_set.items:
+                self._theme_data = self._theme_data.replace(f'{{main-{key}}}', value.hex[1:])
+
+            self._theme_data = self._theme_data.replace('{neutral-color-name}', self._neutral_color_set.name)
+            for key, value in self._neutral_color_set.items:
+                self._theme_data = self._theme_data.replace(f'{{neutral-{key}}}', value.hex[1:])
+
+    def _load_extra_data(self, extra_data: dict = {}, reload: list = [], reload_all: bool = False) -> bool: return False
 
     def set_stylesheet(self, app: QBaseApplication = None) -> None:
         if not app: return
         app.setStyleSheet(self.get_stylesheet(app, QSaveData.StyleSheetMode.All))
+        app.window.setProperty('color', self._main_color_set.name)
 
     def get_stylesheet(self, app: QBaseApplication = None, mode: StyleSheetMode = StyleSheetMode.All) -> str:
         if not app: return ''
 
         match mode:
             case QSaveData.StyleSheetMode.All:
-                return self.get_stylesheet(app, QSaveData.StyleSheetMode.Global) + self.get_stylesheet(app, QSaveData.StyleSheetMode.Local)
+                return self.get_stylesheet(
+                        app,
+                        QSaveData.StyleSheetMode.Global
+                    ) + '\n' + self.get_stylesheet(
+                        app,
+                        QSaveData.StyleSheetMode.Local
+                    )
+
             case QSaveData.StyleSheetMode.Global:
                 return self._theme_data
+
             case QSaveData.StyleSheetMode.Local:
                 with open(f'{self._themes_folder}/{self._theme}.json', 'r', encoding = 'utf-8') as infile:
                     data = json.load(infile)['qss']
@@ -153,13 +251,23 @@ class QSaveData:
                     with open(f'{self._themes_folder}/{self._theme}/{self._theme_variant}/{path}/{file}.qss', 'r', encoding = 'utf-8') as infile:
                         theme_data += infile.read()
 
-                return theme_data.replace('{path}', f'{self._themes_folder}/{self._theme}/{self._theme_variant}/icons/'.replace('//', '/'))
+                theme_data = theme_data.replace('{path}', f'{self._themes_folder}/{self._theme}/{self._theme_variant}/icons/'.replace('//', '/'))
+
+                theme_data = theme_data.replace('{main-color-name}', self._main_color_set.name)
+                for key, value in self._main_color_set.items:
+                    theme_data = theme_data.replace(f'{{main-{key}}}', value.hex[1:])
+
+                theme_data = theme_data.replace('{neutral-color-name}', self._neutral_color_set.name)
+                for key, value in self._neutral_color_set.items:
+                    theme_data = theme_data.replace(f'{{neutral-{key}}}', value.hex[1:])
+
+                return theme_data
         return ''
 
     def get_icon_dir(self) -> str:
         return f'{self._themes_folder}/{self._theme}/{self._theme_variant}/icons/'
 
-    def get_icon(self, path, asQIcon = True, mode: IconMode = IconMode.Local) -> QIcon|str:
+    def get_icon(self, path: str, asQIcon = True, mode: IconMode = IconMode.Local) -> QIcon|str:
         if mode == QSaveData.IconMode.Local:
             if asQIcon: return QIcon(f'{self._themes_folder}/{self._theme}/{self._theme_variant}/icons/{path}')
             return f'{self._themes_folder}/{self._theme}/{self._theme_variant}/icons/{path}'
@@ -202,15 +310,16 @@ class QSaveData:
 
 
             self.save()
-            res = self._load(False, (reload_list if reload_list else [None]))
+            res = self._load(False, (reload_list))
             if 'theme' in reload_list: self.set_stylesheet(app)
-            QMessageBoxWithWidget(app,
-                self._language_data['QMessageBox']['information']['settingsReload']['title'],
-                self._language_data['QMessageBox']['information']['settingsReload']['text'],
-                None,
-                QMessageBoxWithWidget.Icon.Information,
-                None
-            ).exec()
+            if res:
+                QMessageBoxWithWidget(app,
+                    self._language_data['QMessageBox']['information']['settingsReload']['title'],
+                    self._language_data['QMessageBox']['information']['settingsReload']['text'],
+                    None,
+                    QMessageBoxWithWidget.Icon.Information,
+                    None
+                ).exec()
 
             return True
         return False

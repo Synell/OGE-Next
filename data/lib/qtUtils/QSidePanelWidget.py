@@ -43,9 +43,11 @@ class QSidePanelWidget(QWidget):
         self._widget.removeWidget(self._widget.widget(index))
         self.sidepanel.remove_item_at(index)
 
+        send_param = lambda i: lambda: self.set_current_index(i)
+
         for index, item in enumerate(self.sidepanel.items):
             if type(item) is QSidePanelItem:
-                item.connect = lambda: self.set_current_index(index)
+                item.connect = send_param(index)
 
         self.sidepanel.update()
 

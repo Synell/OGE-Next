@@ -64,6 +64,9 @@ class Pole:
     def set_as_new(self) -> None:
         for subject in self._subjects: subject.set_as_new()
 
+    def is_empty(self) -> bool:
+        return len(self._subjects) == 0 or all(subject.is_empty() for subject in self._subjects)
+
     def __str__(self) -> str:
         return f'{self._title} ({self._coefficient})\n\t' + '\n'.join([f'\t{matiere}' for matiere in self._subjects]).replace('\n', '\n\t')
 

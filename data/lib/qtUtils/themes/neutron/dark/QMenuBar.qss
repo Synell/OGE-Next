@@ -27,134 +27,26 @@ QMenuBar::item:pressed {
 
 
 
-/* QMenuBar - Blue */
+/* QMenuBar - Main Color */
 
-QWidget[color='blue'] QMenuBar::item:selected {
-	background-color: #0D66D0;
+QWidget[color='{main-color-name}'] QMenuBar::item:selected {
+	background-color: #{main-color-hover};
 }
 
-QWidget[color='blue'] QMenuBar::item:pressed {
-	background-color: #1B80FC;
-}
-
-
-
-/* QMenuBar - Red */
-
-QWidget[color='red'] QMenuBar::item:selected {
-	background-color: #D0150D;
-}
-
-QWidget[color='red'] QMenuBar::item:pressed {
-	background-color: #FC271B;
+QWidget[color='{main-color-name}'] QMenuBar::item:pressed {
+	background-color: #{main-color-pressed};
 }
 
 
 
-/* QMenuBar - Green */
+/* QMenuBar - Neutral Color */
 
-QWidget[color='green'] QMenuBar::item:selected {
-	background-color: #00BC0C;
-}
-
-QWidget[color='green'] QMenuBar::item:pressed {
-	background-color: #07E813;
-}
-
-
-
-/* QMenuBar - Yellow */
-
-QWidget[color='yellow'] QMenuBar::item:selected {
-	background-color: #BC9900;
-}
-
-QWidget[color='yellow'] QMenuBar::item:pressed {
-	background-color: #E8BC07;
-}
-
-
-
-/* QMenuBar - Magenta */
-
-QWidget[color='magenta'] QMenuBar::item:selected {
-	background-color: #D00DC9;
-}
-
-QWidget[color='magenta'] QMenuBar::item:pressed {
-	background-color: #FC1BF1;
-}
-
-
-
-/* QMenuBar - Cyan */
-
-QWidget[color='cyan'] QMenuBar::item:selected {
-	background-color: #009CA8;
-}
-
-QWidget[color='cyan'] QMenuBar::item:pressed {
-	background-color: #00C8D4;
-}
-
-
-
-/* QMenuBar - Orange */
-
-QWidget[color='orange'] QMenuBar::item:selected {
-	background-color: #BC6A00;
-}
-
-QWidget[color='orange'] QMenuBar::item:pressed {
-	background-color: #E88307;
-}
-
-
-
-/* QMenuBar - Pink */
-
-QWidget[color='pink'] QMenuBar::item:selected {
-	background-color: #BC0052;
-}
-
-QWidget[color='pink'] QMenuBar::item:pressed {
-	background-color: #E8076C;
-}
-
-
-
-/* QMenuBar - Lime */
-
-QWidget[color='lime'] QMenuBar::item:selected {
-	background-color: #52BC00;
-}
-
-QWidget[color='lime'] QMenuBar::item:pressed {
-	background-color: #6CE807;
-}
-
-
-
-/* QMenuBar - Turquoise */
-
-QWidget[color='turquoise'] QMenuBar::item:selected {
-	background-color: #00BC99;
-}
-
-QWidget[color='turquoise'] QMenuBar::item:pressed {
-	background-color: #07E8BC;
-}
-
-
-
-/* QMenuBar - White */
-
-QWidget[color='white'] QMenuBar::item:selected {
-	background-color: #D7D7D7;
+QWidget[color='{neutral-color-name}'] QMenuBar::item:selected {
+	background-color: #{neutral-color-hover};
 	color: #000000;
 }
 
-QWidget[color='white'] QMenuBar::item:pressed {
-	background-color: #EFEFEF;
+QWidget[color='{neutral-color-name}'] QMenuBar::item:pressed {
+	background-color: #{neutral-color-pressed};
 	color: #000000;
 }

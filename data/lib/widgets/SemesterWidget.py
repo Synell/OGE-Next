@@ -76,6 +76,8 @@ class SemesterWidget(QScrollableGridFrame):
         ue8: list[UE] = []
         ue_other: list[UE] = []
 
+        total_ue = 0
+
         for index, ue in enumerate(self._data.ues):
             ue_widget = UEWidget(ue)
             self.scroll_layout.addWidget(ue_widget, index + 1, 0)
@@ -90,7 +92,8 @@ class SemesterWidget(QScrollableGridFrame):
                 else:
                     ue_other.append(ue)
 
-        total_ue = len(self._data.ues)
+                total_ue += 1
+
         ue10_count = len(ue10)
         ue8_count = len(ue8)
 

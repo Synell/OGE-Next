@@ -1,0 +1,77 @@
+{
+    "title": "OGE Next > Settings",
+    "QSidePanel": {
+        "appearance": {
+            "title": "Appearance",
+            "QLabel": {
+                "language": {
+                    "title": "Language",
+                    "description": "Select a display language for OGE Next."
+                },
+                "theme": {
+                    "title": "Theme",
+                    "description": "Select a display theme for OGE Next."
+                }
+            },
+            "QNamedComboBox": {
+                "language": "Language",
+                "theme": "Theme",
+                "themeVariant": "Theme Variant"
+            }
+        },
+        "updates": {
+            "title": "Updates",
+            "QLabel": {
+                "checkForUpdates": {
+                    "title": "Check for Updates",
+                    "description": "Determines how often OGE Next checks for updates."
+                }
+            },
+            "QNamedComboBox": {
+                "checkForUpdates": {
+                    "title": "Check for Updates",
+                    "values": {
+                        "never": "Never",
+                        "daily": "Daily",
+                        "weekly": "Weekly",
+                        "monthly": "Monthly",
+                        "atLaunch": "At Launch"
+                    }
+                }
+            },
+            "QToggleButton": {
+                "newAppsAutoUpdate": "Auto Update"
+            }
+        },
+        "data": {
+            "title": "Data",
+            "QLabel": {
+                "clearData": {
+                    "title": "Clear Data",
+                    "description": "Clears all data stored by OGE Next and restarts the app."
+                },
+                "importData": {
+                    "title": "Import Data",
+                    "description": "Imports data from a file and restarts the app. This will overwrite all data."
+                },
+                "exportData": {
+                    "title": "Export Data",
+                    "description": "Exports data to a file."
+                }
+            },
+            "QPushButton": {
+                "clearData": "Clear Data",
+                "importData": "Import Data",
+                "exportData": "Export Data"
+            },
+            "QFileDialog": {
+                "importData": "OGE Next > Settings > Data > Import Data",
+                "exportData": "OGE Next > Settings > Data > Export Data"
+            }
+        }
+    },
+    "QPushButton": {
+        "cancel": "Cancel",
+        "apply": "Apply"
+    }
+}

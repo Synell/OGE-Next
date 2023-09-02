@@ -18,6 +18,11 @@ class QDragListItem(QGridFrame):
         super().__init__(*args, **kwargs)
         self.setCursor(self.normal_cursor)
 
+        self.mouse_click_x = 0
+        self.mouse_click_y = 0
+        self.old_x = 0
+        self.old_y = 0
+
     def mouseMoveEvent(self, event: QMouseEvent) -> None:
         if (not (event.buttons() == Qt.MouseButton.LeftButton)): return
         if (self._is_minimum_distance_riched(event)): return

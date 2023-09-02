@@ -1,0 +1,77 @@
+{
+    "title": "OGE Next > Paramètres",
+    "QSidePanel": {
+        "appearance": {
+            "title": "Apparence",
+            "QLabel": {
+                "language": {
+                    "title": "Langage",
+                    "description": "Sélectionnez un langage à afficher pour OGE Next."
+                },
+                "theme": {
+                    "title": "Thème",
+                    "description": "Sélectionnez un thème à afficher pour OGE Next."
+                }
+            },
+            "QNamedComboBox": {
+                "language": "Langage",
+                "theme": "Thème",
+                "themeVariant": "Variante du Thème"
+            }
+        },
+        "updates": {
+            "title": "Mises à Jour",
+            "QLabel": {
+                "checkForUpdates": {
+                    "title": "Vérifier les Mises à Jour",
+                    "description": "Détermine la fréquence de vérification des mises à jour de OGE Next."
+                }
+            },
+            "QNamedComboBox": {
+                "checkForUpdates": {
+                    "title": "Vérifier les Mises à Jour",
+                    "values": {
+                        "never": "Jamais",
+                        "daily": "Quotidienne",
+                        "weekly": "Hebdomadaire",
+                        "monthly": "Mensuelle",
+                        "atLaunch": "Au lancement"
+                    }
+                }
+            },
+            "QToggleButton": {
+                "newAppsAutoUpdate": "Mise à Jour Automatique"
+            }
+        },
+        "data": {
+            "title": "Données",
+            "QLabel": {
+                "clearData": {
+                    "title": "Effacer les Données",
+                    "description": "Efface toutes les données et redémarre l'application."
+                },
+                "importData": {
+                    "title": "Importer les Données",
+                    "description": "Importe des données à partir d'un fichier et redémarre l'application."
+                },
+                "exportData": {
+                    "title": "Exporter les Données",
+                    "description": "Exporte les données vers un fichier."
+                }
+            },
+            "QPushButton": {
+                "clearData": "Effacer les Données",
+                "importData": "Importer les Données",
+                "exportData": "Exporter les Données"
+            },
+            "QFileDialog": {
+                "importData": "OGE Next > Paramètres > Données > Importer les Données",
+                "exportData": "OGE Next > Paramètres > Données > Exporter les Données"
+            }
+        }
+    },
+    "QPushButton": {
+        "cancel": "Annuler",
+        "apply": "Appliquer"
+    }
+}

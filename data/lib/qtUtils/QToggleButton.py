@@ -4,6 +4,8 @@
 from PySide6.QtCore import Qt, QSize, QPoint, QPointF, QRectF, QEasingCurve, QPropertyAnimation, QSequentialAnimationGroup, Slot, Property
 from PySide6.QtWidgets import QCheckBox
 from PySide6.QtGui import QColor, QBrush, QPaintEvent, QPen, QPainter
+from . import QBaseApplication
+from .QssSelector import QssSelector
 #----------------------------------------------------------------------
 
     # Class
@@ -11,10 +13,57 @@ class QToggleButton(QCheckBox):
     _transparent_pen = QPen(Qt.GlobalColor.transparent)
     _light_grey_pen = QPen(Qt.GlobalColor.lightGray)
 
-    checked_color = '#0466C7'
-    checked_color_handle = '#FBFEFB'
-    normal_color = '#44999999'
-    normal_color_handle = '#5D5D5D'
+    _checked_color = '#0466C7'
+    _checked_disabled_color = '#0466C7'
+
+    _checked_color_handle = '#FBFEFB'
+    _checked_disabled_color_handle = '#FBFEFB'
+
+    _normal_color = '#44999999'
+    _normal_disabled_color = '#44999999'
+
+    _normal_color_handle = '#5D5D5D'
+    _normal_disabled_color_handle = '#5D5D5D'
+
+    @staticmethod
+    def init(app: QBaseApplication) -> None:
+        QToggleButton._normal_color = app.qss.search(
+            QssSelector(widget = 'QWidget', attributes = {'QToggleButton': True}),
+            QssSelector(widget = 'QCheckBox')
+        )['color']
+        QToggleButton._normal_disabled_color = app.qss.search(
+            QssSelector(widget = 'QWidget', attributes = {'QToggleButton': True}),
+            QssSelector(widget = 'QCheckBox', states = ['disabled'])
+        )['color']
+
+        QToggleButton._normal_color_handle = app.qss.search(
+            QssSelector(widget = 'QWidget', attributes = {'QToggleButton': True}),
+            QssSelector(widget = 'QCheckBox', items = ['handle'])
+        )['color']
+        QToggleButton._normal_disabled_color_handle = app.qss.search(
+            QssSelector(widget = 'QWidget', attributes = {'QToggleButton': True}),
+            QssSelector(widget = 'QCheckBox', states = ['disabled'], items = ['handle'])
+        )['color']
+
+        QToggleButton._checked_color = app.qss.search(
+            QssSelector(widget = 'QWidget', attributes = {'color': app.window.property('color')}),
+            QssSelector(widget = 'QWidget', attributes = {'QToggleButton': True}),
+            QssSelector(widget = 'QCheckBox', states = ['checked'])
+        )['color']
+        QToggleButton._checked_disabled_color = app.qss.search(
+            QssSelector(widget = 'QWidget', attributes = {'color': app.window.property('color')}),
+            QssSelector(widget = 'QWidget', attributes = {'QToggleButton': True}),
+            QssSelector(widget = 'QCheckBox', states = ['checked', 'disabled'])
+        )['color']
+
+        QToggleButton._checked_color_handle = app.qss.search(
+            QssSelector(widget = 'QWidget', attributes = {'QToggleButton': True}),
+            QssSelector(widget = 'QCheckBox', states = ['checked'], items = ['handle'])
+        )['color']
+        QToggleButton._checked_disabled_color_handle = app.qss.search(
+            QssSelector(widget = 'QWidget', attributes = {'QToggleButton': True}),
+            QssSelector(widget = 'QCheckBox', states = ['checked', 'disabled'], items = ['handle'])
+        )['color']
 
     def __init__(self, parent = None):
         super().__init__(parent)
@@ -24,11 +73,17 @@ class QToggleButton(QCheckBox):
         self.setFixedWidth(58)
         self.setFixedHeight(45)
 
-        self._bar_brush = QBrush(QColor(self.normal_color))
-        self._bar_checked_brush = QBrush(QColor(self.checked_color))
+        self._bar_brush = QBrush(QColor(self._normal_color))
+        self._bar_disabled_brush = QBrush(QColor(self._normal_disabled_color))
 
-        self._handle_brush = QBrush(QColor(self.normal_color_handle))
-        self._handle_checked_brush = QBrush(QColor(self.checked_color_handle))
+        self._bar_checked_brush = QBrush(QColor(self._checked_color))
+        self._bar_checked_disabled_brush = QBrush(QColor(self._checked_disabled_color))
+
+        self._handle_brush = QBrush(QColor(self._normal_color_handle))
+        self._handle_disabled_brush = QBrush(QColor(self._normal_disabled_color_handle))
+
+        self._handle_checked_brush = QBrush(QColor(self._checked_color_handle))
+        self._handle_checked_disabled_brush = QBrush(QColor(self._checked_disabled_color_handle))
 
         self.setContentsMargins(8, 0, 8, 0)
         self._handle_position = 0
@@ -59,39 +114,40 @@ class QToggleButton(QCheckBox):
         self.animations_group.start()
 
     def paintEvent(self, e: QPaintEvent):
-
-        contRect = self.contentsRect()
-        handleRadius = round(0.12 * contRect.height())
+        cont_rect = self.contentsRect()
+        handle_radius = round(0.12 * cont_rect.height())
 
         p = QPainter(self)
         p.setRenderHint(QPainter.RenderHint.Antialiasing)
 
         p.setPen(self._transparent_pen)
-        barRect = QRectF(
+        bar_rect = QRectF(
             0, 0,
-            contRect.width() - handleRadius, 0.40 * contRect.height()
+            cont_rect.width() - handle_radius, 0.40 * cont_rect.height()
         )
-        barRect.moveCenter(QPointF(contRect.center()))
-        rounding = barRect.height() / 2
+        bar_rect.moveCenter(QPointF(cont_rect.center()))
+        rounding = bar_rect.height() / 2
 
-        trailLength = contRect.width() - 4.5 * handleRadius
+        trail_length = cont_rect.width() - 4.5 * handle_radius
 
-        xPos = contRect.x() + handleRadius * 2 + trailLength * self._handle_position
+        x_pos = cont_rect.x() + handle_radius * 2 + trail_length * self._handle_position
 
         if self.isChecked():
-            p.setBrush(self._bar_checked_brush)
-            p.drawRoundedRect(barRect, rounding, rounding)
-            p.setBrush(self._handle_checked_brush)
+            p.setBrush(self._bar_checked_brush if self.isEnabled() else self._bar_checked_disabled_brush)
+            p.drawRoundedRect(bar_rect, rounding, rounding)
+            p.setBrush(self._handle_checked_brush if self.isEnabled() else self._handle_checked_disabled_brush)
 
         else:
-            p.setBrush(self._bar_brush)
-            p.drawRoundedRect(barRect, rounding, rounding)
+            p.setBrush(self._bar_brush if self.isEnabled() else self._bar_disabled_brush)
+            p.drawRoundedRect(bar_rect, rounding, rounding)
             p.setPen(self._light_grey_pen)
-            p.setBrush(self._handle_brush)
+            p.setBrush(self._handle_brush if self.isEnabled() else self._handle_disabled_brush)
 
         p.drawEllipse(
-            QPointF(xPos, barRect.center().y()),
-            handleRadius, handleRadius)
+            QPointF(x_pos, bar_rect.center().y()),
+            handle_radius,
+            handle_radius
+        )
 
         p.end()
 
