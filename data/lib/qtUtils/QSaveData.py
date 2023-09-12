@@ -75,8 +75,13 @@ class QSaveData:
                     if value.startswith('#ref:'):
                         file = value.replace('#ref:', '').replace(' ', '').replace('\\', '/')
 
+                        if not os.path.exists(f'{cwd}{file}.json'): raise Exception(f'Cannot find {cwd}{file}.json')
                         with open(f'{cwd}{file}.json', 'r', encoding = 'utf-8') as infile:
-                            d[key] = QSaveData.LangData(json.load(infile), cwd)
+                            try:
+                                d[key] = QSaveData.LangData(json.load(infile), cwd)
+
+                            except Exception as e:
+                                raise Exception(f'Error in {cwd}{file}.json:\n{e}')
 
                         continue
 
@@ -159,11 +164,14 @@ class QSaveData:
 
             exc = suppress(Exception)
 
-            with exc:
+            try:
                 if 'language' in reload or reload_all:
                     self._language = data['language']
                     self._load_language_data()
                     res |= True
+
+            except Exception as e:
+                print(e)
 
             with exc:
                 if 'theme' in reload or reload_all:

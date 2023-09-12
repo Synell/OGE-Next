@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------
 
     # Libraries
-from PySide6.QtCore import Qt, QSize, QPoint, QPointF, QRectF, QEasingCurve, QPropertyAnimation, QSequentialAnimationGroup, Slot, Property
+from PySide6.QtCore import Qt, QSize, QPoint, QPointF, QRectF, QEasingCurve, QPropertyAnimation, QSequentialAnimationGroup, Slot, Property, Signal
 from PySide6.QtWidgets import QCheckBox
 from PySide6.QtGui import QColor, QBrush, QPaintEvent, QPen, QPainter
 from . import QBaseApplication
@@ -10,6 +10,8 @@ from .QssSelector import QssSelector
 
     # Class
 class QToggleButton(QCheckBox):
+    toggled = Signal(bool)
+
     _transparent_pen = QPen(Qt.GlobalColor.transparent)
     _light_grey_pen = QPen(Qt.GlobalColor.lightGray)
 
@@ -105,7 +107,9 @@ class QToggleButton(QCheckBox):
         return self.contentsRect().contains(pos)
 
     @Slot(int)
-    def setup_animation(self, value):
+    def setup_animation(self, value: bool) -> None:
+        self.toggled.emit(value)
+
         self.animations_group.stop()
         if value:
             self.animation.setEndValue(1)

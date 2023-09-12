@@ -2,12 +2,15 @@
 
     # Libraries
 from PySide6.QtWidgets import QLabel
+from PySide6.QtCore import Signal
 from .QGridFrame import QGridFrame
 from .QToggleButton import QToggleButton
 #----------------------------------------------------------------------
 
     # Class
 class QNamedToggleButton(QGridFrame):
+    toggled = Signal(bool)
+
     def __init__(self, parent = None, text: str = '', checked: bool = False, min_width: bool = False):
         super().__init__(parent)
         self.setProperty('QNamedToggleButton', True)
@@ -17,6 +20,7 @@ class QNamedToggleButton(QGridFrame):
         self.grid_layout.setContentsMargins(0, 0, 0, 0)
 
         self.toggle_button = QToggleButton()
+        self.toggle_button.toggled.connect(self.toggled.emit)
         self.label = QLabel()
 
         self.toggle_button.setChecked(checked)
