@@ -56,4 +56,6 @@ from .QSubMainWindow import QSubMainWindow
 from .QSubGridMainWindow import QSubGridMainWindow
 from .QSubScrollableGridMainWindow import QSubScrollableGridMainWindow
 from .DelayedSignal import DelayedSignal
+from .QHexSpinBox import QHexSpinBox
+from .QNamedHexSpinBox import QNamedHexSpinBox
 #----------------------------------------------------------------------

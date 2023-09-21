@@ -1,0 +1,80 @@
+
+/* QNamedHexSpinBox */
+
+QWidget[QNamedHexSpinBox=true] QLineEdit {
+	height: 36px;
+	border: none;
+	border-bottom: 2px solid transparent;
+	background-color: #262626;
+	font-size: 12px;
+	font-weight: bold;
+	padding-top: 16px;
+	padding-left: 16px;
+	padding-right: 12px;
+}
+
+QWidget[QNamedHexSpinBox=true] QLineEdit:hover {
+	background-color: #333333;
+}
+
+QWidget[QNamedHexSpinBox=true] QLineEdit:focus {
+	border-bottom: 2px solid #8AAEDB;
+	background-color: #333333;
+}
+
+QWidget[QNamedHexSpinBox=true] QLabel {
+	color: #909090;
+	height: 50px;
+	border: none;
+	font-size: 12px;
+	padding-bottom: 24px;
+	padding-left: 16px;
+}
+
+QWidget[QNamedHexSpinBox=true] QLabel[hover=true] {
+	color: #909090;
+}
+
+QWidget[QNamedHexSpinBox=true] QLabel[focus=true] {
+	color: #3C6FB2;
+}
+
+QWidget[QNamedHexSpinBox=true][dark=true] QLineEdit {
+	background-color: #1A1A1A;
+}
+
+
+
+/* QNamedHexSpinBox - Wide */
+
+QWidget[wide=true] QWidget[QNamedHexSpinBox=true] QLineEdit, QWidget[QNamedHexSpinBox=true][wide=true] QLineEdit {
+	min-width: 6em;
+}
+
+QWidget[wider=true] QWidget[QNamedHexSpinBox=true] QLineEdit, QWidget[QNamedHexSpinBox=true][wider=true] QLineEdit {
+	min-width: 12em;
+}
+
+
+
+/* QNamedHexSpinBox - Main Color */
+
+QWidget[color='{main-color-name}'] QWidget[QNamedHexSpinBox=true][color='main'] QLineEdit:focus, QWidget[QNamedHexSpinBox=true][color='{main-color-name}'] QLineEdit:focus {
+	border-bottom-color: #{main-color-pressed};
+}
+
+QWidget[color='{main-color-name}'] QWidget[QNamedHexSpinBox=true][color='main'] QLabel[focus=true], QWidget[QNamedHexSpinBox=true][color='{main-color-name}'] QLabel[focus=true] {
+	color: #{main-color-pressed};
+}
+
+
+
+/* QNamedHexSpinBox - Neutral Color */
+
+QWidget[color='{neutral-color-name}'] QWidget[QNamedHexSpinBox=true][color='main'] QLineEdit:focus, QWidget[QNamedHexSpinBox=true][color='{neutral-color-name}'] QLineEdit:focus {
+	border-bottom-color: #{neutral-color-pressed};
+}
+
+QWidget[color='{neutral-color-name}'] QWidget[QNamedHexSpinBox=true][color='main'] QLabel[focus=true], QWidget[QNamedHexSpinBox=true][color='{neutral-color-name}'] QLabel[focus=true] {
+	color: #{neutral-color-pressed};
+}

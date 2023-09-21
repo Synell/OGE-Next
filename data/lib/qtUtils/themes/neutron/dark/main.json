@@ -42,6 +42,7 @@
         "QNamedComboBox",
         "QNamedSpinBox",
         "QNamedDoubleSpinBox",
+        "QNamedHexSpinBox",
         "QFileButton",
         "QIconWidget",
         "QFileZone",

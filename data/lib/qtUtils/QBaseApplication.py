@@ -19,6 +19,7 @@ from .QNamedTextBrowser import QNamedTextBrowser
 from .QNamedComboBox import QNamedComboBox
 from .QNamedSpinBox import QNamedSpinBox
 from .QNamedDoubleSpinBox import QNamedDoubleSpinBox
+from .QNamedHexSpinBox import QNamedHexSpinBox
 from .QToggleButton import QToggleButton
 from .QFileButton import QFileButton
 from .QLinkLabel import QLinkLabel
@@ -164,6 +165,7 @@ class QBaseApplication(QApplication):
         QNamedComboBox.init(self)
         QNamedSpinBox.init(self)
         QNamedDoubleSpinBox.init(self)
+        QNamedHexSpinBox.init(self)
         QFileButton.init(self)
         QToggleButton.init(self)
 
