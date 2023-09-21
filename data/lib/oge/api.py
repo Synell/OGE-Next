@@ -235,7 +235,10 @@ class OGE(QObject):
                 matiere_children: list[Tag]|ResultSet = matiere_tag.pop(0).find_all('span')
                 matiere = matiere_children[0].text.strip().replace('\n', '')
                 if len(matiere_children) == 1: matiere_coeff = 0.0 # bc OGE sucks
-                else: matiere_coeff = float(matiere_children[1].text.strip().replace('\n', '').replace('(', '').replace(')', ''))
+                else:
+                    s = matiere_children[1].text.strip().replace('\n', '').replace('(', '').replace(')', '')
+                    if s: matiere_coeff: matiere_coeff = float(s)
+                    else: matiere_coeff = 0.0
                 # print('>>', matiere, matiere_coeff)
 
                 note_groups: list[GradeGroup] = []
