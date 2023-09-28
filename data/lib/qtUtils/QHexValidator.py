@@ -9,6 +9,7 @@ from PySide6.QtGui import QValidator
 class QHexValidator(QValidator):
     def __init__(self, parent: QObject = None) -> None:
         super().__init__(parent)
+        self._parent = parent
         self._bottom = 0
         self._top = 0xFFFFFFFF
 

@@ -8,13 +8,13 @@ from .QHexValidator import QHexValidator
 
     # Class
 class QHexSpinBox(QLineEdit):
-    value_changed = Signal(int)
+    value_changed = Signal(object)
 
     def __init__(self, parent: QWidget = None, *args, **kwargs) -> None:
         super().__init__(parent, *args, **kwargs)
         self._validator = QHexValidator(self)
         self.setValidator(self._validator)
-        self.textChanged.connect(self.value_changed.emit)
+        self.textChanged.connect(lambda h: self.value_changed.emit(int(h, 16)))
 
     def set_minimum(self, minimum: int) -> None:
         self._validator.set_bottom(minimum)
@@ -29,5 +29,5 @@ class QHexSpinBox(QLineEdit):
         return int(self.text(), 16)
 
     def set_value(self, value: int) -> None:
-        self.setText(f'{value:08X}')
+        self.setText(f'{value:X}')
 #----------------------------------------------------------------------

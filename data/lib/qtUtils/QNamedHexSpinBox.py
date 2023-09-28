@@ -11,7 +11,7 @@ from .QHexSpinBox import QHexSpinBox
 
     # Class
 class QNamedHexSpinBox(QGridWidget):
-    value_changed = Signal(int)
+    value_changed = Signal(object)
 
     _normal_color = '#FFFFFF'
     _hover_color = '#FFFFFF'

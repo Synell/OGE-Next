@@ -17,7 +17,7 @@ from data.lib import *
     # Class
 class ApplicationError(QApplication):
     def __init__(self, err: str = ''):
-        super().__init__(argv)
+        super().__init__(sys.argv)
         self.window = QMainWindow()
         self.window.setWindowTitle('OGE Next - Error')
         QMessageBoxWithWidget(

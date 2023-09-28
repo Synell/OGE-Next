@@ -2,7 +2,7 @@
 
     # Libraries
 from PySide6.QtWidgets import QSpinBox, QLabel
-from PySide6.QtCore import Qt, QEvent
+from PySide6.QtCore import Qt, QEvent, Signal
 from .QGridWidget import QGridWidget
 from . import QBaseApplication
 from .QssSelector import QssSelector
@@ -10,6 +10,8 @@ from .QssSelector import QssSelector
 
     # Class
 class QNamedSpinBox(QGridWidget):
+    value_changed = Signal(int)
+
     _normal_color = '#FFFFFF'
     _hover_color = '#FFFFFF'
     _focus_color = '#FFFFFF'
@@ -53,6 +55,8 @@ class QNamedSpinBox(QGridWidget):
 
         self.leaveEvent()
 
+        self.spin_box.valueChanged.connect(self.value_changed.emit)
+
     def enterEvent(self, event: QEvent = None) -> None:
         self.label.setProperty('inputhover', True)
         if not self.label.property('inputfocus'): self.label.setStyleSheet(f'color: {self._hover_color}')
@@ -78,16 +82,28 @@ class QNamedSpinBox(QGridWidget):
     def setValue(self, value: int) -> None:
         self.spin_box.setValue(value)
 
+    def set_value(self, value: int) -> None:
+        self.spin_box.setValue(value)
+
     def range(self) -> tuple[int, int]:
         return (self.spin_box.minimum(), self.spin_box.maximum())
 
     def setRange(self, min_value: int, max_value: int) -> None:
         self.spin_box.setRange(min_value, max_value)
 
+    def set_range(self, min_value: int, max_value: int) -> None:
+        self.spin_box.setRange(min_value, max_value)
+
     def singleStep(self) -> int:
+        return self.spin_box.singleStep()
+    
+    def single_step(self) -> int:
         return self.spin_box.singleStep()
 
     def setSingleStep(self, step: int) -> None:
+        self.spin_box.setSingleStep(step)
+
+    def set_single_step(self, step: int) -> None:
         self.spin_box.setSingleStep(step)
 
     def suffix(self) -> str:
@@ -96,10 +112,16 @@ class QNamedSpinBox(QGridWidget):
     def setSuffix(self, suffix: str) -> None:
         self.spin_box.setSuffix(suffix)
 
+    def set_suffix(self, suffix: str) -> None:
+        self.spin_box.setSuffix(suffix)
+
     def prefix(self) -> str:
         return self.spin_box.prefix()
 
     def setPrefix(self, prefix: str) -> None:
+        self.spin_box.setPrefix(prefix)
+
+    def set_prefix(self, prefix: str) -> None:
         self.spin_box.setPrefix(prefix)
 
     def minimum(self) -> int:
@@ -108,16 +130,29 @@ class QNamedSpinBox(QGridWidget):
     def setMinimum(self, minimum: int) -> None:
         self.spin_box.setMinimum(minimum)
 
+    def set_minimum(self, minimum: int) -> None:
+        self.spin_box.setMinimum(minimum)
+
     def maximum(self) -> int:
         return self.spin_box.maximum()
 
     def setMaximum(self, maximum: int) -> None:
         self.spin_box.setMaximum(maximum)
 
+    def set_maximum(self, maximum: int) -> None:
+        self.spin_box.setMaximum(maximum)
+
     def setReadOnly(self, read_only: bool) -> None:
         self.spin_box.setReadOnly(read_only)
 
+    def set_read_only(self, read_only: bool) -> None:
+        self.spin_box.setReadOnly(read_only)
+
     def setEnabled(self, enabled: bool) -> None:
+        self.spin_box.setEnabled(enabled)
+        self.label.setEnabled(enabled)
+
+    def set_enabled(self, enabled: bool) -> None:
         self.spin_box.setEnabled(enabled)
         self.label.setEnabled(enabled)
 #----------------------------------------------------------------------
