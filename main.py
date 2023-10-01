@@ -23,8 +23,8 @@ class ApplicationError(QApplication):
         QMessageBoxWithWidget(
             app = self,
             title = 'OGE Next - Error',
-            text = 'Oups, something went wrong...',
-            informative_text = str(err),
+            text = 'Oups, something went wrong...\nPlease check the log/error.log file to see what happened.',
+            informative_text = f'Error:\n{err}',
             icon = QMessageBoxWithWidget.Icon.Critical
         ).exec()
         sys.exit()
@@ -85,9 +85,8 @@ def main() -> None:
             f.write(str(err) + '\n\n')
             f.write(traceback.format_exc())
 
-        if app:
-            if app.thread().isRunning(): app.thread().exit()
-            if app.thread().isRunning(): app.thread().terminate()
+        if app := QApplication.instance():
+            if app.thread().isRunning(): app.shutdown()
 
         app = ApplicationError(err)
 #----------------------------------------------------------------------
