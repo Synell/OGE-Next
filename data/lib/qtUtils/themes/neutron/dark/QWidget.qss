@@ -12,10 +12,6 @@ QWidget[light=true], QFrame[light=true], QFrame[light=true] QFrame, QWidget[ligh
 	background-color: #262626;
 }
 
-QWidget[transparent=true] {
-	background-color: transparent;
-}
-
 
 
 /* QWidget - Global Rounded */
@@ -59,7 +55,7 @@ QWidget[side='all-hover']:hover {
 
 
 /* QWidget - Transparent */
-QWidget[background='transparent'] {
+QWidget[background='transparent'], QFrame[background='transparent'], QWidget[transparent=true], QFrame[transparent=true] {
 	background-color: transparent;
 }
 

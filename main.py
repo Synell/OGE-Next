@@ -1,5 +1,10 @@
 #----------------------------------------------------------------------
 
+    # Initial Setup
+import os, sys
+os.chdir(os.path.dirname(os.path.abspath(__file__ if sys.argv[0].endswith('.py') else sys.executable)))
+#----------------------------------------------------------------------
+
     # Libraries
 from PySide6.QtGui import *
 from PySide6.QtCore import *
@@ -7,7 +12,7 @@ from PySide6.QtWidgets import *
 from PySide6.QtSvg import *
 from PySide6.QtSvgWidgets import *
 from math import *
-import os, json, zipfile, shutil, traceback, sys, subprocess, platform
+import json, zipfile, shutil, traceback, subprocess, platform
 from urllib.request import urlopen, Request
 from datetime import datetime, timedelta
 from app import Application
@@ -35,8 +40,6 @@ def main() -> None:
     app = None
 
     try:
-        os.chdir(os.path.dirname(os.path.abspath(__file__ if sys.argv[0].endswith('.py') else sys.executable)))
-
         if os.path.exists('./#tmp#/'):
             try:
                 for file in os.listdir('./#tmp#'):

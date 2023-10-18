@@ -94,7 +94,8 @@ class QSaveData:
             data = self
 
             for key in keys:
-                data = data[key]
+                try: data = data[key]
+                except KeyError as e: raise Exception(f'Cannot find {e.args[0]} of {path}')
 
             return data
 
@@ -140,7 +141,8 @@ class QSaveData:
         data = self._language_data
 
         for key in keys:
-            data = data[key]
+            try: data = data[key]
+            except KeyError as e: raise Exception(f'Cannot find {e.args[0]} of {path}')
 
         return data
 

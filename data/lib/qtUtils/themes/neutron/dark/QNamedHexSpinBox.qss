@@ -45,6 +45,25 @@ QWidget[QNamedHexSpinBox=true][dark=true] QLineEdit {
 
 
 
+QWidget[QNamedHexSpinBox=true] QPushButton {
+	background-color: #{main-color-normal};
+	margin-right: 16px;
+}
+
+QWidget[QNamedHexSpinBox=true] QPushButton:hover {
+	background-color: #{main-color-hover};
+}
+
+QWidget[QNamedHexSpinBox=true] QPushButton:pressed {
+	background-color: #{main-color-pressed};
+}
+
+QWidget[QNamedHexSpinBox=true] QPushButton:disabled {
+	background-color: #{main-color-disabled};
+}
+
+
+
 /* QNamedHexSpinBox - Wide */
 
 QWidget[wide=true] QWidget[QNamedHexSpinBox=true] QLineEdit, QWidget[QNamedHexSpinBox=true][wide=true] QLineEdit {
