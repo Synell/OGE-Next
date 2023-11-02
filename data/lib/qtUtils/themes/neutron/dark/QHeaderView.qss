@@ -8,6 +8,7 @@ QHeaderView {
 	border-radius: 5px;
 	/* padding: 2px 16px; */
 	height: 32px;
+	font-size: 13px;
 }
 
 QHeaderView::section {

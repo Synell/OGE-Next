@@ -8,6 +8,7 @@ QDockWidget {
 	border-color: #4f5b62;
 	titlebar-close-icon: url({path}dockwidget/close.png);
 	titlebar-normal-icon:  url({path}dockwidget/sendToFront.png);
+	font-size: 13px;
 }
 
 QDockWidget QFrame, QDockWidget QWidget {

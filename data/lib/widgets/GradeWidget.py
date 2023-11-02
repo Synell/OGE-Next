@@ -25,8 +25,8 @@ class GradeWidget(OGEWidget):
             iw = QIconWidget(self, self._OGE_NEW_ICON, QSize(16, 16), False)
             self.grid_layout.addWidget(iw, 0, self.grid_layout.count(), Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
 
-        label = QLabel(f'{grade.value}/{grade.total}')
-        label.setStyleSheet(f'color: {GradeWidget.perc2color(grade.value / grade.total)}')
+        label = QLabel(f'{grade.value if grade.value else "?"}/{grade.total}')
+        label.setStyleSheet(f'color: {GradeWidget.perc2color(grade.value / grade.total) if not grade.has_missing_data else "#00DEFF"}')
         label.setProperty('class', 'grade')
         self.grid_layout.addWidget(label, 0, self.grid_layout.count())
 

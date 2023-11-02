@@ -20,7 +20,7 @@ class Grade:
 
     @property
     def value_20(self) -> str:
-        return self._value * (20 / self._total)
+        return (self._value * (20 / self._total)) if self._value is not None and self._total is not None else None
 
     @property
     def coefficient(self) -> float:

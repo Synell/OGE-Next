@@ -17,6 +17,7 @@ QMenu::item {
 	min-width: 192px;
 	padding-left: 16px;
 	padding-right: 16px;
+	font-size: 14px;
 }
 
 QMenu::item:disabled {

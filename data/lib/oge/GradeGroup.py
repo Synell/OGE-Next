@@ -32,8 +32,9 @@ class GradeGroup:
 
         grade, coefficient = 0, 0
         for grade_ in self._grades:
-            grade += grade_.value_20 * grade_.coefficient
-            coefficient += grade_.coefficient
+            if not grade_.has_missing_data:
+                grade += grade_.value_20 * grade_.coefficient
+                coefficient += grade_.coefficient
 
         if coefficient == 0: return None
 

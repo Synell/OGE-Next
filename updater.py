@@ -1,5 +1,10 @@
 #----------------------------------------------------------------------
 
+    # Initial Setup
+import os, sys
+os.chdir(os.path.dirname(os.path.abspath(__file__ if sys.argv[0].endswith('.py') else sys.executable)))
+#----------------------------------------------------------------------
+
     # Libraries
 from PySide6.QtGui import *
 from PySide6.QtCore import *
@@ -7,7 +12,7 @@ from PySide6.QtWidgets import *
 from PySide6.QtSvg import *
 from PySide6.QtSvgWidgets import *
 from datetime import datetime, timedelta
-import os, base64, math, sys, subprocess, platform
+import base64, math, subprocess, platform
 from urllib.request import urlopen, Request
 from time import sleep
 from data.lib.qtUtils import *
@@ -21,8 +26,8 @@ from data.lib.globalinfo import *
 class QUpdater(QBaseApplication):
     UPDATE_LINK = ''
 
-    def __init__(self,  platform: QPlatform):
-        super().__init__(platform, app_type = QAppType.Updater)
+    def __init__(self, platform: QPlatform) -> None:
+        super().__init__(platform = platform, app_type = QAppType.Updater, single_instance = True)
 
         self.setOrganizationName('Synel')
         # self.setApplicationDisplayName(Info.application_name)

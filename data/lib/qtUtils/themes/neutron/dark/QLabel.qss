@@ -4,6 +4,7 @@
 QLabel {
 	color: #fefefe;
 	background-color: transparent;
+	font-size: 13px;
 	/*font-family: "Arial";*/
 }
 

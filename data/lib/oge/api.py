@@ -268,7 +268,8 @@ class OGE(QObject):
                                     log.append(f'Couldn\'t find valid children (while note_tag.children) in source code!\nChildren:\n{children.__repr__()}')
                                     continue
 
-                                note = float(child.text.strip().replace('\n', ''))
+                                try: note = float(child.text.strip().replace('\n', ''))
+                                except: note = None # bc OGE sucks
 
                                 child = children.pop(0)
                                 total = float(child.text.replace('\n', '').replace('/', '').strip())

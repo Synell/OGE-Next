@@ -7,6 +7,7 @@ QTreeView {
 	border-radius: 5px;
 	padding: 6px 6px;
 	border: 1px solid #313131;
+	font-size: 13px;
 }
 
 QTreeView::item {
