@@ -5,11 +5,12 @@ from PySide6.QtWidgets import QDialog, QPushButton
 from PySide6.QtCore import Qt
 from .QGridFrame import QGridFrame
 from .QLoginWidget import QLoginWidget
+from . import QSaveData
 #----------------------------------------------------------------------
 
     # Class
 class QLoginDialog(QDialog):
-    def __init__(self, parent = None , lang: dict = {}, username: str = '', password: str = '', remember_checkbox: bool = True, remember: bool = False):
+    def __init__(self, parent = None , lang: QSaveData.LangData = {}, username: str = '', password: str = '', remember_checkbox: bool = True, remember: bool = False):
         super().__init__(parent)
 
         self.setWindowTitle(lang['title'])
@@ -40,14 +41,14 @@ class QLoginDialog(QDialog):
         right_buttons.grid_layout.setSpacing(16)
         right_buttons.grid_layout.setContentsMargins(0, 0, 0, 0)
 
-        button = QPushButton(lang['QPushButton']['cancel'])
+        button = QPushButton(lang.get_data('QPushButton.cancel'))
         button.setCursor(Qt.CursorShape.PointingHandCursor)
         button.clicked.connect(self.reject)
         button.setProperty('color', 'white')
         button.setProperty('transparent', True)
         right_buttons.grid_layout.addWidget(button, 0, 0)
 
-        button = QPushButton(lang['QPushButton']['login'])
+        button = QPushButton(lang.get_data('QPushButton.login'))
         button.setCursor(Qt.CursorShape.PointingHandCursor)
         button.clicked.connect(self.accept)
         button.setProperty('color', 'main')

@@ -35,7 +35,6 @@ class UEWidget(OGEWidget):
             if avg is None or ue.is_only_missing_coefficient or ue.has_missing_pole_data:
                 label.setIcon(UEWidget._OGE_WEIRD_ICON)
                 label.setToolTip(UEWidget._OGE_WEIRD_TOOLTIP)
-                label.setCursor(Qt.CursorShape.WhatsThisCursor)
                 label.setProperty('oge-weird', True)
                 title_label.setToolTip(UEWidget._OGE_WEIRD_TOOLTIP)
 

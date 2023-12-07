@@ -35,6 +35,7 @@ class PoleWidget(OGEWidget):
                 label.setCursor(Qt.CursorShape.WhatsThisCursor)
                 label.setProperty('oge-weird', True)
                 title_label.setToolTip(PoleWidget._OGE_WEIRD_TOOLTIP)
+                title_label.setCursor(Qt.CursorShape.WhatsThisCursor)
 
             else:
                 label.setStyleSheet(f'color: {PoleWidget.perc2color(avg / 20)}')

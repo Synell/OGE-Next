@@ -8,5 +8,6 @@
     "reportBug": "Report a Bug...",
     "donate": {
         "title": "Donate"
-    }
+    },
+    "logout": "Logout"
 }

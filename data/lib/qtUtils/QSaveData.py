@@ -290,7 +290,7 @@ class QSaveData:
 
         dialog = QSettingsDialog(
             parent = app.window,
-            settings_data = self._language_data['QSettingsDialog'],
+            settings_data = self._language_data.get_data('QSettingsDialog'),
             lang_folder = self._lang_folder,
             themes_folder = self._themes_folder,
             current_lang = self._language,
@@ -324,8 +324,8 @@ class QSaveData:
             if 'theme' in reload_list: self.set_stylesheet(app)
             if res:
                 QMessageBoxWithWidget(app,
-                    self._language_data['QMessageBox']['information']['settingsReload']['title'],
-                    self._language_data['QMessageBox']['information']['settingsReload']['text'],
+                    self._language_data.get_data('QMessageBox.information.settingsReload.title'),
+                    self._language_data.get_data('QMessageBox.information.settingsReload.text'),
                     None,
                     QMessageBoxWithWidget.Icon.Information,
                     None

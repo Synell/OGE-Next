@@ -3,6 +3,7 @@
     "emptyPassword": "You must enter a password.",
     "loginFailed": "Login failed.",
     "loginSuccess": "Login successful.",
+    "logoutSuccess": "Logout successful.",
     "createPanels": "Creating panels...",
     "ogeLoading": "Loading data from OGE... Note that this may take a while."
 }

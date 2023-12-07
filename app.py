@@ -377,6 +377,37 @@ class Application(QBaseApplication):
 
 
 
+    def logout(self) -> None:
+        if self.oge_worker:
+            if self.oge_worker.isRunning():
+                self.oge_worker.exit()
+                self.oge_worker.wait()
+
+        self.set_panel_disabled(True)
+
+        self.main_page.empty_panel.auth.username = self.save_data.username
+        self.main_page.empty_panel.auth.password = self.save_data.password
+
+        self.main_page.empty_panel.auth.set_disabled(False)
+        self.main_page.empty_panel.login_button.setDisabled(False)
+
+        self.main_page.right.slide_in_index(0)
+        self.main_page.right.semesters.set_current_index(0)
+
+        self.data_panels.clear()
+        while self.main_page.right.semesters.count() > 0:
+            self.main_page.right.semesters.removeWidget(self.main_page.right.semesters.widget(0))
+
+        self.main_page.side_panel.clear()
+
+        self.must_init_panels = True
+
+        self.change_status_message(InfoType.Success, self.get_lang_data('QMainWindow.showMessage.logoutSuccess'))
+
+        self.set_panel_disabled(False)
+
+
+
     def change_semester(self, semester: int, force: bool = False) -> None:
         self.oge_worker.semester = semester
         self.oge_worker.force = force
@@ -455,7 +486,14 @@ class Application(QBaseApplication):
 
         self.about_menu.addMenu(create_donate_menu())
 
+        self.about_menu.addSeparator()
+
+        self._action_logout = self.about_menu.addAction(self.save_data.get_icon('menubar/logout.png', mode = QSaveData.IconMode.Local), self.get_lang_data('QMenu.logout'))
+        self._action_logout.triggered.connect(self.logout)
+        self._action_logout.setVisible(False)
+
     def about_menu_clicked(self) -> None:
+        self._action_logout.setVisible(not self.must_init_panels)
         self.about_menu.popup(QCursor.pos())
 
     def about_clicked(self) -> None:

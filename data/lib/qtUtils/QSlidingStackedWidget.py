@@ -223,4 +223,7 @@ class QSlidingStackedWidget(QStackedWidget):
         self._next_index = None
         self._animation_done_slot()
         self._now = index
+
+    def set_current_index(self, index: int) -> None:
+        self.setCurrentIndex(index)
 #----------------------------------------------------------------------

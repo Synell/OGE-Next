@@ -8,5 +8,6 @@
     "reportBug": "Signaler un Bug...",
     "donate": {
         "title": "Faire un Don"
-    }
+    },
+    "logout": "Se Déconnecter"
 }
