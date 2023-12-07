@@ -13,6 +13,8 @@ class Pole:
         self._subjects = subjects
         self._avg = None
         self._has_missing_data = None
+        self._is_only_missing_coefficient = None
+        self._has_missing_subject_data = None
 
     @property
     def title(self) -> str:
@@ -32,7 +34,7 @@ class Pole:
         return None
 
     @property
-    def average(self) -> float|None:
+    def average(self) -> float | None:
         if self._avg is not None: return self._avg
 
         note, coeff = 0, 0
@@ -51,15 +53,25 @@ class Pole:
     @property
     def new_grade_count(self) -> int:
         return sum(subject.new_grade_count for subject in self._subjects)
-    
+
     @property
     def new_grades_str(self) -> str:
         return f'• {self._title}\n' + '\n\n'.join(subject.new_grades_str.replace('\n', '\n        ') for subject in self._subjects if subject.new_grade_count > 0)
 
     @property
+    def has_missing_subject_data(self) -> bool:
+        if self._has_missing_subject_data is None: self._has_missing_subject_data = any(subject.has_missing_data for subject in self._subjects)
+        return self._has_missing_subject_data
+
+    @property
     def has_missing_data(self) -> bool:
-        if self._has_missing_data is None: self._has_missing_data = any(subject.has_missing_data for subject in self._subjects) or self._coefficient is None or self._coefficient == 0
+        if self._has_missing_data is None: self._has_missing_data = self.has_missing_subject_data or self._coefficient is None or (not self._coefficient)
         return self._has_missing_data
+
+    @property
+    def is_only_missing_coefficient(self) -> bool:
+        if self._is_only_missing_coefficient is None: self._is_only_missing_coefficient = (not self.has_missing_subject_data) and (not self._coefficient)
+        return self._is_only_missing_coefficient
 
     def set_as_new(self) -> None:
         for subject in self._subjects: subject.set_as_new()

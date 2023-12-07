@@ -13,6 +13,7 @@ class UE:
         self._poles = poles
         self._avg = None
         self._has_missing_data = None
+        self._has_missing_pole_data = None
 
     @property
     def title(self) -> str:
@@ -32,7 +33,7 @@ class UE:
         return None
 
     @property
-    def average(self) -> float|None:
+    def average(self) -> float | None:
         if self._avg is not None: return self._avg
 
         grade, coeff = 0, 0
@@ -51,15 +52,24 @@ class UE:
     @property
     def new_grade_count(self) -> int:
         return sum(pole.new_grade_count for pole in self._poles)
-    
+
     @property
     def new_grades_str(self) -> str:
         return f'• {self._title}\n' + '\n\n'.join(pole.new_grades_str.replace('\n', '\n        ') for pole in self._poles if pole.new_grade_count > 0)
 
     @property
+    def has_missing_pole_data(self) -> bool:
+        if self._has_missing_pole_data is None: self._has_missing_pole_data = any(pole.has_missing_data for pole in self._poles)
+        return self._has_missing_pole_data
+
+    @property
     def has_missing_data(self) -> bool:
-        if self._has_missing_data is None: self._has_missing_data = any(pole.has_missing_data for pole in self._poles) or self._coefficient is None or self._coefficient == 0
+        if self._has_missing_data is None: self._has_missing_data = self.has_missing_pole_data or self._coefficient is None or self._coefficient == 0
         return self._has_missing_data
+
+    @property
+    def is_only_missing_coefficient(self) -> bool:
+        return (not self.has_missing_pole_data) and (not self._coefficient)
 
     def set_as_new(self) -> None:
         for pole in self._poles: pole.set_as_new()

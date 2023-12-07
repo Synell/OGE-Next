@@ -21,19 +21,20 @@ class SubjectWidget(OGEWidget):
             self.grid_layout.setContentsMargins(0, 0, 0, 0)
             self.grid_layout.setSpacing(0)
 
-            label = QLabel(f'{subject.title} ({subject.coefficient if subject.coefficient else "?"})')
-            label.setProperty('class', 'title')
-            if subject.coefficient == 0: label.setToolTip(SubjectWidget._OGE_WEIRD_TOOLTIP)
-            self.grid_layout.addWidget(label, 0, 0)
+            title_label = QLabel(f'{subject.title} ({subject.coefficient if subject.coefficient else "?"})')
+            title_label.setProperty('class', 'title')
+            self.grid_layout.addWidget(title_label, 0, 0)
 
             avg = subject.average
 
             label = IconLabel(f'{avg:.2f}/20' if avg is not None else '?/20')
 
-            if avg is None or subject.has_missing_data:
+            if avg is None or subject.is_only_missing_coefficient or subject.has_missing_grade_group_data:
                 label.setIcon(SubjectWidget._OGE_WEIRD_ICON)
                 label.setToolTip(SubjectWidget._OGE_WEIRD_TOOLTIP)
+                label.setCursor(Qt.CursorShape.WhatsThisCursor)
                 label.setProperty('oge-weird', True)
+                title_label.setToolTip(SubjectWidget._OGE_WEIRD_TOOLTIP)
 
             else:
                 label.setStyleSheet(f'color: {SubjectWidget.perc2color(avg / 20)}')

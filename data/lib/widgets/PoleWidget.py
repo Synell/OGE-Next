@@ -21,19 +21,20 @@ class PoleWidget(OGEWidget):
             self.grid_layout.setContentsMargins(0, 0, 0, 0)
             self.grid_layout.setSpacing(0)
 
-            label = QLabel(f'{pole.title} ({pole.coefficient if pole.coefficient else "?"})')
-            label.setProperty('class', 'title')
-            if pole.coefficient == 0: label.setToolTip(PoleWidget._OGE_WEIRD_TOOLTIP)
-            self.grid_layout.addWidget(label, 0, 0)
+            title_label = QLabel(f'{pole.title} ({pole.coefficient if pole.coefficient else "?"})')
+            title_label.setProperty('class', 'title')
+            self.grid_layout.addWidget(title_label, 0, 0)
 
             avg = pole.average
 
             label = IconLabel(f'{avg:.2f}/20' if avg is not None else '?/20')
 
-            if avg is None or pole.has_missing_data:
+            if avg is None or pole.is_only_missing_coefficient or pole.has_missing_subject_data:
                 label.setIcon(PoleWidget._OGE_WEIRD_ICON)
                 label.setToolTip(PoleWidget._OGE_WEIRD_TOOLTIP)
+                label.setCursor(Qt.CursorShape.WhatsThisCursor)
                 label.setProperty('oge-weird', True)
+                title_label.setToolTip(PoleWidget._OGE_WEIRD_TOOLTIP)
 
             else:
                 label.setStyleSheet(f'color: {PoleWidget.perc2color(avg / 20)}')

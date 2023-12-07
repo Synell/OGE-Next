@@ -277,7 +277,7 @@ class QSaveData:
     def get_icon_dir(self) -> str:
         return f'{self._themes_folder}/{self._theme}/{self._theme_variant}/icons/'
 
-    def get_icon(self, path: str, asQIcon = True, mode: IconMode = IconMode.Local) -> QIcon|str:
+    def get_icon(self, path: str, asQIcon = True, mode: IconMode = IconMode.Local) -> QIcon | str:
         if mode == QSaveData.IconMode.Local:
             if asQIcon: return QIcon(f'{self._themes_folder}/{self._theme}/{self._theme_variant}/icons/{path}')
             return f'{self._themes_folder}/{self._theme}/{self._theme_variant}/icons/{path}'
@@ -334,7 +334,7 @@ class QSaveData:
             return True
         return False
 
-    def _settings_menu_extra(self) -> tuple[dict, Callable|None]:
+    def _settings_menu_extra(self) -> tuple[dict, Callable | None]:
         return {}, None
 
     def _close_app(self, app: QBaseApplication) -> None:

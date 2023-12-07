@@ -14,7 +14,7 @@ class QHexSpinBox(QLineEdit):
         super().__init__(parent, *args, **kwargs)
         self._validator = QHexValidator(self)
         self.setValidator(self._validator)
-        self.textChanged.connect(lambda h: self.value_changed.emit(int(h, 16)))
+        self.textChanged.connect(lambda h: self.value_changed.emit(int(h, 16)) if h else None)
 
     def set_minimum(self, minimum: int) -> None:
         self._validator.set_bottom(minimum)

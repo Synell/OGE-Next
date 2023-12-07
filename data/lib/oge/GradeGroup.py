@@ -13,6 +13,8 @@ class GradeGroup:
         self._grades = grades
         self._avg = None
         self._has_missing_data = None
+        self._is_only_missing_coefficient = None
+        self._has_missing_grade_data = None
 
     @property
     def title(self) -> str:
@@ -27,7 +29,7 @@ class GradeGroup:
         return self._grades.copy()
 
     @property
-    def average(self) -> float|None:
+    def average(self) -> float | None:
         if self._avg is not None: return self._avg
 
         grade, coefficient = 0, 0
@@ -45,15 +47,25 @@ class GradeGroup:
     @property
     def new_grade_count(self) -> int:
         return sum(grade.is_new for grade in self._grades)
-    
+
     @property
     def new_grades_str(self) -> str:
         return f'• {self._title}\n' + '\n'.join([f'• {grade}' for grade in self._grades if grade.is_new])
 
     @property
+    def has_missing_grade_data(self) -> bool:
+        if self._has_missing_grade_data is None: self._has_missing_grade_data = any(grade.has_missing_data for grade in self._grades)
+        return self._has_missing_grade_data
+
+    @property
     def has_missing_data(self) -> bool:
-        if self._has_missing_data is None: self._has_missing_data = any(grade.has_missing_data for grade in self._grades) or self._coefficient is None or self._coefficient == 0
+        if self._has_missing_data is None: self._has_missing_data = self.has_missing_grade_data or self._coefficient is None or (not self._coefficient)
         return self._has_missing_data
+
+    @property
+    def is_only_missing_coefficient(self) -> bool:
+        if self._is_only_missing_coefficient is None: self._is_only_missing_coefficient = (not self.has_missing_grade_data) and (not self._coefficient)
+        return self._is_only_missing_coefficient
 
     def set_as_new(self) -> None:
         for grade in self._grades: grade.is_new = True

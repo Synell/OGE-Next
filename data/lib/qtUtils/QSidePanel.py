@@ -3,9 +3,9 @@
     # Libraries
 from enum import Enum
 from typing import Callable, Iterator
-from PySide6.QtWidgets import QPushButton, QLabel, QFrame
+from PySide6.QtWidgets import QPushButton, QSizePolicy, QFrame, QApplication
 from PySide6.QtGui import QIcon
-from PySide6.QtCore import Qt, Signal, Slot
+from PySide6.QtCore import Qt, Signal
 from .QScrollableGridFrame import QScrollableGridFrame
 #----------------------------------------------------------------------
 
@@ -120,7 +120,8 @@ class QSidePanel(QScrollableGridFrame):
         return self.width()
 
     def set_width(self, width: int) -> None:
-        self.setFixedWidth(width)
+        self.setMinimumWidth(width)
+        self.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.MinimumExpanding)
 
     @property
     def current_index(self) -> int:

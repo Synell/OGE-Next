@@ -9,6 +9,7 @@ class Grade:
         self._coefficient = coefficient
         self._is_new = False
         self._has_missing_data = None
+        self._is_only_missing_coefficient = None
 
     @property
     def value(self) -> str:
@@ -35,9 +36,18 @@ class Grade:
         self._is_new = value
 
     @property
+    def _has_missing_grade_data(self) -> bool:
+        return self._value is None or self._total is None
+
+    @property
     def has_missing_data(self) -> bool:
-        if self._has_missing_data is None: self._has_missing_data = self._value is None or self._total is None or self._coefficient is None or self._coefficient == 0
+        if self._has_missing_data is None: self._has_missing_data = self._has_missing_grade_data or (not self._coefficient)
         return self._has_missing_data
+
+    @property
+    def is_only_missing_coefficient(self) -> bool:
+        if self._is_only_missing_coefficient is None: self._is_only_missing_coefficient = (not self._has_missing_grade_data) and (not self._coefficient)
+        return self._is_only_missing_coefficient
 
     def __str__(self) -> str:
         return f'{self._value}/{self._total} ({self._coefficient})'

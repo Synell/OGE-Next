@@ -74,4 +74,34 @@ class QNamedComboBox(QGridWidget):
         self.combo_box.base_focusOutEvent(event)
         if self.label.property('inputhover'): self.label.setStyleSheet(f'color: {self._hover_color}')
         else: self.label.setStyleSheet(f'color: {self._normal_color}')
+
+    def addItems(self, items: list[str]) -> None:
+        self.combo_box.addItems(items)
+
+    def add_items(self, items: list[str]) -> None:
+        self.addItems(items)
+
+    def addItem(self, item: str) -> None:
+        self.combo_box.addItem(item)
+
+    def add_item(self, item: str) -> None:
+        self.addItem(item)
+
+    def setCurrentIndex(self, index: int) -> None:
+        self.combo_box.setCurrentIndex(index)
+
+    def set_current_index(self, index: int) -> None:
+        self.setCurrentIndex(index)
+
+    def currentText(self) -> str:
+        return self.combo_box.currentText()
+    
+    def current_text(self) -> str:
+        return self.currentText()
+    
+    def currentIndex(self) -> int:
+        return self.combo_box.currentIndex()
+    
+    def current_index(self) -> int:
+        return self.currentIndex()
 #----------------------------------------------------------------------

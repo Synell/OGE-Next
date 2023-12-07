@@ -56,6 +56,6 @@ class QColorDialog(QDialog):
 
         self.setLayout(self.root.grid_layout)
 
-    def exec(self) -> QUtilsColor|None:
+    def exec(self) -> QUtilsColor | None:
         if super().exec(): return self.color_picker.color
 #----------------------------------------------------------------------

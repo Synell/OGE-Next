@@ -24,19 +24,20 @@ class UEWidget(OGEWidget):
             self.grid_layout.setSpacing(0)
             self.setProperty('background', 'transparent')
 
-            label = QLabel(f'{ue.title} ({ue.coefficient if ue.coefficient else "?"})')
-            label.setProperty('class', 'title')
-            if ue.coefficient == 0: label.setToolTip(UEWidget._OGE_WEIRD_TOOLTIP)
-            self.grid_layout.addWidget(label, 0, 0)
+            title_label = QLabel(f'{ue.title} ({ue.coefficient if ue.coefficient else "?"})')
+            title_label.setProperty('class', 'title')
+            self.grid_layout.addWidget(title_label, 0, 0)
 
             avg = ue.average
 
             label = IconLabel(f'{avg:.2f}/20' if avg is not None else '?/20')
 
-            if avg is None or ue.has_missing_data:
+            if avg is None or ue.is_only_missing_coefficient or ue.has_missing_pole_data:
                 label.setIcon(UEWidget._OGE_WEIRD_ICON)
                 label.setToolTip(UEWidget._OGE_WEIRD_TOOLTIP)
+                label.setCursor(Qt.CursorShape.WhatsThisCursor)
                 label.setProperty('oge-weird', True)
+                title_label.setToolTip(UEWidget._OGE_WEIRD_TOOLTIP)
 
             else:
                 label.setStyleSheet(f'color: {UEWidget.perc2color(avg / 20)}')
