@@ -4,6 +4,8 @@
 from .QBaseApplication import QBaseApplication
 from .QAppType import QAppType
 from .QssParser import QssParser, QssSelector
+from .QLangDataManager import QLangDataManager, QLangData
+from .QThemeManager import QThemeManager, QColorSet
 from .QSaveData import QSaveData
 from .QBetterListWidget import QBetterListWidget
 from .QScrollableGridWidget import QScrollableGridWidget
@@ -59,4 +61,6 @@ from .DelayedSignal import DelayedSignal
 from .QHexSpinBox import QHexSpinBox
 from .QNamedHexSpinBox import QNamedHexSpinBox
 from .QBetterSortFilterProxyModel import QBetterSortFilterProxyModel
+from .QLogsList import QLogsList
+from .QLogsDialog import QLogsDialog
 #----------------------------------------------------------------------

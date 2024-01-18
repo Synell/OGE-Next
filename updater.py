@@ -78,8 +78,8 @@ class QUpdater(QBaseApplication):
 
         QMessageBoxWithWidget(
             app = self,
-            title = lang.get_data('title'),
-            text = lang.get_data('text'),
+            title = lang.get('title'),
+            text = lang.get('text'),
             icon = QMessageBoxWithWidget.Icon.Critical,
             widget = w
         ).exec()

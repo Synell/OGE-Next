@@ -42,6 +42,7 @@ class Application(QBaseApplication):
             main_color_set = Info.main_color_set,
             neutral_color_set = Info.neutral_color_set
         )
+        self.save_data.warning_received.connect(print)
         self.must_exit_after_download = False
 
         self.oge_worker = None
@@ -112,13 +113,13 @@ class Application(QBaseApplication):
         lang = self.get_lang_data('QMessageBox.critical.notImplemented')
 
         if text:
-            w = QDropDownWidget(text = lang.get_data('details'), widget = QLabel(text))
+            w = QDropDownWidget(text = lang.get('details'), widget = QLabel(text))
         else: w = None
 
         QMessageBoxWithWidget(
             app = self,
-            title = lang.get_data('title'),
-            text = lang.get_data('text'),
+            title = lang.get('title'),
+            text = lang.get('text'),
             icon = QMessageBoxWithWidget.Icon.Critical,
             widget = w
         ).exec()
@@ -263,11 +264,11 @@ class Application(QBaseApplication):
         self.main_page.empty_panel.grid_layout.addWidget(grid, 0, 0)
         self.main_page.empty_panel.grid_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.main_page.empty_panel.auth = QLoginWidget(None, lang.get_data('QLoginWidget'), self.save_data.username, self.save_data.password, True, self.save_data.remember)
+        self.main_page.empty_panel.auth = QLoginWidget(None, lang.get('QLoginWidget'), self.save_data.username, self.save_data.password, True, self.save_data.remember)
         self.main_page.empty_panel.auth.enter_key_pressed.connect(self.login)
         grid.grid_layout.addWidget(self.main_page.empty_panel.auth, 0, 0)
 
-        self.main_page.empty_panel.login_button = QPushButton(lang.get_data('QPushButton.login'))
+        self.main_page.empty_panel.login_button = QPushButton(lang.get('QPushButton.login'))
         self.main_page.empty_panel.login_button.setProperty('color', 'main')
         self.main_page.empty_panel.login_button.setProperty('transparent', True)
         self.main_page.empty_panel.login_button.setCursor(Qt.CursorShape.PointingHandCursor)
@@ -500,14 +501,14 @@ class Application(QBaseApplication):
         lang = self.get_lang_data('QAbout.OGENext')
         QAboutBox(
             app = self,
-            title = lang.get_data('title'),
+            title = lang.get('title'),
             logo = Info.icon_path,
             texts = [
-                lang.get_data('texts')[0],
-                lang.get_data('texts')[1].replace('%s', f'<a href=\"https://github.com/Synell\" style=\"color: {self.COLOR_LINK.hex}; text-decoration: none;\">Synel</a>'),
-                lang.get_data('texts')[2].replace('%s', f'<a href=\"https://github.com/Zenitude71\" style=\"color: {self.COLOR_LINK.hex}; text-decoration: none;\">Zenitude</a>', 1).replace('%s', f'<a href=\"https://github.com/Synell\" style=\"color: {self.COLOR_LINK.hex}; text-decoration: none;\">Synel</a>', 1),
-                lang.get_data('texts')[3].replace('%s', f'<a href=\"https://github.com/Nikolasitude\" style=\"color: {self.COLOR_LINK.hex}; text-decoration: none;\">Nikolasitude</a>'),
-                lang.get_data('texts')[4].replace('%s', f'<a href=\"https://github.com/Synell/OGE-Next\" style=\"color: {self.COLOR_LINK.hex}; text-decoration: none;\">OGE Next Github</a>')
+                lang.get('texts')[0],
+                lang.get('texts')[1].replace('%s', f'<a href=\"https://github.com/Synell\" style=\"color: {self.COLOR_LINK.hex}; text-decoration: none;\">Synel</a>'),
+                lang.get('texts')[2].replace('%s', f'<a href=\"https://github.com/Zenitude71\" style=\"color: {self.COLOR_LINK.hex}; text-decoration: none;\">Zenitude</a>', 1).replace('%s', f'<a href=\"https://github.com/Synell\" style=\"color: {self.COLOR_LINK.hex}; text-decoration: none;\">Synel</a>', 1),
+                lang.get('texts')[3].replace('%s', f'<a href=\"https://github.com/Nikolasitude\" style=\"color: {self.COLOR_LINK.hex}; text-decoration: none;\">Nikolasitude</a>'),
+                lang.get('texts')[4].replace('%s', f'<a href=\"https://github.com/Synell/OGE-Next\" style=\"color: {self.COLOR_LINK.hex}; text-decoration: none;\">OGE Next Github</a>')
             ]
         ).exec()
 

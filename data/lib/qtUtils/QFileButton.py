@@ -8,6 +8,7 @@ from .QGridWidget import QGridWidget
 from .QFiles import QFiles
 from . import QBaseApplication
 from .QssSelector import QssSelector
+from .QLangData import QLangData
 #----------------------------------------------------------------------
 
     # Class
@@ -28,7 +29,7 @@ class QFileButton(QGridWidget):
             QssSelector(widget = 'QLabel', attributes = {'hover': True})
         )['color']
 
-    def __init__(self, parent = None, lang: dict = {}, default_path: str = './', icon: str = None, type: QFiles.Dialog = QFiles.Dialog.ExistingDirectory, filter: str = '', end_with: str = ''):
+    def __init__(self, parent = None, lang: QLangData = {}, default_path: str = './', icon: str = None, type: QFiles.Dialog = QFiles.Dialog.ExistingDirectory, filter: str = '', end_with: str = ''):
         super().__init__(parent)
         self.grid_layout.setSpacing(0)
         self.grid_layout.setContentsMargins(0, 0, 0, 0)

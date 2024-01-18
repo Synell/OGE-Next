@@ -3,6 +3,7 @@
     # Libraries
 from PySide6.QtWidgets import QDialog, QFrame, QLabel, QGridLayout, QWidget, QPushButton, QFileDialog
 from PySide6.QtCore import Qt, Signal
+from PySide6.QtGui import QStandardItem, QStandardItemModel
 from typing import Callable
 from data.lib.qtUtils.QGridFrame import QGridFrame
 
@@ -15,6 +16,7 @@ from .QSidePanelWidget import QSidePanelWidget
 from .QNamedComboBox import QNamedComboBox
 from .QFileExplorer import QFileExplorer
 from .QSlidingStackedWidget import QSlidingStackedWidget
+from .QComboBoxItemModel import QComboBoxItemModel
 #----------------------------------------------------------------------
 
     # Class
@@ -23,9 +25,13 @@ class _QData:
         def __init__(self, lang_folder: str, lang_path: str) -> None:
             with open(f'{lang_folder}/{lang_path}', encoding = 'utf-8') as infile:
                 data = json.load(infile)
-                self.display_name = data['info']['name']
-                self.version = data['info']['version']
-                self.desc = data['info']['description']
+                info: dict = data['info']
+
+                self.display_name = info.get('name', '???')
+                self.version = info.get('version', 'v1.0')
+                self.author = info.get('author', '???')
+                self.description = info.get('description', '')
+
                 self.filename = '.'.join(lang_path.split('.')[:-1])
 
 
@@ -33,9 +39,13 @@ class _QData:
         def __init__(self, themes_folder: str, theme_path: str) -> None:
             with open(f'{themes_folder}/{theme_path}', encoding = 'utf-8') as infile:
                 data = json.load(infile)
-                self.display_name = data['info']['name']
-                self.version = data['info']['version']
-                self.desc = data['info']['description']
+                info: dict = data['info']
+
+                self.display_name = info.get('name', '???')
+                self.version = info.get('version', 'v1.0')
+                self.author = info.get('author', '???')
+                self.desc = info.get('description', '')
+
                 self.filename = '.'.join(theme_path.split('.')[:-1])
                 self.variants = data['qss']
 
@@ -72,20 +82,20 @@ class QSettingsDialog(QDialog):
         right_buttons.grid_layout.setSpacing(16)
         right_buttons.grid_layout.setContentsMargins(0, 0, 0, 0)
 
-        button = QPushButton(settings_data.get_data('QPushButton.cancel'))
+        button = QPushButton(settings_data.get('QPushButton.cancel'))
         button.setCursor(Qt.CursorShape.PointingHandCursor)
         button.clicked.connect(self.reject)
         button.setProperty('color', 'white')
         button.setProperty('transparent', True)
         right_buttons.grid_layout.addWidget(button, 0, 0)
 
-        button = QPushButton(settings_data.get_data('QPushButton.apply'))
+        button = QPushButton(settings_data.get('QPushButton.apply'))
         button.setCursor(Qt.CursorShape.PointingHandCursor)
         button.clicked.connect(self.accept)
         button.setProperty('color', 'main')
         right_buttons.grid_layout.addWidget(button, 0, 1)
 
-        self.setWindowTitle(settings_data.get_data('title'))
+        self.setWindowTitle(settings_data.get('title'))
 
         self.frame = QGridFrame()
         self.frame.grid_layout.addWidget(right_buttons, 0, 0)
@@ -102,16 +112,16 @@ class QSettingsDialog(QDialog):
 
         self._data = _QData(lang_folder, themes_folder)
 
-        self.appearance_tab = self._appearance_tab_widget(settings_data.get_data('QSidePanel.appearance'), current_lang, current_theme, current_theme_variant)
-        self.root.add_widget(self.appearance_tab, settings_data.get_data('QSidePanel.appearance.title'), f'./data/lib/qtUtils/themes/{current_theme}/{current_theme_variant}/icons/sidepanel/appearance.png')
+        self.appearance_tab = self._appearance_tab_widget(settings_data.get('QSidePanel.appearance'), current_lang, current_theme, current_theme_variant)
+        self.root.add_widget(self.appearance_tab, settings_data.get('QSidePanel.appearance.title'), f'./data/lib/qtUtils/themes/{current_theme}/{current_theme_variant}/icons/sidepanel/appearance.png')
 
         self.extra_tabs = extra_tabs
 
         for k, v in extra_tabs.items():
             self.root.add_widget(v, k, extra_icons[k])
 
-        self.data_tab = self._data_tab_widget(settings_data.get_data('QSidePanel.data'))
-        self.root.add_widget(self.data_tab, settings_data.get_data('QSidePanel.data.title'), f'./data/lib/qtUtils/themes/{current_theme}/{current_theme_variant}/icons/sidepanel/data.png')
+        self.data_tab = self._data_tab_widget(settings_data.get('QSidePanel.data'))
+        self.root.add_widget(self.data_tab, settings_data.get('QSidePanel.data.title'), f'./data/lib/qtUtils/themes/{current_theme}/{current_theme_variant}/icons/sidepanel/data.png')
 
         self.root.set_current_index(0)
 
@@ -136,11 +146,20 @@ class QSettingsDialog(QDialog):
         widget.scroll_layout.addWidget(root_frame, 0, 0)
         widget.scroll_layout.setAlignment(root_frame, Qt.AlignmentFlag.AlignTop)
 
-        label = QSettingsDialog._text_group(lang_data.get_data('QLabel.language.title'), lang_data.get_data('QLabel.language.description'))
+        label = QSettingsDialog._text_group(lang_data.get('QLabel.language.title'), lang_data.get('QLabel.language.description'))
         root_frame.grid_layout.addWidget(label, root_frame.grid_layout.count(), 0)
 
-        self.lang_dropdown = QNamedComboBox(None, lang_data.get_data('QNamedComboBox.language'))
-        self.lang_dropdown.combo_box.addItems(list(lang.display_name for lang in self._data.lang))
+        self.lang_dropdown = QNamedComboBox(None, lang_data.get('QNamedComboBox.language'))
+        lang_model: QComboBoxItemModel = QComboBoxItemModel()
+
+        for lang in self._data.lang:
+            lang_model.add_item(
+                lang.display_name,
+                f'{lang.display_name} ({lang.version})\nby {lang.author}'
+            )
+
+        lang_model.bind(self.lang_dropdown.combo_box)
+
         i = 0
         for lang_id in range(len(self._data.lang)):
             if self._data.lang[lang_id].filename == current_lang: i = lang_id
@@ -156,10 +175,10 @@ class QSettingsDialog(QDialog):
         root_frame.grid_layout.addWidget(frame, root_frame.grid_layout.count(), 0)
 
 
-        label = QSettingsDialog._text_group(lang_data.get_data('QLabel.theme.title'), lang_data.get_data('QLabel.theme.description'))
+        label = QSettingsDialog._text_group(lang_data.get('QLabel.theme.title'), lang_data.get('QLabel.theme.description'))
         root_frame.grid_layout.addWidget(label, root_frame.grid_layout.count(), 0)
 
-        self.themes_dropdown = QNamedComboBox(None, lang_data.get_data('QNamedComboBox.theme'))
+        self.themes_dropdown = QNamedComboBox(None, lang_data.get('QNamedComboBox.theme'))
         self.themes_dropdown.combo_box.addItems(list(theme.display_name for theme in self._data.themes))
         i = 0
         for theme_id in range(len(self._data.themes)):
@@ -169,7 +188,7 @@ class QSettingsDialog(QDialog):
         root_frame.grid_layout.addWidget(self.themes_dropdown, root_frame.grid_layout.count(), 0)
         root_frame.grid_layout.setAlignment(self.themes_dropdown, Qt.AlignmentFlag.AlignLeft)
 
-        self.theme_variants_dropdown = QNamedComboBox(None, lang_data.get_data('QNamedComboBox.themeVariant'))
+        self.theme_variants_dropdown = QNamedComboBox(None, lang_data.get('QNamedComboBox.themeVariant'))
         self._load_theme_variants(i)
         self.theme_variants_dropdown.combo_box.setCurrentIndex(list(self._data.themes[i].variants.keys()).index(current_theme_variant))
         root_frame.grid_layout.addWidget(self.theme_variants_dropdown, root_frame.grid_layout.count(), 0)
@@ -189,10 +208,10 @@ class QSettingsDialog(QDialog):
         widget.scroll_layout.addWidget(root_frame, 0, 0)
         widget.scroll_layout.setAlignment(root_frame, Qt.AlignmentFlag.AlignTop)
 
-        label = QSettingsDialog._text_group(lang_data.get_data('QLabel.clearData.title'), lang_data.get_data('QLabel.clearData.description'))
+        label = QSettingsDialog._text_group(lang_data.get('QLabel.clearData.title'), lang_data.get('QLabel.clearData.description'))
         root_frame.grid_layout.addWidget(label, root_frame.grid_layout.count(), 0)
 
-        button = QPushButton(lang_data.get_data('QPushButton.clearData'))
+        button = QPushButton(lang_data.get('QPushButton.clearData'))
         button.setProperty('color', 'main')
         button.setCursor(Qt.CursorShape.PointingHandCursor)
         button.clicked.connect(self._clear_data)
@@ -205,10 +224,10 @@ class QSettingsDialog(QDialog):
         root_frame.grid_layout.addWidget(frame, root_frame.grid_layout.count(), 0)
 
 
-        label = QSettingsDialog._text_group(lang_data.get_data('QLabel.importData.title'), lang_data.get_data('QLabel.importData.description'))
+        label = QSettingsDialog._text_group(lang_data.get('QLabel.importData.title'), lang_data.get('QLabel.importData.description'))
         root_frame.grid_layout.addWidget(label, root_frame.grid_layout.count(), 0)
 
-        button = QPushButton(lang_data.get_data('QPushButton.importData'))
+        button = QPushButton(lang_data.get('QPushButton.importData'))
         button.setProperty('color', 'main')
         button.setCursor(Qt.CursorShape.PointingHandCursor)
         button.clicked.connect(lambda: self._import_data(lang_data))
@@ -221,10 +240,10 @@ class QSettingsDialog(QDialog):
         root_frame.grid_layout.addWidget(frame, root_frame.grid_layout.count(), 0)
 
 
-        label = QSettingsDialog._text_group(lang_data.get_data('QLabel.exportData.title'), lang_data.get_data('QLabel.exportData.description'))
+        label = QSettingsDialog._text_group(lang_data.get('QLabel.exportData.title'), lang_data.get('QLabel.exportData.description'))
         root_frame.grid_layout.addWidget(label, root_frame.grid_layout.count(), 0)
 
-        button = QPushButton(lang_data.get_data('QPushButton.exportData'))
+        button = QPushButton(lang_data.get('QPushButton.exportData'))
         button.setProperty('color', 'main')
         button.setCursor(Qt.CursorShape.PointingHandCursor)
         button.clicked.connect(lambda: self._export_data(lang_data))
@@ -279,7 +298,7 @@ class QSettingsDialog(QDialog):
         path = QFileDialog.getOpenFileName(
             parent = self,
             dir = './',
-            caption = lang_data.get_data('QFileDialog.importData'),
+            caption = lang_data.get('QFileDialog.importData'),
             filter = 'All supported files (*.dat *.json);;DATA (*.dat);;JSON (*.json)'
         )[0]
 
@@ -292,7 +311,7 @@ class QSettingsDialog(QDialog):
         path = QFileDialog.getSaveFileName(
             parent = self,
             dir = './',
-            caption = lang_data.get_data('QFileDialog.exportData'),
+            caption = lang_data.get('QFileDialog.exportData'),
             filter = 'DATA (*.dat);;JSON (*.json)'
         )[0]
 

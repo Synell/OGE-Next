@@ -8,6 +8,7 @@ from PySide6.QtNetwork import QLocalSocket, QLocalServer
 from PySide6.QtGui import QIcon, QPixmap
 from typing import Union
 
+from .QLangDataManager import QLangData
 from .QSaveData import QSaveData
 
 from .QPlatform import QPlatform
@@ -187,7 +188,7 @@ class QBaseApplication(QApplication):
     def theme_variant(self) -> str:
         return self.save_data.theme_variant
 
-    def get_lang_data(self, path: str) -> Union[str, QSaveData.LangData, list[Union[str, QSaveData.LangData]]]:
+    def get_lang_data(self, path: str) -> Union[str, QLangData, list[Union[str, QLangData]]]:
         return self.save_data.get_lang_data(path)
 
     def get_icon_dir(self) -> str:

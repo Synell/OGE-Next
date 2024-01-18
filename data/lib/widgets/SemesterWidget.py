@@ -5,7 +5,7 @@ from PySide6.QtCore import Qt, Signal, QSize
 from PySide6.QtGui import QIcon, QPixmap
 from PySide6.QtWidgets import QPushButton, QLabel
 
-from data.lib.qtUtils import QScrollableGridFrame, QGridFrame, QSidePanelItem, QIconWidget, QDropDownWidget, QSaveData
+from data.lib.qtUtils import QScrollableGridFrame, QGridFrame, QSidePanelItem, QIconWidget, QDropDownWidget, QLangData
 from data.lib.oge import UE, Semester
 from .UEWidget import UEWidget
 #----------------------------------------------------------------------
@@ -16,7 +16,7 @@ class SemesterWidget(QScrollableGridFrame):
     _ICON: QPixmap = ''
     _OGE_NEW_ICON: QPixmap = ''
 
-    def __init__(self, lang: QSaveData.LangData, semester: int, item: QSidePanelItem) -> None:
+    def __init__(self, lang: QLangData, semester: int, item: QSidePanelItem) -> None:
         super().__init__()
 
         self._lang = lang
@@ -48,7 +48,7 @@ class SemesterWidget(QScrollableGridFrame):
         widget.grid_layout.setSpacing(5)
         self.scroll_layout.addWidget(widget, 0, 0)
 
-        button = QPushButton(self._lang.get_data('QPushButton.refresh'))
+        button = QPushButton(self._lang.get('QPushButton.refresh'))
         button.setCursor(Qt.CursorShape.PointingHandCursor)
         button.setProperty('color', 'main')
         button.setProperty('transparent', True)
@@ -103,27 +103,27 @@ class SemesterWidget(QScrollableGridFrame):
 
         if ue10_count == total_ue:
             icon = self._ICON.replace('%s', 'perfect')
-            title = self._lang.get_data('QLabel.perfectSemester')
+            title = self._lang.get('QLabel.perfectSemester')
 
         elif ue10_count > total_ue / 2 and ue8_count >= total_ue - ue10_count:
             icon = self._ICON.replace('%s', 'good')
-            title = self._lang.get_data('QLabel.goodSemester')
-            texts.append(self._lang.get_data('QLabel.between8And10').replace('%s', '\n'.join([f' • {ue.title} ({ue.average:.2f}/20)' for ue in ue8])))
+            title = self._lang.get('QLabel.goodSemester')
+            texts.append(self._lang.get('QLabel.between8And10').replace('%s', '\n'.join([f' • {ue.title} ({ue.average:.2f}/20)' for ue in ue8])))
 
         elif ue10_count + ue8_count != total_ue:
             icon = self._ICON.replace('%s', 'bad')
-            title = self._lang.get_data('QLabel.badSemester')
-            texts.append(self._lang.get_data('QLabel.allBelow8'))
+            title = self._lang.get('QLabel.badSemester')
+            texts.append(self._lang.get('QLabel.allBelow8'))
 
         else:
             icon = self._ICON.replace('%s', 'alert')
-            title = self._lang.get_data('QLabel.alertSemester')
-            texts.append(self._lang.get_data('QLabel.between8And10').replace('%s', '\n'.join([f' • {ue.title}' for ue in ue8])))
-            texts.append(self._lang.get_data('QLabel.below8').replace('%s', '\n'.join([f' • {ue.title} ({ue.average:.2f}/20)' for ue in ue_other])))
+            title = self._lang.get('QLabel.alertSemester')
+            texts.append(self._lang.get('QLabel.between8And10').replace('%s', '\n'.join([f' • {ue.title}' for ue in ue8])))
+            texts.append(self._lang.get('QLabel.below8').replace('%s', '\n'.join([f' • {ue.title} ({ue.average:.2f}/20)' for ue in ue_other])))
 
         details_sw_title_label.setText(title)
         if self._data.has_missing_data:
-            details_subwidget.setToolTip(self._lang.get_data('QToolTip.ogeWeirdTop'))
+            details_subwidget.setToolTip(self._lang.get('QToolTip.ogeWeirdTop'))
             details_subwidget.setCursor(Qt.CursorShape.WhatsThisCursor)
 
         icon = QIcon(icon)
@@ -143,7 +143,7 @@ class SemesterWidget(QScrollableGridFrame):
             new_grades_sw_icon_label = QIconWidget(None, self._OGE_NEW_ICON, QSize(32, 32), False)
             new_grades_title_subwidget.grid_layout.addWidget(new_grades_sw_icon_label, 0, 0)
 
-            new_grades_sw_title_label = QLabel(self._lang.get_data('QLabel.newGrade' + ('s' if self._data.new_grade_count > 1 else '')).replace('%s', str(self._data.new_grade_count)))
+            new_grades_sw_title_label = QLabel(self._lang.get('QLabel.newGrade' + ('s' if self._data.new_grade_count > 1 else '')).replace('%s', str(self._data.new_grade_count)))
             new_grades_sw_title_label.setProperty('title', True)
             new_grades_title_subwidget.grid_layout.addWidget(new_grades_sw_title_label, 0, 1)
 

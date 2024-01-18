@@ -10,7 +10,7 @@ from datetime import datetime
 from contextlib import suppress
 import os
 
-from data.lib.qtUtils import QFiles, QNamedLineEdit, QSaveData, QGridFrame, QScrollableGridWidget, QSettingsDialog, QFileButton, QNamedComboBox, QNamedToggleButton, QUtilsColor, QDragList, QBaseApplication
+from data.lib.qtUtils import QColorSet, QSaveData, QGridFrame, QScrollableGridWidget, QSettingsDialog, QNamedComboBox, QUtilsColor, QBaseApplication
 from cryptography.fernet import Fernet
 #----------------------------------------------------------------------
 
@@ -20,7 +20,7 @@ class SaveData(QSaveData):
     COLOR_LINK = QUtilsColor()
     downloads_folder = './OGENext/'
 
-    def __init__(self, app: QBaseApplication, save_path: str = './data/save.dat', main_color_set: QSaveData.ColorSet = None, neutral_color_set: QSaveData.ColorSet = None) -> None:
+    def __init__(self, app: QBaseApplication, save_path: str = './data/save.dat', main_color_set: QColorSet = None, neutral_color_set: QColorSet = None) -> None:
         self.platform = PlatformType.from_qplatform(app.platform)
 
         self.check_for_updates = 4
@@ -53,16 +53,16 @@ class SaveData(QSaveData):
         widget.scroll_layout.setAlignment(root_frame, Qt.AlignmentFlag.AlignTop)
 
 
-        label = QSettingsDialog._text_group(lang.get_data('QLabel.checkForUpdates.title'), lang.get_data('QLabel.checkForUpdates.description'))
+        label = QSettingsDialog._text_group(lang.get('QLabel.checkForUpdates.title'), lang.get('QLabel.checkForUpdates.description'))
         root_frame.grid_layout.addWidget(label, 0, 0)
 
-        widget.check_for_updates_combobox = QNamedComboBox(None, lang.get_data('QNamedComboBox.checkForUpdates.title'))
+        widget.check_for_updates_combobox = QNamedComboBox(None, lang.get('QNamedComboBox.checkForUpdates.title'))
         widget.check_for_updates_combobox.combo_box.addItems([
-            lang.get_data('QNamedComboBox.checkForUpdates.values.never'),
-            lang.get_data('QNamedComboBox.checkForUpdates.values.daily'),
-            lang.get_data('QNamedComboBox.checkForUpdates.values.weekly'),
-            lang.get_data('QNamedComboBox.checkForUpdates.values.monthly'),
-            lang.get_data('QNamedComboBox.checkForUpdates.values.atLaunch')
+            lang.get('QNamedComboBox.checkForUpdates.values.never'),
+            lang.get('QNamedComboBox.checkForUpdates.values.daily'),
+            lang.get('QNamedComboBox.checkForUpdates.values.weekly'),
+            lang.get('QNamedComboBox.checkForUpdates.values.monthly'),
+            lang.get('QNamedComboBox.checkForUpdates.values.atLaunch')
         ])
         widget.check_for_updates_combobox.combo_box.setCurrentIndex(self.check_for_updates)
         root_frame.grid_layout.addWidget(widget.check_for_updates_combobox, 1, 0)

@@ -2,6 +2,7 @@
     "info": {
         "name": "Français",
         "version": "07e7e910",
+        "author": "Synel",
         "description": "Langage français pour l'application OGE Next."
     },
     "root": {
