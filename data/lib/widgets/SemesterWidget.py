@@ -3,16 +3,17 @@
     # Libraries
 from PySide6.QtCore import Qt, Signal, QSize
 from PySide6.QtGui import QIcon, QPixmap
-from PySide6.QtWidgets import QPushButton, QLabel
+from PySide6.QtWidgets import QLabel, QMenu
 
-from data.lib.qtUtils import QScrollableGridFrame, QGridFrame, QSidePanelItem, QIconWidget, QDropDownWidget, QLangData
+from data.lib.qtUtils import QScrollableGridFrame, QGridFrame, QSidePanelItem, QIconWidget, QDropDownWidget, QLangData, QBetterToolTip, QMoreButton
 from data.lib.oge import UE, Semester
 from .UEWidget import UEWidget
 #----------------------------------------------------------------------
 
     # Class
+@QBetterToolTip
 class SemesterWidget(QScrollableGridFrame):
-    refreshed = Signal(int)
+    refreshed = Signal(int, bool)
     _ICON: QPixmap = ''
     _OGE_NEW_ICON: QPixmap = ''
 
@@ -48,11 +49,11 @@ class SemesterWidget(QScrollableGridFrame):
         widget.grid_layout.setSpacing(5)
         self.scroll_layout.addWidget(widget, 0, 0)
 
-        button = QPushButton(self._lang.get('QPushButton.refresh'))
-        button.setCursor(Qt.CursorShape.PointingHandCursor)
+        button = QMoreButton(self._lang.get('QPushButton.refreshGrades'))
+        button.more_clicked.connect(self.refresh_more_clicked)
         button.setProperty('color', 'main')
         button.setProperty('transparent', True)
-        button.clicked.connect(lambda: self.refreshed.emit(self._semester))
+        button.clicked.connect(lambda: self.refreshed.emit(self._semester, False))
         widget.grid_layout.addWidget(button, widget.grid_layout.count(), 0)
 
         details_subwidget = QGridFrame()
@@ -152,4 +153,15 @@ class SemesterWidget(QScrollableGridFrame):
 
             new_grades_subwidget = QDropDownWidget(new_grades_title_subwidget, new_grades_sw_desc_label, True)
             widget.grid_layout.addWidget(new_grades_subwidget, widget.grid_layout.count(), 0)
+
+
+    def refresh_more_clicked(self) -> None:
+        menu = QMenu(self)
+        menu.setCursor(Qt.CursorShape.PointingHandCursor)
+
+        action = menu.addAction(self._lang.get('QAction.refreshAll'))
+        action.triggered.connect(lambda: self.refreshed.emit(self._semester, True))
+
+        # menu.exec_(self.mapToGlobal(self.sender().pos()))
+        menu.exec_(self.sender().mapToGlobal(self.sender().rect().bottomRight()))
 #----------------------------------------------------------------------

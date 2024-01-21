@@ -16,7 +16,7 @@
         },
         "dataPanel": {
             "QPushButton": {
-                "refresh": "Rafraîchir"
+                "refreshGrades": "Rafraîchir les notes"
             },
             "QLabel": {
                 "perfectSemester": "Semestre parfait, félicitations !",
@@ -32,6 +32,10 @@
             "QToolTip": {
                 "ogeWeird": "OGE est bizarre, ce n'est pas un bug avec OGE Next.\nVotre moyenne sera corrigée quand OGE fournira les bonnes données.",
                 "ogeWeirdTop": "Cette information peut être incorrecte, voir les info-bulles des UEs pour plus de détails."
+            },
+            "QAction": {
+                "refreshAll": "Tout rafraîchir (notes, rangs)",
+                "refreshGrades": "Rafraîchir les notes"
             }
         }
     }

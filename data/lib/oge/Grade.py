@@ -72,14 +72,18 @@ class Grade:
         return {
             'value': self._value,
             'total': self._total,
-            'coefficient': self._coefficient
+            'coefficient': self._coefficient,
+            'rank': self._rank,
+            'rank_total': self._rank_total
         }
 
     @staticmethod
     def from_json(json: dict) -> 'Grade':
         return Grade(
-            json['value'],
-            json['total'],
-            json['coefficient']
+            json.get('value'),
+            json.get('total'),
+            json.get('coefficient'),
+            json.get('rank'),
+            json.get('rank_total')
         )
 #----------------------------------------------------------------------

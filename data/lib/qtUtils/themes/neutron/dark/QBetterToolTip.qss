@@ -1,0 +1,10 @@
+
+/* QBetterToolTip */
+
+QFrame[QBetterToolTip=true] {
+	background-color: #333333;
+	color: #FFFFFF;
+	padding: 0px;
+	border-radius: 4px;
+	border: 1px solid #484848;
+}

@@ -51,6 +51,7 @@
         "QToggleButton",
         "QNamedToggleButton",
         "QSystemTrayIcon",
-        "QAlert"
+        "QAlert",
+        "QBetterToolTip"
     ]
 }

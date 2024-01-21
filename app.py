@@ -337,7 +337,7 @@ class Application(QBaseApplication):
                 )
 
                 widget = SemesterWidget(self.get_lang_data('QMainWindow.mainPage.QSidePanel.dataPanel'), i + 1, item)
-                widget.refreshed.connect(lambda j: self.change_semester(j, True))
+                widget.refreshed.connect(lambda semester, with_ranks: self.change_semester(semester, with_ranks, True))
                 self.main_page.right.semesters.addWidget(widget)
                 self.data_panels.append(widget)
 
@@ -409,7 +409,7 @@ class Application(QBaseApplication):
 
 
 
-    def change_semester(self, semester: int, force: bool = False) -> None:
+    def change_semester(self, semester: int, with_ranks: bool, force: bool = False) -> None:
         self.oge_worker.semester = semester
         self.oge_worker.force = force
         self.set_panel_disabled(True)

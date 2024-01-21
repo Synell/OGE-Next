@@ -2,17 +2,17 @@
 
     # Libraries
 from PySide6.QtWidgets import QLabel
-from PySide6.QtCore import Qt, Signal
-from PySide6.QtGui import QIcon, QMouseEvent
+from PySide6.QtCore import Qt
 
 from .OGEWidget import OGEWidget
 from data.lib.oge import Subject
 from .GradeGroupWidget import GradeGroupWidget
 from .IconLabel import IconLabel
-from data.lib.qtUtils import QGridFrame
+from data.lib.qtUtils import QGridFrame, QBetterToolTip
 #----------------------------------------------------------------------
 
     # Class
+@QBetterToolTip
 class SubjectWidget(OGEWidget):
     class _Header(QGridFrame):
         def __init__(self, subject: Subject) -> None:

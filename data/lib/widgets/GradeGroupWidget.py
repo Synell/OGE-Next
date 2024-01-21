@@ -1,19 +1,19 @@
 #----------------------------------------------------------------------
 
     # Libraries
-from PySide6.QtWidgets import QLabel, QWidget
-from PySide6.QtCore import Qt, Signal
-from PySide6.QtGui import QIcon, QMouseEvent
+from PySide6.QtWidgets import QLabel
+from PySide6.QtCore import Qt
 
 from data.lib.qtUtils import QFlowWidget
 from .OGEWidget import OGEWidget
 from data.lib.oge import GradeGroup
 from .GradeWidget import GradeWidget
 from .IconLabel import IconLabel
-from data.lib.qtUtils import QGridFrame
+from data.lib.qtUtils import QGridFrame, QBetterToolTip
 #----------------------------------------------------------------------
 
     # Class
+@QBetterToolTip
 class GradeGroupWidget(OGEWidget):
     class _Header(QGridFrame):
         def __init__(self, grade_group: GradeGroup) -> None:

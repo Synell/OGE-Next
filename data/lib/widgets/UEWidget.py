@@ -9,10 +9,11 @@ from .OGEWidget import OGEWidget
 from data.lib.oge import UE
 from .PoleWidget import PoleWidget
 from .IconLabel import IconLabel
-from data.lib.qtUtils import QGridFrame
+from data.lib.qtUtils import QGridFrame, QBetterToolTip
 #----------------------------------------------------------------------
 
     # Class
+@QBetterToolTip
 class UEWidget(OGEWidget):
     class _Header(QGridFrame):
         clicked = Signal()
