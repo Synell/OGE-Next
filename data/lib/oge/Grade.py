@@ -3,10 +3,12 @@
 
     # Class
 class Grade:
-    def __init__(self, value: float, total: float, coefficient: float) -> None:
+    def __init__(self, value: float, total: float, coefficient: float, rank: int, rank_total: int) -> None:
         self._value = value
         self._total = total
         self._coefficient = coefficient
+        self._rank = rank
+        self._rank_total = rank_total
         self._is_new = False
         self._has_missing_data = None
         self._is_only_missing_coefficient = None
@@ -26,6 +28,14 @@ class Grade:
     @property
     def coefficient(self) -> float:
         return self._coefficient
+
+    @property
+    def rank(self) -> int:
+        return self._rank
+
+    @property
+    def rank_total(self) -> int:
+        return self._rank_total
 
     @property
     def is_new(self) -> bool:

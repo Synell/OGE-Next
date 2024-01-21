@@ -111,11 +111,11 @@ class OGE(QObject):
             return key_results[0]
 
 
-    def _get_view_state(self, session_: Session) -> str:
+    def _get_view_state(self, session_: Session, url: str) -> str:
         self.info_changed.emit(InfoType.Info, 'Trying to get a viewState key...')
 
         try:
-            r = session_.get(self._URL_GRADES)
+            r = session_.get(url)
             id = re.findall(r'<li class=\"ui-tabmenuitem(?:.*?)onclick=\"PrimeFaces\.ab\({s:&quot;(.*?)&quot;,f:(?:.*?)</li>', r.text)
             view_state = re.findall(r'id=\"javax\.faces\.ViewState\" value=\"(.*?)\" />', r.text)
 
@@ -153,16 +153,17 @@ class OGE(QObject):
 
         self.info_changed.emit(InfoType.Info, 'Waiting for GET request...')
 
+        s = 'mainBilanForm:j_id_15'
         data = {
             'javax.faces.partial.ajax': 'true',
-            'javax.faces.source': 'mainBilanForm:j_id_15',
-            'javax.faces.partial.execute': 'mainBilanForm:j_id_15',
+            'javax.faces.source': s,
+            'javax.faces.partial.execute': s,
             'javax.faces.partial.render': 'mainBilanForm',
-            'mainBilanForm:j_id_15': 'mainBilanForm:j_id_15',
+            s: s,
             'i': str(semester - 1),
-            'mainBilanForm:j_id_15_menuid': str(semester - 1),
+            f'{s}_menuid': str(semester - 1),
             'mainBilanForm_SUBMIT': '1',
-            'javax.faces.ViewState': self._get_view_state(session_)[1]
+            'javax.faces.ViewState': self._get_view_state(session_, self._URL_GRADES)[1]
         }
 
         self.info_changed.emit(InfoType.Info, 'Waiting for POST request...')
@@ -278,7 +279,7 @@ class OGE(QObject):
                                 coef = float(child.text.replace('\n', '').replace('(', '').replace(')', '').strip())
 
                                 # print('>>>>', f'{note}/{total}', coef)
-                                notes.append(Grade(note, total, coef))
+                                notes.append(Grade(note, total, coef, None, None))
 
                     note_group = GradeGroup(name, coeff, notes)
                     note_groups.append(note_group)
