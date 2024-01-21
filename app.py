@@ -409,7 +409,7 @@ class Application(QBaseApplication):
 
 
 
-    def change_semester(self, semester: int, with_ranks: bool, force: bool = False) -> None:
+    def change_semester(self, semester: int, with_ranks: bool = False, force: bool = False) -> None:
         self.oge_worker.semester = semester
         self.oge_worker.force = force
         self.set_panel_disabled(True)
