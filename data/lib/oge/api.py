@@ -3,8 +3,9 @@
     # Libraries
 from bs4.element import Tag, ResultSet
 from requests import session, Session
-import re, traceback, os
+import re, traceback, os, warnings
 from bs4 import BeautifulSoup as BS
+from bs4 import XMLParsedAsHTMLWarning
 from collections import namedtuple
 from datetime import datetime
 from .Grade import Grade
@@ -16,6 +17,10 @@ from .Semester import Semester
 from .InfoType import InfoType
 from .RankMode import RankMode
 from PySide6.QtCore import QObject, Signal
+#----------------------------------------------------------------------
+
+    # Setup
+warnings.filterwarnings('ignore', category = XMLParsedAsHTMLWarning)
 #----------------------------------------------------------------------
 
     # Class
