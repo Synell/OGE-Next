@@ -34,7 +34,7 @@
                 "ogeWeirdTop": "Cette information peut être incorrecte, voir les info-bulles des UEs pour plus de détails."
             },
             "QAction": {
-                "refreshAll": "Tout rafraîchir (notes, rangs)",
+                "refreshAll": "Tout rafraîchir (notes, rangs, etc.)",
                 "refreshGrades": "Rafraîchir les notes"
             }
         }

@@ -67,6 +67,9 @@ class GradeGroup:
         if self._is_only_missing_coefficient is None: self._is_only_missing_coefficient = (not self.has_missing_grade_data) and (not self._coefficient)
         return self._is_only_missing_coefficient
 
+    def has_missing_rank_data(self, only_for_new_grades: bool) -> bool:
+        return any(grade.has_missing_rank_data(only_for_new_grades) for grade in self._grades)
+
     def set_as_new(self) -> None:
         for grade in self._grades: grade.is_new = True
 

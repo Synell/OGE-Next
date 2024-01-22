@@ -10,4 +10,5 @@ from .Subject import Subject
 from .GradeGroup import GradeGroup
 from .Grade import Grade
 from .InfoType import InfoType
+from .RankMode import RankMode
 #----------------------------------------------------------------------

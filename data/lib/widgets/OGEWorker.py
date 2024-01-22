@@ -2,7 +2,7 @@
 
     # Libraries
 from PySide6.QtCore import QObject, Signal, QThread
-from data.lib.oge import OGE, Semester, InfoType
+from data.lib.oge import OGE, Semester, InfoType, RankMode
 import json, os
 #----------------------------------------------------------------------
 
@@ -34,7 +34,7 @@ class OGEWorker(QThread):
         self._oge.failed.connect(self.signals.failed.emit)
 
     def run(self) -> None:
-        data = self._oge.get_semestre_data(self._semester, self._force)
+        data = self._oge.get_semester_data(self._semester, RankMode.OnlyForNewGrades, self._force) #TODO: change hardcoded value
         if data: self.signals.finished.emit(data)
 
     @property
@@ -63,7 +63,7 @@ class OGEWorker(QThread):
 
     def get_loaded_semester(self, semester: int) -> Semester | None:
         if semester in self.loaded_semesters:
-            return self._oge.get_semestre_data(semester)
+            return self._oge.get_semester_data(semester)
 
         return None
 
