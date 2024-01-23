@@ -114,13 +114,15 @@ class Grade:
 
     @staticmethod
     def from_json(json: dict) -> 'Grade':
+        value = json.get('value')
         value_total = json.get('value-total')
+        coefficient = json.get('coefficient')
         date = json.get('date')
 
         g = Grade(
-            json.get('value'),
-            value_total if value_total is not None else json.get('total'), # Retrocompatibility
-            json.get('coefficient'),
+            float(value) if value is not None else None,
+            float(value_total) if value_total is not None else json.get('total'), # Retrocompatibility
+            float(coefficient) if coefficient is not None else None
         )
 
         g.name = json.get('name')

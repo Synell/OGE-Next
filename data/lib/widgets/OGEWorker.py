@@ -21,6 +21,7 @@ class OGEWorker(QThread):
 
         self._username = username
         self._force = False
+        self._rank_mode = RankMode.OnlyForNewGrades
         self._oge = OGE(username, password)
 
         json_data: dict = self._load_data()
@@ -34,7 +35,7 @@ class OGEWorker(QThread):
         self._oge.failed.connect(self.signals.failed.emit)
 
     def run(self) -> None:
-        data = self._oge.get_semester_data(self._semester, RankMode.OnlyForNewGrades, self._force) #TODO: change hardcoded value
+        data = self._oge.get_semester_data(self._semester, self._rank_mode, self._force)
         if data: self.signals.finished.emit(data)
 
     @property
@@ -48,6 +49,14 @@ class OGEWorker(QThread):
     @property
     def semester_count(self) -> int:
         return self._oge.semester_count
+
+    @property
+    def rank_mode(self) -> RankMode:
+        return self._rank_mode
+
+    @rank_mode.setter
+    def rank_mode(self, value: RankMode) -> None:
+        self._rank_mode = value
 
     @property
     def force(self) -> bool:

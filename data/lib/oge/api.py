@@ -2,7 +2,7 @@
 
     # Libraries
 from bs4.element import Tag, ResultSet
-from requests import session, Session
+from requests import session, Session, Response
 import re, traceback, os, warnings
 from bs4 import BeautifulSoup as BS
 from bs4 import XMLParsedAsHTMLWarning
@@ -31,6 +31,16 @@ class OGE(QObject):
     _URL_WEBSITE = 'http://casiut21.u-bourgogne.fr/login?service=https%3A%2F%2Fiutdijon.u-bourgogne.fr%2Foge%2F'
     _URL_GRADES = 'https://iutdijon.u-bourgogne.fr/oge/stylesheets/etu/bilanEtu.xhtml'
     _URL_DETAILS = 'https://iutdijon.u-bourgogne.fr/oge/stylesheets/etu/detailsEtu.xhtml'
+
+    _AJAX_HEADERS = {
+        'Faces-Request': 'partial/ajax',
+        'Host': 'iutdijon.u-bourgogne.fr',
+        'Origin': 'https://iutdijon.u-bourgogne.fr',
+        'Sec-Fetch-Dest': 'empty',
+        'Sec-Fetch-Mode': 'cors',
+        'Sec-Fetch-Site': 'same-origin',
+        'Connection': 'keep-alive'
+    }
 
     _details_info = namedtuple('DetailsInfo', ['date', 'name', 'value', 'value_total', 'coefficient', 'rank', 'rank_total'])
 
@@ -110,6 +120,8 @@ class OGE(QObject):
                 with open(f'./log/api-error.log', 'w', encoding='utf-8') as file:
                     file.write(f'OGE API crashed!\n\n-----=====<( Python Traceback )>=====-----\n\n{traceback.format_exc()}\n\n\n-----=====<( HTML Code )>=====-----\n\n{html.prettify()}')
 
+            print(traceback.format_exc())
+
         session_.close()
 
 
@@ -130,19 +142,19 @@ class OGE(QObject):
             return key_results[0]
 
 
-    def _get_view_state(self, session_: Session, url: str, info_title: str) -> str:
+    def _get_view_state(self, session_: Session, url: str, info_title: str) -> tuple[str, str]:
         self.info_changed.emit(InfoType.Info, f'{info_title} > Trying to get a viewState key...')
 
         try:
             r = session_.get(url)
             id = re.findall(r'<li class=\"ui-tabmenuitem(?:.*?)onclick=\"PrimeFaces\.ab\({s:&quot;(.*?)&quot;,f:(?:.*?)</li>', r.text)
-            view_state = re.findall(r'id=\"javax\.faces\.ViewState\" value=\"(.*?)\" />', r.text)
+            view_state = re.findall(r'<input[^>]*?name="javax\.faces\.ViewState"[^>]*?value="(.*?)"[^>]*?>', r.text)
 
         except Exception as e:
-            raise Exception(f'Unable to get a viewState key!\n{e}')
+            raise Exception(f'{info_title} > Unable to get a viewState key!\n{e}')
 
         if(len(id) == 0 or len(view_state) == 0):
-            raise Exception('Couldn\'t find a valid viewState key!')
+            raise Exception(f'{info_title} > Couldn\'t find a valid viewState key!')
 
         else:
             self.info_changed.emit(InfoType.Success, 'Key obtained successfully!')
@@ -217,12 +229,12 @@ class OGE(QObject):
             tbody = moy_ue.find('tbody')
 
             rows: list[Tag]|ResultSet = tbody.find_all('tr')
-            if len(rows) == 0: raise Exception('Couldn\'t find children in source code!')
+            if len(rows) == 0: raise Exception('Grades > Couldn\'t find children in source code!')
 
             resource_tag = rows.pop(0)
 
             if resource_tag.attrs.get('class', None) != ['cell_BUT_RESSOURCE']:
-                raise Exception('Couldn\'t find valid children in source code!')
+                raise Exception('Grades > Couldn\'t find valid children in source code!')
 
             name_resource, coeff_resource = self._parse_title_coeff(resource_tag.find('td').find('span'))
             # print('>', name_resource, coeff_resource)
@@ -398,7 +410,7 @@ class OGE(QObject):
         return ret
 
 
-    def _load_details_semester(self, session: Session, view_state_key: str, semester: int) -> None:
+    def _load_details_semester(self, session: Session, view_state_key: str, semester: int) -> tuple[str, str]:
         s = f'mainFormDetailNote:j_id_16'
         data = {
             'javax.faces.partial.ajax': 'true',
@@ -413,10 +425,29 @@ class OGE(QObject):
         }
 
         self.info_changed.emit(InfoType.Info, 'Ranks > Change Loaded Semester > Waiting for POST request...')
-        session.post(self._URL_DETAILS, data, headers = {'referer': self._URL_DETAILS})
+
+        try:
+            r = session.post(self._URL_DETAILS, data, headers = {'referer': self._URL_DETAILS} | self._AJAX_HEADERS)
+            id = re.findall(r'<li class=\"ui-tabmenuitem(?:.*?)onclick=\"PrimeFaces\.ab\({s:&quot;(.*?)&quot;,f:(?:.*?)</li>', r.text)
+            view_state = re.findall(r'id=\"javax\.faces\.ViewState\"><!\[CDATA\[(.*?)\]\]>', r.text)
+
+        except Exception as e:
+            raise Exception(f'Ranks > Unable to get a viewState key!\n{e}')
+
+        if(len(id) == 0 or len(view_state) == 0):
+            raise Exception('Ranks > Couldn\'t find a valid viewState key!')
+
+        else:
+            self.info_changed.emit(InfoType.Success, 'Ranks > Key obtained successfully!')
+            return id[0], view_state[0]
 
 
-    def _load_details_subject(self, session: Session, view_state_key: str, ue_id: int, ue_title: str, pole_id: int, pole_title: str, subject_id: int, subject_title: str) -> tuple[BS, int] | None:
+
+
+
+    def _load_details_subject(self, session: Session, view_state_key: str, ue_id: int, ue_title: str, pole_id: int, pole_title: str, subject_id: int, subject_title: str, tries: int = 0) -> tuple[BS | None, int]:
+        if tries >= 10: return None, 0
+
         s = f'mainFormDetailNote:j_id_1b:0_{ue_id}_{pole_id}_{subject_id}:elpLink'
         data = {
             'mainFormDetailNote:j_id_1b_scrollState': '0,0',
@@ -431,7 +462,7 @@ class OGE(QObject):
         }
 
         self.info_changed.emit(InfoType.Info, f'Ranks > Change Loaded Subject ({ue_title} > {pole_title} > {subject_title}) > Waiting for POST request...')
-        session.post(self._URL_DETAILS, data, headers = {'referer': self._URL_DETAILS})
+        session.post(self._URL_DETAILS, data, headers = {'referer': self._URL_DETAILS} | self._AJAX_HEADERS)
 
         data = {
             'javax.faces.partial.ajax': 'true',
@@ -445,8 +476,8 @@ class OGE(QObject):
         }
 
         self.info_changed.emit(InfoType.Info, f'Ranks > Get Loaded Subject ([{ue_id}] {ue_title} > [{pole_id}] {pole_title} > [{subject_id}] {subject_title}) > Waiting for POST request...')
-        response = session.post(self._URL_DETAILS, data, headers = {'referer': self._URL_DETAILS})
-        if response.status_code != 200: return None
+        response = session.post(self._URL_DETAILS, data, headers = {'referer': self._URL_DETAILS} | self._AJAX_HEADERS)
+        if response.status_code != 200: return None, 0
 
         code = None
         offset = 0
@@ -455,10 +486,10 @@ class OGE(QObject):
 
             if code.text.find('Pas de notes saisies sur cette matière') != -1:
                 self.info_changed.emit(InfoType.Warning, f'Ranks > Wrong Subject Offset ([{ue_id}] {ue_title} > [{pole_id}] {pole_title} > [{subject_id}] {subject_title}) > Trying to find the right offset...')
-                code, offset = self._load_details_subject(session, view_state_key, ue_id, ue_title, pole_id, pole_title, subject_id + 1, subject_title)
+                code, offset = self._load_details_subject(session, view_state_key, ue_id, ue_title, pole_id, pole_title, subject_id + 1, subject_title, tries + 1)
                 offset += 1
 
-        return (code, offset) if code else None
+        return (code, offset) if code else (None, 0)
 
 
     def _parse_details_html(self, code: BS) -> dict[str, list[_details_info]]:
@@ -500,23 +531,30 @@ class OGE(QObject):
                     try: rank, rank_total = map(int, rank_str.split('/'))
                     except: pass
 
+                elif len(rank_spans) == 1:
+                    rank_str = rank_spans[0].text.strip()
+                    try: rank, rank_total = map(int, rank_str.split('/'))
+                    except: pass
+
                 values[group_name].append(self._details_info(date, name, value, value_total, coeff, rank, rank_total))
 
             if len(values[group_name]) == 0: del values[group_name]
 
         return values
 
+
     def _set_missing_ranks(self, session: Session, semester: int, only_for_new_grades: bool) -> None:
         view_state_key = self._get_view_state(session, self._URL_DETAILS, 'Ranks')[1]
 
-        if self._semester_count != semester: self._load_details_semester(session, view_state_key, semester)
+        if self._semester_count != semester:
+            view_state_key = self._load_details_semester(session, view_state_key, semester)[1] # Change semester & Update viewState key
 
         for ue_id, ue in enumerate(self._semester_data[semester].ues):
             for pole_id, pole in enumerate(ue.poles):
                 subject_id_offset = 0
 
                 for subject_id, subject in enumerate(pole.subjects):
-                    if subject.has_missing_rank_data(only_for_new_grades):
+                    if subject.has_missing_rank_data(only_for_new_grades) or (not only_for_new_grades):
                         # print(f'Loading {ue.title} > {pole.title} > {subject.title}...')
                         bs, offset = self._load_details_subject(
                             session,
@@ -532,12 +570,10 @@ class OGE(QObject):
                         if bs is None: continue
 
                         values = self._parse_details_html(bs)
-                        # print(values)
-                        if 'Sensi programm multimédia' == subject.title: print(values, f'mainFormDetailNote:j_id_1b:0_{ue_id}_{pole_id}_{subject_id + subject_id_offset}:elpLink', bs)
                         if not values: continue
 
                         for grade_group in subject.grade_groups:
-                            if grade_group.has_missing_rank_data(only_for_new_grades):
+                            if grade_group.has_missing_rank_data(only_for_new_grades) or (not only_for_new_grades):
                                 # print(f'Loading {ue.title} > {pole.title} > {subject.title} > {grade_group.title}...')
 
                                 for group_name in values:

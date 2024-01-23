@@ -59,7 +59,7 @@ def QBetterToolTip(cls: QWidget):
 
 
         def enterEvent(self, event: QEvent) -> None:
-            if self._q_better_tooltip:
+            if self._q_better_tooltip and self.isEnabled():
                 self._q_better_tooltip.show()
 
             super().enterEvent(event)

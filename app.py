@@ -348,6 +348,7 @@ class Application(QBaseApplication):
         # self.status_bar.progress.setValue(100)
 
         self.data_panels[semester.id - 1].set_data(semester, self.oge_worker.force)
+        self.oge_worker.rank_mode = RankMode.OnlyForNewGrades
         self.oge_worker.force = False
         self.main_page.side_panel.set_current_index(semester.id - 1)
 
@@ -411,6 +412,7 @@ class Application(QBaseApplication):
 
     def change_semester(self, semester: int, with_ranks: bool = False, force: bool = False) -> None:
         self.oge_worker.semester = semester
+        self.oge_worker.rank_mode = RankMode.All if with_ranks else RankMode.OnlyForNewGrades
         self.oge_worker.force = force
         self.set_panel_disabled(True)
         self.oge_worker.start()
