@@ -5,6 +5,7 @@
 - Ranks, names and dates are loaded for new grades
 - Added a new setting to refresh the ranks, names and dates of all grades (useful if you want to see the ranks, names and dates of grades you already had before this update)
 - What's New window is now displayed when you open the app after an update
+- Logout button is now accessible from the "i" button in the top left corner of the sidebar
 
 ## Changes
 - Bump cryptography from 41.0.3 to 41.0.6
