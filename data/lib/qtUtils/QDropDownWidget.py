@@ -6,7 +6,7 @@ from PySide6.QtCore import Qt, Signal, QSize
 from PySide6.QtGui import QMouseEvent
 from .QGridFrame import QGridFrame
 from .QIconWidget import QIconWidget
-from .QBaseApplication import QBaseApplication
+from . import QBaseApplication
 from .QSaveData import QSaveData
 #----------------------------------------------------------------------
 
@@ -55,7 +55,7 @@ class QDropDownWidget(QGridFrame):
         self._show_hide_widget = widget
 
         self.grid_layout.addWidget(self._show_hide_button, 0, 0)
-        self.grid_layout.setAlignment(self._show_hide_button, Qt.AlignmentFlag.AlignRight)
+        self.grid_layout.setAlignment(self._show_hide_button, Qt.AlignmentFlag.AlignLeft)
         self.grid_layout.addWidget(self._show_hide_widget , 1, 0)
 
         if not already_open: self._show_hide_widget.hide()

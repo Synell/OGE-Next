@@ -6,19 +6,20 @@ from PySide6.QtCore import Qt
 from .QGridFrame import QGridFrame
 from .QLogsList import QLogsList
 from .QLangDataManager import QLangData
+from .QWhatsNewWidget import QWhatsNewWidget
 from . import QBaseApplication
 #----------------------------------------------------------------------
 
     # Class
-class QLogsDialog(QDialog):
+class QWhatsNewDialog(QDialog):
     _lang: QLangData = QLangData.NoTranslation()
 
 
     def init(app: QBaseApplication) -> None:
-        QLogsDialog._lang = app.get_lang_data('QMainWindow.QLogsDialog')
+        QWhatsNewDialog._lang = app.get_lang_data('QMainWindow.QWhatsNewDialog')
 
 
-    def __init__(self, parent = None):
+    def __init__(self, parent = None, markdown_path: str = None) -> None:
         super().__init__(parent)
 
         self.setWindowTitle(self._lang.get('title'))
@@ -32,8 +33,8 @@ class QLogsDialog(QDialog):
         frame.grid_layout.setSpacing(0)
         self._root.grid_layout.addWidget(frame, 0, 0)
 
-        self._list_widget: QLogsList = QLogsList()
-        frame.grid_layout.addWidget(self._list_widget, 0, 0)
+        self._whats_new_widget: QWhatsNewWidget = QWhatsNewWidget(markdown_path)
+        frame.grid_layout.addWidget(self._whats_new_widget, 0, 0)
 
         frame = QGridFrame()
         frame.grid_layout.setContentsMargins(20, 20, 20, 20)
@@ -62,20 +63,4 @@ class QLogsDialog(QDialog):
     def exec(self) -> None:
         self.setMinimumSize(int(self.parent().window().size().width() * (205 / 256)), int(self.parent().window().size().height() * (13 / 15)))
         if super().exec(): pass
-
-
-    def add_info(self, message: str) -> None:
-        self._list_widget.add_info(message)
-
-
-    def add_warning(self, message: str) -> None:
-        self._list_widget.add_warning(message)
-
-
-    def add_error(self, message: str) -> None:
-        self._list_widget.add_error(message)
-
-
-    def add_success(self, message: str) -> None:
-        self._list_widget.add_success(message)
 #----------------------------------------------------------------------

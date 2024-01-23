@@ -3,7 +3,11 @@
         "title": "OGE Next",
         "mainPage": "#ref: app/mainPage",
         "QSideBar": "#ref: app/QSideBar",
-        "showMessage": "#ref: app/showMessage"
+        "showMessage": "#ref: app/showMessage",
+        "QLogsList": "#ref: app/QLogsList",
+        "QLogsDialog": "#ref: app/QLogsDialog",
+        "QWhatsNewWidget": "#ref: app/QWhatsNewWidget",
+        "QWhatsNewDialog": "#ref: app/QWhatsNewDialog"
     },
     "QSettingsDialog": "#ref: app/QSettingsDialog",
     "QMessageBox": "#ref: app/QMessageBox",

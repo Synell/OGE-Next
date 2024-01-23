@@ -85,6 +85,13 @@ class Application(QBaseApplication):
 
         self.window.closeEvent = self.close_event
 
+        if self.save_data.version < Info.build:
+            self.save_data.version = Info.build
+            self.save_data.save()
+            if os.path.exists('./changelog.md'):
+                self._whatsnew = DelayedSignal(250, lambda: QWhatsNewDialog(self.window, './changelog.md').exec())
+                self._whatsnew()
+
 
 
     def on_another_instance(self) -> None:

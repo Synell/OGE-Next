@@ -2,13 +2,11 @@
 
     # Libraries
 from urllib.parse import urlparse
-from PySide6.QtWidgets import QFrame, QLabel, QLineEdit, QPushButton
 from PySide6.QtCore import Qt
 
 from .PlatformType import PlatformType
 from datetime import datetime
 from contextlib import suppress
-import os
 
 from data.lib.qtUtils import QColorSet, QSaveData, QGridFrame, QScrollableGridWidget, QSettingsDialog, QNamedComboBox, QUtilsColor, QBaseApplication
 from cryptography.fernet import Fernet
@@ -25,6 +23,7 @@ class SaveData(QSaveData):
 
         self.check_for_updates = 4
         self.last_check_for_updates = datetime.now()
+        self.version = '0' * 8
         self.username = ''
         self.password = ''
         self.remember = True
@@ -96,6 +95,7 @@ class SaveData(QSaveData):
         fernet = Fernet(key)
 
         return {
+            'version': self.version,
             'checkForUpdates': self.check_for_updates,
             'lastCheckForUpdates': self.last_check_for_updates.strftime(self.dateformat),
             'username': self.username,
@@ -108,6 +108,7 @@ class SaveData(QSaveData):
         exc = suppress(Exception)
         res = False
 
+        with exc: self.version = extra_data['version']
         with exc: self.check_for_updates = extra_data['checkForUpdates']
         with exc: self.last_check_for_updates = datetime.strptime(extra_data['lastCheckForUpdates'], self.dateformat)
         with exc: self.username = extra_data['username']

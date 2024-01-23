@@ -3,7 +3,7 @@
     # Libraries
 from PySide6.QtCore import Qt
 from .QBetterListWidget import QBetterListWidget
-from .QBaseApplication import QBaseApplication
+from . import QBaseApplication
 from .QSaveData import QSaveData
 from .QLangDataManager import QLangData
 #----------------------------------------------------------------------

@@ -93,7 +93,16 @@ class Grade:
         return ((self._rank is None or self._rank_total is None) and (not only_for_new_grades)) or (only_for_new_grades and self._is_new)
 
     def __str__(self) -> str:
-        return f'{self._value}/{self._value_total} ({self._coefficient})'
+        s = self._name
+        if s and self._date: s += f' ({self._date.strftime("%d/%m/%Y")})'
+        if s: s += ': '
+
+        s += f'{self._value}/{self._value_total} ({self._coefficient})'
+
+        if self._rank is not None and self._rank_total is not None:
+            s += f' | {self._rank}/{self._rank_total}'
+
+        return s
 
     def __eq__(self, __value: object) -> bool:
         if isinstance(__value, Grade):

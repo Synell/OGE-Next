@@ -24,6 +24,11 @@ from .QNamedHexSpinBox import QNamedHexSpinBox
 from .QToggleButton import QToggleButton
 from .QFileButton import QFileButton
 from .QLinkLabel import QLinkLabel
+from .QDropDownWidget import QDropDownWidget
+from .QLogsList import QLogsList
+from .QLogsDialog import QLogsDialog
+from .QWhatsNewWidget import QWhatsNewWidget
+from .QWhatsNewDialog import QWhatsNewDialog
 from .QAppType import QAppType
 #----------------------------------------------------------------------
 
@@ -169,6 +174,11 @@ class QBaseApplication(QApplication):
         QNamedHexSpinBox.init(self)
         QFileButton.init(self)
         QToggleButton.init(self)
+        QDropDownWidget.init(self)
+        QLogsList.init(self)
+        QLogsDialog.init(self)
+        QWhatsNewWidget.init(self)
+        QWhatsNewDialog.init(self)
 
         return self._qss
 

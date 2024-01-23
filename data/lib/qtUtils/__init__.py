@@ -64,4 +64,7 @@ from .QBetterSortFilterProxyModel import QBetterSortFilterProxyModel
 from .QLogsList import QLogsList
 from .QLogsDialog import QLogsDialog
 from .QBetterToolTip import QBetterToolTip
+from .QMarkDownWidget import QMarkDownWidget
+from .QWhatsNewWidget import QWhatsNewWidget
+from .QWhatsNewDialog import QWhatsNewDialog
 #----------------------------------------------------------------------
