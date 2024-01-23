@@ -410,7 +410,7 @@ class OGE(QObject):
         return ret
 
 
-    def _load_details_semester(self, session: Session, view_state_key: str, semester: int) -> tuple[str, str]:
+    def _load_details_semester(self, session: Session, view_state_key: str, semester: int) -> tuple[dict[str, tuple[int, int, int]], str, str]:
         s = f'mainFormDetailNote:j_id_16'
         data = {
             'javax.faces.partial.ajax': 'true',
@@ -439,15 +439,51 @@ class OGE(QObject):
 
         else:
             self.info_changed.emit(InfoType.Success, 'Ranks > Key obtained successfully!')
-            return id[0], view_state[0]
+            return self._map_details_subjects(BS(r.text, 'lxml')), id[0], view_state[0]
 
 
 
+    def _is_valid_subject(self, code: BS, subject_name: str) -> bool:
+        # NOT FUNCTIONAL
+        if code.text.find('Pas de notes saisies sur cette matière') != -1: return False
+
+        table = code.find('table', attrs = {'id': 'mainFormDetailNote:panelTree'})
+        if not table: return False
+
+        tds = table.findChildren('td')
+        if not tds: return False
+        if len(tds) != 2: return False
+
+        h2 = tds[1].find('h2')
+        if not h2: return False
+
+        return h2.text.strip().replace('\n', '') == subject_name
 
 
-    def _load_details_subject(self, session: Session, view_state_key: str, ue_id: int, ue_title: str, pole_id: int, pole_title: str, subject_id: int, subject_title: str, tries: int = 0) -> tuple[BS | None, int]:
-        if tries >= 10: return None, 0
+    def _map_details_subjects(self, code: BS) -> dict[str, tuple[int, int, int]]:
+        table = code.find('table', attrs = {'id': 'mainFormDetailNote:panelTree'})
+        if not table: return None
 
+        lis: list[Tag] | ResultSet = table.findChildren('li', attrs = {'class': 'ui-treenode ui-treenode-leaf ui-treenode-unselected', 'data-nodetype': 'default'})
+        if not lis: return None
+
+        values = {}
+        for li in lis:
+            subject_name = li.findChild('a').text[2:].strip().replace('\n', '')
+            l = list(map(int, li.attrs['data-rowkey'].split('_')))
+            if len(l) != 4: continue
+
+            _, ue_id, pole_id, subject_id = l
+
+            if not subject_name in values:
+                values[subject_name] = []
+
+            values[subject_name].append((ue_id, pole_id, subject_id))
+
+        return {k: tuple(v) for k, v in values.items()}
+
+
+    def _load_details_subject(self, session: Session, view_state_key: str, ue_id: int, ue_title: str, pole_id: int, pole_title: str, subject_id: int, subject_title: str) -> BS | None:
         s = f'mainFormDetailNote:j_id_1b:0_{ue_id}_{pole_id}_{subject_id}:elpLink'
         data = {
             'mainFormDetailNote:j_id_1b_scrollState': '0,0',
@@ -480,16 +516,11 @@ class OGE(QObject):
         if response.status_code != 200: return None, 0
 
         code = None
-        offset = 0
         if response.status_code == 200:
+            # if self._is_valid_subject(BS(response.text, 'lxml'), subject_title):
             code = BS(response.text, 'lxml')
 
-            if code.text.find('Pas de notes saisies sur cette matière') != -1:
-                self.info_changed.emit(InfoType.Warning, f'Ranks > Wrong Subject Offset ([{ue_id}] {ue_title} > [{pole_id}] {pole_title} > [{subject_id}] {subject_title}) > Trying to find the right offset...')
-                code, offset = self._load_details_subject(session, view_state_key, ue_id, ue_title, pole_id, pole_title, subject_id + 1, subject_title, tries + 1)
-                offset += 1
-
-        return (code, offset) if code else (None, 0)
+        return code
 
 
     def _parse_details_html(self, code: BS) -> dict[str, list[_details_info]]:
@@ -543,30 +574,37 @@ class OGE(QObject):
         return values
 
 
+    def _find_subject_keys(self, mappings: dict[str, tuple[int, int, int]], ue_id: int, pole_id: int, subject_name: str) -> tuple[int, int, int] | None:
+        if not subject_name in mappings: return None
+
+        for ue, pole, subject in mappings[subject_name]:
+            if ue == ue_id and pole == pole_id:
+                return ue, pole, subject
+
+
     def _set_missing_ranks(self, session: Session, semester: int, only_for_new_grades: bool) -> None:
         view_state_key = self._get_view_state(session, self._URL_DETAILS, 'Ranks')[1]
 
-        if self._semester_count != semester:
-            view_state_key = self._load_details_semester(session, view_state_key, semester)[1] # Change semester & Update viewState key
+        mappings, _, view_state_key = self._load_details_semester(session, view_state_key, semester) # Generate mappings
 
         for ue_id, ue in enumerate(self._semester_data[semester].ues):
             for pole_id, pole in enumerate(ue.poles):
-                subject_id_offset = 0
-
                 for subject_id, subject in enumerate(pole.subjects):
                     if subject.has_missing_rank_data(only_for_new_grades) or (not only_for_new_grades):
                         # print(f'Loading {ue.title} > {pole.title} > {subject.title}...')
-                        bs, offset = self._load_details_subject(
+                        new_keys = self._find_subject_keys(mappings, ue_id, pole_id, subject.title)
+                        if new_keys is None: continue
+
+                        bs = self._load_details_subject(
                             session,
                             view_state_key,
-                            ue_id,
+                            new_keys[0],
                             ue.title,
-                            pole_id,
+                            new_keys[1],
                             pole.title,
-                            subject_id + subject_id_offset,
+                            new_keys[2],
                             subject.title
                         )
-                        subject_id_offset += offset
                         if bs is None: continue
 
                         values = self._parse_details_html(bs)
