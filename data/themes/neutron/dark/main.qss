@@ -165,6 +165,10 @@
     text-decoration: line-through;
 }
 
+.UEWidget .average[oge-weird=true] QWidget[QBetterToolTip=true] QLabel, .PoleWidget .average[oge-weird=true] QWidget[QBetterToolTip=true] QLabel, .SubjectWidget .average[oge-weird=true] QWidget[QBetterToolTip=true] QLabel, .GradeGroupWidget .average[oge-weird=true] QWidget[QBetterToolTip=true] QLabel {
+    text-decoration: none;
+}
+
 
 
 .PoleWidget[last-child=true], .PoleWidget[last-child=true] > .oge-content {

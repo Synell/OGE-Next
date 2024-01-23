@@ -21,13 +21,16 @@ class SubjectWidget(OGEWidget):
             self.grid_layout.setContentsMargins(0, 0, 0, 0)
             self.grid_layout.setSpacing(0)
 
-            title_label = QLabel(f'{subject.title} ({subject.coefficient if subject.coefficient else "?"})')
+            better_icon_label = QBetterToolTip(IconLabel)
+            better_label = QBetterToolTip(QLabel)
+
+            title_label = better_label(f'{subject.title} ({subject.coefficient if subject.coefficient else "?"})')
             title_label.setProperty('class', 'title')
             self.grid_layout.addWidget(title_label, 0, 0)
 
             avg = subject.average
 
-            label = IconLabel(f'{avg:.2f}/20' if avg is not None else '?/20')
+            label = better_icon_label(f'{avg:.2f}/20' if avg is not None else '?/20')
 
             if avg is None or subject.is_only_missing_coefficient or subject.has_missing_grade_group_data:
                 label.setIcon(SubjectWidget._OGE_WEIRD_ICON)

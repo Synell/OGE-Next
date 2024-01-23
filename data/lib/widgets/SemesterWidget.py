@@ -56,7 +56,9 @@ class SemesterWidget(QScrollableGridFrame):
         button.clicked.connect(lambda: self.refreshed.emit(self._semester, False))
         widget.grid_layout.addWidget(button, widget.grid_layout.count(), 0)
 
-        details_subwidget = QGridFrame()
+        better_grid_frame = QBetterToolTip(QGridFrame)
+
+        details_subwidget = better_grid_frame()
         details_subwidget.grid_layout.setContentsMargins(0, 0, 0, 0)
         details_subwidget.grid_layout.setSpacing(10)
         widget.grid_layout.addWidget(details_subwidget, widget.grid_layout.count(), 0)

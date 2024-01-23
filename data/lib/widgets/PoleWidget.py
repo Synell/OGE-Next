@@ -21,13 +21,16 @@ class PoleWidget(OGEWidget):
             self.grid_layout.setContentsMargins(0, 0, 0, 0)
             self.grid_layout.setSpacing(0)
 
-            title_label = QLabel(f'{pole.title} ({pole.coefficient if pole.coefficient else "?"})')
+            better_icon_label = QBetterToolTip(IconLabel)
+            better_label = QBetterToolTip(QLabel)
+
+            title_label = better_label(f'{pole.title} ({pole.coefficient if pole.coefficient else "?"})')
             title_label.setProperty('class', 'title')
             self.grid_layout.addWidget(title_label, 0, 0)
 
             avg = pole.average
 
-            label = IconLabel(f'{avg:.2f}/20' if avg is not None else '?/20')
+            label = better_icon_label(f'{avg:.2f}/20' if avg is not None else '?/20')
 
             if avg is None or pole.is_only_missing_coefficient or pole.has_missing_subject_data:
                 label.setIcon(PoleWidget._OGE_WEIRD_ICON)

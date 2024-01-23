@@ -25,13 +25,16 @@ class UEWidget(OGEWidget):
             self.grid_layout.setSpacing(0)
             self.setProperty('background', 'transparent')
 
-            title_label = QLabel(f'{ue.title} ({ue.coefficient if ue.coefficient else "?"})')
+            better_icon_label = QBetterToolTip(IconLabel)
+            better_label = QBetterToolTip(QLabel)
+
+            title_label = better_label(f'{ue.title} ({ue.coefficient if ue.coefficient else "?"})')
             title_label.setProperty('class', 'title')
             self.grid_layout.addWidget(title_label, 0, 0)
 
             avg = ue.average
 
-            label = IconLabel(f'{avg:.2f}/20' if avg is not None else '?/20')
+            label = better_icon_label(f'{avg:.2f}/20' if avg is not None else '?/20')
 
             if avg is None or ue.is_only_missing_coefficient or ue.has_missing_pole_data:
                 label.setIcon(UEWidget._OGE_WEIRD_ICON)

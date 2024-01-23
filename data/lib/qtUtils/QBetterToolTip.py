@@ -12,7 +12,8 @@ from .QGridFrame import QGridFrame
 def QBetterToolTip(cls: QWidget):
     class Wrapper(cls):
         def __init__(self, *args, **kwargs) -> None:
-            self._q_better_tooltip = None
+            self._q_better_tooltip: QGridFrame | None = None
+            self._q_better_tooltip_properties: dict[str, object] = {}
             super().__init__(*args, **kwargs)
             self._set_children_mouse_tracking(self, True)
 
@@ -38,6 +39,8 @@ def QBetterToolTip(cls: QWidget):
             self._q_better_tooltip.setMouseTracking(False)
             self._q_better_tooltip.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents, True)
             self._q_better_tooltip.setProperty('QBetterToolTip', True)
+            for property, value in self._q_better_tooltip_properties.items():
+                self._q_better_tooltip.setProperty(property, value)
 
             if isinstance(widget, str):
                 label = QLabel(widget)
@@ -56,6 +59,17 @@ def QBetterToolTip(cls: QWidget):
                 raise TypeError('widget must be a QWidget or a str')
 
             self._q_better_tooltip.hide()
+
+
+        def set_tooltip(self, widget: QWidget | str) -> None:
+            self.setToolTip(widget)
+
+
+        def set_tooltip_property(self, property: str, value: object) -> None:
+            if self._q_better_tooltip:
+                self._q_better_tooltip.setProperty(property, value)
+
+            self._q_better_tooltip_properties[property] = value
 
 
         def enterEvent(self, event: QEvent) -> None:

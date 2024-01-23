@@ -13,7 +13,6 @@ from data.lib.qtUtils import QGridFrame, QBetterToolTip
 #----------------------------------------------------------------------
 
     # Class
-@QBetterToolTip
 class GradeGroupWidget(OGEWidget):
     class _Header(QGridFrame):
         def __init__(self, grade_group: GradeGroup) -> None:
@@ -22,13 +21,16 @@ class GradeGroupWidget(OGEWidget):
             self.grid_layout.setContentsMargins(0, 0, 0, 0)
             self.grid_layout.setSpacing(0)
 
-            title_label = QLabel(f'{grade_group.title} ({grade_group.coefficient if grade_group.coefficient else "?"})')
+            better_icon_label = QBetterToolTip(IconLabel)
+            better_label = QBetterToolTip(QLabel)
+
+            title_label = better_label(f'{grade_group.title} ({grade_group.coefficient if grade_group.coefficient else "?"})')
             title_label.setProperty('class', 'title')
             self.grid_layout.addWidget(title_label, 0, 0)
 
             avg = grade_group.average
 
-            label = IconLabel(f'{avg:.2f}/20' if avg is not None else '?/20')
+            label = better_icon_label(f'{avg:.2f}/20' if avg is not None else '?/20')
 
             if avg is None or grade_group.is_only_missing_coefficient or grade_group.has_missing_grade_data:
                 label.setIcon(GradeGroupWidget._OGE_WEIRD_ICON)
