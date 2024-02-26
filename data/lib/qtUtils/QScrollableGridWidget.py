@@ -8,7 +8,7 @@ from .QSmoothScrollArea import QSmoothScrollArea
 
     # Class
 class QScrollableGridWidget(QSmoothScrollArea):
-    def __init__(self):
+    def __init__(self) -> None:
         super(QScrollableGridWidget, self).__init__()
         self.scroll_widget = QWidget()
         self.scroll_layout = QGridLayout(self.scroll_widget)

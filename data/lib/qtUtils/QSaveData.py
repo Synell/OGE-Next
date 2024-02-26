@@ -75,11 +75,22 @@ class QSaveData(QObject):
         self._theme_manager: QThemeManager = QThemeManager(main_color_set, neutral_color_set)
         self._theme_manager.warning_received.connect(self.warning_received.emit)
 
+        self._preload_warnings: list[str] = []
+        self._language_manager.warning_received.connect(self._preload_warnings.append)
+
         self._load(reload_all = True)
+
+        self._language_manager.warning_received.disconnect()
 
 
     @property
     def developer_mode(self) -> bool: return self._developer_mode
+
+
+    def get_and_clear_preload_warnings(self) -> list[str]:
+        res = self._preload_warnings
+        self._preload_warnings = []
+        return res
 
 
     def get_lang_data(self, path: str) -> Union[str, 'QLangData', list[Union[str, 'QLangData']]]:

@@ -1,0 +1,6 @@
+
+/* QBetterGraphicsView */
+
+QWidget[QBetterGraphicsView=true][selection=true] {
+    color: #55{main-color-normal};
+}

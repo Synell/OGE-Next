@@ -29,6 +29,7 @@ from .QLogsList import QLogsList
 from .QLogsDialog import QLogsDialog
 from .QWhatsNewWidget import QWhatsNewWidget
 from .QWhatsNewDialog import QWhatsNewDialog
+from .QBetterGraphicsView import QBetterGraphicsView
 from .QAppType import QAppType
 #----------------------------------------------------------------------
 
@@ -179,6 +180,7 @@ class QBaseApplication(QApplication):
         QLogsDialog.init(self)
         QWhatsNewWidget.init(self)
         QWhatsNewDialog.init(self)
+        QBetterGraphicsView.init(self)
 
         return self._qss
 

@@ -15,6 +15,6 @@ QToolButton:hover {
 
 QToolButton:pressed {
 	background-color: #32009ceb;
-	padding-left: 1px;
-	padding-top: 1px;
+	/* padding-left: 1px; */
+	/* padding-top: 1px; */
 }

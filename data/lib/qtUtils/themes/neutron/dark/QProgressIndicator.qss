@@ -1,0 +1,50 @@
+QWidget[QProgressIndicator=true] {
+    background-color: #262626;
+}
+
+QFrame[QProgressIndicatorBar=true], QFrame[QProgressIndicatorBar=true][active=false] {
+    background-color: #1A1A1A;
+}
+
+QFrame[QProgressIndicatorBar=true][active=true] {
+    background-color: #{main-color-normal};
+}
+
+QLabel[QProgressIndicatorItem=true][compact=false] {
+    background-color: #373737;
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+    border: 2px solid #5b5b5b;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+QLabel[QProgressIndicatorItem=true][compact=true] {
+    background-color: #373737;
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    border: 2px solid #5b5b5b;
+    color: #ffffff;
+    font-size: 1px;
+}
+
+QLabel[QProgressIndicatorItem=true][state="0"] {
+    background-color: #373737;
+    border-color: #5b5b5b;
+    color: #ffffff;
+}
+
+QLabel[QProgressIndicatorItem=true][state="1"] {
+    background-color: #262626;
+    border-color: #{main-color-normal};
+    color: #ffffff;
+}
+
+QLabel[QProgressIndicatorItem=true][state="2"] {
+    background-color: #{main-color-normal};
+    border-color: #{main-color-normal};
+    color: #262626;
+}

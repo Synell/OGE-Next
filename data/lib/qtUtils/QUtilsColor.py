@@ -109,11 +109,14 @@ class QUtilsColor:
     @staticmethod
     def from_ahex(color: str) -> 'QUtilsColor':
         c = QUtilsColor()
-        color.replace('#', '')
+        color = color.replace('#', '')
+
         c._alpha = int(color[0:2], 16)
         c._red = int(color[2:4], 16)
         c._green = int(color[4:6], 16)
         c._blue = int(color[6:8], 16)
+
+        return c
 
 
     @dispatch((int, float), (int, float), (int, float))

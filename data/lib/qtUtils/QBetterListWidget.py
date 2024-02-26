@@ -9,10 +9,10 @@ from PySide6.QtCore import Qt, QItemSelectionModel, QModelIndex, QSize, Signal, 
     # Class
 class _verification:
     def good_headers(headers = None):
-        if type(headers) is not list: return False
+        if not isinstance(headers, list): return False
         if len(headers) < 1: return False
         for i in headers:
-            if type(i) is not str: return False
+            if not isinstance(i, str): return False
         return True
 
 

@@ -9,7 +9,11 @@ QMenu {
 	border: 1px solid #484848;
 }
 
-QMenu::item {
+QMenu QWidget {
+	background-color: transparent;
+}
+
+QMenu::item, QMenu QPushButton {
 	background-color: #333333;
 	color: #B3B3B3;
 	border-radius: 4px;
@@ -20,26 +24,30 @@ QMenu::item {
 	font-size: 14px;
 }
 
-QMenu::item:disabled {
+QMenu QPushButton {
+	min-width: 0px;
+}
+
+QMenu::item:disabled, QMenu QPushButton:disabled {
 	color: #737373;
 }
 
-QMenu::item:selected {
+QMenu::item:selected, QMenu QPushButton:hover {
 	color: #FFFFFF;
 	background-color: #575757;
 }
 
-QMenu::item:selected:disabled {
+QMenu::item:selected:disabled, QMenu QPushButton:hover:disabled {
 	color: #737373;
 	background-color: transparent;
 }
 
-QMenu::item:pressed {
+QMenu::item:pressed, QMenu QPushButton:pressed {
 	color: #FFFFFF;
 	background-color: #6F6F6F;
 }
 
-QMenu::item:pressed:disabled {
+QMenu::item:pressed:disabled, QMenu QPushButton:pressed:disabled {
 	color: #737373;
 	background-color: transparent;
 }
@@ -52,11 +60,11 @@ QMenu::icon {
 
 /* QMenu - Main Color */
 
-QWidget[color='{main-color-name}'] QMenu::item:selected {
+QWidget[color='{main-color-name}'] QMenu::item:selected, QWidget[color='{main-color-name}'] QMenu QPushButton:hover {
 	background-color: #{main-color-hover};
 }
 
-QWidget[color='{main-color-name}'] QMenu::item:pressed {
+QWidget[color='{main-color-name}'] QMenu::item:pressed, QWidget[color='{main-color-name}'] QMenu QPushButton:pressed {
 	background-color: #{main-color-pressed};
 }
 
@@ -64,12 +72,12 @@ QWidget[color='{main-color-name}'] QMenu::item:pressed {
 
 /* QMenu - Neutral Color */
 
-QWidget[color='{neutral-color-name}'] QMenu::item:selected {
+QWidget[color='{neutral-color-name}'] QMenu::item:selected, QWidget[color='{neutral-color-name}'] QMenu QPushButton:hover {
 	background-color: #{neutral-color-hover};
 	color: #000000;
 }
 
-QWidget[color='{neutral-color-name}'] QMenu::item:pressed {
+QWidget[color='{neutral-color-name}'] QMenu::item:pressed, QWidget[color='{neutral-color-name}'] QMenu QPushButton:pressed {
 	background-color: #{neutral-color-pressed};
 	color: #000000;
 }

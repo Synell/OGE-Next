@@ -17,4 +17,11 @@ class QFlowScrollableWidget(QSmoothScrollArea):
         self.scroll_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
         self.setWidget(self.scroll_frame)
         self.setWidgetResizable(True)
+
+    def clear(self):
+        for i in reversed(range(self.scroll_layout.count())):
+            item = self.scroll_layout.itemAt(i)
+            if item.widget():
+                item.widget().deleteLater()
+            self.scroll_layout.removeItem(item)
 #----------------------------------------------------------------------

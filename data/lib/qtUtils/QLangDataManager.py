@@ -30,7 +30,7 @@ class QLangDataManager(QObject):
                 self._data.warning_received.connect(self.warning_received.emit)
 
         except Exception as e:
-            self.warning_received.emit(f'Failed to load language data from {language_path}: {e}')
+            self.warning_received.emit(f'Failed to load language data from {language_path}:\n{e}')
             self._data = QLangData.NoTranslation()
 
 

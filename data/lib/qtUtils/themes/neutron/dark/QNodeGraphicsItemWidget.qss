@@ -1,0 +1,13 @@
+
+/* QNodeGraphicsItemWidgetTitle */
+
+QWidget[QNodeGraphicsItemWidgetTitle=true] {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+QWidget[QNodeGraphicsItemWidgetTitle=true] QLabel {
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+}

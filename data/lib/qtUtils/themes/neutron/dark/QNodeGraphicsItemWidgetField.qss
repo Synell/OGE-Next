@@ -1,0 +1,90 @@
+
+/* QNodeGraphicsItemWidgetField */
+
+QWidget[QNodeGraphicsItemWidgetField=true] QWidget[input=true], QWidget[QNodeGraphicsItemWidgetField=true] QWidget[output=true] {
+    width: 16px;
+    height: 16px;
+}
+
+QWidget[QNodeGraphicsItemWidgetField=true] QWidget[input=true] {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+QWidget[QNodeGraphicsItemWidgetField=true] QWidget[output=true] {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+QWidget[QNodeGraphicsItemWidgetField=true] QWidget[input=true] QLabel[connector=true], QWidget[QNodeGraphicsItemWidgetField=true] QWidget[output=true] QLabel[connector=true] {
+    border-radius: 4px;
+    width: 8px;
+    height: 8px;
+}
+
+
+
+/* QNodeGraphicsItemWidgetField • Red */
+
+QWidget[QNodeGraphicsItemWidgetField=true] QWidget[input=true][connector-color=red], QWidget[QNodeGraphicsItemWidgetField=true] QWidget[output=true][connector-color=red] {
+    background-color: #950101;
+}
+
+QWidget[QNodeGraphicsItemWidgetField=true] QWidget[input=true][connector-color=red] QLabel[connector=true], QWidget[QNodeGraphicsItemWidgetField=true] QWidget[output=true][connector-color=red] QLabel[connector=true] {
+    background-color: #3D0000;
+}
+
+
+/* QNodeGraphicsItemWidgetField • Green */
+
+QWidget[QNodeGraphicsItemWidgetField=true] QWidget[input=true][connector-color=green], QWidget[QNodeGraphicsItemWidgetField=true] QWidget[output=true][connector-color=green] {
+    background-color: #4E9F3D;
+}
+
+QWidget[QNodeGraphicsItemWidgetField=true] QWidget[input=true][connector-color=green] QLabel[connector=true], QWidget[QNodeGraphicsItemWidgetField=true] QWidget[output=true][connector-color=green] QLabel[connector=true] {
+    background-color: #1E5128;
+}
+
+
+/* QNodeGraphicsItemWidgetField • Blue */
+
+QWidget[QNodeGraphicsItemWidgetField=true] QWidget[input=true][connector-color=blue], QWidget[QNodeGraphicsItemWidgetField=true] QWidget[output=true][connector-color=blue] {
+    background-color: #1F6E8C;
+}
+
+QWidget[QNodeGraphicsItemWidgetField=true] QWidget[input=true][connector-color=blue] QLabel[connector=true], QWidget[QNodeGraphicsItemWidgetField=true] QWidget[output=true][connector-color=blue] QLabel[connector=true] {
+    background-color: #0E2954;
+}
+
+
+/* QNodeGraphicsItemWidgetField • Yellow */
+
+QWidget[QNodeGraphicsItemWidgetField=true] QWidget[input=true][connector-color=yellow], QWidget[QNodeGraphicsItemWidgetField=true] QWidget[output=true][connector-color=yellow] {
+    background-color: #E8C000;
+}
+
+QWidget[QNodeGraphicsItemWidgetField=true] QWidget[input=true][connector-color=yellow] QLabel[connector=true], QWidget[QNodeGraphicsItemWidgetField=true] QWidget[output=true][connector-color=yellow] QLabel[connector=true] {
+    background-color: #7F6A00;
+}
+
+
+/* QNodeGraphicsItemWidgetField • Magenta */
+
+QWidget[QNodeGraphicsItemWidgetField=true] QWidget[input=true][connector-color=magenta], QWidget[QNodeGraphicsItemWidgetField=true] QWidget[output=true][connector-color=magenta] {
+    background-color: #A200A2;
+}
+
+QWidget[QNodeGraphicsItemWidgetField=true] QWidget[input=true][connector-color=magenta] QLabel[connector=true], QWidget[QNodeGraphicsItemWidgetField=true] QWidget[output=true][connector-color=magenta] QLabel[connector=true] {
+    background-color: #4A004A;
+}
+
+
+/* QNodeGraphicsItemWidgetField • Cyan */
+
+QWidget[QNodeGraphicsItemWidgetField=true] QWidget[input=true][connector-color=cyan], QWidget[QNodeGraphicsItemWidgetField=true] QWidget[output=true][connector-color=cyan] {
+    background-color: #00A2A2;
+}
+
+QWidget[QNodeGraphicsItemWidgetField=true] QWidget[input=true][connector-color=cyan] QLabel[connector=true], QWidget[QNodeGraphicsItemWidgetField=true] QWidget[output=true][connector-color=cyan] QLabel[connector=true] {
+    background-color: #004A4A;
+}

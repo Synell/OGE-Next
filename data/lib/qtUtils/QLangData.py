@@ -16,6 +16,9 @@ class QLangData(QObject):
             instance = super().__new__(cls, 'No translation')
             return instance
 
+        def __init__(self) -> None:
+            super().__init__()
+
         def __getitem__(self, __key: str) -> 'QLangData.NoTranslation':
             return self
 
@@ -79,7 +82,7 @@ class QLangData(QObject):
         for key in keys:
             try: data = data._data[key]
             except KeyError as e:
-                self.warning_received.emit(f'[{self._current_file}] Cannot find {e.args[0]} from\n{self._path_to_here}.{path}')
+                self.warning_received.emit(f'[{self._current_file}] Cannot find {e.args[0]} from\n' + (f'{self._path_to_here}.{path}' if self._path_to_here is not None else path))
                 return QLangData.NoTranslation() if default is None else default
 
         if isinstance(data, QLangData.NoTranslation):

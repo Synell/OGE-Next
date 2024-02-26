@@ -67,4 +67,16 @@ from .QBetterToolTip import QBetterToolTip
 from .QMarkDownWidget import QMarkDownWidget
 from .QWhatsNewWidget import QWhatsNewWidget
 from .QWhatsNewDialog import QWhatsNewDialog
+from .QComboBoxItemModel import QComboBoxItemModel
+from .QProgressIndicator import QProgressIndicator, QProgressIndicatorItem
+from .QProgressIndicatorWidget import QProgressIndicatorWidget
+from .QBetterGraphicsView import QBetterGraphicsView
+from .QBetterGraphicsScene import QBetterGraphicsScene
+from .QBetterGraphicsLayer import QBetterGraphicsLayer
+from .QBetterGraphicsItemWidget import QBetterGraphicsItemWidget
+from .QNodeGraphicsView import QNodeGraphicsView, QNodeGraphicsScene, QNodeGraphicsItemLink
+from .QNodeGraphicsItemWidget import QNodeGraphicsItemWidget
+from .QNodeGraphicsItemWidgetField import QNodeGraphicsItemWidgetField, QNodeGraphicsField
+from .QNodeGraphicsBlockWidget import QNodeGraphicsBlockWidget
+from .QNodeGraphicsItemWidgetBlock import QNodeGraphicsItemWidgetBlock
 #----------------------------------------------------------------------

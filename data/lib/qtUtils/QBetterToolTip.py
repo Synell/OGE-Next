@@ -33,7 +33,7 @@ def QBetterToolTip(cls: QWidget):
             self._q_better_tooltip = QGridFrame()
 
             self._q_better_tooltip.setParent(self)
-            self._q_better_tooltip.setWindowFlags(Qt.WindowType.ToolTip | Qt.WindowType.FramelessWindowHint)
+            self._q_better_tooltip.setWindowFlags(Qt.WindowType.ToolTip | Qt.WindowType.FramelessWindowHint | Qt.WindowType.WindowStaysOnTopHint)
             self._q_better_tooltip.setAttribute(Qt.WidgetAttribute.WA_ShowWithoutActivating, True)
             self._q_better_tooltip.setAttribute(Qt.WidgetAttribute.WA_MouseTracking, False)
             self._q_better_tooltip.setMouseTracking(False)
@@ -68,6 +68,8 @@ def QBetterToolTip(cls: QWidget):
         def set_tooltip_property(self, property: str, value: object) -> None:
             if self._q_better_tooltip:
                 self._q_better_tooltip.setProperty(property, value)
+                self._q_better_tooltip.style().unpolish(self._q_better_tooltip)
+                self._q_better_tooltip.style().polish(self._q_better_tooltip)
 
             self._q_better_tooltip_properties[property] = value
 

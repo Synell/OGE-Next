@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------
 
     # Libraries
-from PyQt6.QtCore import QSharedMemory # Doesn't work with PySide6 for some reason
+from PySide6.QtCore import QSharedMemory # Doesn't work with PySide6 for some reason
 #----------------------------------------------------------------------
 
     # Class
