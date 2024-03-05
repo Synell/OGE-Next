@@ -4,12 +4,12 @@
 from PySide6.QtWidgets import QLabel
 from PySide6.QtCore import Qt
 
-from data.lib.qtUtils import QFlowWidget
+from data.lib.QtUtils import QFlowWidget
 from .OGEWidget import OGEWidget
 from data.lib.oge import GradeGroup
 from .GradeWidget import GradeWidget
 from .IconLabel import IconLabel
-from data.lib.qtUtils import QGridFrame, QBetterToolTip
+from data.lib.QtUtils import QGridFrame, QBetterToolTip
 #----------------------------------------------------------------------
 
     # Class

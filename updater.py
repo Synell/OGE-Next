@@ -15,7 +15,7 @@ from datetime import datetime, timedelta
 import base64, math, subprocess, platform
 from urllib.request import urlopen, Request
 from time import sleep
-from data.lib.qtUtils import *
+from data.lib.QtUtils import *
 from data.lib.widgets import SaveData
 from data.lib.widgets.updater import *
 from data.lib.widgets.updater import data as updater_data

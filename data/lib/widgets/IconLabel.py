@@ -4,7 +4,7 @@
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QPixmap, QIcon
 
-from data.lib.qtUtils import QGridWidget, QIconLabel
+from data.lib.QtUtils import QGridWidget, QIconLabel
 #----------------------------------------------------------------------
 
     # Class

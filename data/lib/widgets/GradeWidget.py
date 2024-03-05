@@ -7,7 +7,7 @@ from PySide6.QtGui import QPixmap
 
 from .OGEWidget import OGEWidget
 from data.lib.oge import Grade
-from data.lib.qtUtils import QIconWidget, QBetterToolTip
+from data.lib.QtUtils import QIconWidget, QBetterToolTip
 #----------------------------------------------------------------------
 
     # Class

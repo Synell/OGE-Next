@@ -110,7 +110,7 @@ class QSettingsDialog(QDialog):
         self._data = _QData(lang_folder, themes_folder)
 
         self.appearance_tab = self._appearance_tab_widget(settings_data.get('QSidePanel.appearance'), current_lang, current_theme, current_theme_variant)
-        self.root.add_widget(self.appearance_tab, settings_data.get('QSidePanel.appearance.title'), f'./data/lib/qtUtils/themes/{current_theme}/{current_theme_variant}/icons/sidepanel/appearance.png')
+        self.root.add_widget(self.appearance_tab, settings_data.get('QSidePanel.appearance.title'), f'./data/lib/QtUtils/themes/{current_theme}/{current_theme_variant}/icons/sidepanel/appearance.png')
 
         self.extra_tabs = extra_tabs
 
@@ -118,7 +118,7 @@ class QSettingsDialog(QDialog):
             self.root.add_widget(v, k, extra_icons[k])
 
         self.data_tab = self._data_tab_widget(settings_data.get('QSidePanel.data'))
-        self.root.add_widget(self.data_tab, settings_data.get('QSidePanel.data.title'), f'./data/lib/qtUtils/themes/{current_theme}/{current_theme_variant}/icons/sidepanel/data.png')
+        self.root.add_widget(self.data_tab, settings_data.get('QSidePanel.data.title'), f'./data/lib/QtUtils/themes/{current_theme}/{current_theme_variant}/icons/sidepanel/data.png')
 
         self.root.set_current_index(0)
 

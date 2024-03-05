@@ -1,8 +1,7 @@
 #----------------------------------------------------------------------
 
     # Libraries
-from .QtUtils import *
-from .widgets import *
-from .oge import *
-from .globalinfo import *
+from .QtCore import *
+from .QtGui import *
+from .QtWidgets import *
 #----------------------------------------------------------------------

@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------
 
     # Libraries
-from ..qtUtils import QColorSet, QUtilsColor
+from ..QtUtils import QColorSet, QUtilsColor
 import os
 #----------------------------------------------------------------------
 

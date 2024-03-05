@@ -8,7 +8,7 @@ from .PlatformType import PlatformType
 from datetime import datetime
 from contextlib import suppress
 
-from data.lib.qtUtils import QColorSet, QSaveData, QGridFrame, QScrollableGridWidget, QSettingsDialog, QNamedComboBox, QUtilsColor, QBaseApplication
+from data.lib.QtUtils import QColorSet, QSaveData, QGridFrame, QScrollableGridWidget, QSettingsDialog, QNamedComboBox, QUtilsColor, QBaseApplication
 from cryptography.fernet import Fernet
 #----------------------------------------------------------------------
 

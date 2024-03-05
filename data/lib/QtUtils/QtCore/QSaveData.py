@@ -196,8 +196,8 @@ class QSaveData(QObject):
             if asQIcon: return QIcon(f'{self._themes_folder}/{self._theme}/{self._theme_variant}/icons/{path}')
             return f'{self._themes_folder}/{self._theme}/{self._theme_variant}/icons/{path}'
         elif mode == QSaveData.IconMode.Global:
-            if asQIcon: return QIcon(f'./data/lib/qtUtils/themes/{self._theme}/{self._theme_variant}/icons/{path}')
-            return f'./data/lib/qtUtils/themes/{self._theme}/{self._theme_variant}/icons/{path}'
+            if asQIcon: return QIcon(f'./data/lib/QtUtils/themes/{self._theme}/{self._theme_variant}/icons/{path}')
+            return f'./data/lib/QtUtils/themes/{self._theme}/{self._theme_variant}/icons/{path}'
 
     def settings_menu(self, app: QBaseApplication = None) -> bool:
         dat = self._settings_menu_extra()

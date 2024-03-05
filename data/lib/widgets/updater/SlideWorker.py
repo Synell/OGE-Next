@@ -2,7 +2,7 @@
 
     # Libraries
 from PySide6.QtCore import QObject, Signal, QThread
-from data.lib.qtUtils import QSlidingStackedWidget
+from data.lib.QtUtils import QSlidingStackedWidget
 #----------------------------------------------------------------------
 
     # Class

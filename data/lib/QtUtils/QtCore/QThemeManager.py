@@ -49,17 +49,17 @@ class QThemeManager(QObject):
             data = json.load(infile)['qss']
             path = data[theme_variant]['location']
 
-        if os.path.exists(f'data/lib/qtUtils/themes/{theme}/{theme_variant}/{path}/main.json'):
-            with open(f'data/lib/qtUtils/themes/{theme}/{theme_variant}/{path}/main.json', 'r', encoding = 'utf-8') as infile:
+        if os.path.exists(f'data/lib/QtUtils/themes/{theme}/{theme_variant}/{path}/main.json'):
+            with open(f'data/lib/QtUtils/themes/{theme}/{theme_variant}/{path}/main.json', 'r', encoding = 'utf-8') as infile:
                 files = json.load(infile)['files']
 
             for file in files:
-                with open(f'data/lib/qtUtils/themes/{theme}/{theme_variant}/{path}/{file}.qss', 'r', encoding = 'utf-8') as infile:
+                with open(f'data/lib/QtUtils/themes/{theme}/{theme_variant}/{path}/{file}.qss', 'r', encoding = 'utf-8') as infile:
                     self._data_global += infile.read()
 
             self._data_global = self._data_global.replace(
                 '{path}',
-                f'data/lib/qtUtils/themes/{theme}/{theme_variant}/{path}/icons/'.replace('//', '/')
+                f'data/lib/QtUtils/themes/{theme}/{theme_variant}/{path}/icons/'.replace('//', '/')
             )
 
             self._data_global = self._data_global.replace('{main-color-name}', self._main_color_set.name)

@@ -5,7 +5,7 @@ from PySide6.QtCore import Qt, Signal, QSize
 from PySide6.QtGui import QIcon, QPixmap
 from PySide6.QtWidgets import QLabel, QMenu
 
-from data.lib.qtUtils import QScrollableGridFrame, QGridFrame, QSidePanelItem, QIconWidget, QDropDownWidget, QLangData, QBetterToolTip, QMoreButton
+from data.lib.QtUtils import QScrollableGridFrame, QGridFrame, QSidePanelItem, QIconWidget, QDropDownWidget, QLangData, QBetterToolTip, QMoreButton
 from data.lib.oge import UE, Semester
 from .UEWidget import UEWidget
 #----------------------------------------------------------------------

@@ -2,7 +2,7 @@
 
     # Libraries
 from PySide6.QtGui import QPixmap
-from data.lib.qtUtils import QGridFrame
+from data.lib.QtUtils import QGridFrame
 #----------------------------------------------------------------------
 
     # Class

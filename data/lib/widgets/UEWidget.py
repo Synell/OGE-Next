@@ -9,7 +9,7 @@ from .OGEWidget import OGEWidget
 from data.lib.oge import UE
 from .PoleWidget import PoleWidget
 from .IconLabel import IconLabel
-from data.lib.qtUtils import QGridFrame, QBetterToolTip
+from data.lib.QtUtils import QGridFrame, QBetterToolTip
 #----------------------------------------------------------------------
 
     # Class
