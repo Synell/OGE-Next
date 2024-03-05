@@ -2,7 +2,7 @@
 
     # Libraries
 from enum import Enum
-from data.lib.QtUtils.QPlatform import QPlatform
+from data.lib.QtUtils import QPlatform
 #----------------------------------------------------------------------
 
     # Class
