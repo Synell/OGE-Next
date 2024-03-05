@@ -26,6 +26,7 @@ QLabel[h='2'] {
 QLabel[h='2'][small=true] {
 	font-size: 20px;
 	font-weight: bold;
+	padding-left: 0;
 }
 
 QLabel[h='3'] {
@@ -149,6 +150,13 @@ QLabel[brightnormal=true] {
 
 QLabel[brightsubtitle=true] {
 	color: #909090;
+	background-color: transparent;
+	border: none;
+	font-size: 12px;
+}
+
+QLabel[brightersubtitle=true] {
+	color: #FFFFFF;
 	background-color: transparent;
 	border: none;
 	font-size: 12px;

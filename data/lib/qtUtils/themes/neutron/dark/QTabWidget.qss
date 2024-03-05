@@ -36,13 +36,13 @@ QTabBar::tab, QDockWidget QTabBar::tab {
 QTabBar::tab:top:selected:disabled, QDockWidget QTabBar::tab:top:selected:disabled {
 	border-bottom: 2px solid #26486B;
 	color: #808080;
-	background-color: #455364;
+	background-color: transparent;
 }
 
 QTabBar::tab:top:!selected:disabled, QDockWidget QTabBar::tab:top:!selected:disabled {
-	border-bottom: 2px solid #3D77C2;
+	border-bottom: 2px solid transparent;
 	color: #808080;
-	background-color: #3D77C2;
+	background-color: transparent;
 }
 
 QTabBar::tab:top:!selected, QDockWidget QTabBar::tab:top:!selected {
@@ -88,14 +88,50 @@ QTabBar QToolButton, QDockWidget QTabBar QToolButton {
 
 /* QTabWidget - Main Color */
 
-QWidget[color='{main-color-name}'] QTabBar[color='main']::tab:top:selected, QTabBar[color='{main-color-name}']::tab:top:selected, QWidget[color='{main-color-name}'] QDockWidget QTabBar[color='main']::tab:top:selected, QDockWidget QTabBar[color='{main-color-name}']::tab:top:selected {
+QWidget[color='{main-color-name}'] QTabBar[color='main']::tab:top:selected,
+QTabBar[color='{main-color-name}']::tab:top:selected,
+QWidget[color='{main-color-name}'] QDockWidget QTabBar[color='main']::tab:top:selected,
+QDockWidget QTabBar[color='{main-color-name}']::tab:top:selected,
+QWidget[color='{main-color-name}'] QTabWidget[color='main'] QTabBar::tab:top:selected,
+QTabWidget[color='{main-color-name}'] QTabBar::tab:top:selected,
+QWidget[color='{main-color-name}'] QDockWidget QTabWidget QTabBar[color='main']::tab:top:selected,
+QDockWidget QTabWidget QTabBar[color='{main-color-name}']::tab:top:selected {
 	border-bottom-color: #{main-color-pressed};
+}
+
+QWidget[color='{main-color-name}'] QTabBar[color='main']::tab:top:selected:disabled,
+QTabBar[color='{main-color-name}']::tab:top:selected:disabled,
+QWidget[color='{main-color-name}'] QDockWidget QTabBar[color='main']::tab:top:selected:disabled,
+QDockWidget QTabBar[color='{main-color-name}']::tab:top:selected:disabled,
+QWidget[color='{main-color-name}'] QTabWidget[color='main'] QTabBar::tab:top:selected:disabled,
+QTabWidget[color='{main-color-name}'] QTabBar::tab:top:selected:disabled,
+QWidget[color='{main-color-name}'] QDockWidget QTabWidget QTabBar[color='main']::tab:top:selected:disabled,
+QDockWidget QTabWidget QTabBar[color='{main-color-name}']::tab:top:selected:disabled {
+	border-bottom-color: #{main-color-disabled};
 }
 
 
 
 /* QTabWidget - Neutral Color */
 
-QWidget[color='{neutral-color-name}'] QTabBar[color='main']::tab:top:selected, QTabBar[color='{neutral-color-name}']::tab:top:selected, QWidget[color='{neutral-color-name}'] QDockWidget QTabBar[color='main']::tab:top:selected, QDockWidget QTabBar[color='{neutral-color-name}']::tab:top:selected {
+QWidget[color='{neutral-color-name}'] QTabBar[color='main']::tab:top:selected,
+QTabBar[color='{neutral-color-name}']::tab:top:selected,
+QWidget[color='{neutral-color-name}'] QDockWidget QTabBar[color='main']::tab:top:selected,
+QDockWidget QTabBar[color='{neutral-color-name}']::tab:top:selected,
+QWidget[color='{neutral-color-name}'] QTabWidget[color='main'] QTabBar::tab:top:selected,
+QTabWidget[color='{neutral-color-name}'] QTabBar::tab:top:selected,
+QWidget[color='{neutral-color-name}'] QDockWidget QTabWidget QTabBar[color='main']::tab:top:selected,
+QDockWidget QTabWidget QTabBar[color='{neutral-color-name}']::tab:top:selected {
 	border-bottom-color: #{neutral-color-pressed};
+}
+
+QWidget[color='{neutral-color-name}'] QTabBar[color='main']::tab:top:selected:disabled,
+QTabBar[color='{neutral-color-name}']::tab:top:selected:disabled,
+QWidget[color='{neutral-color-name}'] QDockWidget QTabBar[color='main']::tab:top:selected:disabled,
+QDockWidget QTabBar[color='{neutral-color-name}']::tab:top:selected:disabled,
+QWidget[color='{neutral-color-name}'] QTabWidget[color='main'] QTabBar::tab:top:selected:disabled,
+QTabWidget[color='{neutral-color-name}'] QTabBar::tab:top:selected:disabled,
+QWidget[color='{neutral-color-name}'] QDockWidget QTabWidget QTabBar[color='main']::tab:top:selected:disabled,
+QDockWidget QTabWidget QTabBar[color='{neutral-color-name}']::tab:top:selected:disabled {
+	border-bottom-color: #{neutral-color-disabled};
 }

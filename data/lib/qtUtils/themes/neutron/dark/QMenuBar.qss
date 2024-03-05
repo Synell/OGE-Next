@@ -4,6 +4,7 @@
 QMenuBar {
 	background-color: #333333;
 	color: #FFFFFF;
+	font-size: 14px;
 }
 
 QMenuBar::item {

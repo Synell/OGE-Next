@@ -68,6 +68,10 @@ QWidget[color='{main-color-name}'] QMenu::item:pressed, QWidget[color='{main-col
 	background-color: #{main-color-pressed};
 }
 
+QWidget[color='{main-color-name}'] QMenu::item:selected:disabled, QWidget[color='{main-color-name}'] QMenu QPushButton:hover:disabled, QWidget[color='{main-color-name}'] QMenu::item:pressed:disabled, QWidget[color='{main-color-name}'] QMenu QPushButton:pressed:disabled {
+	background-color: #{main-color-disabled};
+}
+
 
 
 /* QMenu - Neutral Color */
@@ -79,5 +83,10 @@ QWidget[color='{neutral-color-name}'] QMenu::item:selected, QWidget[color='{neut
 
 QWidget[color='{neutral-color-name}'] QMenu::item:pressed, QWidget[color='{neutral-color-name}'] QMenu QPushButton:pressed {
 	background-color: #{neutral-color-pressed};
+	color: #000000;
+}
+
+QWidget[color='{neutral-color-name}'] QMenu::item:selected:disabled, QWidget[color='{neutral-color-name}'] QMenu QPushButton:hover:disabled, QWidget[color='{neutral-color-name}'] QMenu::item:pressed:disabled, QWidget[color='{neutral-color-name}'] QMenu QPushButton:pressed:disabled {
+	background-color: #{neutral-color-disabled};
 	color: #000000;
 }

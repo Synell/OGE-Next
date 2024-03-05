@@ -25,6 +25,7 @@
         "QHeaderView",
         "QScrollBar",
         "QPushButton",
+        "QTitleButton",
         "QMoreButton",
         "QMenuBar",
         "QMenu",
