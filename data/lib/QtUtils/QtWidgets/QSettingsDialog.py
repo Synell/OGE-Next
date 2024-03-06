@@ -13,7 +13,8 @@ from .QSlidingStackedWidget import QSlidingStackedWidget
 from .QGridFrame import QGridFrame
 from .QGridWidget import QGridWidget
 
-from ..QtCore import QFileExplorer, QComboBoxItemModel
+from ..QtCore.QComboBoxItemModel import QComboBoxItemModel
+from ..QtCore.QFileExplorer import QFileExplorer
 #----------------------------------------------------------------------
 
     # Class
@@ -176,7 +177,16 @@ class QSettingsDialog(QDialog):
         root_frame.grid_layout.addWidget(label, root_frame.grid_layout.count(), 0)
 
         self.themes_dropdown = QNamedComboBox(None, lang_data.get('QNamedComboBox.theme'))
-        self.themes_dropdown.combo_box.addItems(list(theme.display_name for theme in self._data.themes))
+        theme_model: QComboBoxItemModel = QComboBoxItemModel()
+
+        for theme in self._data.themes:
+            theme_model.add_item(
+                theme.display_name,
+                f'{theme.display_name} ({theme.version})\nby {theme.author}'
+            )
+
+        theme_model.bind(self.themes_dropdown.combo_box)
+
         i = 0
         for theme_id in range(len(self._data.themes)):
             if self._data.themes[theme_id].filename == current_theme: i = theme_id
@@ -184,6 +194,7 @@ class QSettingsDialog(QDialog):
         self.themes_dropdown.combo_box.currentIndexChanged.connect(self._load_theme_variants)
         root_frame.grid_layout.addWidget(self.themes_dropdown, root_frame.grid_layout.count(), 0)
         root_frame.grid_layout.setAlignment(self.themes_dropdown, Qt.AlignmentFlag.AlignLeft)
+
 
         self.theme_variants_dropdown = QNamedComboBox(None, lang_data.get('QNamedComboBox.themeVariant'))
         self._load_theme_variants(i)
