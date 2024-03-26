@@ -16,12 +16,13 @@ class SemesterWidget(QScrollableGridFrame):
     refreshed = Signal(int, bool)
     _ICON: QPixmap = ''
     _OGE_NEW_ICON: QPixmap = ''
+    _app = None
 
-    def __init__(self, lang: QLangData, semester: int, item: QSidePanelItem) -> None:
+    def __init__(self, lang: QLangData, id_: int, item: QSidePanelItem) -> None:
         super().__init__()
 
         self._lang = lang
-        self._semester = semester
+        self._id = id_
         self._item = item
 
         self.scroll_layout.setContentsMargins(20, 20, 20, 20)
@@ -53,7 +54,7 @@ class SemesterWidget(QScrollableGridFrame):
         button.more_clicked.connect(self.refresh_more_clicked)
         button.setProperty('color', 'main')
         button.setProperty('transparent', True)
-        button.clicked.connect(lambda: self.refreshed.emit(self._semester, False))
+        button.clicked.connect(lambda: self.refreshed.emit(self._id, False))
         widget.grid_layout.addWidget(button, widget.grid_layout.count(), 0)
 
         better_grid_frame = QBetterToolTip(QGridFrame)
@@ -133,6 +134,7 @@ class SemesterWidget(QScrollableGridFrame):
 
         icon = QIcon(icon)
         details_sw_icon_label.setPixmap(icon.pixmap(32, 32))
+        self.update_sidebar_item()
         self._item.icon = icon
 
         if texts:
@@ -159,12 +161,25 @@ class SemesterWidget(QScrollableGridFrame):
             widget.grid_layout.addWidget(new_grades_subwidget, widget.grid_layout.count(), 0)
 
 
+    def update_sidebar_item(self) -> None:
+        if not self._data: return
+
+        self._item.text = self._app.get_lang_data('QMainWindow.QSideBar.semester').replace(
+            '%s',
+            (
+                (f'{self._data.number}' if self._data.number is not None else f'{self._data.id}?') +
+                ' ' +
+                (f'({"-".join([str(y) for y in self._data.years])})' if self._data.years else '(?-?)')
+            )
+        )
+
+
     def refresh_more_clicked(self) -> None:
         menu = QMenu(self)
         menu.setCursor(Qt.CursorShape.PointingHandCursor)
 
         action = menu.addAction(self._lang.get('QAction.refreshAll'))
-        action.triggered.connect(lambda: self.refreshed.emit(self._semester, True))
+        action.triggered.connect(lambda: self.refreshed.emit(self._id, True))
 
         # menu.exec_(self.mapToGlobal(self.sender().pos()))
         menu.exec_(self.sender().mapToGlobal(self.sender().rect().bottomRight()))

@@ -1,3 +1,14 @@
+# OGE Next Rel-07e83fd5
+
+## Changes
+- Semester names now have the years in them
+
+## Fix
+- Fixed a bug where the semester name was incorrect for some users
+- Fixed the tooltip style not being applied to some tooltips
+
+--------------------------------
+
 # OGE Next Rel-07e815bd
 
 ## New

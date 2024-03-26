@@ -103,7 +103,7 @@ class OGE(QObject):
 
                 new_grades = False
 
-                self._semester_data[semester] = Semester(semester, self._parse_bilan_html(html))
+                self._semester_data[semester] = Semester(semester, *self._parse_bilan_html(html))
                 if semester == self._semester_count: new_grades = self._set_new()
 
                 if (rank_mode == RankMode.OnlyForNewGrades and new_grades) or rank_mode == RankMode.All:
@@ -212,10 +212,26 @@ class OGE(QObject):
         coeff = float(coeff_s) if coeff_s else 0.0
         return title, coeff
 
-    def _parse_bilan_html(self, code: BS) -> list[UE]:
+    def _parse_bilan_html(self, code: BS) -> tuple[str, list[UE]]:
         log = [] # for debug
 
         self.info_changed.emit(InfoType.Info, 'Grades > Parsing OGE data...')
+        semester_raw_name = None
+
+        try:
+            semester_raw_name = code.find('li', attrs = {'class': 'ui-tabmenuitem ui-state-default ui-state-active ui-corner-top'}).find('span').text.strip()
+
+            pattern = re.compile(r'(\d{4})\/(\d{4})-(?:.*)[A-Za-z] (\d+)')
+            all_spans: list[Tag] = [r.find('span') for r in code.find_all('li', attrs = {'class': 'ui-tabmenuitem ui-state-default ui-corner-top'})]
+
+            for span in all_spans:
+                year1, year2, sm_n = pattern.findall(span.text.strip())[0]
+                year1, year2, sm_n = int(year1), int(year2), int(sm_n)
+                if sm_n in self._semester_data:
+                    self._semester_data[sm_n].raw_name = span.text.strip()
+
+        except Exception as e:
+            log.append(f'Couldn\'t find valid children in source code!\n{traceback.format_exc()}')
 
         data = []
 
@@ -335,7 +351,7 @@ class OGE(QObject):
             with open(f'./log/api-warnings.log', 'w', encoding='utf-8') as file:
                 file.write(f'OGE API warnings!\n\n-----=====<( API Warnings ({len(log)}) )>=====-----\n\n' + ('\n' + ('-' * 50) + '\n').join(log))
 
-        return data
+        return semester_raw_name, data
 
 
     def _set_new(self) -> bool:

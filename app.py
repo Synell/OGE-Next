@@ -53,6 +53,7 @@ class Application(QBaseApplication):
         self.setWindowIcon(QIcon(Info.icon_path))
 
         SemesterWidget._ICON = f'{self.save_data.get_icon_dir()}/sidepanel/semester_%s.png'
+        SemesterWidget._app = self
         OGEWorker._CACHE_FILE = './data/oge_cache/%s.json'
         OGEWidget._OGE_WEIRD_TOOLTIP = self.get_lang_data('QMainWindow.mainPage.QSidePanel.dataPanel.QToolTip.ogeWeird')
         OGEWidget._OGE_WEIRD_ICON = QIcon(f'{self.save_data.get_icon_dir()}/oge/about.png').pixmap(16, 16)
@@ -338,7 +339,7 @@ class Application(QBaseApplication):
 
             for i in range(c):
                 item = QSidePanelItem(
-                    self.get_lang_data('QMainWindow.QSideBar.semester').replace('%s', str(i + 1)),
+                    self.get_lang_data('QMainWindow.QSideBar.semester').replace('%s', f'{i + 1}? (?-?)'),
                     f'{self.save_data.get_icon_dir()}/sidepanel/semester_unknown.png',
                     send_param(i)
                 )
@@ -355,6 +356,7 @@ class Application(QBaseApplication):
         # self.status_bar.progress.setValue(100)
 
         self.data_panels[semester.id - 1].set_data(semester, self.oge_worker.force)
+        for smstr in self.data_panels: smstr.update_sidebar_item()
         self.oge_worker.rank_mode = RankMode.OnlyForNewGrades
         self.oge_worker.force = False
         self.main_page.side_panel.set_current_index(semester.id - 1)
