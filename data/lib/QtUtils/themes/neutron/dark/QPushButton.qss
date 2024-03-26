@@ -231,3 +231,28 @@ QPushButton[small=true] {
 	font-weight: bold;
 	font-size: 12px;
 }
+
+
+
+/* QPushButton - Block */
+
+QPushButton[block=true], QWidget QPushButton[block=true][color='main'], QWidget[QPushButton=true][block=true], QWidget QWidget[QPushButton=true][block=true][color='main'] {
+	background-color: transparent;
+	color: #FFFFFF;
+	border-radius: 4px;
+	text-align: left;
+	color: #{main-color-normal};
+}
+
+QPushButton[block=true]:hover, QWidget QPushButton[block=true][color='main']:hover, QWidget[QPushButton=true][block=true]:hover, QWidget QWidget[QPushButton=true][block=true][color='main']:hover {
+	background-color: #333333;
+}
+
+QPushButton[block=true]:pressed, QWidget QPushButton[block=true][color='main']:pressed, QWidget[QPushButton=true][block=true]:pressed, QWidget QWidget[QPushButton=true][block=true][color='main']:pressed {
+	background-color: #404040;
+}
+
+QPushButton[block=true]:disabled, QWidget QPushButton[block=true][color='main']:disabled, QWidget[QPushButton=true][block=true]:disabled, QWidget QWidget[QPushButton=true][block=true][color='main']:disabled {
+	background-color: transparent;
+	color: #8F8F8F;
+}

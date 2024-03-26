@@ -3,6 +3,7 @@
     # Libraries
 from PySide6.QtWidgets import QGridLayout, QLabel, QFrame
 from PySide6.QtCore import Qt
+from ..QtCore.QDirection import QDirection
 from enum import Enum
 from typing import Iterable
 #----------------------------------------------------------------------
@@ -33,14 +34,7 @@ class QProgressIndicatorItem(QLabel):
 
 
 class QProgressIndicator(QFrame):
-    class Direction(Enum):
-        Left2Right = 'left2right',
-        Right2Left = 'right2left',
-        Top2Bottom = 'top2bottom',
-        Bottom2Top = 'bottom2top'
-
-
-    def __init__(self, parent = None, direction: Direction = Direction.Bottom2Top, compact: bool = True, content_margins: tuple = (16, 16, 16, 16)) -> None:
+    def __init__(self, parent = None, direction: QDirection = QDirection.Bottom2Top, compact: bool = True, content_margins: tuple = (16, 16, 16, 16)) -> None:
         super().__init__(parent)
         self._layout = QGridLayout(self)
         self._direction = direction
@@ -75,15 +69,15 @@ class QProgressIndicator(QFrame):
 
 
     @property
-    def direction(self) -> Direction:
+    def direction(self) -> QDirection:
         return self._direction
 
     @direction.setter
-    def direction(self, value: Direction) -> None:
+    def direction(self, value: QDirection) -> None:
         self._direction = value
         self._rebuild()
 
-    def set_direction(self, value: Direction) -> None:
+    def set_direction(self, value: QDirection) -> None:
         self.direction = value
 
 
@@ -123,16 +117,16 @@ class QProgressIndicator(QFrame):
 
     def _rebuild(self) -> None:
         match self._direction:
-            case QProgressIndicator.Direction.Left2Right:
+            case QDirection.Left2Right:
                 self.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
 
-            case QProgressIndicator.Direction.Right2Left:
+            case QDirection.Right2Left:
                 self.setLayoutDirection(Qt.LayoutDirection.RightToLeft)
 
-            case QProgressIndicator.Direction.Top2Bottom:
+            case QDirection.Top2Bottom:
                 self.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
 
-            case QProgressIndicator.Direction.Bottom2Top:
+            case QDirection.Bottom2Top:
                 self.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
 
 
@@ -150,14 +144,12 @@ class QProgressIndicator(QFrame):
         self._active_bar = QFrame()
         self._active_bar.setProperty('QProgressIndicatorBar', True)
         self._active_bar.setProperty('active', True)
-        # self._active_bar.setStyleSheet('background-color: green;')
 
         self._bar = QFrame()
         self._bar.setProperty('QProgressIndicatorBar', True)
         self._bar.setProperty('active', False)
-        # self._bar.setStyleSheet('background-color: red;')
 
-        if self._direction in (QProgressIndicator.Direction.Left2Right, QProgressIndicator.Direction.Right2Left):
+        if self._direction in (QDirection.Left2Right, QDirection.Right2Left):
             self._active_bar.setFixedHeight(2)
             self._layout.addWidget(self._active_bar, 0, 0, 1, max(self._current_index + 1, 1), Qt.AlignmentFlag.AlignVCenter)
 
@@ -178,8 +170,8 @@ class QProgressIndicator(QFrame):
             item.setFixedWidth(16 if self._compact else 32)
             item.setFixedHeight(16 if self._compact else 32)
             item.setProperty('compact', self._compact)
-            
-            if self._direction in (QProgressIndicator.Direction.Left2Right, QProgressIndicator.Direction.Right2Left):
+
+            if self._direction in (QDirection.Left2Right, QDirection.Right2Left):
                 self._layout.addWidget(item, 0, i)
 
             else:

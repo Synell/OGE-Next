@@ -160,8 +160,12 @@
 
 
 
-.UEWidget .average[oge-weird=true] QLabel, .PoleWidget .average[oge-weird=true] QLabel, .SubjectWidget .average[oge-weird=true] QLabel, .GradeGroupWidget .average[oge-weird=true] QLabel {
+.UEWidget *[oge-weird=true] QLabel, .PoleWidget *[oge-weird=true] QLabel, .SubjectWidget *[oge-weird=true] QLabel, .GradeGroupWidget *[oge-weird=true] QLabel, QFrame[oge-details=true] *[oge-weird=true] QLabel {
     color: #00DEFF;
+    font-weight: bold;
+}
+
+.UEWidget .average[oge-weird=true] QLabel, .PoleWidget .average[oge-weird=true] QLabel, .SubjectWidget .average[oge-weird=true] QLabel, .GradeGroupWidget .average[oge-weird=true] QLabel {
     text-decoration: line-through;
 }
 

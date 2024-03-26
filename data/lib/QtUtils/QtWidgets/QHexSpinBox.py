@@ -3,7 +3,7 @@
     # Libraries
 from PySide6.QtWidgets import QLineEdit, QWidget
 from PySide6.QtCore import Signal
-from ..QtCore import QHexValidator
+from ..QtCore.QHexValidator import QHexValidator
 #----------------------------------------------------------------------
 
     # Class

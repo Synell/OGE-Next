@@ -23,6 +23,7 @@ class QDragListItem(QGridFrame):
         self.old_x = 0
         self.old_y = 0
 
+
     def mouseMoveEvent(self, event: QMouseEvent) -> None:
         if (not (event.buttons() == Qt.MouseButton.LeftButton)): return
         if (self._is_minimum_distance_riched(event)): return
@@ -43,6 +44,7 @@ class QDragListItem(QGridFrame):
             elif (x > bottom_border): x = bottom_border
             self.move(int(x), int(self.old_y))
 
+
     def mousePressEvent(self, event: QMouseEvent) -> None:
         if (event.buttons() == Qt.MouseButton.LeftButton): self.dragStartPosition = event.position()
         self.old_x = self.geometry().x()
@@ -50,27 +52,31 @@ class QDragListItem(QGridFrame):
         self.mouse_click_x = event.globalPosition().x()
         self.mouse_click_y = event.globalPosition().y()
 
+
     def _is_minimum_distance_riched(self, event: QMouseEvent) -> bool:
         return False
         # return (event.position() - self.dragStartPosition).manhattanLength() < QApplication.startDragDistance()
 
+
     def _move_in_layout(self, widget: QWidget, direction: str) -> bool:
-        layout = widget.parentWidget().layout()
+        layout: QHBoxLayout | QVBoxLayout = widget.parentWidget().layout()
 
         index = layout.indexOf(widget)
         if (direction == 'MoveUp' and index == 0): return False
         if (direction == 'MoveDown' and index == layout.count() - 1): return False
-        newIndex = index - 1 if direction == 'MoveUp' else index + 1
+        new_index = index - 1 if direction == 'MoveUp' else index + 1
         layout.removeWidget(widget)
-        layout.insertWidget(newIndex, widget)
-        self.parentWidget().moved.emit(index, newIndex)
+        layout.insertWidget(new_index, widget)
+        self.parentWidget().moved.emit(index, new_index)
         return True
 
+
     def paintEvent(self, _: QPaintEvent) -> None:
-        o = QStyleOption()
-        o.initFrom(self)
-        p = QPainter(self)
-        self.style().drawPrimitive(QStyle.PrimitiveElement.PE_Widget, o, p, self)
+        style_option = QStyleOption()
+        style_option.initFrom(self)
+        painter = QPainter(self)
+        self.style().drawPrimitive(QStyle.PrimitiveElement.PE_Widget, style_option, painter, self)
+
 
     def mouseReleaseEvent(self, _: QMouseEvent) -> None:
         self.setCursor(self.normal_cursor)
@@ -105,6 +111,7 @@ class QDragListItem(QGridFrame):
         layout.update()
         self.saveGeometry()
 
+
     def isVertical(self) -> bool:
         return self.parentWidget().orientation == Qt.Orientation.Vertical
 
@@ -125,31 +132,60 @@ class QDragList(QWidget):
 
         self.setProperty('QDragAndDropList', True)
 
+
     @property
     def orientation(self) -> Qt.Orientation:
         return self._orientation
+
+    @orientation.setter
+    def orientation(self, value: Qt.Orientation) -> None:
+        self.set_orientation(value)
 
     def set_orientation(self, orientation: Qt.Orientation) -> None:
         self._orientation = orientation
         children = list(self.items)
 
         for child in children: self.remove_item(child)
+        margins = self._layout.contentsMargins()
+        spacing = self._layout.spacing()
 
         if self._orientation == Qt.Orientation.Vertical: self._layout = QVBoxLayout()
         else: self._layout = QHBoxLayout()
+
+        self._layout.setContentsMargins(margins)
+        self._layout.setSpacing(spacing)
+
         self.setLayout(self._layout)
 
         for child in children: self.add_item(child)
 
-    def add_item(self, item: QDragListItem):
+
+    def add_item(self, item: QDragListItem) -> None:
         self._layout.addWidget(item)
 
-    def remove_item(self, item: QDragListItem):
+
+    def insert_item(self, index: int, item: QDragListItem) -> None:
+        self._layout.insertWidget(index, item)
+
+
+    def remove_item(self, item: QDragListItem) -> None:
         self._layout.removeWidget(item)
         item.setParent(None)
 
-    def clear(self):
+
+    def pop(self, index: int) -> QDragListItem:
+        item = self._layout.itemAt(index).widget()
+        self.remove_item(item)
+        return item
+
+
+    def clear(self) -> None:
         for child in list(self.items): self.remove_item(child)
+
+
+    def index(self, item: QDragListItem) -> int:
+        return self._layout.indexOf(item)
+
 
     @property
     def items(self) -> Generator[QDragListItem, None, None]:

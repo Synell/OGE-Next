@@ -6,6 +6,7 @@ from PySide6.QtCore import Qt
 from .QProgressIndicator import QProgressIndicator, QProgressIndicatorItem
 from .QSlidingStackedWidget import QSlidingStackedWidget
 from .QGridWidget import QGridWidget
+from ..QtCore.QDirection import QDirection
 #----------------------------------------------------------------------
 
     # Class
@@ -13,7 +14,7 @@ class QProgressIndicatorWidget(QWidget):
     def __init__(
         self,
         parent = None,
-        progress_direction: QProgressIndicator.Direction = QProgressIndicator.Direction.Left2Right,
+        progress_direction: QDirection = QDirection.Left2Right,
         compact: bool = True,
         progress_content_margins: tuple = (16, 16, 16, 16),
         direction: QSlidingStackedWidget.Direction = QSlidingStackedWidget.Direction.Bottom2Top,
@@ -25,16 +26,16 @@ class QProgressIndicatorWidget(QWidget):
 
         self._progress_indicator = QProgressIndicator(self, progress_direction, compact, progress_content_margins)
         match progress_direction:
-            case QProgressIndicator.Direction.Left2Right:
+            case QDirection.Left2Right:
                 self._progress_indicator.setProperty('border-bottom', True)
 
-            case QProgressIndicator.Direction.Right2Left:
+            case QDirection.Right2Left:
                 self._progress_indicator.setProperty('border-bottom', True)
 
-            case QProgressIndicator.Direction.Top2Bottom:
+            case QDirection.Top2Bottom:
                 self._progress_indicator.setProperty('border-right', True)
 
-            case QProgressIndicator.Direction.Bottom2Top:
+            case QDirection.Bottom2Top:
                 self._progress_indicator.setProperty('border-right', True)
 
         w = QGridWidget()

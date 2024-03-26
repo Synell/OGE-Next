@@ -128,6 +128,8 @@ class SemesterWidget(QScrollableGridFrame):
         if self._data.has_missing_data:
             details_subwidget.setToolTip(self._lang.get('QToolTip.ogeWeirdTop'))
             details_subwidget.setCursor(Qt.CursorShape.WhatsThisCursor)
+            details_subwidget.set_tooltip_property('oge-weird', True)
+            details_subwidget.setProperty('oge-details', True)
 
         icon = QIcon(icon)
         details_sw_icon_label.setPixmap(icon.pixmap(32, 32))

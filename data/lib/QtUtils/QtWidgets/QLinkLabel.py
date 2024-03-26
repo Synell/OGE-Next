@@ -7,49 +7,68 @@ from PySide6.QtCore import Signal
 
     # Class
 class QLinkLabel(QLabel):
-    start_text = '<a'
-    end_text = '</a>'
+    _start_text = '<a'
+    _end_text = '</a>'
     link_color = '#4B9CF5'
 
     clicked = Signal(str)
 
+
     def __init__(self, text: str = '', parent = None) -> None:
         super().__init__(parent)
-        self.setText(text)
+        self.set_text(text)
         self.setProperty('QLinkLabel', True)
         self.setOpenExternalLinks(False)
-        self.linkActivated.connect(self.__linkActivated__)
+        self.linkActivated.connect(self._link_activated)
 
-    def setText(self, text: str = '') -> None:
-        self.__text__ = text
+
+    def text(self) -> str:
+        return self._text
+
+    def text_only(self) -> str:
+        return self._text_only
+
+
+    def set_text(self, text: str) -> None:
+        self._text = text
         self.update()
+
+    def setText(self, text: str) -> None:
+        self.set_text(text)
+
 
     def update(self) -> None:
         new_text = ''
-        start = self.__text__.find(self.start_text)
-        end = self.__text__.find(self.end_text)
-        text = self.__text__
+        start = self._text.find(self._start_text)
+        end = self._text.find(self._end_text)
+        text = self._text
+
+        self._text_only = ''
 
         while start != -1 and end != -1 and start < end:
             new_text += text[:start]
+            self._text_only += text[:start]
 
-            link_text = text[start + len(self.start_text) + 1 : end]
+            link_text = text[start + len(self._start_text) + 1 : end]
             base_link_text = link_text
 
             ending = link_text.find('>')
-            if ending == -1: raise ValueError(f'Invalid link: {base_link_text}')
-            link_text = f'{self.start_text} {link_text[:ending]} style=\"color: {self.link_color}; text-decoration: none;\"{link_text[ending:]}{self.end_text}'
+            if ending == -1: raise ValueError(f'Invalid link: {link_text}')
+            link_text = f'{self._start_text} {link_text[:ending]} style=\"color: {self.link_color}; text-decoration: none;\"{link_text[ending:]}{self._end_text}'
 
             new_text += link_text
-            text = text[end + len(self.end_text):]
+            text = text[end + len(self._end_text):]
+            self._text_only += base_link_text[ending + 1:]
 
-            start = text.find(self.start_text)
-            end = text.find(self.end_text)
+            start = text.find(self._start_text)
+            end = text.find(self._end_text)
 
         new_text += text
+        self._text_only += text
 
         super().setText(new_text)
 
-    def __linkActivated__(self, link: str) -> None:
+
+    def _link_activated(self, link: str) -> None:
         self.clicked.emit(link)
 #----------------------------------------------------------------------

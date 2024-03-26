@@ -15,4 +15,5 @@ from .QBetterSortFilterProxyModel import QBetterSortFilterProxyModel
 from .QComboBoxItemModel import QComboBoxItemModel
 from .QDisabledColorFilter import QDisabledColorFilter
 from .QCrashReport import QCrashReport
+from .QDirection import QDirection
 #----------------------------------------------------------------------

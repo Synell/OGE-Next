@@ -209,11 +209,15 @@ class QSlidingStackedWidget(QStackedWidget):
 
     def _animation_done_slot(self) -> None:
         super().setCurrentIndex(self._next)
-        self.widget(self._now).hide()
-        self.widget(self._now).move(self._p_now)
+        w = self.widget(self._now)
+
+        if w:
+            w.hide()
+            w.move(self._p_now)
+
         self._active = False
         self.animation_finished.emit()
-        
+
         if self._next_index is not None:
             self.slide_in_index(self._next_index[0], self._next_index[1])
             self._next_index = None
@@ -223,6 +227,11 @@ class QSlidingStackedWidget(QStackedWidget):
         self._next_index = None
         self._animation_done_slot()
         self._now = index
+
+        w = self.widget(index)
+        if w.isHidden():
+            w.show()
+            w.move(self._p_now)
 
     def set_current_index(self, index: int) -> None:
         self.setCurrentIndex(index)

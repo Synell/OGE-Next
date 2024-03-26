@@ -2,7 +2,7 @@
 
     # Libraries
 from PySide6.QtWidgets import QLabel
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QSize
 
 from .OGEWidget import OGEWidget
 from data.lib.oge import Subject
@@ -39,6 +39,7 @@ class SubjectWidget(OGEWidget):
                 label.setProperty('oge-weird', True)
                 title_label.setToolTip(SubjectWidget._OGE_WEIRD_TOOLTIP)
                 title_label.setCursor(Qt.CursorShape.WhatsThisCursor)
+                title_label.set_tooltip_property('oge-weird', True)
 
             else:
                 label.setStyleSheet(f'color: {SubjectWidget.perc2color(avg / 20)}')

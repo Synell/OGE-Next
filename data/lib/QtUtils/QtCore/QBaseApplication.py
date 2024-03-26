@@ -28,6 +28,7 @@ from ..QtWidgets.QLogsDialog import QLogsDialog
 from ..QtWidgets.QWhatsNewWidget import QWhatsNewWidget
 from ..QtWidgets.QWhatsNewDialog import QWhatsNewDialog
 from ..QtWidgets.QBetterGraphicsView import QBetterGraphicsView
+from ..QtWidgets.QWidgetTabBar import QWidgetTabBarItem
 #----------------------------------------------------------------------
 
     # Class
@@ -178,6 +179,7 @@ class QBaseApplication(QApplication):
         QWhatsNewWidget.init(self)
         QWhatsNewDialog.init(self)
         QBetterGraphicsView.init(self)
+        QWidgetTabBarItem.init(self)
 
         return self._qss
 

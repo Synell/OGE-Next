@@ -41,6 +41,7 @@ class UEWidget(OGEWidget):
                 label.setToolTip(UEWidget._OGE_WEIRD_TOOLTIP)
                 label.setProperty('oge-weird', True)
                 title_label.setToolTip(UEWidget._OGE_WEIRD_TOOLTIP)
+                title_label.set_tooltip_property('oge-weird', True)
 
             else:
                 label.setStyleSheet(f'color: {UEWidget.perc2color(avg / 20)}')

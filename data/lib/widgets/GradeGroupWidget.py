@@ -39,6 +39,7 @@ class GradeGroupWidget(OGEWidget):
                 label.setProperty('oge-weird', True)
                 title_label.setToolTip(GradeGroupWidget._OGE_WEIRD_TOOLTIP)
                 title_label.setCursor(Qt.CursorShape.WhatsThisCursor)
+                title_label.set_tooltip_property('oge-weird', True)
 
             else:
                 label.setStyleSheet(f'color: {GradeGroupWidget.perc2color(avg / 20)}')

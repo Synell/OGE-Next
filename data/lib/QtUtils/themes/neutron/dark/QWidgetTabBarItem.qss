@@ -1,0 +1,61 @@
+
+/* QWidgetTabBarItem */
+
+QWidget[QWidgetTabBarItem=true] {
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+QWidget[QWidgetTabBarItem=true][selected=false]:hover {
+    background-color: #22{main-color-hover};
+    border: 1px solid #AA{main-color-hover};
+}
+
+QWidget[QWidgetTabBarItem=true][selected=true] {
+    background-color: #55{main-color-pressed};
+    border: 1px solid #{main-color-pressed};
+}
+
+QWidget[QWidgetTabBarItem=true][selected=false]:disabled {
+    background-color: transparent;
+    border: 1px solid transparent;
+}
+
+QWidget[QWidgetTabBarItem=true][selected=true]:disabled {
+    background-color: #55{main-color-disabled};
+    border: 1px solid #{main-color-disabled};
+}
+
+
+
+/* QWidgetTabBarItem - Close QPushButton */
+
+QWidget[QWidgetTabBarItem=true] QPushButton[close=true] {
+	border-radius: 4px;
+}
+
+QWidget[QWidgetTabBarItem=true][selected=true] QPushButton[close=true] {
+    background-color: #55{main-color-normal};
+    border: 1px solid #{main-color-normal};
+}
+
+QWidget[QWidgetTabBarItem=true][selected=false] QPushButton[close=true] {
+    background-color: transparent;
+	border: 1px solid transparent;
+}
+
+QWidget[QWidgetTabBarItem=true] QPushButton[close=true]:hover {
+    background-color: #77{main-color-hover};
+    border: 1px solid #{main-color-hover};
+}
+
+QWidget[QWidgetTabBarItem=true] QPushButton[close=true]:pressed {
+    background-color: #AA{main-color-pressed};
+    border: 1px solid #{main-color-pressed};
+}
+
+QWidget[QWidgetTabBarItem=true] QPushButton[close=true]:disabled {
+    background-color: transparent;
+    border: 1px solid transparent;
+}
