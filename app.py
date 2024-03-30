@@ -311,7 +311,7 @@ class Application(QBaseApplication):
         # self.status_bar.progress.setVisible(True)
         self.show_alert(self.get_lang_data('QMainWindow.showMessage.ogeLoading'), pause_duration = 4300)
 
-    def login_success(self, semester: Semester) -> None:
+    async def login_success(self, semester: Semester) -> None:
         self.oge_worker.exit()
         self.change_status_message(InfoType.Info, self.get_lang_data('QMainWindow.showMessage.createPanels'))
 
@@ -393,6 +393,8 @@ class Application(QBaseApplication):
             if self.oge_worker.isRunning():
                 self.oge_worker.exit()
                 self.oge_worker.wait()
+
+            else: self.oge_worker.save_data()
 
         self.set_panel_disabled(True)
 
