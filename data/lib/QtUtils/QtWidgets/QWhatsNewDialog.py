@@ -28,7 +28,7 @@ class QWhatsNewDialog(QDialog):
         self._root.grid_layout.setSpacing(20)
 
         frame = QGridFrame()
-        frame.grid_layout.setContentsMargins(20, 20, 20, 20)
+        frame.grid_layout.setContentsMargins(20, 20, 20, 0)
         frame.grid_layout.setSpacing(0)
         self._root.grid_layout.addWidget(frame, 0, 0)
 
