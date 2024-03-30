@@ -33,3 +33,7 @@ QWidget[separator=true], QWidget[separator=true]:hover, QWidget[separator=true]:
 	border: 2px solid #aaaaaa;
 	border-radius: 2px;
 }
+
+QWidget[separator=true][soft=true], QWidget[separator=true][soft=true]:hover, QWidget[separator=true][soft=true]:focus, QWidget[separator=true][soft=true]:disabled {
+	border-color: #303030;
+}

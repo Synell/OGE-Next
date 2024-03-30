@@ -10,7 +10,7 @@ class Info:
     def __new__(cls) -> None:
         return None
 
-    build: str = '07e83fd5'
+    build: str = '07e83ff6'
     version: str = 'Experimental'
 
     application_name: str = 'Oge Next'
@@ -33,4 +33,6 @@ class Info:
     )
 
     icon_path: str = './data/icons/OGENext.svg'
+
+    github_link: str = 'https://github.com/Synell/OGE-Next'
 #----------------------------------------------------------------------

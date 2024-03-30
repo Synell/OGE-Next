@@ -1,0 +1,84 @@
+
+/* QWhatsNewWidget - Title */
+
+QWidget[QWhatsNewWidget=true] QWidget[type='title'] QLabel[color-block=true],
+QWidget[QWhatsNewWidget=true] QLabel[sub-color-block=true] {
+    border-radius: 4px;
+    width: 100px;
+}
+
+QWidget[QWhatsNewWidget=true] QWidget[type='title'] QLabel {
+    font-size: 18px;
+    font-weight: bold;
+    color: #dddddd;
+}
+
+QWidget[QWhatsNewWidget=true] QWidget[type='title'] QLabel[color-block=true] {
+    background-color: #056bb9;
+    padding: 8px 8px;
+    font-size: 14px;
+}
+
+
+
+/* QWhatsNewWidget - Sub */
+
+QWidget[QWhatsNewWidget=true] QWidget[type='content'] QLabel {
+    font-size: 14px;
+    color: #dddddd;
+}
+
+QWidget[QWhatsNewWidget=true] QWidget[type='content'] QLabel[sub-color-block=true] {
+    background-color: #000000;
+    padding: 6px 8px;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+QWidget[QWhatsNewWidget=true] QWidget[type='content'] QLabel[sub-color-block=true][type='new'] {
+    background-color: #3483de;
+}
+
+QWidget[QWhatsNewWidget=true] QWidget[type='content'] QLabel[sub-color-block=true][type='changes'],
+QWidget[QWhatsNewWidget=true] QWidget[type='content'] QLabel[sub-color-block=true][type='change'],
+QWidget[QWhatsNewWidget=true] QWidget[type='content'] QLabel[sub-color-block=true][type='changed'] {
+    background-color: #b39305;
+}
+
+QWidget[QWhatsNewWidget=true] QWidget[type='content'] QLabel[sub-color-block=true][type='fix'],
+QWidget[QWhatsNewWidget=true] QWidget[type='content'] QLabel[sub-color-block=true][type='fixes'],
+QWidget[QWhatsNewWidget=true] QWidget[type='content'] QLabel[sub-color-block=true][type='fixed'] {
+    background-color: #d24646;
+}
+
+QWidget[QWhatsNewWidget=true] QWidget[type='content'] QLabel[sub-color-block=true][type='improvement'],
+QWidget[QWhatsNewWidget=true] QWidget[type='content'] QLabel[sub-color-block=true][type='improvements'],
+QWidget[QWhatsNewWidget=true] QWidget[type='content'] QLabel[sub-color-block=true][type='improved'] {
+    background-color: #4b8e4b;
+}
+
+QWidget[QWhatsNewWidget=true] QWidget[type='content'] QLabel[sub-color-block=true][type='remove'],
+QWidget[QWhatsNewWidget=true] QWidget[type='content'] QLabel[sub-color-block=true][type='removes'],
+QWidget[QWhatsNewWidget=true] QWidget[type='content'] QLabel[sub-color-block=true][type='removed'] {
+    background-color: #8e4b8e;
+}
+
+QWidget[QWhatsNewWidget=true] QWidget[type='content'] QLabel[sub-color-block=true][type='add'],
+QWidget[QWhatsNewWidget=true] QWidget[type='content'] QLabel[sub-color-block=true][type='adds'],
+QWidget[QWhatsNewWidget=true] QWidget[type='content'] QLabel[sub-color-block=true][type='added'] {
+    background-color: #4b8e8e;
+}
+
+QWidget[QWhatsNewWidget=true] QWidget[type='content'] QLabel[sub-color-block=true][type='security'],
+QWidget[QWhatsNewWidget=true] QWidget[type='content'] QLabel[sub-color-block=true][type='secure'] {
+    background-color: #d2468e;
+}
+
+QWidget[QWhatsNewWidget=true] QWidget[type='content'] QLabel[sub-color-block=true][type='technical'] {
+    background-color: #8e4b05;
+}
+
+QWidget[QWhatsNewWidget=true] QWidget[type='content'] QLabel[sub-color-block=true][type='other'] {
+    background-color: #8e8e8e;
+}

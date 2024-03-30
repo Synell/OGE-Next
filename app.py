@@ -15,6 +15,7 @@ from data.lib import *
     # Class
 class Application(QBaseApplication):
     SERVER_NAME = Info.application_name
+    GITHUB_LINK = Info.github_link
 
     MESSAGE_DURATION = 5000
 
@@ -22,7 +23,7 @@ class Application(QBaseApplication):
     ALERT_PAUSE_DURATION = 2300
     ALERT_FADE_DURATION = 350
 
-    UPDATE_LINK = 'https://github.com/Synell/OGE-Next'
+    UPDATE_LINK = Info.github_link
 
     def __init__(self, platform: QPlatform) -> None:
         super().__init__(platform = platform, app_type = QAppType.Main, single_instance = True)

@@ -59,6 +59,7 @@
         "QBetterGraphicsItemWidget",
         "QNodeGraphicsItemWidgetField",
         "QNodeGraphicsItemWidget",
-        "QWidgetTabBarItem"
+        "QWidgetTabBarItem",
+        "QWhatsNewWidget"
     ]
 }

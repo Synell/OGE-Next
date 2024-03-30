@@ -36,6 +36,7 @@ class QBaseApplication(QApplication):
     another_instance_opened = Signal()
 
     SERVER_NAME = 'myApp'
+    GITHUB_LINK = ''
 
     COLOR_LINK = QUtilsColor.from_hex('#cccccc')
 
