@@ -1,7 +1,8 @@
 {
     "info": {
         "name": "Neutron",
-        "version": 1.0,
+        "version": "07e83ff6",
+        "author": "Synel",
         "description": "Theme for QT6 App."
     },
     "qss": {
