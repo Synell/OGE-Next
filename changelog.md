@@ -2,7 +2,7 @@
 
 ## Changes
 - Semester names now have the years in them
-- Changelog window now has been redesigned to be more readable
+- Changelog window has been redesigned to be more readable
 
 ## Fix
 - Fixed a bug where the semester name was incorrect for some users (Issue #18)
