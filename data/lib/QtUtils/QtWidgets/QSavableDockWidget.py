@@ -11,21 +11,26 @@ class QSavableDockWidget(QDockWidget):
     #     super().__init__(*args, **kwargs)
     #     self._name = name
 
+
     # @property
     # def name(self) -> str:
     #     return self._name
+
 
     @property
     def area(self) -> Qt.DockWidgetArea:
         return self.parent().dockWidgetArea(self)
 
+
     @property
     def is_floating(self) -> bool:
         return self.isFloating()
 
+
     @property
     def tabified(self) -> list:
         return self.parent().tabifiedDockWidgets(self)
+
 
     def to_dict(self) -> dict:
         return {
@@ -36,6 +41,7 @@ class QSavableDockWidget(QDockWidget):
             'visible': not self.isHidden()
             # 'orientation': self.orientation().value
         }
+
 
     def load_dict(self, main_window: QMainWindow, data: dict, orientation: Qt.Orientation = Qt.Orientation.Vertical) -> None:
         if data['isFloating']:
@@ -54,6 +60,7 @@ class QSavableDockWidget(QDockWidget):
             if w: main_window.tabifyDockWidget(self, w)
 
         self.setVisible(data['visible'])
+
 
     @staticmethod
     def from_dict(main_window: QMainWindow, data: dict, orientation: Qt.Orientation = Qt.Orientation.Vertical) -> 'QSavableDockWidget':
