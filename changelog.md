@@ -1,3 +1,10 @@
+# [07e86a83] - 2024-05-16
+
+## Fix
+- Fixed a bug where the app would not load the semester widget if the data is outdated (Issue #20)
+
+--------------------------------
+
 # [07e85508] - 2024-04-01
 
 ## Changes
