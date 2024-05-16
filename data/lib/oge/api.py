@@ -238,6 +238,7 @@ class OGE(QObject):
         for moy_ue in code.find_all('table'):
             thead = moy_ue.find('thead')
             ue_div = thead.find('div')
+            if not ue_div: continue
 
             ue, ue_coeff = self._parse_title_coeff(ue_div)
             # print(ue, ue_coeff)

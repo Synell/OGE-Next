@@ -105,7 +105,12 @@ class SemesterWidget(QScrollableGridFrame):
         icon = ''
         texts = []
 
-        if ue10_count == total_ue:
+        if total_ue == 0:
+            icon = self._ICON.replace('%s', 'alert')
+            title = self._lang.get('QLabel.errorSemester')
+            texts.append(self._lang.get('QLabel.noUE'))
+
+        elif ue10_count == total_ue:
             icon = self._ICON.replace('%s', 'perfect')
             title = self._lang.get('QLabel.perfectSemester')
 
