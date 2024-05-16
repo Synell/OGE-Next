@@ -19,6 +19,7 @@ class QSlidingStackedWidget(QStackedWidget):
 
     animation_finished = Signal()
 
+
     def __init__(self, parent = None) -> None:
         super().__init__(parent)
 
@@ -39,52 +40,81 @@ class QSlidingStackedWidget(QStackedWidget):
     def orientation(self) -> Qt.Orientation:
         return self._orientation
 
-    def set_orientation(self, orientation: Qt.Orientation) -> None:
+    @orientation.setter
+    def orientation(self, orientation: Qt.Orientation) -> None:
         self._orientation = orientation
+
+    def set_orientation(self, orientation: Qt.Orientation) -> None:
+        self.orientation = orientation
+
 
     @property
     def speed(self) -> int:
         return self._speed
 
-    def set_speed(self, speed: int) -> None:
+    @speed.setter
+    def speed(self, speed: int) -> None:
         self._speed = speed
+
+    def set_speed(self, speed: int) -> None:
+        self.speed = speed
+
 
     @property
     def animation(self) -> QEasingCurve.Type:
         return self._animation_type
 
-    def set_animation(self, animation: QEasingCurve.Type) -> None:
+    @animation.setter
+    def animation(self, animation: QEasingCurve.Type) -> None:
         self._animation_type = animation
+
+    def set_animation(self, animation: QEasingCurve.Type) -> None:
+        self.animation_type = animation
+
 
     @property
     def wrap(self) -> bool:
         return self._wrap
 
-    def set_wrap(self, wrap: bool) -> None:
+    @wrap.setter
+    def wrap(self, wrap: bool) -> None:
         self._wrap = wrap
+
+    def set_wrap(self, wrap: bool) -> None:
+        self.wrap = wrap
+
 
     @property
     def has_opacity_effect(self) -> bool:
         return self._has_opacity_effect
 
-    def set_has_opacity_effect(self, has_opacity_effect: bool) -> None:
+    @has_opacity_effect.setter
+    def has_opacity_effect(self, has_opacity_effect: bool) -> None:
         self._has_opacity_effect = has_opacity_effect
+
+    def set_has_opacity_effect(self, has_opacity_effect: bool) -> None:
+        self.has_opacity_effect = has_opacity_effect
+
 
     @property
     def active(self) -> bool:
         return self._active
 
+
     @property
     def current_index(self) -> int:
         return self._next_index[0] if (self._next_index is not None) else self._next
+
 
     def slide_loop_next(self, direction: Direction = Direction.Automatic) -> None:
         result = self.slide_in_next()
         if (not result): self.slide_in_index(0, direction)
 
+
     def slide_loop_previous(self, direction: Direction = Direction.Automatic) -> None:
         result = self.slide_in_previous()
         if (not result): self.slide_in_index(self.count() - 1, direction)
+
 
     def slide_in_next(self) -> bool:
         now = self.currentIndex()
@@ -92,11 +122,13 @@ class QSlidingStackedWidget(QStackedWidget):
         else: return False
         return True
 
+
     def slide_in_previous(self) -> bool:
         now = self.currentIndex()
         if (self._wrap or (now > 0)): self.slide_in_index(now - 1)
         else: return False
         return True
+
 
     def slide_in_index(self, index: int, direction: Direction = Direction.Automatic) -> None:
         if (index > self.count() - 1):
@@ -112,6 +144,7 @@ class QSlidingStackedWidget(QStackedWidget):
             return
 
         self._slide_in_widget(self.widget(index), direction)
+
 
     def _slide_in_widget(self, newwidget: QWidget, direction: Direction) -> None:
         if (self._active): return
@@ -207,6 +240,7 @@ class QSlidingStackedWidget(QStackedWidget):
         self._active = True
         self._anim_group.start(QAbstractAnimation.DeletionPolicy.DeleteWhenStopped)
 
+
     def _animation_done_slot(self) -> None:
         super().setCurrentIndex(self._next)
         w = self.widget(self._now)
@@ -222,6 +256,7 @@ class QSlidingStackedWidget(QStackedWidget):
             self.slide_in_index(self._next_index[0], self._next_index[1])
             self._next_index = None
 
+
     def setCurrentIndex(self, index: int) -> None:
         self._next = index
         self._next_index = None
@@ -229,10 +264,29 @@ class QSlidingStackedWidget(QStackedWidget):
         self._now = index
 
         w = self.widget(index)
-        if w.isHidden():
-            w.show()
-            w.move(self._p_now)
+        if w:
+            if w.isHidden():
+                w.show()
+                w.move(self._p_now)
 
     def set_current_index(self, index: int) -> None:
         self.setCurrentIndex(index)
+
+
+    def setCurrentWidget(self, widget: QWidget) -> None:
+        self.setCurrentIndex(self.indexOf(widget))
+
+
+    def set_current_widget(self, widget: QWidget) -> None:
+        self.setCurrentWidget(widget)
+
+
+    @property
+    def children(self) -> tuple[QWidget]:
+        return tuple(self.widget(i) for i in range(self.count()))
+
+
+    @property
+    def current_widget(self) -> QWidget:
+        return self.currentWidget()
 #----------------------------------------------------------------------

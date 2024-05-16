@@ -16,6 +16,8 @@ class QWidgetTabWidget(QGridWidget):
     tab_changed = Signal(QWidgetTabBarItem, QWidget)
     tab_index_changed = Signal(int)
 
+    moved = Signal(int, int)
+
 
     def __init__(self, orientation: Qt.Orientation = Qt.Orientation.Horizontal) -> None:
         super().__init__()
@@ -187,8 +189,10 @@ class QWidgetTabWidget(QGridWidget):
         self._root.slide_in_index(index)
         self._call_tab_changed()
 
+
     def _close_requested_on_tab(self, index: int) -> None:
         self.tab_close_requested.emit(index)
+
 
     def _moved(self, previous: int, index: int) -> None:
         if index == previous: return
@@ -198,6 +202,8 @@ class QWidgetTabWidget(QGridWidget):
         self._root.insertWidget(index, widget)
 
         self._root.set_current_index(index)
+
+        self.moved.emit(previous, index)
 
 
     def _call_tab_changed(self) -> None:

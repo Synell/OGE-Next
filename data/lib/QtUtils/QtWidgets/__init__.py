@@ -60,4 +60,6 @@ from .QBetterGraphicsItemWidget import QBetterGraphicsItemWidget
 from .QGraphics import *
 from .QTitleButton import QTitleButton
 from .QWidgetTabWidget import QWidgetTabWidget, QWidgetTabBar, QWidgetTabBarItem
+from .QIconTabBar import QIconTabBar
+from .QCheckableGridFrame import QCheckableGridFrame
 #----------------------------------------------------------------------

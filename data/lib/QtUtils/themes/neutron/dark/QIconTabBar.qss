@@ -1,0 +1,16 @@
+
+/* QIconTabBar */
+
+QTabBar[QIconTabBar=true]::tab:top, QDockWidget QTabBar[QIconTabBar=true]::tab:top,
+QTabBar[QIconTabBar=true]::tab:top:hover, QDockWidget QTabBar[QIconTabBar=true]::tab:top:hover,
+QTabBar[QIconTabBar=true]::tab:top:selected, QDockWidget QTabBar[QIconTabBar=true]::tab:top:selected {
+	padding: 2px;
+	padding-top: 8px;
+	padding-left: 3px;
+	padding-right: -13px;
+}
+
+QTabBar[QIconTabBar=true]::tab:top, QDockWidget QTabBar[QIconTabBar=true]::tab:top {
+	margin: 4px;
+	margin-top: 2px;
+}

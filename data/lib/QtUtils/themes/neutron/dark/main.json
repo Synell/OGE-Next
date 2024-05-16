@@ -32,6 +32,7 @@
         "QToolBar",
         "QToolButton",
         "QTabWidget",
+        "QIconTabBar",
         "QToolTip",
         "QSvgWidget",
         "QSideBar",
@@ -60,6 +61,7 @@
         "QNodeGraphicsItemWidgetField",
         "QNodeGraphicsItemWidget",
         "QWidgetTabBarItem",
-        "QWhatsNewWidget"
+        "QWhatsNewWidget",
+        "QCheckableGridFrame"
     ]
 }

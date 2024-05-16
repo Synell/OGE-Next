@@ -1,0 +1,28 @@
+
+/* QCheckableGridFrame */
+
+QWidget[QCheckableGridFrame=true] {
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+QWidget[QCheckableGridFrame=true][selected=false]:hover {
+    background-color: #22{main-color-hover};
+    border: 1px solid #AA{main-color-hover};
+}
+
+QWidget[QCheckableGridFrame=true][selected=true] {
+    background-color: #55{main-color-pressed};
+    border: 1px solid #{main-color-pressed};
+}
+
+QWidget[QCheckableGridFrame=true][selected=false]:disabled {
+    background-color: transparent;
+    border: 1px solid transparent;
+}
+
+QWidget[QCheckableGridFrame=true][selected=true]:disabled {
+    background-color: #55{main-color-disabled};
+    border: 1px solid #{main-color-disabled};
+}

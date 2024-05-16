@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------
 
     # Libraries
-from PySide6.QtWidgets import QDockWidget, QMainWindow
+from PySide6.QtWidgets import QDockWidget, QMainWindow, QWidget
 from PySide6.QtCore import Qt
 #----------------------------------------------------------------------
 
@@ -48,17 +48,15 @@ class QSavableDockWidget(QDockWidget):
             main_window.addDockWidget(Qt.DockWidgetArea(1), self, orientation)
             self.setFloating(True)
             self.move(data['area'][0], data['area'][1])
-            self.resize(data['size'][0], data['size'][1])
 
         else:
             main_window.addDockWidget(Qt.DockWidgetArea(data['area']), self, orientation)
-
-        # self.resize(data['size'][0], data['size'][1])
 
         for w in data['tabified']:
             if type(w) == str: w = main_window.findChild(QDockWidget, w, Qt.FindChildOption.FindDirectChildrenOnly)
             if w: main_window.tabifyDockWidget(self, w)
 
+        # main_window.resizeDocks([self], [data['size'][0 if orientation == Qt.Orientation.Vertical else 1]], orientation)
         self.setVisible(data['visible'])
 
 
