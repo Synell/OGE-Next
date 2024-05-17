@@ -2,6 +2,7 @@
 
     # Libraries
 from .UE import UE
+import re
 #----------------------------------------------------------------------
 
     # Class
@@ -19,7 +20,8 @@ class UEAvg:
 
     @property
     def title(self) -> str:
-        return self._ues[-1].title
+        match = re.match(r'^([A-Z]+)\s*\d*.(\d*)\s*(.*)', self._ues[-1].title)
+        return f'{match.group(1)} {match.group(2)} {match.group(3)}'
 
 
     @property

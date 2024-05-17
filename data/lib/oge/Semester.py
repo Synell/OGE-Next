@@ -39,6 +39,16 @@ class Semester:
 
 
     @property
+    def start_year(self) -> int:
+        return self._semester_name.start_year if self._semester_name is not None else None
+
+
+    @property
+    def end_year(self) -> int:
+        return self._semester_name.end_year if self._semester_name is not None else None
+
+
+    @property
     def raw_name(self) -> str:
         return self._semester_name.raw_name if self._semester_name is not None else None
 

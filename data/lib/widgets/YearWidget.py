@@ -229,10 +229,18 @@ class YearWidget(QScrollableGridFrame):
     def update_sidebar_item(self) -> None:
         if not self._data: return
 
-        self._item.text = YearWidget.generate_sidebar_item_name(self._app, self._number)
+        self._item.text = YearWidget.generate_sidebar_item_name(self._app, self._number, self._data if self._data else tuple())
 
 
     @staticmethod
-    def generate_sidebar_item_name(app, number: int) -> str:
-        return app.get_lang_data('QMainWindow.QSideBar.year').replace('%s', str(number))
+    def generate_sidebar_item_name(app, number: int, semesters: tuple[Semester] = tuple()) -> str:
+        s = app.get_lang_data('QMainWindow.QSideBar.year').replace('%s', str(number))
+        if semesters:
+            start_year = min([semester.start_year for semester in semesters if semester.start_year] + [999999999999])
+            end_year = max([semester.end_year for semester in semesters if semester.end_year] + [0])
+
+            if start_year != 0 and end_year != 999999999999:
+                s += f' ({start_year}-{end_year})'
+
+        return s
 #----------------------------------------------------------------------
