@@ -53,10 +53,11 @@ class Application(QBaseApplication):
 
         self.setWindowIcon(QIcon(Info.icon_path))
 
+        YearWidget._app = self
         SemesterWidget._ICON = f'{self.save_data.get_icon_dir()}/sidepanel/semester_%s.png'
         SemesterWidget._app = self
         OGEWorker._CACHE_FILE = './data/oge_cache/%s.json'
-        OGEWidget._OGE_WEIRD_TOOLTIP = self.get_lang_data('QMainWindow.mainPage.QSidePanel.dataPanel.QToolTip.ogeWeird')
+        OGEWidget._OGE_WEIRD_TOOLTIP = self.get_lang_data('QMainWindow.mainPage.QSidePanel.dataPanel.SemesterWidget.QToolTip.ogeWeird')
         OGEWidget._OGE_WEIRD_ICON = QIcon(f'{self.save_data.get_icon_dir()}/oge/about.png').pixmap(16, 16)
 
         oge_new_icon = QIcon(f'{self.save_data.get_icon_dir()}/oge/new.png')
@@ -336,7 +337,8 @@ class Application(QBaseApplication):
             self.must_init_panels = False
 
             c = self.oge_worker.semester_count
-            send_param = lambda i: lambda: self.change_semester(i)
+            send_param_semester = lambda i: lambda: self.change_semester(i)
+            send_param_year = lambda i: lambda: self.change_year(i)
 
             for i in range(1, c + 1):
                 item = QSidePanelItem(
@@ -346,15 +348,28 @@ class Application(QBaseApplication):
                             .replace('%s', f'{i}? (?-?)')
                     ),
                     f'{self.save_data.get_icon_dir()}/sidepanel/semester_unknown.png',
-                    send_param(i)
+                    send_param_semester(i)
                 )
 
-                widget = SemesterWidget(self.get_lang_data('QMainWindow.mainPage.QSidePanel.dataPanel'), i, item)
+                widget = SemesterWidget(self.get_lang_data('QMainWindow.mainPage.QSidePanel.dataPanel.SemesterWidget'), i, item)
                 widget.refreshed.connect(lambda semester, with_ranks: self.change_semester(semester, with_ranks, True))
                 self.main_page.right.semesters.addWidget(widget)
                 self.data_panels[WidgetKey(WidgetKey.Type.Semester, i)] = widget
 
                 self.main_page.side_panel.add_item(item)
+
+                if (semester_name := self.oge_worker.get_semester_names().get(i, None)) and semester_name.number % 2 == 0:
+                    year_item = QSidePanelItem(
+                        self.get_lang_data('QMainWindow.QSideBar.year')
+                            .replace('%s', f'{semester_name.number // 2}'),
+                        None,
+                        send_param_year(i)
+                    )
+
+                    year_widget = YearWidget(self.get_lang_data('QMainWindow.mainPage.QSidePanel.dataPanel.YearWidget'), i, semester_name.number // 2, year_item)
+                    self.main_page.right.semesters.addWidget(year_widget)
+                    self.data_panels[WidgetKey(WidgetKey.Type.Year, i)] = year_widget
+                    self.main_page.side_panel.add_item(year_item)
 
             self.main_page.right.slide_in_index(1)
 
@@ -445,6 +460,17 @@ class Application(QBaseApplication):
         # self.status_bar.progress.setVisible(True)
         # self.status_bar.progress.setValue(10)
 
+
+    def change_year(self, year: int) -> None:
+        semester1 = self.oge_worker.get_loaded_semester(year - 1)
+        semester2 = self.oge_worker.get_loaded_semester(year)
+
+        self.data_panels[WidgetKey(WidgetKey.Type.Year, year)].set_data((semester1, semester2), False)
+
+        index = self.main_page.right.semesters.layout().indexOf(self.data_panels[WidgetKey(WidgetKey.Type.Year, year)])
+        self.main_page.side_panel.set_current_index(index)
+
+        self.main_page.right.semesters.slide_in_index(index, QSlidingStackedWidget.Direction.Bottom2Top)
 
 
     def set_panel_disabled(self, disabled: bool) -> None:

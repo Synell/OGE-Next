@@ -15,30 +15,33 @@
             }
         },
         "dataPanel": {
-            "QPushButton": {
-                "refreshGrades": "Refresh grades"
+            "SemesterWidget": {
+                "QPushButton": {
+                    "refreshGrades": "Refresh grades"
+                },
+                "QLabel": {
+                    "errorSemester": "An error occurred while loading the semester.",
+                    "perfectSemester": "Perfect semester, keep it up !",
+                    "goodSemester": "Good semester, almost perfect !",
+                    "alertSemester": "Alert semester, find a way to improve !",
+                    "badSemester": "Bad semester, work harder !",
+                    "noUE": "Unable to load UEs, this might be due to a weird OGE format.",
+                    "between8And10": "UEs between 8/20 and 10/20 to improve :\n%s",
+                    "below8": "UEs below 8/20 to improve :\n%s",
+                    "allBelow8": "All UEs are below 8/20, work harder if you want to pass !",
+                    "newGrade": "A new grade has been added to the gradebook !",
+                    "newGrades": "%s new grades have been added to the gradebook !"
+                },
+                "QToolTip": {
+                    "ogeWeird": "OGE is weird, this is not a bug of OGE Next.\nYour average will be correct when OGE will give the correct data.",
+                    "ogeWeirdTop": "This information may be incorrect, see the tooltips of the UEs for more information."
+                },
+                "QAction": {
+                    "refreshAll": "Refresh all (grades, ranks, dates, etc.)",
+                    "refreshGrades": "Refresh grades"
+                }
             },
-            "QLabel": {
-                "errorSemester": "An error occurred while loading the semester.",
-                "perfectSemester": "Perfect semester, keep it up !",
-                "goodSemester": "Good semester, almost perfect !",
-                "alertSemester": "Alert semester, find a way to improve !",
-                "badSemester": "Bad semester, work harder !",
-                "noUE": "Unable to load UEs, this might be due to a weird OGE format.",
-                "between8And10": "UEs between 8/20 and 10/20 to improve :\n%s",
-                "below8": "UEs below 8/20 to improve :\n%s",
-                "allBelow8": "All UEs are below 8/20, work harder if you want to pass !",
-                "newGrade": "A new grade has been added to the gradebook !",
-                "newGrades": "%s new grades have been added to the gradebook !"
-            },
-            "QToolTip": {
-                "ogeWeird": "OGE is weird, this is not a bug of OGE Next.\nYour average will be correct when OGE will give the correct data.",
-                "ogeWeirdTop": "This information may be incorrect, see the tooltips of the UEs for more information."
-            },
-            "QAction": {
-                "refreshAll": "Refresh all (grades, ranks, dates, etc.)",
-                "refreshGrades": "Refresh grades"
-            }
+            "YearWidget": {}
         }
     }
 }

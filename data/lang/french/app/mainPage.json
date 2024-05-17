@@ -15,30 +15,33 @@
             }
         },
         "dataPanel": {
-            "QPushButton": {
-                "refreshGrades": "Rafraîchir les notes"
+            "SemesterWidget": {
+                "QPushButton": {
+                    "refreshGrades": "Rafraîchir les notes"
+                },
+                "QLabel": {
+                    "errorSemester": "Une erreur est survenue lors du chargement du semestre.",
+                    "perfectSemester": "Semestre parfait, félicitations !",
+                    "goodSemester": "Semestre valide, continuez comme ça !",
+                    "alertSemester": "Semestre en alerte, attention à vos notes !",
+                    "badSemester": "Semestre en difficulté, cherchez à combler vos lacunes !",
+                    "noUE": "Impossible de charger les UEs, cela peut être dû à un format OGE étrange.",
+                    "between8And10": "UEs comprises entre 8/20 et 10/20 à améliorer :\n%s",
+                    "below8": "UEs en dessous de 8/20 à améliorer :\n%s",
+                    "allBelow8": "Toutes les UE sont en dessous de 8/20, travaillez plus si vous voulez réussir !",
+                    "newGrade": "Une nouvelle note est apparue !",
+                    "newGrades": "%s nouvelles notes sont apparues !"
+                },
+                "QToolTip": {
+                    "ogeWeird": "OGE est bizarre, ce n'est pas un bug avec OGE Next.\nVotre moyenne sera corrigée quand OGE fournira les bonnes données.",
+                    "ogeWeirdTop": "Cette information peut être incorrecte, voir les info-bulles des UEs pour plus de détails."
+                },
+                "QAction": {
+                    "refreshAll": "Tout rafraîchir (notes, rangs, etc.)",
+                    "refreshGrades": "Rafraîchir les notes"
+                }
             },
-            "QLabel": {
-                "errorSemester": "Une erreur est survenue lors du chargement du semestre.",
-                "perfectSemester": "Semestre parfait, félicitations !",
-                "goodSemester": "Semestre valide, continuez comme ça !",
-                "alertSemester": "Semestre en alerte, attention à vos notes !",
-                "badSemester": "Semestre en difficulté, cherchez à combler vos lacunes !",
-                "noUE": "Impossible de charger les UEs, cela peut être dû à un format OGE étrange.",
-                "between8And10": "UEs comprises entre 8/20 et 10/20 à améliorer :\n%s",
-                "below8": "UEs en dessous de 8/20 à améliorer :\n%s",
-                "allBelow8": "Toutes les UE sont en dessous de 8/20, travaillez plus si vous voulez réussir !",
-                "newGrade": "Une nouvelle note est apparue !",
-                "newGrades": "%s nouvelles notes sont apparues !"
-            },
-            "QToolTip": {
-                "ogeWeird": "OGE est bizarre, ce n'est pas un bug avec OGE Next.\nVotre moyenne sera corrigée quand OGE fournira les bonnes données.",
-                "ogeWeirdTop": "Cette information peut être incorrecte, voir les info-bulles des UEs pour plus de détails."
-            },
-            "QAction": {
-                "refreshAll": "Tout rafraîchir (notes, rangs, etc.)",
-                "refreshGrades": "Rafraîchir les notes"
-            }
+            "YearWidget": {}
         }
     }
 }

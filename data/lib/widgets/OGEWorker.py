@@ -77,7 +77,10 @@ class OGEWorker(QThread):
 
         return None
 
-    def get_semester_name(self, id: int, default: str) -> str:
+    def get_semester_names(self) -> dict[str, SemesterName]:
+        return self._oge.get_semester_names()
+
+    def get_semester_name(self, id: int, default: object) -> str | object:
         ret = self._oge.get_semester_names().get(id, default)
         if isinstance(ret, SemesterName): return SemesterWidget.generate_sidebar_item_name(self.parent(), id, ret)
         return ret
