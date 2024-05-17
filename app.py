@@ -376,6 +376,25 @@ class Application(QBaseApplication):
         # self.status_bar.progress.setValue(100)
 
         self.data_panels[WidgetKey(WidgetKey.Type.Semester, semester.id)].set_data(semester, self.oge_worker.force)
+
+        if semester.number is not None:
+            top_semester_id = semester.id
+            if semester.number % 2 == 0:
+                year_id = semester.number
+
+            else:
+                year_id = semester.number + 1
+                top_semester_id += 1
+
+            if WidgetKey(WidgetKey.Type.Year, year_id) in self.data_panels:
+                self.data_panels[WidgetKey(WidgetKey.Type.Year, year_id)].set_data(
+                    (
+                        self.oge_worker.get_loaded_semester(top_semester_id - 1),
+                        self.oge_worker.get_loaded_semester(top_semester_id),
+                    ),
+                    False
+                )
+
         for smstr in self.data_panels.values(): smstr.update_sidebar_item()
         self.oge_worker.rank_mode = RankMode.OnlyForNewGrades
         self.oge_worker.force = False

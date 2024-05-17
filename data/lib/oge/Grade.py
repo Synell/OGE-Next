@@ -107,7 +107,7 @@ class Grade:
 
 
     def __str__(self) -> str:
-        s = self._name
+        s = self._name if self._name else ''
         if s and self._date: s += f' ({self._date.strftime("%d/%m/%Y")})'
         if s: s += ': '
 
