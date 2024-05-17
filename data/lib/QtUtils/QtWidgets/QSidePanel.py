@@ -3,7 +3,7 @@
     # Libraries
 from enum import Enum
 from typing import Callable, Iterator
-from PySide6.QtWidgets import QPushButton, QSizePolicy, QFrame
+from PySide6.QtWidgets import QPushButton, QSizePolicy, QFrame, QWidget
 from PySide6.QtGui import QIcon
 from PySide6.QtCore import Qt, Signal
 from .QScrollableGridFrame import QScrollableGridFrame
@@ -138,6 +138,9 @@ class QSidePanel(QScrollableGridFrame):
 
     def set_current_item(self, item: QSidePanelItem) -> None:
         self.set_current_index(self.items.index(item))
+
+    def set_current_widget(self, widget: QWidget) -> None:
+        self.set_current_index(self.index_of(widget))
 
     def update(self) -> None:
         if self._current_index >= self.count(): self._current_index = self.count() - 1

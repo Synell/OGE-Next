@@ -6,7 +6,7 @@ from PySide6.QtGui import QIcon, QPixmap
 from PySide6.QtWidgets import QLabel, QMenu
 
 from data.lib.QtUtils import QScrollableGridFrame, QGridFrame, QSidePanelItem, QIconWidget, QDropDownWidget, QLangData, QBetterToolTip, QMoreButton
-from data.lib.oge import UE, Semester
+from data.lib.oge import UE, Semester, SemesterName
 from .UEWidget import UEWidget
 #----------------------------------------------------------------------
 
@@ -169,12 +169,17 @@ class SemesterWidget(QScrollableGridFrame):
     def update_sidebar_item(self) -> None:
         if not self._data: return
 
-        self._item.text = self._app.get_lang_data('QMainWindow.QSideBar.semester').replace(
+        self._item.text = SemesterWidget.generate_sidebar_item_name(self._app, self._id, self._data.name)
+
+
+    @staticmethod
+    def generate_sidebar_item_name(app, id: int, semester_name: SemesterName) -> str:
+        return app.get_lang_data('QMainWindow.QSideBar.semester').replace(
             '%s',
             (
-                (f'{self._data.number}' if self._data.number is not None else f'{self._data.id}?') +
+                (f'{semester_name.number}' if semester_name.number is not None else f'{id}?') +
                 ' ' +
-                (f'({"-".join([str(y) for y in self._data.years])})' if self._data.years else '(?-?)')
+                (f'({"-".join([str(y) for y in semester_name.years])})' if semester_name.years else '(?-?)')
             )
         )
 

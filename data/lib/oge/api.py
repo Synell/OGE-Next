@@ -127,7 +127,7 @@ class OGE(QObject):
         session_.close()
 
 
-    def _get_semester_names(self) -> None:
+    def get_semester_names(self) -> dict[int, str]:
         return self._semester_names.copy()
 
 

@@ -2,7 +2,8 @@
 
     # Libraries
 from PySide6.QtCore import QObject, Signal, QThread
-from data.lib.oge import OGE, Semester, InfoType, RankMode
+from data.lib.oge import OGE, Semester, InfoType, RankMode, SemesterName
+from data.lib.widgets.SemesterWidget import SemesterWidget
 import json, os
 #----------------------------------------------------------------------
 
@@ -75,6 +76,11 @@ class OGEWorker(QThread):
             return self._oge.get_semester_data(semester)
 
         return None
+
+    def get_semester_name(self, id: int, default: str) -> str:
+        ret = self._oge.get_semester_names().get(id, default)
+        if isinstance(ret, SemesterName): return SemesterWidget.generate_sidebar_item_name(self.parent(), id, ret)
+        return ret
 
     def _load_data(self) -> dict:
         try:

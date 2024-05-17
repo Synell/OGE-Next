@@ -232,7 +232,7 @@ class Application(QBaseApplication):
         self.main_page.right.semesters.set_orientation(Qt.Orientation.Vertical)
         self.main_page.right.addWidget(self.main_page.right.semesters)
 
-        self.data_panels: list[SemesterWidget] = []
+        self.data_panels: dict[WidgetKey, SemesterWidget] = {}
         self.main_page.right.slide_in_index(0)
 
         left_top = QFrame()
@@ -336,19 +336,23 @@ class Application(QBaseApplication):
             self.must_init_panels = False
 
             c = self.oge_worker.semester_count
-            send_param = lambda i: lambda: self.change_semester(i + 1)
+            send_param = lambda i: lambda: self.change_semester(i)
 
-            for i in range(c):
+            for i in range(1, c + 1):
                 item = QSidePanelItem(
-                    self.get_lang_data('QMainWindow.QSideBar.semester').replace('%s', f'{i + 1}? (?-?)'),
+                    self.oge_worker.get_semester_name(
+                        i,
+                        self.get_lang_data('QMainWindow.QSideBar.semester')
+                            .replace('%s', f'{i}? (?-?)')
+                    ),
                     f'{self.save_data.get_icon_dir()}/sidepanel/semester_unknown.png',
                     send_param(i)
                 )
 
-                widget = SemesterWidget(self.get_lang_data('QMainWindow.mainPage.QSidePanel.dataPanel'), i + 1, item)
+                widget = SemesterWidget(self.get_lang_data('QMainWindow.mainPage.QSidePanel.dataPanel'), i, item)
                 widget.refreshed.connect(lambda semester, with_ranks: self.change_semester(semester, with_ranks, True))
                 self.main_page.right.semesters.addWidget(widget)
-                self.data_panels.append(widget)
+                self.data_panels[WidgetKey(WidgetKey.Type.Semester, i)] = widget
 
                 self.main_page.side_panel.add_item(item)
 
@@ -356,20 +360,29 @@ class Application(QBaseApplication):
 
         # self.status_bar.progress.setValue(100)
 
-        self.data_panels[semester.id - 1].set_data(semester, self.oge_worker.force)
-        for smstr in self.data_panels: smstr.update_sidebar_item()
+        self.data_panels[WidgetKey(WidgetKey.Type.Semester, semester.id)].set_data(semester, self.oge_worker.force)
+        for smstr in self.data_panels.values(): smstr.update_sidebar_item()
         self.oge_worker.rank_mode = RankMode.OnlyForNewGrades
         self.oge_worker.force = False
-        self.main_page.side_panel.set_current_index(semester.id - 1)
+        index = self.main_page.right.semesters.layout().indexOf(self.data_panels[WidgetKey(WidgetKey.Type.Semester, semester.id)])
+        self.main_page.side_panel.set_current_index(index)
 
-        self.main_page.right.semesters.slide_in_index(semester.id - 1, QSlidingStackedWidget.Direction.Bottom2Top)
+        self.main_page.right.semesters.slide_in_index(index, QSlidingStackedWidget.Direction.Bottom2Top)
 
         self.change_status_message(InfoType.Success, self.get_lang_data('QMainWindow.showMessage.loginSuccess'))
 
-        semesters_to_load = [i + 1 for i, s in enumerate(self.data_panels) if (not s.loaded) and (i + 1 in self.oge_worker.loaded_semesters)]
+        semesters_to_load = [
+            k.id
+            for k, s in self.data_panels.items()
+            if (
+                (k.widget_type == WidgetKey.Type.Semester) and
+                (not s.loaded) and
+                (k.id in self.oge_worker.loaded_semesters)
+            )
+        ]
 
         for i in semesters_to_load:
-            self.data_panels[i - 1].set_data(self.oge_worker.get_loaded_semester(i), True)
+            self.data_panels[WidgetKey(WidgetKey.Type.Semester, i)].set_data(self.oge_worker.get_loaded_semester(i), True)
 
         self.set_panel_disabled(False)
 
@@ -436,7 +449,7 @@ class Application(QBaseApplication):
 
     def set_panel_disabled(self, disabled: bool) -> None:
         self.main_page.side_panel.setDisabled(disabled)
-        for panel in self.data_panels:
+        for panel in self.data_panels.values():
             panel.setDisabled(disabled)
 
 

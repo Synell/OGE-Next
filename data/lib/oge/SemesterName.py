@@ -49,6 +49,11 @@ class SemesterName:
 
 
     @property
+    def years(self) -> tuple[int, int]:
+        return (self._start_year, self._end_year)
+
+
+    @property
     def raw_name(self) -> str:
         return f'{self._start_year}/{self._end_year} - Semester {self._number}'
 

@@ -24,6 +24,11 @@ class Semester:
 
 
     @property
+    def name(self) -> SemesterName | None:
+        return self._semester_name if self._semester_name is not None else None
+
+
+    @property
     def number(self) -> int:
         return self._semester_name.number if self._semester_name is not None else None
 

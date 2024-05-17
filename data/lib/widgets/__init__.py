@@ -9,4 +9,5 @@ from .OGEWorker import OGEWorker
 from .SemesterWidget import SemesterWidget
 from .GradeWidget import GradeWidget
 from .OGEWidget import OGEWidget
+from .WidgetKey import WidgetKey
 #----------------------------------------------------------------------
