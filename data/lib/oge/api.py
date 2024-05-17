@@ -13,7 +13,7 @@ from .GradeGroup import GradeGroup
 from .Subject import Subject
 from .Pole import Pole
 from .UE import UE
-from .Semester import Semester
+from .Semester import Semester, SemesterName
 from .InfoType import InfoType
 from .RankMode import RankMode
 from PySide6.QtCore import QObject, Signal
@@ -52,6 +52,7 @@ class OGE(QObject):
         self._semester_data: dict[int, Semester] = {}
         self._semester_count = 0
         self._new_semester: Semester = None
+        self._semester_names: dict[int, str] = {}
 
 
     @property
@@ -103,7 +104,8 @@ class OGE(QObject):
 
                 new_grades = False
 
-                self._semester_data[semester] = Semester(semester, *self._parse_bilan_html(html))
+                semester_data = self._parse_bilan_html(html)
+                self._semester_data[semester] = Semester(semester, self._semester_names.get(semester), semester_data)
                 if semester == self._semester_count: new_grades = self._set_new()
 
                 if (rank_mode == RankMode.OnlyForNewGrades and new_grades) or rank_mode == RankMode.All:
@@ -123,6 +125,10 @@ class OGE(QObject):
             print(traceback.format_exc())
 
         session_.close()
+
+
+    def _get_semester_names(self) -> None:
+        return self._semester_names.copy()
 
 
     def _get_key(self, session: Session) -> str:
@@ -212,14 +218,15 @@ class OGE(QObject):
         coeff = float(coeff_s) if coeff_s else 0.0
         return title, coeff
 
-    def _parse_bilan_html(self, code: BS) -> tuple[str, list[UE]]:
+    def _parse_bilan_html(self, code: BS) -> list[UE]:
         log = [] # for debug
 
         self.info_changed.emit(InfoType.Info, 'Grades > Parsing OGE data...')
-        semester_raw_name = None
 
         try:
-            semester_raw_name = code.find('li', attrs = {'class': 'ui-tabmenuitem ui-state-default ui-state-active ui-corner-top'}).find('span').text.strip()
+            if not self._semester_names:
+                for i, semester_name in enumerate(code.find_all('li', attrs = {'class': ['ui-tabmenuitem ui-state-default ui-corner-top', 'ui-tabmenuitem ui-state-default ui-state-active ui-corner-top']}), start = 1):
+                    self._semester_names[i] = SemesterName.from_string(semester_name.find('span').text.strip())
 
             pattern = re.compile(r'(\d{4})\/(\d{4})-(?:.*)[A-Za-z] (\d+)')
             all_spans: list[Tag] = [r.find('span') for r in code.find_all('li', attrs = {'class': 'ui-tabmenuitem ui-state-default ui-corner-top'})]
@@ -352,7 +359,7 @@ class OGE(QObject):
             with open(f'./log/api-warnings.log', 'w', encoding='utf-8') as file:
                 file.write(f'OGE API warnings!\n\n-----=====<( API Warnings ({len(log)}) )>=====-----\n\n' + ('\n' + ('-' * 50) + '\n').join(log))
 
-        return semester_raw_name, data
+        return data
 
 
     def _set_new(self) -> bool:

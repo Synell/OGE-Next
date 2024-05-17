@@ -3,14 +3,14 @@
 
     # Libraries
 from .UE import UE
-import re
+from .SemesterName import SemesterName
 #----------------------------------------------------------------------
 
     # Class
 class Semester:
-    def __init__(self, id_: int, raw_name: str, ues: list[UE]) -> None:
+    def __init__(self, id_: int, name: SemesterName | str | None, ues: list[UE]) -> None:
         self._id = id_
-        self.raw_name = raw_name
+        self._semester_name = name if isinstance(name, SemesterName) else SemesterName.from_string(name)
         self._ues = ues
         self._avg = None
         self._new_grade_count = None
@@ -24,34 +24,22 @@ class Semester:
 
 
     @property
-    def raw_name(self) -> str:
-        return self._raw_name
-
-    @raw_name.setter
-    def raw_name(self, value: str) -> None:
-        self._raw_name = value
-
-        try:
-            pattern = re.compile(r'(\d{4})\/(\d{4})-(?:.*)[A-Za-z] (\d+)')
-            year1, year2, sm_n = pattern.findall(value)[0]
-            year1, year2, sm_n = int(year1), int(year2), int(sm_n)
-
-            self._number = sm_n
-            self._years = (year1, year2)
-
-        except:
-            self._number = None
-            self._years = (None, None)
-
-
-    @property
     def number(self) -> int:
-        return self._number
+        return self._semester_name.number if self._semester_name is not None else None
 
 
     @property
     def years(self) -> tuple[int, int]:
-        return self._years
+        return (self._semester_name.start_year, self._semester_name.end_year) if self._semester_name is not None else (None, None)
+
+
+    @property
+    def raw_name(self) -> str:
+        return self._semester_name.raw_name if self._semester_name is not None else None
+
+    @raw_name.setter
+    def raw_name(self, value: str) -> None:
+        self._semester_name = SemesterName.from_string(value)
 
 
     @property
@@ -127,16 +115,19 @@ class Semester:
     def to_json(self) -> dict:
         return {
             'id': self._id,
-            'rawName': self._raw_name,
+            'name': self._semester_name.to_json() if self._semester_name is not None else None,
             'ues': [ue.to_json() for ue in self._ues]
         }
 
 
     @staticmethod
     def from_json(json: dict) -> 'Semester':
+        raw_name = json.get('rawName', None)
+        semester_name = json.get('name', None)
+
         return Semester(
             json['id'],
-            json.get('rawName', f'Semester {json["id"]} (?)'),
+            SemesterName.from_json(raw_name if raw_name is not None else semester_name),
             [UE.from_json(ue) for ue in json['ues']]
         )
 #----------------------------------------------------------------------
