@@ -14,7 +14,8 @@ from .UEWidget import UEWidget
 @QBetterToolTip
 class SemesterWidget(QScrollableGridFrame):
     refreshed = Signal(int, bool)
-    _ICON: QPixmap = ''
+
+    _ICON: str = ''
     _OGE_NEW_ICON: QPixmap = ''
     _app = None
 
@@ -106,7 +107,7 @@ class SemesterWidget(QScrollableGridFrame):
         texts = []
 
         if total_ue == 0:
-            icon = self._ICON.replace('%s', 'alert')
+            icon = self._ICON.replace('%s', 'invalid')
             title = self._lang.get('QLabel.errorSemester')
             texts.append(self._lang.get('QLabel.noUE'))
 

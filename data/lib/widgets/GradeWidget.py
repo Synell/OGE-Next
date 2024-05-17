@@ -35,7 +35,8 @@ class GradeWidget(OGEWidget):
         label.setProperty('class', 'grade')
         self.grid_layout.addWidget(label, 0, self.grid_layout.count())
 
-        label = QLabel(f'({grade.coefficient})')
+        label = QLabel(f'({grade.coefficient if grade.coefficient is not None else "?"})')
+        if grade.coefficient is None: label.setStyleSheet('color: #00DEFF')
         label.setProperty('class', 'coefficient')
         self.grid_layout.addWidget(label, 0, self.grid_layout.count())
 

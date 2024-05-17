@@ -12,4 +12,5 @@ from .GradeGroup import GradeGroup
 from .Grade import Grade
 from .InfoType import InfoType
 from .RankMode import RankMode
+from .UEAvg import UEAvg
 #----------------------------------------------------------------------

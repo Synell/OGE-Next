@@ -41,7 +41,22 @@
                     "refreshGrades": "Refresh grades"
                 }
             },
-            "YearWidget": {}
+            "YearWidget": {
+                "QLabel": {
+                    "cannotLoad": "Unable to load the year.",
+                    "invalidData": "Invalid and/or incomplete data, unable to load the average.\nMake sure all the semesters are loaded.",
+                    "noUE": "Unable to load UEs, this might be due to OGE not giving all the data.",
+                    "between8And10": "UEs between 8/20 and 10/20 to improve :\n%s\n\nNote: if the semester is finished and theses UEs are not available next year, you won't pass the year.",
+                    "below8": "UEs below 8/20 to improve :\n%s\n\nNote: if the semester is finished, you won't pass the year.",
+                    "perfectYear": "Perfect year, keep it up !",
+                    "generalAverage": "General average: %s",
+                    "noGeneralAverage": "Unable to calculate the general average, some data is missing."
+                },
+                "QToolTip": {
+                    "ogeWeird": "OGE is weird, this is not a bug of OGE Next.\nYour average will be correct when OGE will give the correct data.",
+                    "ogeWeirdTop": "This information may be incorrect, see the tooltips of the UEs for more information."
+                }
+            }
         }
     }
 }

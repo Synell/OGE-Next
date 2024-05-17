@@ -1,17 +1,20 @@
 
-.SemesterWidget QLabel[title=true] {
+.SemesterWidget QLabel[title=true],
+.YearWidget QLabel[title=true] {
     font-size: 16px;
     font-weight: bold;
     color: #ffffff;
 }
 
-.SemesterWidget QLabel[desc=true] {
+.SemesterWidget QLabel[desc=true],
+.YearWidget QLabel[desc=true] {
     font-size: 14px;
     font-weight: bold;
     color: #c0c0c0;
 }
 
-.UEWidget {
+.UEWidget,
+.UEAvgWidget {
     background-color: #545454;
     border-radius: 8px;
     border: 2px solid #ffffff;
@@ -23,7 +26,8 @@
     background-color: transparent;
 }
 
-.UEWidget QLabel.title {
+.UEWidget QLabel.title,
+.UEAvgWidget QLabel.title {
     font-size: 16px;
     font-weight: bold;
     padding-left: 8px;
@@ -31,7 +35,8 @@
     padding-bottom: 8px;
 }
 
-.UEWidget .average QLabel {
+.UEWidget .average QLabel,
+.UEAvgWidget .average QLabel {
     font-size: 14px;
     font-weight: bold;
     padding-right: 8px;
@@ -160,32 +165,52 @@
 
 
 
-.UEWidget *[oge-weird=true] QLabel, .PoleWidget *[oge-weird=true] QLabel, .SubjectWidget *[oge-weird=true] QLabel, .GradeGroupWidget *[oge-weird=true] QLabel, QFrame[oge-details=true] *[oge-weird=true] QLabel {
+.YearWidget *[oge-weird=true] QLabel,
+.UEWidget *[oge-weird=true] QLabel,
+.UEAvgWidget *[oge-weird=true] QLabel,
+.PoleWidget *[oge-weird=true] QLabel,
+.SubjectWidget *[oge-weird=true] QLabel,
+.GradeGroupWidget *[oge-weird=true] QLabel,
+QFrame[oge-details=true] *[oge-weird=true] QLabel {
     color: #00DEFF;
     font-weight: bold;
 }
 
-.UEWidget .average[oge-weird=true] QLabel, .PoleWidget .average[oge-weird=true] QLabel, .SubjectWidget .average[oge-weird=true] QLabel, .GradeGroupWidget .average[oge-weird=true] QLabel {
+.YearWidget .average[oge-weird=true] QLabel,
+.UEWidget .average[oge-weird=true] QLabel,
+.UEAvgWidget .average[oge-weird=true] QLabel,
+.PoleWidget .average[oge-weird=true] QLabel,
+.SubjectWidget .average[oge-weird=true] QLabel,
+.GradeGroupWidget .average[oge-weird=true] QLabel {
     text-decoration: line-through;
 }
 
-.UEWidget .average[oge-weird=true] QWidget[QBetterToolTip=true] QLabel, .PoleWidget .average[oge-weird=true] QWidget[QBetterToolTip=true] QLabel, .SubjectWidget .average[oge-weird=true] QWidget[QBetterToolTip=true] QLabel, .GradeGroupWidget .average[oge-weird=true] QWidget[QBetterToolTip=true] QLabel {
+.YearWidget .average[oge-weird=true] QWidget[QBetterToolTip=true] QLabel,
+.UEWidget .average[oge-weird=true] QWidget[QBetterToolTip=true] QLabel,
+.UEAvgWidget .average[oge-weird=true] QWidget[QBetterToolTip=true] QLabel,
+.PoleWidget .average[oge-weird=true] QWidget[QBetterToolTip=true] QLabel,
+.SubjectWidget .average[oge-weird=true] QWidget[QBetterToolTip=true] QLabel,
+.GradeGroupWidget .average[oge-weird=true] QWidget[QBetterToolTip=true] QLabel {
     text-decoration: none;
 }
 
 
 
-.PoleWidget[last-child=true], .PoleWidget[last-child=true] > .oge-content {
+.PoleWidget[last-child=true],
+.PoleWidget[last-child=true] > .oge-content {
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
 }
 
-.PoleWidget[last-child=true] .SubjectWidget[last-child=true], .PoleWidget[last-child=true] .SubjectWidget[last-child=true] > .oge-content {
+.PoleWidget[last-child=true] .SubjectWidget[last-child=true],
+.PoleWidget[last-child=true] .SubjectWidget[last-child=true] > .oge-content {
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
 }
 
-.PoleWidget[last-child=true] .SubjectWidget[last-child=true] .GradeGroupWidget[last-child=true], .PoleWidget[last-child=true] .SubjectWidget[last-child=true] .GradeGroupWidget[last-child=true] > .oge-content, .PoleWidget[last-child=true] .SubjectWidget[last-child=true] .GradeGroupWidget[last-child=true] > .oge-content > .oge-subcontent {
+.PoleWidget[last-child=true] .SubjectWidget[last-child=true] .GradeGroupWidget[last-child=true],
+.PoleWidget[last-child=true] .SubjectWidget[last-child=true] .GradeGroupWidget[last-child=true] > .oge-content,
+.PoleWidget[last-child=true] .SubjectWidget[last-child=true] .GradeGroupWidget[last-child=true] > .oge-content > .oge-subcontent {
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
 }

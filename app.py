@@ -53,6 +53,7 @@ class Application(QBaseApplication):
 
         self.setWindowIcon(QIcon(Info.icon_path))
 
+        YearWidget._ICON = f'{self.save_data.get_icon_dir()}/sidepanel/semester_%s.png'
         YearWidget._app = self
         SemesterWidget._ICON = f'{self.save_data.get_icon_dir()}/sidepanel/semester_%s.png'
         SemesterWidget._app = self
@@ -362,7 +363,7 @@ class Application(QBaseApplication):
                     year_item = QSidePanelItem(
                         self.get_lang_data('QMainWindow.QSideBar.year')
                             .replace('%s', f'{semester_name.number // 2}'),
-                        None,
+                        f'{self.save_data.get_icon_dir()}/sidepanel/semester_unknown.png',
                         send_param_year(i)
                     )
 
@@ -416,7 +417,26 @@ class Application(QBaseApplication):
         ]
 
         for i in semesters_to_load:
-            self.data_panels[WidgetKey(WidgetKey.Type.Semester, i)].set_data(self.oge_worker.get_loaded_semester(i), True)
+            semester = self.oge_worker.get_loaded_semester(i)
+            self.data_panels[WidgetKey(WidgetKey.Type.Semester, i)].set_data(semester, True)
+
+            if semester.number is not None:
+                top_semester_id = semester.id
+                if semester.number % 2 == 0:
+                    year_id = semester.number
+
+                else:
+                    year_id = semester.number + 1
+                    top_semester_id += 1
+
+                if WidgetKey(WidgetKey.Type.Year, year_id) in self.data_panels:
+                    self.data_panels[WidgetKey(WidgetKey.Type.Year, year_id)].set_data(
+                        (
+                            self.oge_worker.get_loaded_semester(top_semester_id - 1),
+                            self.oge_worker.get_loaded_semester(top_semester_id),
+                        ),
+                        False
+                    )
 
         self.set_panel_disabled(False)
 

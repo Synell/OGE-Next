@@ -41,7 +41,22 @@
                     "refreshGrades": "Rafraîchir les notes"
                 }
             },
-            "YearWidget": {}
+            "YearWidget": {
+                "QLabel": {
+                    "cannotLoad": "Impossible de charger l'année.",
+                    "invalidData": "Données invalides et/ou incomplètes, impossible de charger les moyennes.\nAssurez-vous que tous les semestres sont chargés.",
+                    "noUE": "Impossible de charger les UEs, cela peut être dû à OGE qui n'a pas fourni toutes les données.",
+                    "between8And10": "UEs comprises entre 8/20 et 10/20 à améliorer :\n%s\n\nNote: si le semestre est terminé et que ces UEs ne sont pas disponibles l'année prochaine, vous ne passerez pas l'année.",
+                    "below8": "UEs en dessous de 8/20 à améliorer :\n%s\n\nNote: si le semestre est terminé, vous ne passerez pas l'année.",
+                    "perfectYear": "Année parfaite, continuez comme ça !",
+                    "generalAverage": "Moyenne générale: %s",
+                    "noGeneralAverage": "Impossible de calculer la moyenne générale, il manque des données."
+                },
+                "QToolTip": {
+                    "ogeWeird": "OGE est bizarre, ce n'est pas un bug avec OGE Next.\nVotre moyenne sera corrigée quand OGE fournira les bonnes données.",
+                    "ogeWeirdTop": "Cette information peut être incorrecte, voir les info-bulles des UEs pour plus de détails."
+                }
+            }
         }
     }
 }
