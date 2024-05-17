@@ -393,7 +393,7 @@ class Application(QBaseApplication):
                         self.oge_worker.get_loaded_semester(top_semester_id - 1),
                         self.oge_worker.get_loaded_semester(top_semester_id),
                     ),
-                    False
+                    self.oge_worker.force
                 )
 
         for smstr in self.data_panels.values(): smstr.update_sidebar_item()
