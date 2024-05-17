@@ -30,7 +30,9 @@
                     "below8": "UEs below 8/20 to improve :\n%s",
                     "allBelow8": "All UEs are below 8/20, work harder if you want to pass !",
                     "newGrade": "A new grade has been added to the gradebook !",
-                    "newGrades": "%s new grades have been added to the gradebook !"
+                    "newGrades": "%s new grades have been added to the gradebook !",
+                    "generalAverage": "General average: %s",
+                    "noGeneralAverage": "Unable to calculate the general average, some data is missing."
                 },
                 "QToolTip": {
                     "ogeWeird": "OGE is weird, this is not a bug of OGE Next.\nYour average will be correct when OGE will give the correct data.",

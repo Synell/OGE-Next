@@ -30,7 +30,9 @@
                     "below8": "UEs en dessous de 8/20 à améliorer :\n%s",
                     "allBelow8": "Toutes les UE sont en dessous de 8/20, travaillez plus si vous voulez réussir !",
                     "newGrade": "Une nouvelle note est apparue !",
-                    "newGrades": "%s nouvelles notes sont apparues !"
+                    "newGrades": "%s nouvelles notes sont apparues !",
+                    "generalAverage": "Moyenne générale: %s",
+                    "noGeneralAverage": "Impossible de calculer la moyenne générale, il manque des données."
                 },
                 "QToolTip": {
                     "ogeWeird": "OGE est bizarre, ce n'est pas un bug avec OGE Next.\nVotre moyenne sera corrigée quand OGE fournira les bonnes données.",

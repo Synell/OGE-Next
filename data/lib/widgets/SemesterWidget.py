@@ -8,6 +8,7 @@ from PySide6.QtWidgets import QLabel, QMenu
 from data.lib.QtUtils import QScrollableGridFrame, QGridFrame, QSidePanelItem, QIconWidget, QDropDownWidget, QLangData, QBetterToolTip, QMoreButton
 from data.lib.oge import UE, Semester, SemesterName
 from .UEWidget import UEWidget
+from .OGEWidget import OGEWidget
 #----------------------------------------------------------------------
 
     # Class
@@ -64,7 +65,7 @@ class SemesterWidget(QScrollableGridFrame):
         details_subwidget.grid_layout.setContentsMargins(0, 0, 0, 0)
         details_subwidget.grid_layout.setSpacing(10)
         widget.grid_layout.addWidget(details_subwidget, widget.grid_layout.count(), 0)
-        details_subwidget.grid_layout.setColumnStretch(2, 1)
+        details_subwidget.grid_layout.setColumnStretch(4, 1)
 
         details_sw_icon_label = QLabel()
         details_subwidget.grid_layout.addWidget(details_sw_icon_label, 0, 0)
@@ -72,6 +73,37 @@ class SemesterWidget(QScrollableGridFrame):
         details_sw_title_label = QLabel()
         details_sw_title_label.setProperty('title', True)
         details_subwidget.grid_layout.addWidget(details_sw_title_label, 0, 1)
+
+        details_sw_sep_label = QLabel()
+        details_sw_sep_label.setProperty('title', True)
+        details_sw_sep_label.setText(' • ')
+        details_subwidget.grid_layout.addWidget(details_sw_sep_label, 0, 2)
+
+        details_sw_general_avg_label = QLabel()
+        details_sw_general_avg_label.setProperty('title', True)
+
+        ue_avg_list = [ue.average for ue in self._data.ues if ue.average is not None]
+        if ue_avg_list:
+            general_avg = sum(ue_avg_list) / max(sum([1 for ue in self._data.ues if ue.average is not None]), 1)
+
+        else:
+            general_avg = None
+
+        missing_data = any([ue.has_missing_data for ue in self._data.ues])
+
+        details_sw_general_avg_label.setText(
+            f'{self._lang.get("QLabel.generalAverage")}'.replace('%s', f'{general_avg:.2f}/20')
+            if general_avg is not None
+            else self._lang.get('QLabel.noGeneralAverage')
+        )
+
+        if missing_data:
+            details_sw_general_avg_label.setStyleSheet(f'color: #00DEFF')
+
+        else:
+            details_sw_general_avg_label.setStyleSheet(f'color: {OGEWidget.perc2color(general_avg / 20)}')
+
+        details_subwidget.grid_layout.addWidget(details_sw_general_avg_label, 0, 3)
 
         details_sw_desc_label = QLabel()
         details_sw_desc_label.setProperty('desc', True)
