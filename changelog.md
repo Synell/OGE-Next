@@ -1,3 +1,12 @@
+
+# [07e86a94] - 2024-05-18
+
+## New
+- Added general average to the semester widget (Feature #11)
+- Added a year recap widget (Feature #12)
+
+--------------------------------
+
 # [07e86a83] - 2024-05-16
 
 ## Fix

@@ -10,7 +10,7 @@ class Info:
     def __new__(cls) -> None:
         return None
 
-    build: str = '07e86a8b'
+    build: str = '07e86a94'
     version: str = 'Experimental'
 
     application_name: str = 'Oge Next'
