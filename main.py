@@ -12,7 +12,7 @@ from PySide6.QtWidgets import *
 from PySide6.QtSvg import *
 from PySide6.QtSvgWidgets import *
 from math import *
-import json, zipfile, shutil, traceback, subprocess, platform
+import json, zipfile, shutil, traceback, subprocess, platform, logging
 from urllib.request import urlopen, Request
 from datetime import datetime, timedelta
 from app import Application
@@ -36,8 +36,30 @@ class ApplicationError(QApplication):
 #----------------------------------------------------------------------
 
     # Main Function
+
+def config_logger() -> None:
+    os.makedirs('data/logs', exist_ok = True)
+
+    logging.getLogger('asyncio').setLevel(logging.ERROR)
+    logging.getLogger('aiohttp').setLevel(logging.ERROR)
+
+    logging.basicConfig(
+        filename = 'data/logs/app.log',
+        filemode = 'w',
+        format = ('=' * 64) + '\n[%(levelname)s] %(name)s at %(asctime)s\n%(message)s\n',
+        level = logging.WARNING
+    )
+
+    def excepthook(type: type, value: Exception, tb: traceback) -> None:
+        logging.error('Uncaught exception', exc_info = (type, value, tb))
+        sys.__excepthook__(type, value, tb)
+
+    sys.excepthook = excepthook
+
+
 def main() -> None:
     app = None
+    config_logger()
 
     try:
         if os.path.exists('./#tmp#/'):
@@ -80,13 +102,7 @@ def main() -> None:
         sys.exit(exit_code)
 
     except Exception as err:
-        print(err)
-
-        if not os.path.exists('./log/'): os.mkdir('./log/')
-
-        with open('./log/error.log', 'w', encoding = 'utf-8') as f:
-            f.write(str(err) + '\n\n')
-            f.write(traceback.format_exc())
+        logging.exception(err)
 
         if app := QApplication.instance():
             if app.thread().isRunning(): app.shutdown()
