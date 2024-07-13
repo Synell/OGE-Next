@@ -17,8 +17,8 @@ class QIconWidget(QGridFrame):
         self._check_file = check_file
         self._mask = mask
         self.set(icon, icon_size)
-        self.grid_layout.setContentsMargins(0, 0, 0, 0)
-        self.grid_layout.setSpacing(0)
+        self.layout_.setContentsMargins(0, 0, 0, 0)
+        self.layout_.setSpacing(0)
 
         self.setProperty('QIconWidget', True)
         self.update()
@@ -73,12 +73,12 @@ class QIconWidget(QGridFrame):
         return qq.icon(file)
 
     def update(self) -> None:
-        for i in reversed(range(self.grid_layout.count())):
-            self.grid_layout.itemAt(i).widget().setParent(None)
+        for i in reversed(range(self.layout_.count())):
+            self.layout_.itemAt(i).widget().setParent(None)
 
         pixmap = QIconWidget.generate_icon(self.icon, self.icon_size, self.check_file, self.mask)
 
-        self.grid_layout.addWidget(pixmap, 0, 0)
+        self.layout_.addWidget(pixmap, 0, 0)
 
     @staticmethod
     def is_file_icon(icon: str | bytes | QPixmap | QSvgWidget | QIcon | QLabel) -> bool:

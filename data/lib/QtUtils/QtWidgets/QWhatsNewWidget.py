@@ -21,6 +21,8 @@ class QWhatsNewWidget(QGridFrame):
             'bug fixes': 'fixed',
             'bugfix': 'fixed',
             'bugfixes': 'fixed',
+            'hotfix': 'fixed',
+            'hotfixes': 'fixed',
             'bug': 'fixed',
             'bugs': 'fixed',
             'crash fix': 'fixed',
@@ -50,8 +52,8 @@ class QWhatsNewWidget(QGridFrame):
 
             self.setProperty('type', 'title' if is_title else 'content')
 
-            self.grid_layout.setContentsMargins(0, 0, 0, 0)
-            self.grid_layout.setSpacing(20)
+            self.layout_.setContentsMargins(0, 0, 0, 0)
+            self.layout_.setSpacing(20)
 
             translated_title = QWhatsNewWidget.Block._translations.get(title.lower(), title)
 
@@ -59,7 +61,7 @@ class QWhatsNewWidget(QGridFrame):
             title_label.setProperty('color-block' if is_title else 'sub-color-block', True)
             if not is_title: title_label.setProperty('type', translated_title.lower().replace(' ', '-'))
 
-            self.grid_layout.addWidget(title_label, 0, 0)
+            self.layout_.addWidget(title_label, 0, 0)
             title_label.setFixedWidth(100)
             title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
@@ -70,15 +72,15 @@ class QWhatsNewWidget(QGridFrame):
 
             content_label.setWordWrap(True)
             content_label.setSizePolicy(QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed))
-            self.grid_layout.addWidget(content_label, 0, 1)
+            self.layout_.addWidget(content_label, 0, 1)
 
 
     class SubSection(QGridFrame):
         def __init__(self, content: str) -> None:
             super().__init__()
 
-            self.grid_layout.setContentsMargins(0, 0, 0, 0)
-            self.grid_layout.setSpacing(10)
+            self.layout_.setContentsMargins(0, 0, 0, 0)
+            self.layout_.setSpacing(10)
 
             title_pattern = r'^##\s(.*)$'
             section_pattern = r'^-\s(.*)$'
@@ -93,7 +95,7 @@ class QWhatsNewWidget(QGridFrame):
                     text = self._format_text(text)
 
                     block = QWhatsNewWidget.Block(title, text, False)
-                    self.grid_layout.addWidget(block, self.grid_layout.rowCount(), 0)
+                    self.layout_.addWidget(block, self.layout_.rowCount(), 0)
 
 
         def _issues_and_features_link(self, text: str) -> str:
@@ -187,8 +189,8 @@ class QWhatsNewWidget(QGridFrame):
         def __init__(self, title: str, content: str) -> None:
             super().__init__()
 
-            self.grid_layout.setContentsMargins(0, 0, 0, 0)
-            self.grid_layout.setSpacing(20)
+            self.layout_.setContentsMargins(0, 0, 0, 0)
+            self.layout_.setSpacing(20)
 
             pattern = r'# \[([^\]]+)\] - (\d{4}-\d{2}-\d{2})'
             matches = re.match(pattern, title)
@@ -196,10 +198,10 @@ class QWhatsNewWidget(QGridFrame):
             date = matches.group(2)
 
             block = QWhatsNewWidget.Block(version, date, True)
-            self.grid_layout.addWidget(block, 0, 0)
+            self.layout_.addWidget(block, 0, 0)
 
             subsection = QWhatsNewWidget.SubSection(content)
-            self.grid_layout.addWidget(subsection, 1, 0)
+            self.layout_.addWidget(subsection, 1, 0)
 
 
 
@@ -217,32 +219,32 @@ class QWhatsNewWidget(QGridFrame):
 
         self.setProperty('QWhatsNewWidget', True)
 
-        self.grid_layout.setContentsMargins(0, 0, 0, 0)
-        self.grid_layout.setSpacing(16)
+        self.layout_.setContentsMargins(0, 0, 0, 0)
+        self.layout_.setSpacing(16)
 
         self._label = QLabel(self._lang.get('title'))
         self._label.setProperty('h', 1)
-        self.grid_layout.addWidget(self._label, 0, 0)
+        self.layout_.addWidget(self._label, 0, 0)
 
         with open(markdown_path, 'r', encoding='utf-8') as file:
             sections = self._parse_into_sections(file.read())
 
         scroll_frame = QScrollableGridFrame()
-        scroll_frame.scroll_layout.setContentsMargins(0, 0, 0, 0)
-        scroll_frame.scroll_layout.setSpacing(20)
-        self.grid_layout.addWidget(scroll_frame, 1, 0)
+        scroll_frame.layout_.setContentsMargins(0, 0, 0, 0)
+        scroll_frame.layout_.setSpacing(20)
+        self.layout_.addWidget(scroll_frame, 1, 0)
 
         last_section = sections[-1]
 
         for section in sections:
-            scroll_frame.scroll_layout.addWidget(section, scroll_frame.scroll_layout.rowCount(), 0)
+            scroll_frame.layout_.addWidget(section, scroll_frame.layout_.rowCount(), 0)
 
             if section != last_section:
                 line = QFrame()
                 line.setProperty('separator', True)
                 line.setProperty('soft', True)
                 line.setFixedHeight(2)
-                scroll_frame.scroll_layout.addWidget(line, scroll_frame.scroll_layout.rowCount(), 0)
+                scroll_frame.layout_.addWidget(line, scroll_frame.layout_.rowCount(), 0)
 
 
     def _parse_into_sections(self, text: str) -> tuple[Section]:

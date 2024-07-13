@@ -41,19 +41,19 @@ class SaveData(QSaveData):
     def settings_menu_updates(self):
         lang = self.get_lang_data('QSettingsDialog.QSidePanel.updates')
         widget = QScrollableGridWidget()
-        widget.scroll_layout.setSpacing(0)
-        widget.scroll_layout.setContentsMargins(0, 0, 0, 0)
+        widget.layout_.setSpacing(0)
+        widget.layout_.setContentsMargins(0, 0, 0, 0)
 
 
         root_frame = QGridFrame()
-        root_frame.grid_layout.setSpacing(16)
-        root_frame.grid_layout.setContentsMargins(0, 0, 16, 0)
-        widget.scroll_layout.addWidget(root_frame, 0, 0)
-        widget.scroll_layout.setAlignment(root_frame, Qt.AlignmentFlag.AlignTop)
+        root_frame.layout_.setSpacing(16)
+        root_frame.layout_.setContentsMargins(0, 0, 16, 0)
+        widget.layout_.addWidget(root_frame, 0, 0)
+        widget.layout_.setAlignment(root_frame, Qt.AlignmentFlag.AlignTop)
 
 
         label = QSettingsDialog._text_group(lang.get('QLabel.checkForUpdates.title'), lang.get('QLabel.checkForUpdates.description'))
-        root_frame.grid_layout.addWidget(label, 0, 0)
+        root_frame.layout_.addWidget(label, 0, 0)
 
         widget.check_for_updates_combobox = QNamedComboBox(None, lang.get('QNamedComboBox.checkForUpdates.title'))
         widget.check_for_updates_combobox.combo_box.addItems([
@@ -64,8 +64,8 @@ class SaveData(QSaveData):
             lang.get('QNamedComboBox.checkForUpdates.values.atLaunch')
         ])
         widget.check_for_updates_combobox.combo_box.setCurrentIndex(self.check_for_updates)
-        root_frame.grid_layout.addWidget(widget.check_for_updates_combobox, 1, 0)
-        root_frame.grid_layout.setAlignment(widget.check_for_updates_combobox, Qt.AlignmentFlag.AlignLeft)
+        root_frame.layout_.addWidget(widget.check_for_updates_combobox, 1, 0)
+        root_frame.layout_.setAlignment(widget.check_for_updates_combobox, Qt.AlignmentFlag.AlignLeft)
 
 
         return widget

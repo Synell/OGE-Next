@@ -19,20 +19,20 @@ class QBetterGraphicsItemWidget(QGridFrame):
 
         self.setAttribute(Qt.WidgetAttribute.WA_NoSystemBackground, True)
         self.setContentsMargins(0, 0, 0, 0)
-        self.grid_layout.setContentsMargins(0, 0, 0, 0)
-        self.grid_layout.setSpacing(0)
+        self.layout_.setContentsMargins(0, 0, 0, 0)
+        self.layout_.setSpacing(0)
 
         self._patch_children(widget)
 
         self._root = QGridFrame()
         self._root.setContentsMargins(0, 0, 0, 0)
-        self._root.grid_layout.setContentsMargins(0, 0, 0, 0)
-        self._root.grid_layout.setSpacing(0)
+        self._root.layout_.setContentsMargins(0, 0, 0, 0)
+        self._root.layout_.setSpacing(0)
         self._root.setProperty('QBetterGraphicsItemWidget', True)
         self._root.setProperty('fake-focus', True)
-        self.grid_layout.addWidget(self._root, 0, 0)
+        self.layout_.addWidget(self._root, 0, 0)
 
-        self._root.grid_layout.addWidget(self._widget, 0, 0)
+        self._root.layout_.addWidget(self._widget, 0, 0)
 
 
     @property
@@ -59,7 +59,7 @@ class QBetterGraphicsItemWidget(QGridFrame):
 
 
     def add_widget(self, widget: QWidget, row: int, column: int) -> None:
-        self._root.grid_layout.addWidget(widget, row, column)
+        self._root.layout_.addWidget(widget, row, column)
 
     def addWidget(self, widget: QWidget, row: int, column: int) -> None:
         self.add_widget(widget, row, column)

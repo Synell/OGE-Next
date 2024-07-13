@@ -10,17 +10,28 @@ from ..QtGui import QFlowLayout, QSmoothScrollArea
 class QFlowScrollableWidget(QSmoothScrollArea):
     def __init__(self, parent = None, orientation = Qt.Orientation.Horizontal, margin = 0, spacing = -1) -> None:
         super(QFlowScrollableWidget, self).__init__(parent)
-        self.scroll_frame = QFrame()
-        self.scroll_frame.setContentsMargins(margin, margin, margin, margin)
-        self.scroll_layout = QFlowLayout(self.scroll_frame, orientation, spacing)
-        self.scroll_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
-        self.setWidget(self.scroll_frame)
+        self._widget = QFrame()
+        self._widget.setContentsMargins(margin, margin, margin, margin)
+        self._layout = QFlowLayout(self._widget, orientation, spacing)
+        self._layout.setAlignment(Qt.AlignmentFlag.AlignTop)
+        self.setWidget(self._widget)
         self.setWidgetResizable(True)
 
+
+    @property
+    def layout_(self) -> QFlowLayout:
+        return self._layout
+
+
+    @property
+    def widget_(self) -> QFrame:
+        return self._widget
+
+
     def clear(self) -> None:
-        for i in reversed(range(self.scroll_layout.count())):
-            item = self.scroll_layout.itemAt(i)
+        for i in reversed(range(self._layout.count())):
+            item = self._layout.itemAt(i)
             if item.widget():
                 item.widget().deleteLater()
-            self.scroll_layout.removeItem(item)
+            self._layout.removeItem(item)
 #----------------------------------------------------------------------

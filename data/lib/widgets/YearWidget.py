@@ -27,8 +27,8 @@ class YearWidget(QScrollableGridFrame):
         self._number = number
         self._item = item
 
-        self.scroll_layout.setContentsMargins(20, 20, 20, 20)
-        self.scroll_layout.setSpacing(20)
+        self.layout_.setContentsMargins(20, 20, 20, 20)
+        self.layout_.setSpacing(20)
         self.setProperty('class', 'YearWidget')
 
         self._data: tuple[Semester] = None
@@ -49,8 +49,8 @@ class YearWidget(QScrollableGridFrame):
 
     def build(self) -> None:
         self._built = True
-        for i in reversed(range(self.scroll_layout.count())):
-            self.scroll_layout.itemAt(i).widget().setParent(None)
+        for i in reversed(range(self.layout_.count())):
+            self.layout_.itemAt(i).widget().setParent(None)
 
         if all([bool(semester) for semester in self._data]):
             self._build_data()
@@ -62,9 +62,9 @@ class YearWidget(QScrollableGridFrame):
 
     def _build_not_enough_data(self) -> None:
         widget = QGridFrame()
-        widget.grid_layout.setContentsMargins(0, 0, 0, 0)
-        widget.grid_layout.setSpacing(5)
-        self.scroll_layout.addWidget(widget, 0, 0)
+        widget.layout_.setContentsMargins(0, 0, 0, 0)
+        widget.layout_.setSpacing(5)
+        self.layout_.addWidget(widget, 0, 0)
 
         details_sw_icon_label = QLabel()
         icon = QIcon(self._ICON.replace('%s', 'invalid'))
@@ -73,51 +73,51 @@ class YearWidget(QScrollableGridFrame):
         self._item.icon = icon
 
         details_subwidget = QGridFrame()
-        details_subwidget.grid_layout.setContentsMargins(0, 0, 0, 0)
-        details_subwidget.grid_layout.setSpacing(10)
-        widget.grid_layout.addWidget(details_subwidget, widget.grid_layout.count(), 0)
-        details_subwidget.grid_layout.setColumnStretch(2, 1)
+        details_subwidget.layout_.setContentsMargins(0, 0, 0, 0)
+        details_subwidget.layout_.setSpacing(10)
+        widget.layout_.addWidget(details_subwidget, widget.layout_.count(), 0)
+        details_subwidget.layout_.setColumnStretch(2, 1)
 
-        details_subwidget.grid_layout.addWidget(details_sw_icon_label, 0, 0)
+        details_subwidget.layout_.addWidget(details_sw_icon_label, 0, 0)
 
         details_sw_title_label = QLabel()
         details_sw_title_label.setText(self._lang.get('QLabel.cannotLoad'))
         details_sw_title_label.setProperty('title', True)
-        details_subwidget.grid_layout.addWidget(details_sw_title_label, 0, 1)
+        details_subwidget.layout_.addWidget(details_sw_title_label, 0, 1)
 
         details_sw_desc_label = QLabel()
         details_sw_desc_label.setProperty('desc', True)
         details_sw_desc_label.setWordWrap(True)
 
         details_sw_desc_label.setText(self._lang.get('QLabel.invalidData'))
-        widget.grid_layout.addWidget(details_sw_desc_label, widget.grid_layout.count(), 0)
+        widget.layout_.addWidget(details_sw_desc_label, widget.layout_.count(), 0)
 
 
     def _build_data(self) -> None:
         widget = QGridFrame()
-        widget.grid_layout.setContentsMargins(0, 0, 0, 0)
-        widget.grid_layout.setSpacing(5)
-        self.scroll_layout.addWidget(widget, 0, 0)
+        widget.layout_.setContentsMargins(0, 0, 0, 0)
+        widget.layout_.setSpacing(5)
+        self.layout_.addWidget(widget, 0, 0)
 
         better_grid_frame = QBetterToolTip(QGridFrame)
 
         details_subwidget = better_grid_frame()
-        details_subwidget.grid_layout.setContentsMargins(0, 0, 0, 0)
-        details_subwidget.grid_layout.setSpacing(10)
-        widget.grid_layout.addWidget(details_subwidget, widget.grid_layout.count(), 0)
-        details_subwidget.grid_layout.setColumnStretch(4, 1)
+        details_subwidget.layout_.setContentsMargins(0, 0, 0, 0)
+        details_subwidget.layout_.setSpacing(10)
+        widget.layout_.addWidget(details_subwidget, widget.layout_.count(), 0)
+        details_subwidget.layout_.setColumnStretch(4, 1)
 
         details_sw_icon_label = QLabel()
-        details_subwidget.grid_layout.addWidget(details_sw_icon_label, 0, 0)
+        details_subwidget.layout_.addWidget(details_sw_icon_label, 0, 0)
 
         details_sw_title_label = QLabel()
         details_sw_title_label.setProperty('title', True)
-        details_subwidget.grid_layout.addWidget(details_sw_title_label, 0, 1)
+        details_subwidget.layout_.addWidget(details_sw_title_label, 0, 1)
 
         details_sw_sep_label = QLabel()
         details_sw_sep_label.setProperty('title', True)
         details_sw_sep_label.setText(' • ')
-        details_subwidget.grid_layout.addWidget(details_sw_sep_label, 0, 2)
+        details_subwidget.layout_.addWidget(details_sw_sep_label, 0, 2)
 
         details_sw_general_avg_label = QLabel()
         details_sw_general_avg_label.setProperty('title', True)
@@ -143,7 +143,7 @@ class YearWidget(QScrollableGridFrame):
         else:
             details_sw_general_avg_label.setStyleSheet(f'color: {OGEWidget.perc2color(general_avg / 20)}')
 
-        details_subwidget.grid_layout.addWidget(details_sw_general_avg_label, 0, 3)
+        details_subwidget.layout_.addWidget(details_sw_general_avg_label, 0, 3)
 
         details_sw_desc_label = QLabel()
         details_sw_desc_label.setProperty('desc', True)
@@ -165,7 +165,7 @@ class YearWidget(QScrollableGridFrame):
             ue_avg = UEAvg(ues)
             avg = ue_avg.average
             all_ues.append(ue_avg)
-            self.scroll_layout.addWidget(UEAvgWidget(ue_avg), index + 1, 0)
+            self.layout_.addWidget(UEAvgWidget(ue_avg), index + 1, 0)
 
             if avg is None:
                 continue
@@ -223,7 +223,7 @@ class YearWidget(QScrollableGridFrame):
 
         if texts:
             details_sw_desc_label.setText('\n\n'.join(texts))
-            widget.grid_layout.addWidget(details_sw_desc_label, widget.grid_layout.count(), 0)
+            widget.layout_.addWidget(details_sw_desc_label, widget.layout_.count(), 0)
 
 
     def update_sidebar_item(self) -> None:

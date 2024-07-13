@@ -28,9 +28,9 @@ class QNodeGraphicsBlockWidget(QBetterGraphicsItemWidget):
 
         widget = QGridFrame()
         widget.setContentsMargins(0, 0, 0, 0)
-        widget.grid_layout.setContentsMargins(0, 0, 0, 2)
-        widget.grid_layout.setHorizontalSpacing(0)
-        widget.grid_layout.setVerticalSpacing(4)
+        widget.layout_.setContentsMargins(0, 0, 0, 2)
+        widget.layout_.setHorizontalSpacing(0)
+        widget.layout_.setVerticalSpacing(4)
         super().__init__(widget)
 
         self.setProperty('QNodeGraphicsItemWidget', True)
@@ -38,20 +38,20 @@ class QNodeGraphicsBlockWidget(QBetterGraphicsItemWidget):
         if name:
             title_container = QGridFrame()
             title_container.setProperty('QNodeGraphicsItemWidgetTitle', True)
-            title_container.grid_layout.setContentsMargins(0, 2, 0, 2)
-            title_container.grid_layout.setHorizontalSpacing(0)
-            title_container.grid_layout.setVerticalSpacing(0)
+            title_container.layout_.setContentsMargins(0, 2, 0, 2)
+            title_container.layout_.setHorizontalSpacing(0)
+            title_container.layout_.setVerticalSpacing(0)
             title_container.setStyleSheet(f'background-color: {color.hex};')
-            widget.grid_layout.addWidget(title_container, 0, 0)
+            widget.layout_.addWidget(title_container, 0, 0)
 
             title = QLabel(name)
             title.setAlignment(Qt.AlignmentFlag.AlignCenter)
-            title_container.grid_layout.addWidget(title, 0, 0)
+            title_container.layout_.addWidget(title, 0, 0)
 
         self._widget_block = widget_block
 
         widget_block.root = self
-        widget.grid_layout.addWidget(widget_block, widget.grid_layout.rowCount(), 0)
+        widget.layout_.addWidget(widget_block, widget.layout_.rowCount(), 0)
 
         widget_block.lmb_pressed.connect(self.lmb_pressed)
         widget_block.lmb_released.connect(self.lmb_released)

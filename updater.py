@@ -86,34 +86,34 @@ class QUpdater(QBaseApplication):
 
     def create_widgets(self):
         self.root = QGridWidget()
-        self.root.grid_layout.setSpacing(0)
-        self.root.grid_layout.setContentsMargins(0, 0, 0, 0)
+        self.root.layout_.setSpacing(0)
+        self.root.layout_.setContentsMargins(0, 0, 0, 0)
 
         self.window.setCentralWidget(self.root)
 
 
         top_frame = QGridFrame()
         top_frame.setProperty('border-top', True)
-        self.root.grid_layout.addWidget(top_frame, 0, 0)
-        self.root.grid_layout.setAlignment(top_frame, Qt.AlignmentFlag.AlignTop)
-        top_frame.grid_layout.setSpacing(5)
-        top_frame.grid_layout.setContentsMargins(15, 10, 15, 10)
+        self.root.layout_.addWidget(top_frame, 0, 0)
+        self.root.layout_.setAlignment(top_frame, Qt.AlignmentFlag.AlignTop)
+        top_frame.layout_.setSpacing(5)
+        top_frame.layout_.setContentsMargins(15, 10, 15, 10)
 
         self.progress_percent = QLabel(self.get_lang_data('QUpdater.QLabel.downloading').replace('%s', self.get_lang_data('QUpdater.QLabel.waiting')))
         self.progress_percent.setProperty('h', 2)
-        top_frame.grid_layout.addWidget(self.progress_percent, 0, 0, 1, 2)
+        top_frame.layout_.addWidget(self.progress_percent, 0, 0, 1, 2)
 
         self.progress_eta = QLabel(self.get_lang_data('QUpdater.QLabel.calculatingRemainingTime'))
         self.progress_eta.setProperty('subtitle', True)
         self.progress_eta.setProperty('bold', True)
-        top_frame.grid_layout.addWidget(self.progress_eta, 1, 0)
-        top_frame.grid_layout.setAlignment(self.progress_eta, Qt.AlignmentFlag.AlignLeft)
+        top_frame.layout_.addWidget(self.progress_eta, 1, 0)
+        top_frame.layout_.setAlignment(self.progress_eta, Qt.AlignmentFlag.AlignLeft)
 
         self.progress_speed = QLabel(self.convert(0))
         self.progress_speed.setProperty('subtitle', True)
         self.progress_speed.setProperty('bold', True)
-        top_frame.grid_layout.addWidget(self.progress_speed, 1, 1)
-        top_frame.grid_layout.setAlignment(self.progress_speed, Qt.AlignmentFlag.AlignRight)
+        top_frame.layout_.addWidget(self.progress_speed, 1, 1)
+        top_frame.layout_.setAlignment(self.progress_speed, Qt.AlignmentFlag.AlignRight)
 
 
         self.progress = QAnimatedProgressBar()
@@ -125,8 +125,8 @@ class QUpdater(QBaseApplication):
         self.progress.setTextVisible(False)
         self.progress.setValue(0)
         self.progress.setRange(0, 100)
-        self.root.grid_layout.addWidget(self.progress, 1, 0)
-        self.root.grid_layout.setAlignment(self.progress, Qt.AlignmentFlag.AlignTop)
+        self.root.layout_.addWidget(self.progress, 1, 0)
+        self.root.layout_.setAlignment(self.progress, Qt.AlignmentFlag.AlignTop)
 
 
         ratio = 1192 / self.window.width() # 1192x674
@@ -137,8 +137,8 @@ class QUpdater(QBaseApplication):
         self.screenshots.setFixedHeight(math.ceil(674 / ratio))
         self.screenshots.layout().setContentsMargins(0, 0, 0, 0)
         self.screenshots.layout().setSpacing(0)
-        self.root.grid_layout.addWidget(self.screenshots, 2, 0)
-        self.root.grid_layout.setAlignment(self.screenshots, Qt.AlignmentFlag.AlignTop)
+        self.root.layout_.addWidget(self.screenshots, 2, 0)
+        self.root.layout_.setAlignment(self.screenshots, Qt.AlignmentFlag.AlignTop)
 
         for image in updater_data.images:
             self.screenshots.addWidget(QIconWidget(None, base64.b64decode(image), QSize(self.window.width() + 1, math.ceil(674 / ratio)), False))
@@ -146,57 +146,57 @@ class QUpdater(QBaseApplication):
         bottom_frame = QGridFrame()
         bottom_frame.setFixedHeight(int(self.window.height() / 2.125))
         # bottom_frame.setProperty('border-top', True)
-        self.root.grid_layout.addWidget(bottom_frame, 3, 0)
-        bottom_frame.grid_layout.setSpacing(5)
-        bottom_frame.grid_layout.setContentsMargins(0, 0, 0, 0)
+        self.root.layout_.addWidget(bottom_frame, 3, 0)
+        bottom_frame.layout_.setSpacing(5)
+        bottom_frame.layout_.setContentsMargins(0, 0, 0, 0)
 
 
         bottom_frame.top = QGridFrame()
-        bottom_frame.top.grid_layout.setSpacing(0)
-        bottom_frame.top.grid_layout.setContentsMargins(0, 10, 0, 10)
-        bottom_frame.grid_layout.addWidget(bottom_frame.top, 0, 0)
+        bottom_frame.top.layout_.setSpacing(0)
+        bottom_frame.top.layout_.setContentsMargins(0, 10, 0, 10)
+        bottom_frame.layout_.addWidget(bottom_frame.top, 0, 0)
 
         self.texts = QSlidingStackedWidget()
         self.texts.set_speed(650)
         self.texts.set_animation(QEasingCurve.Type.OutCubic)
         self.texts.layout().setContentsMargins(0, 0, 0, 0)
         self.texts.layout().setSpacing(0)
-        bottom_frame.top.grid_layout.addWidget(self.texts, 0, 0)
+        bottom_frame.top.layout_.addWidget(self.texts, 0, 0)
 
         for text in self.get_lang_data('QUpdater.QSlidingStackedWidget.texts'):
             w = QGridFrame()
-            w.grid_layout.setSpacing(0)
-            w.grid_layout.setContentsMargins(50, 0, 50, 0)
+            w.layout_.setSpacing(0)
+            w.layout_.setContentsMargins(50, 0, 50, 0)
 
             l = QLabel(text)
             l.setWordWrap(True)
             l.setAlignment(Qt.AlignmentFlag.AlignCenter)
-            w.grid_layout.addWidget(l, 0, 0)
+            w.layout_.addWidget(l, 0, 0)
 
             self.texts.addWidget(w)
 
 
         bottom_frame.bottom = QGridFrame()
-        bottom_frame.bottom.grid_layout.setSpacing(5)
-        bottom_frame.bottom.grid_layout.setContentsMargins(10, 10, 10, 10)
+        bottom_frame.bottom.layout_.setSpacing(5)
+        bottom_frame.bottom.layout_.setContentsMargins(10, 10, 10, 10)
         bottom_frame.bottom.setProperty('border-top', True)
-        bottom_frame.grid_layout.addWidget(bottom_frame.bottom, 0, 0)
-        bottom_frame.grid_layout.setAlignment(bottom_frame.bottom, Qt.AlignmentFlag.AlignBottom)
+        bottom_frame.layout_.addWidget(bottom_frame.bottom, 0, 0)
+        bottom_frame.layout_.setAlignment(bottom_frame.bottom, Qt.AlignmentFlag.AlignBottom)
 
         self.close_button = QPushButton('Close')
         self.close_button.setCursor(Qt.CursorShape.ForbiddenCursor)
         self.close_button.setDisabled(True)
         self.close_button.setProperty('color', 'white')
         self.close_button.setProperty('transparent', True)
-        bottom_frame.bottom.grid_layout.addWidget(self.close_button, 0, 0)
-        bottom_frame.bottom.grid_layout.setAlignment(self.close_button, Qt.AlignmentFlag.AlignLeft)
+        bottom_frame.bottom.layout_.addWidget(self.close_button, 0, 0)
+        bottom_frame.bottom.layout_.setAlignment(self.close_button, Qt.AlignmentFlag.AlignLeft)
 
         self.open_button = QPushButton('Open App')
         self.open_button.setCursor(Qt.CursorShape.ForbiddenCursor)
         self.open_button.setDisabled(True)
         self.open_button.setProperty('color', 'main')
-        bottom_frame.bottom.grid_layout.addWidget(self.open_button, 0, 1)
-        bottom_frame.bottom.grid_layout.setAlignment(self.open_button, Qt.AlignmentFlag.AlignRight)
+        bottom_frame.bottom.layout_.addWidget(self.open_button, 0, 1)
+        bottom_frame.bottom.layout_.setAlignment(self.open_button, Qt.AlignmentFlag.AlignRight)
 
 
     def run(self):

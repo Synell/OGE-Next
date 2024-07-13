@@ -156,27 +156,27 @@ class Application(QBaseApplication):
 
         self.status_bar.status = QGridWidget()
         self.status_bar.status.setContentsMargins(0, 0, 0, 0)
-        self.status_bar.status.grid_layout.setContentsMargins(10, 5, 0, 5)
-        self.status_bar.status.grid_layout.setSpacing(10)
+        self.status_bar.status.layout_.setContentsMargins(10, 5, 0, 5)
+        self.status_bar.status.layout_.setSpacing(10)
         self.status_bar.addPermanentWidget(self.status_bar.status, 40)
 
         self.status_bar.status.icon = QLabel()
         self.status_bar.status.icon.setAlignment(Qt.AlignmentFlag.AlignLeft)
-        self.status_bar.status.grid_layout.addWidget(self.status_bar.status.icon, 0, 0)
+        self.status_bar.status.layout_.addWidget(self.status_bar.status.icon, 0, 0)
 
         self.status_bar.status.label = QLabel()
         self.status_bar.status.label.setAlignment(Qt.AlignmentFlag.AlignLeft)
-        self.status_bar.status.grid_layout.addWidget(self.status_bar.status.label, 0, 1)
+        self.status_bar.status.layout_.addWidget(self.status_bar.status.label, 0, 1)
 
-        self.status_bar.status.grid_layout.setColumnStretch(2, 1)
+        self.status_bar.status.layout_.setColumnStretch(2, 1)
 
         self.change_status_message(InfoType.Info, 'Not connected')
 
 
         progress_widget = QGridWidget()
         progress_widget.setContentsMargins(0, 0, 0, 0)
-        progress_widget.grid_layout.setContentsMargins(0, 0, 0, 0)
-        progress_widget.grid_layout.setSpacing(0)
+        progress_widget.layout_.setContentsMargins(0, 0, 0, 0)
+        progress_widget.layout_.setSpacing(0)
         self.status_bar.addPermanentWidget(progress_widget, 20)
 
         # self.status_bar.progress = QAnimatedProgressBar()
@@ -186,21 +186,21 @@ class Application(QBaseApplication):
         # self.status_bar.progress.setTextVisible(False)
         # self.status_bar.progress.setRange(0, 100)
         # self.status_bar.progress.setValue(0)
-        # progress_widget.grid_layout.addWidget(self.status_bar.progress, 0, 0)
+        # progress_widget.layout_.addWidget(self.status_bar.progress, 0, 0)
         # self.status_bar.progress.setVisible(False)
 
 
         empty_widget = QGridWidget()
         empty_widget.setContentsMargins(0, 0, 0, 0)
-        empty_widget.grid_layout.setContentsMargins(0, 0, 0, 0)
-        empty_widget.grid_layout.setSpacing(0)
+        empty_widget.layout_.setContentsMargins(0, 0, 0, 0)
+        empty_widget.layout_.setSpacing(0)
         self.status_bar.addPermanentWidget(empty_widget, 30)
 
 
         update_widget = QGridWidget()
         update_widget.setContentsMargins(0, 0, 0, 0)
-        update_widget.grid_layout.setContentsMargins(0, 0, 0, 0)
-        update_widget.grid_layout.setSpacing(0)
+        update_widget.layout_.setContentsMargins(0, 0, 0, 0)
+        update_widget.layout_.setSpacing(0)
         self.status_bar.addPermanentWidget(update_widget, 10)
 
         self.update_button = QPushButton(self.get_lang_data('QStatusBar.QPushButton.update'))
@@ -208,7 +208,7 @@ class Application(QBaseApplication):
         self.update_button.clicked.connect(self.update_click)
         self.update_button.setProperty('color', 'main')
         self.update_button.setProperty('transparent', True)
-        update_widget.grid_layout.addWidget(self.update_button, 0, 0)
+        update_widget.layout_.addWidget(self.update_button, 0, 0)
         self.update_button.setVisible(False)
 
 
@@ -217,16 +217,16 @@ class Application(QBaseApplication):
         self.root.addWidget(self.main_page)
 
         self.main_page.left = QGridWidget()
-        self.main_page.left.grid_layout.setSpacing(0)
-        self.main_page.left.grid_layout.setContentsMargins(0, 0, 0, 0)
-        self.main_page.grid_layout.addWidget(self.main_page.left, 0, 0)
-        self.main_page.grid_layout.setSpacing(0)
-        self.main_page.grid_layout.setContentsMargins(0, 0, 0, 0)
-        self.main_page.grid_layout.setAlignment(self.main_page.left, Qt.AlignmentFlag.AlignLeft)
+        self.main_page.left.layout_.setSpacing(0)
+        self.main_page.left.layout_.setContentsMargins(0, 0, 0, 0)
+        self.main_page.layout_.addWidget(self.main_page.left, 0, 0)
+        self.main_page.layout_.setSpacing(0)
+        self.main_page.layout_.setContentsMargins(0, 0, 0, 0)
+        self.main_page.layout_.setAlignment(self.main_page.left, Qt.AlignmentFlag.AlignLeft)
 
         self.main_page.right = QSlidingStackedWidget()
         self.main_page.right.set_orientation(Qt.Orientation.Horizontal)
-        self.main_page.grid_layout.addWidget(self.main_page.right, 0, 1)
+        self.main_page.layout_.addWidget(self.main_page.right, 0, 1)
 
         self.create_empty_panel()
 
@@ -238,31 +238,31 @@ class Application(QBaseApplication):
         self.main_page.right.slide_in_index(0)
 
         left_top = QFrame()
-        left_top.grid_layout = QGridLayout()
-        left_top.setLayout(left_top.grid_layout)
+        left_top.layout_ = QGridLayout()
+        left_top.setLayout(left_top.layout_)
         left_top.setProperty('border-top', True)
         left_top.setProperty('border-left', True)
         left_top.setProperty('border-right', True)
         left_top.setProperty('background', 'light')
-        self.main_page.left.grid_layout.addWidget(left_top, 0, 0)
+        self.main_page.left.layout_.addWidget(left_top, 0, 0)
 
         button = QPushButton()
         button.setCursor(Qt.CursorShape.PointingHandCursor)
         button.setIcon(self.save_data.get_icon('/pushbutton/note.png'))
         button.clicked.connect(self.about_menu_clicked)
-        left_top.grid_layout.addWidget(button, 0, 0)
-        left_top.grid_layout.setAlignment(button, Qt.AlignmentFlag.AlignLeft)
+        left_top.layout_.addWidget(button, 0, 0)
+        left_top.layout_.setAlignment(button, Qt.AlignmentFlag.AlignLeft)
 
         button = QPushButton()
         button.setCursor(Qt.CursorShape.PointingHandCursor)
         button.setIcon(self.save_data.get_icon('/pushbutton/settings.png'))
         button.clicked.connect(self.settings_menu)
-        left_top.grid_layout.addWidget(button, 0, 1)
-        left_top.grid_layout.setAlignment(button, Qt.AlignmentFlag.AlignRight)
+        left_top.layout_.addWidget(button, 0, 1)
+        left_top.layout_.setAlignment(button, Qt.AlignmentFlag.AlignRight)
 
         self.main_page.side_panel = QSidePanel(width = 240)
         self.main_page.side_panel.setProperty('border-right', True)
-        self.main_page.left.grid_layout.addWidget(self.main_page.side_panel, 1, 0)
+        self.main_page.left.layout_.addWidget(self.main_page.side_panel, 1, 0)
 
     def create_empty_panel(self) -> None:
         lang = self.get_lang_data('QMainWindow.mainPage.QSidePanel.emptyPanel')
@@ -270,21 +270,21 @@ class Application(QBaseApplication):
         self.main_page.empty_panel = QGridWidget()
 
         grid = QGridWidget()
-        grid.grid_layout.setSpacing(20)
-        grid.grid_layout.setContentsMargins(0, 0, 0, 0)
-        self.main_page.empty_panel.grid_layout.addWidget(grid, 0, 0)
-        self.main_page.empty_panel.grid_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        grid.layout_.setSpacing(20)
+        grid.layout_.setContentsMargins(0, 0, 0, 0)
+        self.main_page.empty_panel.layout_.addWidget(grid, 0, 0)
+        self.main_page.empty_panel.layout_.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.main_page.empty_panel.auth = QLoginWidget(None, lang.get('QLoginWidget'), self.save_data.username, self.save_data.password, True, self.save_data.remember)
         self.main_page.empty_panel.auth.enter_key_pressed.connect(self.login)
-        grid.grid_layout.addWidget(self.main_page.empty_panel.auth, 0, 0)
+        grid.layout_.addWidget(self.main_page.empty_panel.auth, 0, 0)
 
         self.main_page.empty_panel.login_button = QPushButton(lang.get('QPushButton.login'))
         self.main_page.empty_panel.login_button.setProperty('color', 'main')
         self.main_page.empty_panel.login_button.setProperty('transparent', True)
         self.main_page.empty_panel.login_button.setCursor(Qt.CursorShape.PointingHandCursor)
         self.main_page.empty_panel.login_button.clicked.connect(self.login)
-        grid.grid_layout.addWidget(self.main_page.empty_panel.login_button, 1, 0)
+        grid.layout_.addWidget(self.main_page.empty_panel.login_button, 1, 0)
 
         grid.setMaximumHeight(350)
 

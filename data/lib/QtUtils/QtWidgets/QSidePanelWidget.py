@@ -21,12 +21,12 @@ class QSidePanelWidget(QWidget):
         self.sidepanel.setProperty('border-right', True)
 
         w = QGridWidget()
-        w.grid_layout.setSpacing(0)
-        w.grid_layout.setContentsMargins(*content_margins)
+        w.layout_.setSpacing(0)
+        w.layout_.setContentsMargins(*content_margins)
 
         self._widget = QSlidingStackedWidget()
         self._widget.set_orientation(Qt.Orientation.Vertical)
-        w.grid_layout.addWidget(self._widget, 0, 0)
+        w.layout_.addWidget(self._widget, 0, 0)
 
         self._layout.setSpacing(0)
         self._layout.setContentsMargins(0, 0, 0, 0)

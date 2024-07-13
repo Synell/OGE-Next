@@ -47,13 +47,13 @@ def QBetterToolTip(cls: QWidget):
                 label.setContentsMargins(0, 0, 0, 0)
                 label.setMouseTracking(False)
                 label.setWordWrap(True)
-                self._q_better_tooltip.grid_layout.addWidget(label, 0, 0)
+                self._q_better_tooltip.layout_.addWidget(label, 0, 0)
 
             elif isinstance(widget, QWidget):
                 widget.setContentsMargins(0, 0, 0, 0)
                 if widget.layout(): widget.layout().setContentsMargins(0, 0, 0, 0)
                 self._set_children_mouse_tracking(widget, False)
-                self._q_better_tooltip.grid_layout.addWidget(widget, 0, 0)
+                self._q_better_tooltip.layout_.addWidget(widget, 0, 0)
 
             else:
                 raise TypeError('widget must be a QWidget or a str')

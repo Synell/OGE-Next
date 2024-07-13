@@ -51,30 +51,30 @@ class QNamedHexSpinBox(QGridWidget):
         self._mode = QNamedHexSpinBox.Mode.Hex
         self._allow_mode_change = allow_mode_change
 
-        self.grid_layout.setSpacing(0)
-        self.grid_layout.setContentsMargins(0, 0, 0, 0)
+        self.layout_.setSpacing(0)
+        self.layout_.setContentsMargins(0, 0, 0, 0)
 
         self.setProperty('QNamedHexSpinBox', True)
         self.setProperty('color', 'main')
 
         self.hex_spinbox = QHexSpinBox()
         self.hex_spinbox.value_changed.connect(self._value_changed)
-        self.grid_layout.addWidget(self.hex_spinbox, 0, 0)
+        self.layout_.addWidget(self.hex_spinbox, 0, 0)
 
         self.text_lineedit = QLineEdit()
         self.text_lineedit.textChanged.connect(self._text_changed)
-        self.grid_layout.addWidget(self.text_lineedit, 0, 0)
+        self.layout_.addWidget(self.text_lineedit, 0, 0)
         self.text_lineedit.setVisible(False)
 
         self.mode_button = QPushButton()
         self.mode_button.setIcon(self._mode_icons[0])
         self.mode_button.clicked.connect(lambda: self.set_mode(QNamedHexSpinBox.Mode.next(self.mode())))
         self.mode_button.setCursor(Qt.CursorShape.PointingHandCursor)
-        self.grid_layout.addWidget(self.mode_button, 0, 0, Qt.AlignmentFlag.AlignRight)
+        self.layout_.addWidget(self.mode_button, 0, 0, Qt.AlignmentFlag.AlignRight)
         self.mode_button.setVisible(allow_mode_change)
 
         self.label = QLabel(name)
-        self.grid_layout.addWidget(self.label, 0, 0)
+        self.layout_.addWidget(self.label, 0, 0)
         self.label.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents, True)
         self.label.setProperty('inputhover', False)
         self.label.setProperty('inputfocus', False)

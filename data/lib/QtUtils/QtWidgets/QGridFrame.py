@@ -8,6 +8,11 @@ from PySide6.QtWidgets import QFrame, QGridLayout
 class QGridFrame(QFrame):
     def __init__(self, parent = None):
         super().__init__(parent)
-        self.grid_layout = QGridLayout()
-        self.setLayout(self.grid_layout)
+        self._layout = QGridLayout()
+        self.setLayout(self._layout)
+
+
+    @property
+    def layout_(self) -> QGridLayout:
+        return self._layout
 #----------------------------------------------------------------------

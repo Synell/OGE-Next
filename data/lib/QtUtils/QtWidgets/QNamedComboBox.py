@@ -32,8 +32,8 @@ class QNamedComboBox(QGridWidget):
 
     def __init__(self, parent = None, name: str = '') -> None:
         super().__init__(parent)
-        self.grid_layout.setSpacing(0)
-        self.grid_layout.setContentsMargins(0, 0, 0, 0)
+        self.layout_.setSpacing(0)
+        self.layout_.setContentsMargins(0, 0, 0, 0)
 
         self.setProperty('QNamedComboBox', True)
         self.setProperty('color', 'main')
@@ -42,9 +42,9 @@ class QNamedComboBox(QGridWidget):
         self.combo_box = QComboBox()
         self.combo_box.setCursor(Qt.CursorShape.PointingHandCursor)
         self.combo_box.view().setCursor(Qt.CursorShape.PointingHandCursor)
-        self.grid_layout.addWidget(self.combo_box, 0, 0)
+        self.layout_.addWidget(self.combo_box, 0, 0)
         self.label = QLabel(name)
-        self.grid_layout.addWidget(self.label, 0, 0)
+        self.layout_.addWidget(self.label, 0, 0)
         self.label.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents, True)
         self.label.setProperty('inputhover', False)
         self.label.setProperty('inputfocus', False)

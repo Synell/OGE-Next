@@ -21,6 +21,6 @@ class QSubGridMainWindow(QSubMainWindow):
         return self._root
 
     @property
-    def grid_layout(self) -> QGridLayout:
-        return self._root.grid_layout
+    def layout_(self) -> QGridLayout:
+        return self._root.layout_
 #----------------------------------------------------------------------

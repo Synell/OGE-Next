@@ -12,7 +12,7 @@ from PySide6.QtWidgets import *
 from PySide6.QtSvg import *
 from PySide6.QtSvgWidgets import *
 from math import *
-import json, zipfile, shutil, traceback, subprocess, platform
+import json, zipfile, shutil, traceback, subprocess, platform, logging
 from urllib.request import urlopen, Request
 from datetime import datetime, timedelta
 from app import Application

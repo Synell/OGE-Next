@@ -17,8 +17,8 @@ class QMoreButton(QGridWidget):
     def __init__(self, text: str = '') -> None:
         super().__init__()
 
-        self.grid_layout.setContentsMargins(0, 0, 0, 0)
-        self.grid_layout.setSpacing(1)
+        self.layout_.setContentsMargins(0, 0, 0, 0)
+        self.layout_.setSpacing(1)
 
         self.setProperty('QMoreButton', True)
 
@@ -27,7 +27,7 @@ class QMoreButton(QGridWidget):
         self._main_button.setProperty('color', 'main')
         self._main_button.setProperty('mainButton', True)
         self._main_button.clicked.connect(self.clicked.emit)
-        self.grid_layout.addWidget(self._main_button, 0, 0)
+        self.layout_.addWidget(self._main_button, 0, 0)
 
         self._more_button = QPushButton()
         self._more_button.setSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
@@ -35,9 +35,9 @@ class QMoreButton(QGridWidget):
         self._more_button.setProperty('color', 'main')
         self._more_button.setProperty('moreButton', True)
         self._more_button.clicked.connect(self.more_clicked.emit)
-        self.grid_layout.addWidget(self._more_button, 0, 1)
+        self.layout_.addWidget(self._more_button, 0, 1)
 
-        # self.grid_layout.setColumnStretch(2, 1)
+        # self.layout_.setColumnStretch(2, 1)
 
 
     def setDisabled(self, arg__1: bool) -> None:

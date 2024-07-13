@@ -48,8 +48,8 @@ class QNodeGraphicsItemWidgetField(QGridFrame):
             self._connected_on_output: list[QNodeGraphicsItemWidgetField.Connection] = []
 
             self.setContentsMargins(0, 0, 0, 0)
-            self.grid_layout.setContentsMargins(0, 0, 0, 0)
-            self.grid_layout.setSpacing(0)
+            self.layout_.setContentsMargins(0, 0, 0, 0)
+            self.layout_.setSpacing(0)
             self.setFixedSize(16, 16)
             self.setProperty('connector-color', color.value)
 
@@ -69,7 +69,7 @@ class QNodeGraphicsItemWidgetField(QGridFrame):
             self._connect_point.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents)
             self._connect_point.setProperty('connector', True)
             self._connect_point.setFixedSize(8, 8)
-            self.grid_layout.addWidget(self._connect_point, 0, 0, Qt.AlignmentFlag.AlignCenter)
+            self.layout_.addWidget(self._connect_point, 0, 0, Qt.AlignmentFlag.AlignCenter)
 
 
         @property
@@ -279,22 +279,22 @@ class QNodeGraphicsItemWidgetField(QGridFrame):
 
     def _build(self, widget: 'QNodeGraphicsField', in_color: Color = Color.Red, out_color: Color = Color.Blue, in_types: Sequence[type] = [], out_types: Sequence[type] = []) -> None:
         self.setContentsMargins(0, 0, 0, 0)
-        self.grid_layout.setContentsMargins(0, 0, 0, 0)
-        self.grid_layout.setHorizontalSpacing(8)
-        self.grid_layout.setVerticalSpacing(0)
+        self.layout_.setContentsMargins(0, 0, 0, 0)
+        self.layout_.setHorizontalSpacing(8)
+        self.layout_.setVerticalSpacing(0)
 
         self._in_connector = QNodeGraphicsItemWidgetField.Connector(self, self._field_type & QNodeGraphicsItemWidgetField.Connector.Type.Input, in_color, in_types)
         self._in_connector.lmb_pressed.connect(lambda: self.lmb_pressed.emit(self._in_connector))
         self._in_connector.lmb_released.connect(lambda: self.lmb_released.emit(self._in_connector))
-        self.grid_layout.addWidget(self._in_connector, 0, 0, Qt.AlignmentFlag.AlignVCenter | Qt.AlignmentFlag.AlignLeft)
+        self.layout_.addWidget(self._in_connector, 0, 0, Qt.AlignmentFlag.AlignVCenter | Qt.AlignmentFlag.AlignLeft)
 
-        self.grid_layout.addWidget(widget, 0, 1, Qt.AlignmentFlag.AlignVCenter)
+        self.layout_.addWidget(widget, 0, 1, Qt.AlignmentFlag.AlignVCenter)
         widget.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self._out_connector = QNodeGraphicsItemWidgetField.Connector(self, self._field_type & QNodeGraphicsItemWidgetField.Connector.Type.Output, out_color, out_types)
         self._out_connector.lmb_pressed.connect(lambda: self.lmb_pressed.emit(self._out_connector))
         self._out_connector.lmb_released.connect(lambda: self.lmb_released.emit(self._out_connector))
-        self.grid_layout.addWidget(self._out_connector, 0, 2, Qt.AlignmentFlag.AlignVCenter | Qt.AlignmentFlag.AlignRight)
+        self.layout_.addWidget(self._out_connector, 0, 2, Qt.AlignmentFlag.AlignVCenter | Qt.AlignmentFlag.AlignRight)
 
 
 

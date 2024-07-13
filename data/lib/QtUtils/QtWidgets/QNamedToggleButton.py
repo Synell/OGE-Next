@@ -16,8 +16,8 @@ class QNamedToggleButton(QGridFrame):
         self.setProperty('QNamedToggleButton', True)
         self.setProperty('color', 'main')
 
-        self.grid_layout.setSpacing(16)
-        self.grid_layout.setContentsMargins(0, 0, 0, 0)
+        self.layout_.setSpacing(16)
+        self.layout_.setContentsMargins(0, 0, 0, 0)
 
         self.toggle_button = QToggleButton()
         self.toggle_button.toggled.connect(self.toggled.emit)
@@ -26,9 +26,9 @@ class QNamedToggleButton(QGridFrame):
         self.toggle_button.setChecked(checked)
         self.label.setText(text)
 
-        self.grid_layout.addWidget(self.label, 0, 0)
-        self.grid_layout.addWidget(self.toggle_button, 0, 1)
-        if min_width: self.grid_layout.setColumnStretch(2, 1)
+        self.layout_.addWidget(self.label, 0, 0)
+        self.layout_.addWidget(self.toggle_button, 0, 1)
+        if min_width: self.layout_.setColumnStretch(2, 1)
 
     def setChecked(self, value: bool):
         self.toggle_button.setChecked(value)

@@ -23,9 +23,9 @@ class QAboutBox(QDialog):
         self.left = QGridWidget()
 
         self.right = QGridWidget()
-        self.right.grid_layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
-        self.right.grid_layout.setSpacing(20)
-        self.right.grid_layout.setContentsMargins(20, 20, 20, 20)
+        self.right.layout_.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        self.right.layout_.setSpacing(20)
+        self.right.layout_.setContentsMargins(20, 20, 20, 20)
 
         self.__down__ = QGridWidget()
 
@@ -35,43 +35,43 @@ class QAboutBox(QDialog):
 
         icon_widget = QIconWidget(None, logo, QSize(128, 128), False)
 
-        self.left.grid_layout.addWidget(icon_widget)
-        self.left.grid_layout.setAlignment(icon_widget, Qt.AlignmentFlag.AlignTop)
-        self.left.grid_layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        self.left.layout_.addWidget(icon_widget)
+        self.left.layout_.setAlignment(icon_widget, Qt.AlignmentFlag.AlignTop)
+        self.left.layout_.setAlignment(Qt.AlignmentFlag.AlignLeft)
 
         self.setWindowTitle(title)
 
 
         text = QLabel(title)
         text.setProperty('h', 2)
-        self.right.grid_layout.addWidget(text, 0, 0)
-        self.right.grid_layout.setAlignment(text, Qt.AlignmentFlag.AlignTop)
+        self.right.layout_.addWidget(text, 0, 0)
+        self.right.layout_.setAlignment(text, Qt.AlignmentFlag.AlignTop)
 
-        self.right.grid_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
+        self.right.layout_.setAlignment(Qt.AlignmentFlag.AlignTop)
 
         for textID in range(len(texts)):
             lines = texts[textID].split('\n')
             if len(lines) == 1: label = self.generate_label(texts[textID])
             else: label = self.generate_label_group(lines)
-            self.right.grid_layout.addWidget(label, textID + 1, 0)
-            self.right.grid_layout.setAlignment(label, Qt.AlignmentFlag.AlignTop)
+            self.right.layout_.addWidget(label, textID + 1, 0)
+            self.right.layout_.setAlignment(label, Qt.AlignmentFlag.AlignTop)
 
 
         right_buttons = QGridWidget()
-        right_buttons.grid_layout.setSpacing(16)
-        right_buttons.grid_layout.setContentsMargins(0, 0, 0, 0)
+        right_buttons.layout_.setSpacing(16)
+        right_buttons.layout_.setContentsMargins(0, 0, 0, 0)
 
         button = QPushButton('OK')
         button.setCursor(Qt.CursorShape.PointingHandCursor)
         button.clicked.connect(self.accept)
         button.setProperty('class', 'gray')
-        right_buttons.grid_layout.addWidget(button, 0, 1)
+        right_buttons.layout_.addWidget(button, 0, 1)
 
         self.frame = QGridFrame()
-        self.frame.grid_layout.addWidget(right_buttons, 0, 0)
-        self.frame.grid_layout.setAlignment(right_buttons, Qt.AlignmentFlag.AlignRight)
-        self.frame.grid_layout.setSpacing(0)
-        self.frame.grid_layout.setContentsMargins(16, 16, 16, 16)
+        self.frame.layout_.addWidget(right_buttons, 0, 0)
+        self.frame.layout_.setAlignment(right_buttons, Qt.AlignmentFlag.AlignRight)
+        self.frame.layout_.setSpacing(0)
+        self.frame.layout_.setContentsMargins(16, 16, 16, 16)
         self.frame.setProperty('border-top', True)
         self.frame.setProperty('border-bottom', True)
         self.frame.setProperty('border-left', True)
@@ -90,13 +90,13 @@ class QAboutBox(QDialog):
 
     def generate_label_group(self, texts: list[str]) -> QGridFrame:
         frame = QGridFrame()
-        frame.grid_layout.setSpacing(0)
-        frame.grid_layout.setContentsMargins(0, 0, 0, 0)
+        frame.layout_.setSpacing(0)
+        frame.layout_.setContentsMargins(0, 0, 0, 0)
 
         for textID in range(len(texts)):
             label = self.generate_label(texts[textID])
-            frame.grid_layout.addWidget(label, textID, 0)
-            frame.grid_layout.setAlignment(label, Qt.AlignmentFlag.AlignTop)
+            frame.layout_.addWidget(label, textID, 0)
+            frame.layout_.setAlignment(label, Qt.AlignmentFlag.AlignTop)
 
         return frame
 #----------------------------------------------------------------------

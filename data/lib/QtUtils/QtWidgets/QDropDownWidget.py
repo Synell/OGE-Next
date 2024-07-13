@@ -17,11 +17,11 @@ class QDropDownWidget(QGridFrame):
         def __init__(self, header: QWidget, icon: QIconWidget) -> None:
             super().__init__()
             self.setCursor(Qt.CursorShape.PointingHandCursor)
-            self.grid_layout.setContentsMargins(0, 0, 0, 0)
-            self.grid_layout.setSpacing(0)
-            self.grid_layout.addWidget(header, 0, 0)
-            self.grid_layout.addWidget(icon, 0, 1)
-            self.grid_layout.setColumnStretch(2, 1)
+            self.layout_.setContentsMargins(0, 0, 0, 0)
+            self.layout_.setSpacing(0)
+            self.layout_.addWidget(header, 0, 0)
+            self.layout_.addWidget(icon, 0, 1)
+            self.layout_.setColumnStretch(2, 1)
 
         def mousePressEvent(self, event: QMouseEvent) -> None:
             self.clicked.emit()
@@ -39,11 +39,11 @@ class QDropDownWidget(QGridFrame):
 
     def __init__(self, header: str | QWidget = '', widget: QWidget = None, already_open: bool = False) -> None:
         super().__init__()
-        self.grid_layout.setSpacing(1)
+        self.layout_.setSpacing(1)
         self.setContentsMargins(0, 0, 0, 0)
 
-        self.grid_layout.setColumnStretch(1, 1)
-        self.grid_layout.setRowStretch(2, 1)
+        self.layout_.setColumnStretch(1, 1)
+        self.layout_.setRowStretch(2, 1)
 
         self._must_be_shown = already_open
         self._icon = QIconWidget(None, self._close_icon if not already_open else self._open_icon, QSize(32, 32), False)
@@ -53,9 +53,9 @@ class QDropDownWidget(QGridFrame):
 
         self._show_hide_widget = widget
 
-        self.grid_layout.addWidget(self._show_hide_button, 0, 0)
-        self.grid_layout.setAlignment(self._show_hide_button, Qt.AlignmentFlag.AlignLeft)
-        self.grid_layout.addWidget(self._show_hide_widget , 1, 0)
+        self.layout_.addWidget(self._show_hide_button, 0, 0)
+        self.layout_.setAlignment(self._show_hide_button, Qt.AlignmentFlag.AlignLeft)
+        self.layout_.addWidget(self._show_hide_widget , 1, 0)
 
         if not already_open: self._show_hide_widget.hide()
 

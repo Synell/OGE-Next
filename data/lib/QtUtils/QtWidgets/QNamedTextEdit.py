@@ -34,21 +34,21 @@ class QNamedTextEdit(QGridWidget):
 
     def __init__(self, parent = None, placeholder: str = '', name: str = '') -> None:
         super().__init__(parent)
-        self.grid_layout.setSpacing(0)
-        self.grid_layout.setContentsMargins(0, 0, 0, 0)
+        self.layout_.setSpacing(0)
+        self.layout_.setContentsMargins(0, 0, 0, 0)
 
         self.setProperty('QNamedTextEdit', True)
         self.setProperty('color', 'main')
 
         self.text_edit = QTextEdit()
         self.text_edit.setPlaceholderText(placeholder)
-        self.grid_layout.addWidget(self.text_edit, 0, 0)
+        self.layout_.addWidget(self.text_edit, 0, 0)
         self.label = QLabel(name)
-        self.grid_layout.addWidget(self.label, 0, 0)
+        self.layout_.addWidget(self.label, 0, 0)
         self.label.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents, True)
         self.label.setProperty('inputhover', False)
         self.label.setProperty('inputfocus', False)
-        self.grid_layout.setAlignment(self.label, Qt.AlignmentFlag.AlignTop)
+        self.layout_.setAlignment(self.label, Qt.AlignmentFlag.AlignTop)
 
         self.text_edit.base_focusInEvent = self.text_edit.focusInEvent
         self.text_edit.base_focusOutEvent = self.text_edit.focusOutEvent

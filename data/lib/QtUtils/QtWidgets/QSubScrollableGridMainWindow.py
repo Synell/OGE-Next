@@ -21,6 +21,6 @@ class QSubScrollableGridMainWindow(QSubMainWindow):
         return self._root
 
     @property
-    def scroll_layout(self) -> QGridLayout:
-        return self._root.scroll_layout
+    def layout_(self) -> QGridLayout:
+        return self._root.layout_
 #----------------------------------------------------------------------

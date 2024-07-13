@@ -61,14 +61,14 @@ class QMessageBoxWithWidget(QDialog):
         self._right_layout.setAlignment(informative_text, Qt.AlignmentFlag.AlignLeft)
 
         right_buttons = QGridWidget()
-        right_buttons.grid_layout.setSpacing(16)
-        right_buttons.grid_layout.setContentsMargins(0, 0, 0, 0)
+        right_buttons.layout_.setSpacing(16)
+        right_buttons.layout_.setContentsMargins(0, 0, 0, 0)
 
         button = QPushButton('OK')
         button.setCursor(Qt.CursorShape.PointingHandCursor)
         button.clicked.connect(self.accept)
         button.setProperty('color', 'main')
-        right_buttons.grid_layout.addWidget(button, 0, 0)
+        right_buttons.layout_.addWidget(button, 0, 0)
 
         self._layout.addWidget(right_buttons, 2, 1)
         self._layout.setAlignment(right_buttons, Qt.AlignmentFlag.AlignRight)

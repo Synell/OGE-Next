@@ -11,16 +11,27 @@ from ..QtGui import QSmoothScrollArea
 class QScrollableGridFrame(QSmoothScrollArea):
     def __init__(self):
         super(QScrollableGridFrame, self).__init__()
-        self.scroll_frame = QFrame()
-        self.scroll_layout = QGridLayout(self.scroll_frame)
-        self.scroll_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
-        self.setWidget(self.scroll_frame)
+        self._widget = QFrame()
+        self._layout = QGridLayout(self._widget)
+        self._layout.setAlignment(Qt.AlignmentFlag.AlignTop)
+        self.setWidget(self._widget)
         self.setWidgetResizable(True)
+
 
     def set_all_property(self, name: str, value: Any) -> bool:
         ret = self.setProperty(name, value)
-        self.scroll_frame.setProperty(name, value)
-        self.scroll_layout.setProperty(name, value)
+        self._widget.setProperty(name, value)
+        self._layout.setProperty(name, value)
 
         return ret
+
+
+    @property
+    def layout_(self) -> QGridLayout:
+        return self._layout
+
+
+    @property
+    def widget_(self) -> QFrame:
+        return self._widget
 #----------------------------------------------------------------------

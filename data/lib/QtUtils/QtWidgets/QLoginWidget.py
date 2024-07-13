@@ -18,28 +18,28 @@ class QLoginWidget(QGridFrame):
     def __init__(self, parent = None , lang: QLangData = {}, username: str = '', password: str = '', remember_checkbox: bool = True, remember: bool = False) -> None:
         super().__init__(parent)
 
-        self.grid_layout.setContentsMargins(0, 0, 0, 0)
-        self.grid_layout.setSpacing(20)
+        self.layout_.setContentsMargins(0, 0, 0, 0)
+        self.layout_.setSpacing(20)
         self.setFixedSize(300, 200)
 
         self._username = QNamedLineEdit(None, '', lang.get('QNamedLineEdit.username'))
         self._username.line_edit.setProperty('small', True)
         self._username.setText(username)
-        self.grid_layout.addWidget(self._username, 0, 0)
+        self.layout_.addWidget(self._username, 0, 0)
 
         self._password = QNamedLineEdit(None, '', lang.get('QNamedLineEdit.password'))
         self._password.line_edit.setEchoMode(QLineEdit.EchoMode.Password)
         self._password.setText(password)
-        self.grid_layout.addWidget(self._password, 1, 0)
+        self.layout_.addWidget(self._password, 1, 0)
 
         if remember_checkbox:
             self._remember = QNamedToggleButton(None, lang.get('QNamedToggleButton.remember'), False, True)
             self._remember.setChecked(remember)
-            self.grid_layout.addWidget(self._remember, 2, 0)
-            self.grid_layout.setAlignment(self._remember, Qt.AlignmentFlag.AlignRight)
+            self.layout_.addWidget(self._remember, 2, 0)
+            self.layout_.setAlignment(self._remember, Qt.AlignmentFlag.AlignRight)
         else: self._remember = None
 
-        self.grid_layout.setRowStretch(3, 1)
+        self.layout_.setRowStretch(3, 1)
 
 
     def set_disabled(self, disabled: bool = True) -> None:

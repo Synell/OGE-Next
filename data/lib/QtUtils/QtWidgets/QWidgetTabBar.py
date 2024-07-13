@@ -33,7 +33,7 @@ class QWidgetTabBarItem(QDragListItem):
         self._widget = widget
         self.setProperty('QWidgetTabBarItem', True)
         self.setProperty('selected', False)
-        self.grid_layout.addWidget(self._widget, 0, 0)
+        self.layout_.addWidget(self._widget, 0, 0)
 
         self._close_button = QPushButton()
         self._close_button.setProperty('close', True)
@@ -42,17 +42,17 @@ class QWidgetTabBarItem(QDragListItem):
         self._close_button.setIcon(self._close_icon)
         self._close_button.setIconSize(QSize(self._icon_size.width(), self._icon_size.height()))
         self._close_button.clicked.connect(self._close_requested_on_widget)
-        self.grid_layout.addWidget(self._close_button, 0, 0, Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignTop)
+        self.layout_.addWidget(self._close_button, 0, 0, Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignTop)
         if not closable: self._close_button.setVisible(False)
 
         self._unsaved_icon = QIconWidget(None, self._unsaved_icon, QSize(self._icon_size.width(), self._icon_size.height()), False)
         self._unsaved_icon.setProperty('unsaved', True)
         self._unsaved_icon.setFixedSize(self._icon_size.width(), self._icon_size.height())
-        self.grid_layout.addWidget(self._unsaved_icon, 0, 0, Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
+        self.layout_.addWidget(self._unsaved_icon, 0, 0, Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
         self._unsaved_icon.setVisible(False)
 
-        self.grid_layout.setRowStretch(1, 1)
-        self.grid_layout.setColumnStretch(1, 1)
+        self.layout_.setRowStretch(1, 1)
+        self.layout_.setColumnStretch(1, 1)
 
 
     @property
@@ -90,8 +90,8 @@ class QWidgetTabBarItem(QDragListItem):
         self._unsaved_icon.setParent(None)
 
         self._widget = value
-        self.grid_layout.addWidget(self._widget, 0, 0)
-        self.grid_layout.addWidget(self._close_button, 0, 0, Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignTop)
+        self.layout_.addWidget(self._widget, 0, 0)
+        self.layout_.addWidget(self._close_button, 0, 0, Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignTop)
 
         self._close_button.setVisible(close_visible)
         self._unsaved_icon.setVisible(unsaved_visible)
@@ -119,19 +119,19 @@ class QWidgetTabBar(QScrollableGridWidget):
     def __init__(self, orientation: Qt.Orientation = Qt.Orientation.Horizontal) -> None:
         super().__init__()
 
-        self.scroll_layout.setSpacing(0)
-        self.scroll_layout.setContentsMargins(0, 0, 0, 0)
+        self.layout_.setSpacing(0)
+        self.layout_.setContentsMargins(0, 0, 0, 0)
 
         self._root = QDragList(None, orientation)
         self._root.moved.connect(self.moved)
-        self.scroll_layout.addWidget(self._root)
+        self.layout_.addWidget(self._root)
 
         self.setSizePolicy(QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.Minimum)
 
         self._root.layout().setContentsMargins(0, 0, 0, 0)
         self._root.layout().setSpacing(5)
-        self.scroll_layout.setRowStretch(1, 1)
-        self.scroll_layout.setColumnStretch(1, 1)
+        self.layout_.setRowStretch(1, 1)
+        self.layout_.setColumnStretch(1, 1)
 
 
     @property

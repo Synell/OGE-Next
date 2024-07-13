@@ -15,20 +15,20 @@ class QIconLabel(QGridWidget):
     def __init__(self, text: str = '', icon: str | QPixmap | QIcon = None, icon_size: QSize = QSize(16, 16), spacing: int = 5) -> None:
         super().__init__()
 
-        self.grid_layout.setContentsMargins(0, 0, 0, 0)
-        self.grid_layout.setSpacing(spacing)
+        self.layout_.setContentsMargins(0, 0, 0, 0)
+        self.layout_.setSpacing(spacing)
 
         self._icon_label = QIconWidget()
         self._icon_label.icon_size = QSize(icon_size.width(), icon_size.height())
         self._icon_label.setFixedSize(QSize(icon_size.width(), icon_size.height()))
         self.set_icon(icon, icon_size)
-        self.grid_layout.addWidget(self._icon_label, 0, 0)
+        self.layout_.addWidget(self._icon_label, 0, 0)
 
         self._text_label = QLabel()
         self.set_text(text)
-        self.grid_layout.addWidget(self._text_label, 0, 1)
+        self.layout_.addWidget(self._text_label, 0, 1)
 
-        self.grid_layout.setColumnStretch(2, 1)
+        self.layout_.setColumnStretch(2, 1)
 
     def set_icon(self, icon: str | QPixmap | QIcon, size: QSize = QSize(16, 16)) -> None:
         self._icon_label.icon = icon
@@ -39,7 +39,7 @@ class QIconLabel(QGridWidget):
         self.set_icon(icon, size)
 
     def set_spacing(self, spacing: int) -> None:
-        self.grid_layout.setSpacing(spacing)
+        self.layout_.setSpacing(spacing)
 
     def setSpacing(self, spacing: int) -> None:
         self.set_spacing(spacing)

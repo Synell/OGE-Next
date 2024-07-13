@@ -15,8 +15,8 @@ from data.lib.QtUtils import QBetterToolTip
 class UEAvgWidget(OGEWidget):
     def __init__(self, ue_avg: UEAvg) -> None:
         super().__init__()
-        self.grid_layout.setContentsMargins(0, 0, 0, 0)
-        self.grid_layout.setSpacing(0)
+        self.layout_.setContentsMargins(0, 0, 0, 0)
+        self.layout_.setSpacing(0)
         self.setProperty('background', 'transparent')
         self.setProperty('class', 'UEAvgWidget')
 
@@ -25,7 +25,7 @@ class UEAvgWidget(OGEWidget):
 
         title_label = better_label(f'{ue_avg.title} ({ue_avg.coefficient if ue_avg.coefficient else "?"})')
         title_label.setProperty('class', 'title')
-        self.grid_layout.addWidget(title_label, 0, 0)
+        self.layout_.addWidget(title_label, 0, 0)
 
         avg = ue_avg.average
 
@@ -45,5 +45,5 @@ class UEAvgWidget(OGEWidget):
 
         label.setProperty('class', 'average')
         label.setAlignment(Qt.AlignmentFlag.AlignVCenter | Qt.AlignmentFlag.AlignRight)
-        self.grid_layout.addWidget(label, 0, 1)
+        self.layout_.addWidget(label, 0, 1)
 #----------------------------------------------------------------------

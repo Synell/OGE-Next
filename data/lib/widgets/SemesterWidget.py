@@ -27,8 +27,8 @@ class SemesterWidget(QScrollableGridFrame):
         self._id = id_
         self._item = item
 
-        self.scroll_layout.setContentsMargins(20, 20, 20, 20)
-        self.scroll_layout.setSpacing(20)
+        self.layout_.setContentsMargins(20, 20, 20, 20)
+        self.layout_.setSpacing(20)
         self.setProperty('class', 'SemesterWidget')
 
         self._data: Semester = None
@@ -44,40 +44,40 @@ class SemesterWidget(QScrollableGridFrame):
         self.build()
 
     def build(self) -> None:
-        for i in reversed(range(self.scroll_layout.count())):
-            self.scroll_layout.itemAt(i).widget().setParent(None)
+        for i in reversed(range(self.layout_.count())):
+            self.layout_.itemAt(i).widget().setParent(None)
 
         widget = QGridFrame()
-        widget.grid_layout.setContentsMargins(0, 0, 0, 0)
-        widget.grid_layout.setSpacing(5)
-        self.scroll_layout.addWidget(widget, 0, 0)
+        widget.layout_.setContentsMargins(0, 0, 0, 0)
+        widget.layout_.setSpacing(5)
+        self.layout_.addWidget(widget, 0, 0)
 
         button = QMoreButton(self._lang.get('QPushButton.refreshGrades'))
         button.more_clicked.connect(self.refresh_more_clicked)
         button.setProperty('color', 'main')
         button.setProperty('transparent', True)
         button.clicked.connect(lambda: self.refreshed.emit(self._id, False))
-        widget.grid_layout.addWidget(button, widget.grid_layout.count(), 0)
+        widget.layout_.addWidget(button, widget.layout_.count(), 0)
 
         better_grid_frame = QBetterToolTip(QGridFrame)
 
         details_subwidget = better_grid_frame()
-        details_subwidget.grid_layout.setContentsMargins(0, 0, 0, 0)
-        details_subwidget.grid_layout.setSpacing(10)
-        widget.grid_layout.addWidget(details_subwidget, widget.grid_layout.count(), 0)
-        details_subwidget.grid_layout.setColumnStretch(4, 1)
+        details_subwidget.layout_.setContentsMargins(0, 0, 0, 0)
+        details_subwidget.layout_.setSpacing(10)
+        widget.layout_.addWidget(details_subwidget, widget.layout_.count(), 0)
+        details_subwidget.layout_.setColumnStretch(4, 1)
 
         details_sw_icon_label = QLabel()
-        details_subwidget.grid_layout.addWidget(details_sw_icon_label, 0, 0)
+        details_subwidget.layout_.addWidget(details_sw_icon_label, 0, 0)
 
         details_sw_title_label = QLabel()
         details_sw_title_label.setProperty('title', True)
-        details_subwidget.grid_layout.addWidget(details_sw_title_label, 0, 1)
+        details_subwidget.layout_.addWidget(details_sw_title_label, 0, 1)
 
         details_sw_sep_label = QLabel()
         details_sw_sep_label.setProperty('title', True)
         details_sw_sep_label.setText(' • ')
-        details_subwidget.grid_layout.addWidget(details_sw_sep_label, 0, 2)
+        details_subwidget.layout_.addWidget(details_sw_sep_label, 0, 2)
 
         details_sw_general_avg_label = QLabel()
         details_sw_general_avg_label.setProperty('title', True)
@@ -103,7 +103,7 @@ class SemesterWidget(QScrollableGridFrame):
         else:
             details_sw_general_avg_label.setStyleSheet(f'color: {OGEWidget.perc2color(general_avg / 20)}')
 
-        details_subwidget.grid_layout.addWidget(details_sw_general_avg_label, 0, 3)
+        details_subwidget.layout_.addWidget(details_sw_general_avg_label, 0, 3)
 
         details_sw_desc_label = QLabel()
         details_sw_desc_label.setProperty('desc', True)
@@ -117,7 +117,7 @@ class SemesterWidget(QScrollableGridFrame):
 
         for index, ue in enumerate(self._data.ues):
             ue_widget = UEWidget(ue)
-            self.scroll_layout.addWidget(ue_widget, index + 1, 0)
+            self.layout_.addWidget(ue_widget, index + 1, 0)
 
             if ue.average:
                 if ue.average >= 10:
@@ -177,26 +177,26 @@ class SemesterWidget(QScrollableGridFrame):
 
         if texts:
             details_sw_desc_label.setText('\n\n'.join(texts))
-            widget.grid_layout.addWidget(details_sw_desc_label, widget.grid_layout.count(), 0)
+            widget.layout_.addWidget(details_sw_desc_label, widget.layout_.count(), 0)
 
         if self._data.new_grade_count:
             new_grades_title_subwidget = QGridFrame()
-            new_grades_title_subwidget.grid_layout.setContentsMargins(0, 0, 0, 0)
-            new_grades_title_subwidget.grid_layout.setSpacing(10)
-            new_grades_title_subwidget.grid_layout.setColumnStretch(2, 1)
+            new_grades_title_subwidget.layout_.setContentsMargins(0, 0, 0, 0)
+            new_grades_title_subwidget.layout_.setSpacing(10)
+            new_grades_title_subwidget.layout_.setColumnStretch(2, 1)
 
             new_grades_sw_icon_label = QIconWidget(None, self._OGE_NEW_ICON, QSize(32, 32), False)
-            new_grades_title_subwidget.grid_layout.addWidget(new_grades_sw_icon_label, 0, 0, Qt.AlignmentFlag.AlignLeft)
+            new_grades_title_subwidget.layout_.addWidget(new_grades_sw_icon_label, 0, 0, Qt.AlignmentFlag.AlignLeft)
 
             new_grades_sw_title_label = QLabel(self._lang.get('QLabel.newGrade' + ('s' if self._data.new_grade_count > 1 else '')).replace('%s', str(self._data.new_grade_count)))
             new_grades_sw_title_label.setProperty('title', True)
-            new_grades_title_subwidget.grid_layout.addWidget(new_grades_sw_title_label, 0, 1)
+            new_grades_title_subwidget.layout_.addWidget(new_grades_sw_title_label, 0, 1)
 
             new_grades_sw_desc_label = QLabel(self._data.new_grades_str)
             new_grades_sw_desc_label.setProperty('desc', True)
 
             new_grades_subwidget = QDropDownWidget(new_grades_title_subwidget, new_grades_sw_desc_label, True)
-            widget.grid_layout.addWidget(new_grades_subwidget, widget.grid_layout.count(), 0)
+            widget.layout_.addWidget(new_grades_subwidget, widget.layout_.count(), 0)
 
 
     def update_sidebar_item(self) -> None:

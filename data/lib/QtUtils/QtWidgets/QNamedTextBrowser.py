@@ -32,21 +32,21 @@ class QNamedTextBrowser(QGridWidget):
 
     def __init__(self, parent = None, placeholder: str = '', name: str = '') -> None:
         super().__init__(parent)
-        self.grid_layout.setSpacing(0)
-        self.grid_layout.setContentsMargins(0, 0, 0, 0)
+        self.layout_.setSpacing(0)
+        self.layout_.setContentsMargins(0, 0, 0, 0)
 
         self.setProperty('QNamedTextBrowser', True)
         self.setProperty('color', 'main')
 
         self.text_browser = QTextBrowser()
         self.text_browser.setPlaceholderText(placeholder)
-        self.grid_layout.addWidget(self.text_browser, 0, 0)
+        self.layout_.addWidget(self.text_browser, 0, 0)
         self.label = QLabel(name)
-        self.grid_layout.addWidget(self.label, 0, 0)
+        self.layout_.addWidget(self.label, 0, 0)
         self.label.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents, True)
         self.label.setProperty('inputhover', False)
         self.label.setProperty('inputfocus', False)
-        self.grid_layout.setAlignment(self.label, Qt.AlignmentFlag.AlignTop)
+        self.layout_.setAlignment(self.label, Qt.AlignmentFlag.AlignTop)
 
         self.text_browser.base_focusInEvent = self.text_browser.focusInEvent
         self.text_browser.base_focusOutEvent = self.text_browser.focusOutEvent

@@ -23,12 +23,12 @@ class QWidgetTabWidget(QGridWidget):
         super().__init__()
 
         self._tab_bar = QWidgetTabBar(orientation)
-        self.grid_layout.addWidget(self._tab_bar, 0, 0)
+        self.layout_.addWidget(self._tab_bar, 0, 0)
         self._tab_position = QTabWidget.TabPosition.North
 
         self._root = QSlidingStackedWidget()
         self._root.set_orientation(orientation)
-        self.grid_layout.addWidget(self._root, 1, 0)
+        self.layout_.addWidget(self._root, 1, 0)
 
         self._tab_bar.moved.connect(self._moved)
 
@@ -51,27 +51,27 @@ class QWidgetTabWidget(QGridWidget):
         match value:
             case QTabWidget.TabPosition.North:
                 self._tab_bar.orientation = Qt.Orientation.Horizontal
-                self.grid_layout.addWidget(self._tab_bar, 0, 0)
+                self.layout_.addWidget(self._tab_bar, 0, 0)
                 self._root.set_orientation(Qt.Orientation.Horizontal)
-                self.grid_layout.addWidget(self._root, 1, 0)
+                self.layout_.addWidget(self._root, 1, 0)
 
             case QTabWidget.TabPosition.South:
                 self._tab_bar.orientation = Qt.Orientation.Horizontal
-                self.grid_layout.addWidget(self._tab_bar, 1, 0)
+                self.layout_.addWidget(self._tab_bar, 1, 0)
                 self._root.set_orientation(Qt.Orientation.Horizontal)
-                self.grid_layout.addWidget(self._root, 0, 0)
+                self.layout_.addWidget(self._root, 0, 0)
 
             case QTabWidget.TabPosition.West:
                 self._tab_bar.orientation = Qt.Orientation.Vertical
-                self.grid_layout.addWidget(self._tab_bar, 0, 0)
+                self.layout_.addWidget(self._tab_bar, 0, 0)
                 self._root.set_orientation(Qt.Orientation.Vertical)
-                self.grid_layout.addWidget(self._root, 0, 1)
+                self.layout_.addWidget(self._root, 0, 1)
 
             case QTabWidget.TabPosition.East:
                 self._tab_bar.orientation = Qt.Orientation.Vertical
-                self.grid_layout.addWidget(self._tab_bar, 0, 1)
+                self.layout_.addWidget(self._tab_bar, 0, 1)
                 self._root.set_orientation(Qt.Orientation.Vertical)
-                self.grid_layout.addWidget(self._root, 0, 0)
+                self.layout_.addWidget(self._root, 0, 0)
 
     def set_tab_position(self, value: QTabWidget.TabPosition) -> None:
         self.tab_position = value

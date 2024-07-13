@@ -31,8 +31,8 @@ class QFileButton(QGridWidget):
 
     def __init__(self, parent = None, lang: QLangData = {}, default_path: str = './', icon: str = None, type: QFiles.Dialog = QFiles.Dialog.ExistingDirectory, filter: str = '', end_with: str = ''):
         super().__init__(parent)
-        self.grid_layout.setSpacing(0)
-        self.grid_layout.setContentsMargins(0, 0, 0, 0)
+        self.layout_.setSpacing(0)
+        self.layout_.setContentsMargins(0, 0, 0, 0)
 
         self.setProperty('QFileButton', True)
 
@@ -47,9 +47,9 @@ class QFileButton(QGridWidget):
         self.push_button.setIcon(QIcon(icon))
         self.push_button.setLayoutDirection(Qt.LayoutDirection.RightToLeft)
         self.push_button.setCursor(Qt.CursorShape.PointingHandCursor)
-        self.grid_layout.addWidget(self.push_button, 0, 0)
+        self.layout_.addWidget(self.push_button, 0, 0)
         self.label = QLabel(lang['title'])
-        self.grid_layout.addWidget(self.label, 0, 0)
+        self.layout_.addWidget(self.label, 0, 0)
         self.label.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents, True)
         self.label.setProperty('hover', False)
 

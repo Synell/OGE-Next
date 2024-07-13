@@ -20,7 +20,8 @@ class QSmoothScrollArea(QScrollArea):
     def __init__(self, parent: QWidget = None) -> None: # TODO: Fix speed inconsistencies due to widget size
         super().__init__(parent)
 
-        QScroller.scroller(self.viewport()).grabGesture(self.viewport(), QScroller.ScrollerGestureType.TouchGesture)
+        # QScroller.scroller(self.viewport()).grabGesture(self.viewport(), QScroller.ScrollerGestureType.TouchGesture)
+        QScroller.grabGesture(self, QScroller.ScrollerGestureType.LeftMouseButtonGesture)
         prop: QScrollerProperties = QScroller.scroller(self.viewport()).scrollerProperties()
         prop.setScrollMetric(QScrollerProperties.ScrollMetric.AxisLockThreshold, 0.66)
         prop.setScrollMetric(QScrollerProperties.ScrollMetric.ScrollingCurve, QEasingCurve(QEasingCurve.Type.OutExpo))

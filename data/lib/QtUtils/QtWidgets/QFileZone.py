@@ -38,29 +38,29 @@ class QFileZone(QGridFrame):
         self.setProperty('QFileZone', True)
 
         icon_widget = QIconWidget(self, self._icon, icon_size)
-        self.grid_layout.addWidget(icon_widget, 0, 0)
+        self.layout_.addWidget(icon_widget, 0, 0)
 
         widget = QGridFrame()
         widget.setProperty('transparent', True)
-        widget.grid_layout.setContentsMargins(0, 0, 0, 0)
-        widget.grid_layout.setSpacing(5)
+        widget.layout_.setContentsMargins(0, 0, 0, 0)
+        widget.layout_.setSpacing(5)
 
         label = QLabel(lang.get('QLabel.dragAndDrop' + ('File' if type == QFiles.Dialog.OpenFileName else 'Files' if type == QFiles.Dialog.OpenFileNames else 'Directory')))
         label.setProperty('class', 'h2')
-        widget.grid_layout.addWidget(label, 0, 0)
-        widget.grid_layout.setAlignment(label, Qt.AlignmentFlag.AlignCenter)
+        widget.layout_.addWidget(label, 0, 0)
+        widget.layout_.setAlignment(label, Qt.AlignmentFlag.AlignCenter)
 
         label = QLinkLabel(lang.get('QLinkLabel.select' + ('File' if type == QFiles.Dialog.OpenFileName else 'Files' if type == QFiles.Dialog.OpenFileNames else 'Directory')))
         label.setProperty('class', 'bold')
         label.clicked.connect(self._clicked)
-        widget.grid_layout.addWidget(label, 1, 0)
-        widget.grid_layout.setAlignment(label, Qt.AlignmentFlag.AlignCenter)
+        widget.layout_.addWidget(label, 1, 0)
+        widget.layout_.setAlignment(label, Qt.AlignmentFlag.AlignCenter)
 
-        self.grid_layout.addWidget(widget, 1, 0)
-        self.grid_layout.setAlignment(widget, Qt.AlignmentFlag.AlignCenter)
+        self.layout_.addWidget(widget, 1, 0)
+        self.layout_.setAlignment(widget, Qt.AlignmentFlag.AlignCenter)
 
-        self.grid_layout.setSpacing(10)
-        self.grid_layout.setContentsMargins(90, 60, 90, 60)
+        self.layout_.setSpacing(10)
+        self.layout_.setContentsMargins(90, 60, 90, 60)
 
         self.setAcceptDrops(True)
 
