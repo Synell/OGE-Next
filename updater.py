@@ -34,7 +34,7 @@ class QUpdater(QBaseApplication):
         self.setApplicationName(Info.application_name)
         self.setApplicationVersion(Info.version)
 
-        self.save_data = self.save_data = SaveData(
+        self._save_data = self._save_data = SaveData(
             app = self,
             save_path = Info.save_path,
             main_color_set = Info.main_color_set,

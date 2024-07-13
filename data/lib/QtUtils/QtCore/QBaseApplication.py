@@ -48,12 +48,12 @@ class QBaseApplication(QApplication):
         self.platform = platform
         self.app_type = app_type
 
-        self.must_update = None
-        self.must_update_link = None
+        self._must_update = None
+        self._must_update_link = None
 
-        self.must_restart = None
+        self._must_restart = None
 
-        self.save_data: QSaveData = None
+        self._save_data: QSaveData = None
 
         self._alerts = []
         self._has_alert_queue = True
@@ -61,6 +61,20 @@ class QBaseApplication(QApplication):
 
         if single_instance: self._start_listener()
 
+
+    @property
+    def must_update(self) -> bool:
+        return self._must_update
+
+
+    @property
+    def must_restart(self) -> bool:
+        return self._must_restart
+
+
+    @property
+    def save_data(self) -> QSaveData:
+        return self._save_data
 
 
     @staticmethod
@@ -156,7 +170,7 @@ class QBaseApplication(QApplication):
         return super().eventFilter(obj, event)
 
     def load_colors(self) -> QssParser:
-        self._qss = QssParser(self.save_data.get_stylesheet(app = self, mode = self.save_data.StyleSheetMode.All))
+        self._qss = QssParser(self._save_data.get_stylesheet(app = self, mode = self._save_data.StyleSheetMode.All))
 
         self.COLOR_LINK = QUtilsColor(
             self._qss.search(
@@ -190,22 +204,22 @@ class QBaseApplication(QApplication):
 
     @property
     def language(self) -> str:
-        return self.save_data.language
+        return self._save_data.language
 
     @property
     def theme(self) -> str:
-        return self.save_data.theme
+        return self._save_data.theme
 
     @property
     def theme_variant(self) -> str:
-        return self.save_data.theme_variant
+        return self._save_data.theme_variant
 
     def get_lang_data(self, path: str) -> Union[str, QLangData, list[Union[str, QLangData]]]:
-        return self.save_data.get_lang_data(path)
+        return self._save_data.get_lang_data(path)
 
     def get_icon_dir(self) -> str:
-        return self.save_data.get_icon_dir()
+        return self._save_data.get_icon_dir()
     
     def get_icon(self, name: str, asQIcon = True, mode: QSaveData.IconMode = QSaveData.IconMode.Local) -> QIcon | str:
-        return self.save_data.get_icon(name, asQIcon, mode)
+        return self._save_data.get_icon(name, asQIcon, mode)
 #----------------------------------------------------------------------

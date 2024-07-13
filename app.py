@@ -28,7 +28,7 @@ class Application(QBaseApplication):
     def __init__(self, platform: QPlatform) -> None:
         super().__init__(platform = platform, app_type = QAppType.Main, single_instance = True)
 
-        self.update_request = None
+        self._update_request = None
 
         self.setOrganizationName('Synel')
         # self.setApplicationDisplayName(Info.application_name)
@@ -37,7 +37,7 @@ class Application(QBaseApplication):
 
         self.another_instance_opened.connect(self.on_another_instance)
 
-        self.save_data = self.save_data = SaveData(
+        self._save_data = self._save_data = SaveData(
             app = self,
             save_path = Info.save_path,
             main_color_set = Info.main_color_set,
@@ -520,19 +520,19 @@ class Application(QBaseApplication):
 
 
     def check_updates(self) -> None:
-        self.update_request = RequestWorker([self.UPDATE_LINK])
-        self.update_request.signals.received.connect(self.check_updates_release)
-        self.update_request.signals.failed.connect(self.check_updates_failed)
-        self.update_request.start()
+        self._update_request = RequestWorker([self.UPDATE_LINK])
+        self._update_request.signals.received.connect(self.check_updates_release)
+        self._update_request.signals.failed.connect(self.check_updates_failed)
+        self._update_request.start()
 
     def check_updates_release(self, rel: dict, app: str) -> None:
-        self.update_request.exit()
-        self.must_update_link = RequestWorker.get_release(rel, None).link
+        self._update_request.exit()
+        self._must_update_link = RequestWorker.get_release(rel, None).link
         if rel['tag_name'] > Info.build: self.set_update(True)
         else: self.save_data.last_check_for_updates = datetime.now()
 
     def check_updates_failed(self, error: str) -> None:
-        self.update_request.exit()
+        self._update_request.exit()
         print('Failed to check for updates:', error)
 
     def set_update(self, update: bool) -> None:
@@ -540,7 +540,7 @@ class Application(QBaseApplication):
 
     def update_click(self) -> None:
         self.save_data.save()
-        self.must_update = self.must_update_link
+        self._must_update = self._must_update_link
         self.exit()
 
 
@@ -610,11 +610,11 @@ class Application(QBaseApplication):
         self.exit()
 
     def exit(self) -> None:
-        if self.update_request:
-            self.update_request.exit()
+        if self._update_request:
+            self._update_request.exit()
 
-            if self.update_request.isRunning():
-                self.update_request.terminate()
+            if self._update_request.isRunning():
+                self._update_request.terminate()
 
         if self.oge_worker:
             self.oge_worker.exit()
