@@ -2,8 +2,8 @@
 
     # Libraries
 from bs4.element import Tag, ResultSet
-from requests import session, Session, Response
-import re, traceback, os, warnings
+from requests import session, Session
+import re, traceback, os, warnings, logging
 from bs4 import BeautifulSoup as BS
 from bs4 import XMLParsedAsHTMLWarning
 from collections import namedtuple
@@ -53,6 +53,8 @@ class OGE(QObject):
         self._semester_count = 0
         self._new_semester: Semester = None
         self._semester_names: dict[int, str] = {}
+
+        self._log = logging.getLogger('OGE')
 
 
     @property
@@ -118,9 +120,7 @@ class OGE(QObject):
             self.failed.emit(Exception('An error has occurred while trying to get or parse OGE data!\nYou can find more information in the api-error.log file.'))
 
             if html:
-                if not os.path.exists('./log/'): os.mkdir('./log/')
-                with open(f'./log/api-error.log', 'w', encoding='utf-8') as file:
-                    file.write(f'OGE API crashed!\n\n-----=====<( Python Traceback )>=====-----\n\n{traceback.format_exc()}\n\n\n-----=====<( HTML Code )>=====-----\n\n{html.prettify()}')
+                self._log.error(f'OGE API crashed!\n\n-----=====<( Python Traceback )>=====-----\n\n{traceback.format_exc()}\n\n\n-----=====<( HTML Code )>=====-----\n\n{html.prettify()}')
 
             print(traceback.format_exc())
 
@@ -354,10 +354,7 @@ class OGE(QObject):
             data.append(ue)
 
         if log:
-            if not os.path.exists('./log/'): os.mkdir('./log/')
-
-            with open(f'./log/api-warnings.log', 'w', encoding='utf-8') as file:
-                file.write(f'OGE API warnings!\n\n-----=====<( API Warnings ({len(log)}) )>=====-----\n\n' + ('\n' + ('-' * 50) + '\n').join(log))
+            self._log.warning(f'OGE API warnings!\n\n-----=====<( API Warnings ({len(log)}) )>=====-----\n\n' + ('\n' + ('-' * 50) + '\n').join(log))
 
         return data
 
