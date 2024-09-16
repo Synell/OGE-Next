@@ -53,14 +53,14 @@ class QNodeGraphicsBlockWidget(QBetterGraphicsItemWidget):
         widget_block.root = self
         widget.layout_.addWidget(widget_block, widget.layout_.rowCount(), 0)
 
-        widget_block.lmb_pressed.connect(self.lmb_pressed)
-        widget_block.lmb_released.connect(self.lmb_released)
+        widget_block.lmb_pressed.connect(self.lmb_pressed.emit)
+        widget_block.lmb_released.connect(self.lmb_released.emit)
 
-        widget_block.in_connector_linked.connect(self.in_connector_linked)
-        widget_block.in_connector_unlinked.connect(self.in_connector_unlinked)
+        widget_block.in_connector_linked.connect(self.in_connector_linked.emit)
+        widget_block.in_connector_unlinked.connect(self.in_connector_unlinked.emit)
 
-        widget_block.out_connector_linked.connect(self.out_connector_linked)
-        widget_block.out_connector_unlinked.connect(self.out_connector_unlinked)
+        widget_block.out_connector_linked.connect(self.out_connector_linked.emit)
+        widget_block.out_connector_unlinked.connect(self.out_connector_unlinked.emit)
 
 
     @property

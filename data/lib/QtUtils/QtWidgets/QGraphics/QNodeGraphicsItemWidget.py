@@ -52,14 +52,14 @@ class QNodeGraphicsItemWidget(QBetterGraphicsItemWidget):
             field.root = self
             widget.layout_.addWidget(field, widget.layout_.rowCount(), 0)
 
-            field.lmb_pressed.connect(self.lmb_pressed)
-            field.lmb_released.connect(self.lmb_released)
+            field.lmb_pressed.connect(self.lmb_pressed.emit)
+            field.lmb_released.connect(self.lmb_released.emit)
 
-            field.in_connector_linked.connect(self.in_connector_linked)
-            field.in_connector_unlinked.connect(self.in_connector_unlinked)
+            field.in_connector_linked.connect(self.in_connector_linked.emit)
+            field.in_connector_unlinked.connect(self.in_connector_unlinked.emit)
 
-            field.out_connector_linked.connect(self.out_connector_linked)
-            field.out_connector_unlinked.connect(self.out_connector_unlinked)
+            field.out_connector_linked.connect(self.out_connector_linked.emit)
+            field.out_connector_unlinked.connect(self.out_connector_unlinked.emit)
 
 
     @property

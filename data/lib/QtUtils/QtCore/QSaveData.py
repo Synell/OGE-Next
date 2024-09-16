@@ -14,6 +14,7 @@ from . import QBaseApplication
 from ..QtWidgets import QMessageBoxWithWidget, QSettingsDialog
 from ..QtGui.QColorSet import QUtilsColor, QColorSet
 from .QAppType import QAppType
+from ..QtCore.QData import QData
 from .QLangDataManager import QLangDataManager, QLangData
 from .QThemeManager import QThemeManager
 #----------------------------------------------------------------------
@@ -78,9 +79,20 @@ class QSaveData(QObject):
         self._preload_warnings: list[str] = []
         self._language_manager.warning_received.connect(self._preload_warnings.append)
 
+        self._data = QData(lang_folder, themes_folder)
+
         self._load(reload_all = True)
 
         self._language_manager.warning_received.disconnect()
+
+
+    @property
+    def current_language(self) -> str: return self._language
+
+
+    @property
+    def all_available_languages(self) -> tuple[QData.QLang]:
+        return self._data.langs
 
 
     @property
@@ -187,8 +199,17 @@ class QSaveData(QObject):
 
         return ''
 
-    def get_icon_dir(self) -> str:
-        return f'{self._themes_folder}/{self._theme}/{self._theme_variant}/icons/'
+    def get_theme_dir(self, mode: StyleSheetMode = StyleSheetMode.Local) -> str:
+        if mode == QSaveData.StyleSheetMode.Global: path_start = './data/lib/QtUtils/themes'
+        else: path_start = f'{self._themes_folder}'
+
+        return os.path.join(path_start, f'{self._theme}/{self._theme_variant}/')
+
+    def get_icon_dir(self, mode: StyleSheetMode = StyleSheetMode.Local) -> str:
+        return f'{self.get_theme_dir(mode)}icons/'
+
+    def get_template_dir(self, mode: StyleSheetMode = StyleSheetMode.Local) -> str:
+        return f'{self.get_theme_dir(mode)}templates/'
 
     def get_icon(self, path: str, asQIcon = True, mode: IconMode | str = IconMode.Local) -> QIcon | str:
         if isinstance(mode, str): mode = QSaveData.IconMode(mode)
@@ -205,8 +226,7 @@ class QSaveData(QObject):
         dialog = QSettingsDialog(
             parent = app.window,
             settings_data = self._language_manager.get('QSettingsDialog'),
-            lang_folder = self._lang_folder,
-            themes_folder = self._themes_folder,
+            data = self._data,
             current_lang = self._language,
             current_theme = self._theme,
             current_theme_variant = self._theme_variant,

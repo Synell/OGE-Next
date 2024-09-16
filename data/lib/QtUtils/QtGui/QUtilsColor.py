@@ -53,6 +53,8 @@ class QUtilsColor:
     @dispatch(str)
     def __init__(self, color: str) -> None:
         color = color.replace('#', '')
+        if len(color) >= 3 and len(color) <= 4: color = ''.join([c * 2 for c in color])
+
         self._red = int(color[0:2], 16)
         self._green = int(color[2:4], 16)
         self._blue = int(color[4:6], 16)
@@ -60,6 +62,16 @@ class QUtilsColor:
 
     def _byte_range(self, value: int) -> int:
         return int(max(0, min(value, 255)))
+
+
+    def __eq__(self, other: 'QUtilsColor') -> bool:
+        if not isinstance(other, QUtilsColor): return False
+        return (
+            self.red == other.red and
+            self.green == other.green and
+            self.blue == other.blue and
+            self.alpha == other.alpha
+        )
 
 
     @dispatch((int, float), (int, float), (int, float))

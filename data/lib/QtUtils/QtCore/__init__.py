@@ -3,6 +3,7 @@
     # Libraries
 from .QBaseApplication import QBaseApplication
 from .QAppType import QAppType
+from .QData import QData
 from .QThemeManager import QThemeManager
 from .QLangDataManager import QLangDataManager, QLangData
 from .QSaveData import QSaveData
@@ -16,4 +17,8 @@ from .QComboBoxItemModel import QComboBoxItemModel
 from .QDisabledColorFilter import QDisabledColorFilter
 from .QCrashReport import QCrashReport
 from .QDirection import QDirection
+from .QLogsColor import QLogsColor
+from .QTerminalModel import QTerminalModel
+from .QTerminalAction import *
+from .QTerminalElementModifier import QTerminalElementModifier
 #----------------------------------------------------------------------

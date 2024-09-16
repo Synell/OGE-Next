@@ -1,0 +1,106 @@
+
+/* QNamedDateTimeEdit */
+
+QWidget[QNamedDateTimeEdit=true] QDateTimeEdit,
+QWidget[QNamedDateEdit=true] QDateEdit,
+QWidget[QNamedTimeEdit=true] QTimeEdit {
+	height: 33px;
+	border: none;
+	border-bottom: 2px solid transparent;
+	background-color: #262626;
+	font-size: 14px;
+	font-weight: bold;
+	padding-top: 16px;
+	padding-left: 16px;
+	padding-right: 12px;
+}
+
+QWidget[QNamedDateTimeEdit=true] QDateTimeEdit:hover,
+QWidget[QNamedDateEdit=true] QDateEdit:hover,
+QWidget[QNamedTimeEdit=true] QTimeEdit:hover {
+	background-color: #333333;
+}
+
+QWidget[QNamedDateTimeEdit=true] QDateTimeEdit:focus,
+QWidget[QNamedDateEdit=true] QDateEdit:focus,
+QWidget[QNamedTimeEdit=true] QTimeEdit:focus {
+	border-bottom: 2px solid #8AAEDB;
+	background-color: #333333;
+}
+
+QWidget[QNamedDateTimeEdit=true] QLabel,
+QWidget[QNamedDateEdit=true] QLabel,
+QWidget[QNamedTimeEdit=true] QLabel {
+	color: #909090;
+	height: 50px;
+	border: none;
+	font-size: 12px;
+	padding-bottom: 24px;
+	padding-left: 16px;
+}
+
+QWidget[QNamedDateTimeEdit=true] QLabel[hover=true],
+QWidget[QNamedDateEdit=true] QLabel[hover=true],
+QWidget[QNamedTimeEdit=true] QLabel[hover=true] {
+	color: #909090;
+}
+
+QWidget[QNamedDateTimeEdit=true] QLabel[focus=true],
+QWidget[QNamedDateEdit=true] QLabel[focus=true],
+QWidget[QNamedTimeEdit=true] QLabel[focus=true] {
+	color: #3C6FB2;
+}
+
+QWidget[QNamedDateTimeEdit=true][dark=true] QDateTimeEdit,
+QWidget[QNamedDateEdit=true][dark=true] QDateEdit,
+QWidget[QNamedTimeEdit=true][dark=true] QTimeEdit {
+	background-color: #1A1A1A;
+}
+
+
+
+/* QNamedDateTimeEdit - Wide */
+
+QWidget[wide=true] QWidget[QNamedDateTimeEdit=true] QDateTimeEdit, QWidget[QNamedDateTimeEdit=true][wide=true] QDateTimeEdit,
+QWidget[wide=true] QWidget[QNamedDateEdit=true] QDateEdit, QWidget[QNamedDateEdit=true][wide=true] QDateEdit,
+QWidget[wide=true] QWidget[QNamedTimeEdit=true] QTimeEdit, QWidget[QNamedTimeEdit=true][wide=true] QTimeEdit {
+	min-width: 6em;
+}
+
+QWidget[wider=true] QWidget[QNamedDateTimeEdit=true] QDateTimeEdit, QWidget[QNamedDateTimeEdit=true][wider=true] QDateTimeEdit,
+QWidget[wider=true] QWidget[QNamedDateEdit=true] QDateEdit, QWidget[QNamedDateEdit=true][wider=true] QDateEdit,
+QWidget[wider=true] QWidget[QNamedTimeEdit=true] QTimeEdit, QWidget[QNamedTimeEdit=true][wider=true] QTimeEdit {
+	min-width: 12em;
+}
+
+
+
+/* QNamedDateTimeEdit - Main Color */
+
+QWidget[color='{main-color-name}'] QWidget[QNamedDateTimeEdit=true][color='main'] QDateTimeEdit:focus, QWidget[QNamedDateTimeEdit=true][color='{main-color-name}'] QDateTimeEdit:focus,
+QWidget[color='{main-color-name}'] QWidget[QNamedDateEdit=true][color='main'] QDateEdit:focus, QWidget[QNamedDateEdit=true][color='{main-color-name}'] QDateEdit:focus,
+QWidget[color='{main-color-name}'] QWidget[QNamedTimeEdit=true][color='main'] QTimeEdit:focus, QWidget[QNamedTimeEdit=true][color='{main-color-name}'] QTimeEdit:focus {
+	border-bottom-color: #{main-color-pressed};
+}
+
+QWidget[color='{main-color-name}'] QWidget[QNamedDateTimeEdit=true][color='main'] QLabel[focus=true], QWidget[QNamedDateTimeEdit=true][color='{main-color-name}'] QLabel[focus=true],
+QWidget[color='{main-color-name}'] QWidget[QNamedDateEdit=true][color='main'] QLabel[focus=true], QWidget[QNamedDateEdit=true][color='{main-color-name}'] QLabel[focus=true],
+QWidget[color='{main-color-name}'] QWidget[QNamedTimeEdit=true][color='main'] QLabel[focus=true], QWidget[QNamedTimeEdit=true][color='{main-color-name}'] QLabel[focus=true] {
+	color: #{main-color-pressed};
+}
+
+
+
+/* QNamedDateTimeEdit - Neutral Color */
+
+QWidget[color='{neutral-color-name}'] QWidget[QNamedDateTimeEdit=true][color='main'] QDateTimeEdit:focus, QWidget[QNamedDateTimeEdit=true][color='{neutral-color-name}'] QDateTimeEdit:focus,
+QWidget[color='{neutral-color-name}'] QWidget[QNamedDateEdit=true][color='main'] QDateEdit:focus, QWidget[QNamedDateEdit=true][color='{neutral-color-name}'] QDateEdit:focus,
+QWidget[color='{neutral-color-name}'] QWidget[QNamedTimeEdit=true][color='main'] QTimeEdit:focus, QWidget[QNamedTimeEdit=true][color='{neutral-color-name}'] QTimeEdit:focus {
+	border-bottom-color: #{neutral-color-pressed};
+}
+
+QWidget[color='{neutral-color-name}'] QWidget[QNamedDateTimeEdit=true][color='main'] QLabel[focus=true], QWidget[QNamedDateTimeEdit=true][color='{neutral-color-name}'] QLabel[focus=true],
+QWidget[color='{neutral-color-name}'] QWidget[QNamedDateEdit=true][color='main'] QLabel[focus=true], QWidget[QNamedDateEdit=true][color='{neutral-color-name}'] QLabel[focus=true],
+QWidget[color='{neutral-color-name}'] QWidget[QNamedTimeEdit=true][color='main'] QLabel[focus=true], QWidget[QNamedTimeEdit=true][color='{neutral-color-name}'] QLabel[focus=true] {
+	color: #{neutral-color-pressed};
+}

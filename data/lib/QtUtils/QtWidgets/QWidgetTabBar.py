@@ -123,7 +123,7 @@ class QWidgetTabBar(QScrollableGridWidget):
         self.layout_.setContentsMargins(0, 0, 0, 0)
 
         self._root = QDragList(None, orientation)
-        self._root.moved.connect(self.moved)
+        self._root.moved.connect(self.moved.emit)
         self.layout_.addWidget(self._root)
 
         self.setSizePolicy(QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.Minimum)

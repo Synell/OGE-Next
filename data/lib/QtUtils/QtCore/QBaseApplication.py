@@ -29,6 +29,9 @@ from ..QtWidgets.QWhatsNewWidget import QWhatsNewWidget
 from ..QtWidgets.QWhatsNewDialog import QWhatsNewDialog
 from ..QtWidgets.QBetterGraphicsView import QBetterGraphicsView
 from ..QtWidgets.QWidgetTabBar import QWidgetTabBarItem
+from ..QtWidgets.QNamedDateTimeEdit import QNamedDateTimeEdit
+from ..QtWidgets.QNamedDateEdit import QNamedDateEdit
+from ..QtWidgets.QNamedTimeEdit import QNamedTimeEdit
 #----------------------------------------------------------------------
 
     # Class
@@ -195,6 +198,9 @@ class QBaseApplication(QApplication):
         QWhatsNewDialog.init(self)
         QBetterGraphicsView.init(self)
         QWidgetTabBarItem.init(self)
+        QNamedDateTimeEdit.init(self)
+        QNamedDateEdit.init(self)
+        QNamedTimeEdit.init(self)
 
         return self._qss
 
@@ -204,7 +210,7 @@ class QBaseApplication(QApplication):
 
     @property
     def language(self) -> str:
-        return self._save_data.language
+        return self._save_data.current_language
 
     @property
     def theme(self) -> str:

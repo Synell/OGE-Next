@@ -1,0 +1,9 @@
+.%name {
+    background-color: var(--%name-bg);
+}
+.%name::after {
+    border-left-color: var(--%name-bg);
+}
+.%name.special-text:not(.first)::before {
+    border-left-color: var(--%name-bg);
+}

@@ -31,8 +31,7 @@ class QFileZone(QGridFrame):
             case QFiles.Dialog.OpenFileUrl: type = QFiles.Dialog.OpenFileName
             case QFiles.Dialog.OpenFileUrls: type = QFiles.Dialog.OpenFileNames
             case QFiles.Dialog.ExistingDirectoryUrl: type = QFiles.Dialog.ExistingDirectory
-            case QFiles.Dialog.SaveFileName: type = QFiles.Dialog.OpenFileName
-            case QFiles.Dialog.SaveFileUrl: type = QFiles.Dialog.OpenFileName
+            case QFiles.Dialog.SaveFileUrl: type = QFiles.Dialog.SaveFileName
         self._type = type
 
         self.setProperty('QFileZone', True)
@@ -72,11 +71,11 @@ class QFileZone(QGridFrame):
     def set_filter(self, filter: str) -> None:
         self._filter = filter
 
-        self.__extension_list__ = []
+        self._extension_list = []
         for ext in self._filter.split(';;'):
             ext = ext.split('(')[-1].replace('.', '').replace('*', '').replace(')', '').replace(' ', '').replace('.', '').split(',')
             for i in ext:
-                if i: self.__extension_list__.append(i)
+                if i: self._extension_list.append(i.lower())
 
 
     def _clicked(self, action: str) -> None:
@@ -85,8 +84,10 @@ class QFileZone(QGridFrame):
         match action:
             case 'file':
                 path = QFileDialog.getOpenFileName(self, dir = self._dir, filter = self._filter, caption = self._lang.get('QFileDialog.file'))[0]
+
             case 'files':
                 path = QFileDialog.getOpenFileNames(self, dir = self._dir, filter = self._filter, caption = self._lang.get('QFileDialog.files'))[0]
+
             case 'directory':
                 path = QFileDialog.getExistingDirectory(self, dir = self._dir, caption = self._lang.get('QFileDialog.directory'))[0]
 
@@ -106,11 +107,14 @@ class QFileZone(QGridFrame):
     def dragEnterEvent(self, event: QDragEnterEvent) -> None:
         if not event.mimeData().hasUrls(): return event.ignore()
 
+        if self._type == QFiles.Dialog.OpenFileNames:
+            if len(event.mimeData().urls()) > 1: return event.ignore()
+
         for e in event.mimeData().urls():
             if not e.isLocalFile():
                 return event.ignore()
     
-            if not e.toLocalFile().split('.')[-1] in self.__extension_list__:
+            if not e.toLocalFile().split('.')[-1].lower() in self._extension_list:
                 return event.ignore()
 
         event.accept()
@@ -118,8 +122,9 @@ class QFileZone(QGridFrame):
 
     def dropEvent(self, event: QDropEvent) -> None:
         self.drag_and_drop_used.emit()
+
         files = [u.toLocalFile() for u in event.mimeData().urls()]
-        for f in files:
-            self.item_added.emit(f)
+        for f in files: self.item_added.emit(f)
+
         self.items_added.emit(files)
 #----------------------------------------------------------------------

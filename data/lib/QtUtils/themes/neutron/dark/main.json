@@ -62,6 +62,8 @@
         "QNodeGraphicsItemWidget",
         "QWidgetTabBarItem",
         "QWhatsNewWidget",
-        "QCheckableGridFrame"
+        "QCheckableGridFrame",
+        "QTerminalWidget",
+        "QNamedDateTimeEdit"
     ]
 }

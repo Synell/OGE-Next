@@ -14,50 +14,10 @@ from .QGridFrame import QGridFrame
 from .QGridWidget import QGridWidget
 
 from ..QtCore.QComboBoxItemModel import QComboBoxItemModel
-from ..QtCore.QFileExplorer import QFileExplorer
+from ..QtCore.QData import QData
 #----------------------------------------------------------------------
 
     # Class
-class _QData:
-    class _QLang:
-        def __init__(self, lang_folder: str, lang_path: str) -> None:
-            with open(f'{lang_folder}/{lang_path}', encoding = 'utf-8') as infile:
-                data = json.load(infile)
-                info: dict = data['info']
-
-                self.display_name = info.get('name', '???')
-                self.version = info.get('version', 'v1.0')
-                self.author = info.get('author', '???')
-                self.description = info.get('description', '')
-
-                self.filename = '.'.join(lang_path.split('.')[:-1])
-
-
-    class _QTheme:
-        def __init__(self, themes_folder: str, theme_path: str) -> None:
-            with open(f'{themes_folder}/{theme_path}', encoding = 'utf-8') as infile:
-                data = json.load(infile)
-                info: dict = data['info']
-
-                self.display_name = info.get('name', '???')
-                self.version = info.get('version', 'v1.0')
-                self.author = info.get('author', '???')
-                self.desc = info.get('description', '')
-
-                self.filename = '.'.join(theme_path.split('.')[:-1])
-                self.variants = data['qss']
-
-
-    def __init__(self, lang_folder: str, themes_folder: str) -> None:
-        self.lang: list[_QData._QLang] = []
-        for file in QFileExplorer.get_files(lang_folder, ['json'], False, True):
-            self.lang.append(self._QLang(lang_folder, file))
-
-        self.themes: list[_QData._QTheme] = []
-        for file in QFileExplorer.get_files(themes_folder, ['json'], False, True):
-            self.themes.append(self._QTheme(themes_folder, file))
-
-
 class QSettingsDialog(QDialog):
     close_app = Signal()
     restart_app = Signal()
@@ -66,8 +26,10 @@ class QSettingsDialog(QDialog):
     import_data = Signal(str)
     export_data = Signal(str)
 
-    def __init__(self, parent = None, settings_data = {}, lang_folder: str = '', themes_folder: str = '', current_lang: str = '', current_theme: str = '', current_theme_variant: str = '', extra_tabs: dict[str: QWidget] = {}, get_function: Callable = None) -> None:
+    def __init__(self, parent = None, settings_data = {}, data: QData = None, current_lang: str = '', current_theme: str = '', current_theme_variant: str = '', extra_tabs: dict[str: QWidget] = {}, get_function: Callable = None) -> None:
         super().__init__(parent)
+
+        if data is None: raise ValueError('data cannot be None')
 
         self._layout = QGridLayout()
         self._layout.setSpacing(0)
@@ -108,7 +70,7 @@ class QSettingsDialog(QDialog):
         self.root = QSidePanelWidget(width = 220, direction = QSlidingStackedWidget.Direction.Bottom2Top)
         self.root.setProperty('wider', True)
 
-        self._data = _QData(lang_folder, themes_folder)
+        self._data = data
 
         self.appearance_tab = self._appearance_tab_widget(settings_data.get('QSidePanel.appearance'), current_lang, current_theme, current_theme_variant)
         self.root.add_widget(self.appearance_tab, settings_data.get('QSidePanel.appearance.title'), f'./data/lib/QtUtils/themes/{current_theme}/{current_theme_variant}/icons/sidepanel/appearance.png')
@@ -150,7 +112,7 @@ class QSettingsDialog(QDialog):
         self.lang_dropdown = QNamedComboBox(None, lang_data.get('QNamedComboBox.language'))
         lang_model: QComboBoxItemModel = QComboBoxItemModel()
 
-        for lang in self._data.lang:
+        for lang in self._data.langs:
             lang_model.add_item(
                 lang.display_name,
                 f'{lang.display_name} ({lang.version})\nby {lang.author}'
@@ -159,8 +121,8 @@ class QSettingsDialog(QDialog):
         lang_model.bind(self.lang_dropdown.combo_box)
 
         i = 0
-        for lang_id in range(len(self._data.lang)):
-            if self._data.lang[lang_id].filename == current_lang: i = lang_id
+        for lang_id in range(len(self._data.langs)):
+            if self._data.langs[lang_id].filename == current_lang: i = lang_id
 
         self.lang_dropdown.combo_box.setCurrentIndex(i)
         root_frame.layout_.addWidget(self.lang_dropdown, root_frame.layout_.count(), 0)
@@ -291,7 +253,7 @@ class QSettingsDialog(QDialog):
             try: self.get_function(self.extra_tabs)
             except Exception as e: print(e)
             return (
-                self._data.lang[self.lang_dropdown.combo_box.currentIndex()].filename,
+                self._data.langs[self.lang_dropdown.combo_box.currentIndex()].filename,
                 self._data.themes[self.themes_dropdown.combo_box.currentIndex()].filename,
                 list(self._data.themes[self.themes_dropdown.combo_box.currentIndex()].variants.keys())[self.theme_variants_dropdown.combo_box.currentIndex()]
             )

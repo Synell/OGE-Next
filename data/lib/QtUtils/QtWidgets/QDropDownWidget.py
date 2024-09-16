@@ -42,7 +42,7 @@ class QDropDownWidget(QGridFrame):
         self.layout_.setSpacing(1)
         self.setContentsMargins(0, 0, 0, 0)
 
-        self.layout_.setColumnStretch(1, 1)
+        # self.layout_.setColumnStretch(1, 1)
         self.layout_.setRowStretch(2, 1)
 
         self._must_be_shown = already_open

@@ -93,3 +93,34 @@ QWidget[color='{neutral-color-name}'] QWidget[QNamedComboBox=true][color='main']
 QWidget[color='{neutral-color-name}'] QWidget[QNamedComboBox=true][color='main'] QLabel[focus=true], QWidget[QNamedComboBox=true][color='{neutral-color-name}'] QLabel[focus=true] {
 	color: #{neutral-color-pressed};
 }
+
+
+
+/* QSearchNamedComboBox */
+
+QWidget[QSearchNamedComboBox=true] QComboBox QAbstractItemView,
+QAbstractItemView[completerPopup=true] {
+    background-color: #262626;
+    border: 2px solid #313131;
+    border-radius: 5px;
+    padding: 10px 10px;
+}
+
+QWidget[QSearchNamedComboBox=true] QComboBox QAbstractItemView::item,
+QAbstractItemView[completerPopup=true]::item {
+    color: #fefefe;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #262626;
+	border-radius: 4px;
+	min-width: 48px;
+}
+
+QWidget[QSearchNamedComboBox=true] QComboBox QAbstractItemView::item:hover,
+QAbstractItemView::item:selected,
+QAbstractItemView[completerPopup=true]::item:hover,
+QAbstractItemView[completerPopup=true]::item:selected {
+    background-color: #333333;
+}

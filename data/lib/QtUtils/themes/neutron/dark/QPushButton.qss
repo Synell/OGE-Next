@@ -37,6 +37,12 @@ QPushButton[icon-padding=true] {
 	padding-left: 8px;
 }
 
+QPushButton[icon=true] {
+	height: 24px;
+	font-size: 14px;
+	qproperty-iconSize: 24px;
+}
+
 
 
 /* QPushButton - Transparent */

@@ -32,8 +32,8 @@ class QNodeGraphicsScene(QBetterGraphicsScene):
         ret = super().add_item(item, layer)
 
         if isinstance(item, (QNodeGraphicsItemWidget, QNodeGraphicsBlockWidget)):
-            item.lmb_pressed.connect(self.lmb_pressed)
-            item.lmb_released.connect(self.lmb_released)
+            item.lmb_pressed.connect(self.lmb_pressed.emit)
+            item.lmb_released.connect(self.lmb_released.emit)
 
         return ret
 
@@ -42,8 +42,8 @@ class QNodeGraphicsScene(QBetterGraphicsScene):
         widget = item.widget() if isinstance(item, QGraphicsProxyWidget) else None
 
         if isinstance(widget, (QNodeGraphicsItemWidget, QNodeGraphicsBlockWidget)):
-            widget.lmb_pressed.disconnect(self.lmb_pressed)
-            widget.lmb_released.disconnect(self.lmb_released)
+            widget.lmb_pressed.disconnect(self.lmb_pressed.emit)
+            widget.lmb_released.disconnect(self.lmb_released.emit)
 
             for conn in widget.in_connections:
                 super().remove_item(conn.graphics_item, self.connection_layer)
