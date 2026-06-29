@@ -1,4 +1,4 @@
-#----------------------------------------------------------------------
+﻿#----------------------------------------------------------------------
 
     # Libraries
 from bs4.element import Tag, ResultSet
@@ -28,7 +28,7 @@ class OGE(QObject):
     info_changed = Signal(InfoType, str)
     failed = Signal(Exception)
 
-    _URL_WEBSITE = 'http://casiut21.u-bourgogne.fr/login?service=https%3A%2F%2Fiutdijon.u-bourgogne.fr%2Foge%2F'
+    _URL_WEBSITE = 'https://casiut21.u-bourgogne.fr/login?service=https%3A%2F%2Fiutdijon.u-bourgogne.fr%2Foge%2F'
     _URL_GRADES = 'https://iutdijon.u-bourgogne.fr/oge/stylesheets/etu/bilanEtu.xhtml'
     _URL_DETAILS = 'https://iutdijon.u-bourgogne.fr/oge/stylesheets/etu/detailsEtu.xhtml'
 
@@ -173,7 +173,8 @@ class OGE(QObject):
             'password': self._password,
             'execution': self._get_key(session),
             '_eventId': 'submit',
-            'geolocation' : ''
+            'geolocation' : '',
+            'deviceFingerprint': ''
         }
 
         self.info_changed.emit(InfoType.Info, 'Creating a new session...')
